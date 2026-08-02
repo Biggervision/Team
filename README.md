@@ -106,6 +106,14 @@ free time ≥ 5 h, and nothing over-allocated. **80+ = sustainable executive wee
 
 ```
 apps-script/
-  Code.gs      ← the entire builder (paste this into Extensions → Apps Script)
-README.md      ← you are here
+  Code.gs           ← the entire builder (paste this into Extensions → Apps Script)
+docs/
+  DEPLOYMENT.md     ← full deployment & integration guide (auth flow, clasp CLI,
+                      template distribution, troubleshooting)
+README.md           ← you are here
 ```
+
+Deploying for the first time? Follow **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** —
+it covers the exact click path, the Google authorization screens, CLI deployment
+with `clasp`, how to distribute the finished sheet as a template, and fixes for
+every common hiccup.
