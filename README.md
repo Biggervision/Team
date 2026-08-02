@@ -11,7 +11,23 @@ After the build, everything runs on pure Google Sheets formulas (`LET`, `XLOOKUP
 
 ---
 
-## 🚀 Install (≈2 minutes)
+## ⚡ Fastest path — no code at all (≈1 minute)
+
+Download **[`168-Hour-Executive-OS.xlsx`](168-Hour-Executive-OS.xlsx)** from this repo, then:
+
+1. Go to [drive.google.com](https://drive.google.com) → **New → File upload** → pick the file.
+2. Double-click the uploaded file → it opens in Google Sheets → **File → Save as Google Sheets**.
+
+Done. All 8 tabs (Dashboard, Weekly Tracker, Daily Tracker, Weekly Review, Monthly,
+Annual, Settings, Start Here), every formula, the teal reference styling, charts and
+warnings are already in it — nothing to run, nothing to authorize. The default values
+reproduce the reference sheet (166.1 h used / 1.9 h free) — just replace the blue cells
+with your own numbers.
+
+> The file is rebuilt by `tools/build_xlsx.py`; the Apps Script route below is the
+> alternative if you prefer generating the system inside an existing spreadsheet.
+
+## 🚀 Alternative install — Apps Script builder (≈2 minutes)
 
 1. Open your Google Sheet
    (e.g. [your Ascension OS sheet](https://docs.google.com/spreadsheets/d/1Qqj0B21HB2ksWDyqNOPW_tYsrpyKMaT7m-qUOtnyZJM/edit)

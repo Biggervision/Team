@@ -46,10 +46,12 @@ const UI = {
   line:      '#E2E8F0',
   paper:     '#FFFFFF',
   card:      '#F8FAFC',
-  inputBg:   '#EAF3FF', // every editable cell uses this colour
-  inputLine: '#BFDBFE',
+  band:      '#2BB5AE', // teal section bands (reference style)
+  inputBg:   '#DDEBF7', // every editable cell uses this colour (reference style)
+  inputLine: '#9DC3E6',
   accent:    '#4F46E5', // indigo
-  teal:      '#0E7490',
+  orange:    '#F6A21D', // bar-chart colour (reference style)
+  teal:      '#2BB5AE',
   good:      '#16A34A',
   goodBg:    '#DCFCE7',
   warn:      '#D97706',
@@ -262,7 +264,7 @@ function freshSheet(ctx, name) {
 function band(sh, row, c1, c2, text) {
   const r = sh.getRange(row, c1, 1, c2 - c1 + 1);
   r.merge().setValue(text)
-    .setBackground(UI.navy).setFontColor('#FFFFFF')
+    .setBackground(UI.band).setFontColor('#FFFFFF')
     .setFontWeight('bold').setFontSize(11).setHorizontalAlignment('left');
   sh.setRowHeight(row, 30);
   return r;
@@ -592,7 +594,7 @@ function buildDaily(ctx) {
   const headers = ['Category', 'Plan / day', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri',
                    'Sat', 'Sun', 'Week actual', 'vs plan'];
   sh.getRange(head, 2, 1, 11).setValues([headers])
-    .setBackground(UI.navy).setFontColor('#FFFFFF').setFontWeight('bold')
+    .setBackground(UI.band).setFontColor('#FFFFFF').setFontWeight('bold')
     .setFontSize(9).setHorizontalAlignment('center');
   sh.getRange(head, 2).setHorizontalAlignment('left');
   sh.setRowHeight(head, 28);
@@ -664,7 +666,7 @@ function buildWeekly(ctx) {
   const d = ctx.daily;
   const headers = ['Category', 'Planned', 'Actual', 'Diff', '% of plan', '% of week', 'Progress'];
   sh.getRange(head, 2, 1, 7).setValues([headers])
-    .setBackground(UI.navy).setFontColor('#FFFFFF').setFontWeight('bold')
+    .setBackground(UI.band).setFontColor('#FFFFFF').setFontWeight('bold')
     .setFontSize(9).setHorizontalAlignment('center');
   sh.getRange(head, 2).setHorizontalAlignment('left');
   sh.setRowHeight(head, 28);
@@ -740,7 +742,7 @@ function buildMonthly(ctx) {
   const headers = ['Category', 'Weekly plan', 'Monthly plan', 'Monthly actual*',
                    'Variance', '% of month', 'Plan vs actual'];
   sh.getRange(head, 2, 1, 7).setValues([headers])
-    .setBackground(UI.navy).setFontColor('#FFFFFF').setFontWeight('bold')
+    .setBackground(UI.band).setFontColor('#FFFFFF').setFontWeight('bold')
     .setFontSize(9).setHorizontalAlignment('center');
   sh.getRange(head, 2).setHorizontalAlignment('left');
   sh.setRowHeight(head, 28);
@@ -797,7 +799,7 @@ function buildAnnual(ctx) {
   const head = 4, first = head + 1, last = first + TRACKER_ROWS - 1;
   const headers = ['Category', 'Weekly h', 'Annual hours', 'Annual days', 'Annual weeks', '% of year'];
   sh.getRange(head, 2, 1, 6).setValues([headers])
-    .setBackground(UI.navy).setFontColor('#FFFFFF').setFontWeight('bold')
+    .setBackground(UI.band).setFontColor('#FFFFFF').setFontWeight('bold')
     .setFontSize(9).setHorizontalAlignment('center');
   sh.getRange(head, 2).setHorizontalAlignment('left');
   sh.setRowHeight(head, 28);
@@ -889,7 +891,7 @@ function buildChartsTab(ctx) {
     .addRange(barRange).setNumHeaders(1)
     .setPosition(anchor, 6, 0, 0)
     .setOption('title', 'Hours per week by life area')
-    .setOption('colors', [UI.accent])
+    .setOption('colors', [UI.orange])
     .setOption('legend', { position: 'none' })
     .setOption('width', 520).setOption('height', 360)
     .build());
@@ -1037,7 +1039,7 @@ function buildDashboard(ctx) {
     .addRange(ctx.chartFeeds.bar).setNumHeaders(1)
     .setPosition(hz + 17, 8, 0, 0)
     .setOption('title', 'Hours per week by life area')
-    .setOption('colors', [UI.accent])
+    .setOption('colors', [UI.orange])
     .setOption('legend', { position: 'none' })
     .setOption('width', 500).setOption('height', 380)
     .build());
