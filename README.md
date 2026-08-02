@@ -1,135 +1,109 @@
-# ⚡ 168-Hour Executive Time Operating System
+# ⚡ ASCENSION OS™ — Executive 168-Hour Operating System (v2.0)
 
-A complete, formula-driven **Executive Time OS for Google Sheets** — built for founders,
-freelancers, digital nomads and remote professionals who need to see exactly where all
-168 hours of their week go.
+A complete, formula-driven **Personal Operating System for Google Sheets** — built for
+founders, freelancers, consultants, agency owners, creators and remote professionals
+who want to intentionally design, execute and review every one of their 168 weekly hours.
 
-This repo contains a **one-click builder**: paste a single script into your Google Sheet,
-click one menu item, and the entire system is generated natively inside your sheet.
-After the build, everything runs on pure Google Sheets formulas (`LET`, `XLOOKUP`,
-`FILTER`, `SUMIFS`, named ranges) — **no scripts are needed for day-to-day use**.
-
----
-
-## ⚡ Fastest path — no code at all (≈1 minute)
-
-Download **[`168-Hour-Executive-OS.xlsx`](168-Hour-Executive-OS.xlsx)** from this repo, then:
-
-1. Go to [drive.google.com](https://drive.google.com) → **New → File upload** → pick the file.
-2. Double-click the uploaded file → it opens in Google Sheets → **File → Save as Google Sheets**.
-
-Done. All 8 tabs (Dashboard, Weekly Tracker, Daily Tracker, Weekly Review, Monthly,
-Annual, Settings, Start Here), every formula, the teal reference styling, charts and
-warnings are already in it — nothing to run, nothing to authorize. The default values
-reproduce the reference sheet (166.1 h used / 1.9 h free) — just replace the blue cells
-with your own numbers.
-
-> The file is rebuilt by `tools/build_xlsx.py`; the Apps Script route below is the
-> alternative if you prefer generating the system inside an existing spreadsheet.
-
-## 🚀 Alternative install — Apps Script builder (≈2 minutes)
-
-1. Open your Google Sheet
-   (e.g. [your Ascension OS sheet](https://docs.google.com/spreadsheets/d/1Qqj0B21HB2ksWDyqNOPW_tYsrpyKMaT7m-qUOtnyZJM/edit)
-   — or a fresh blank sheet; existing tabs you created are untouched).
-2. Menu: **Extensions → Apps Script**.
-3. Delete any code in the editor, paste the full contents of
-   [`apps-script/Code.gs`](apps-script/Code.gs), press **Save** (💾).
-4. **Reload the spreadsheet tab** in your browser. A new menu **⚡ Executive OS** appears
-   after a few seconds.
-5. Click **⚡ Executive OS → Build / Rebuild System** and authorise when Google asks
-   (it only touches this spreadsheet).
-6. ~30 seconds later the full OS is built and you land on the Dashboard.
-
-> **Why a builder script?** Google Sheets can't be generated from outside your account
-> without access to it. The script is only the *installer* — the finished spreadsheet is
-> 100 % native formulas, charts and formatting, exactly as if it had been hand-built.
+This is not a time tracker. It is a full operating loop:
+**Design → Commit → Execute → Review**, with a contextual executive dashboard on
+every sheet so you never switch tabs just to know where you stand.
 
 ---
 
-## 🧭 What gets built
+## 🚀 Install the v2.0 system (≈2 minutes)
 
-| Tab | Role |
+1. Open your Google Sheet → **Extensions → Apps Script**.
+2. Delete the placeholder code, paste the full contents of
+   **[`dist/AscensionOS.gs`](dist/AscensionOS.gs)** (single-file bundle of all
+   modules), press **Save**.
+3. Reload the spreadsheet → a **⚡ Ascension OS** menu appears.
+4. **⚡ Ascension OS → Build / Rebuild System** → authorize → ~60 s later the OS is live.
+
+Full illustrated walkthrough (with screenshots of every step, the authorization
+screens, `clasp` CLI deployment and troubleshooting):
+**[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)**.
+
+> **No-code quick start (v1.x):** [`168-Hour-Executive-OS.xlsx`](168-Hour-Executive-OS.xlsx)
+> can be uploaded straight to Google Drive and opened as a Google Sheet — the previous
+> generation of the system, no script needed. The v2.0 experience below requires the
+> Apps Script build.
+
+---
+
+## 🧭 What v2.0 builds
+
+Every operational sheet opens with the **same executive dashboard strip** — Hours
+Used, Remaining, Weekly/Monthly/Annual Hours, Productive, Free Time, Utilization %,
+Balance Score — plus a live line of what you've logged **today · this week · this
+month · this year**. Then: guided inputs in the middle, analysis at the bottom.
+
+| Sheet | Role |
 |---|---|
-| **📊 Dashboard** | KPI cards (Hours Used, Hours Free, Utilization %, Balance Score, Productive Hours, Sleep), Daily/Weekly/Monthly/Yearly horizons table, live Signals panel, allocation table, donut + bar charts |
-| **⚙️ Inputs** | The *only* place you plan. Guided sentences per life area ("I sleep for around `7.5` hours per night") — edit blue cells only, weekly hours compute per line |
-| **📅 Daily Tracker** | Log actual hours per category, Mon–Sun. Day totals warn when a day exceeds 18 h / 24 h |
-| **📈 Weekly Tracker** | Planned vs Actual vs Difference, % of plan, % of week, in-cell progress bars, utilization & remaining hours |
-| **🗓️ Monthly Tracker** | Monthly projections (× 4.35 weeks), extrapolated actuals, variance, plan-vs-actual sparklines |
-| **🎯 Annual Tracker** | Annual hours / days / weeks / % per category + "perspective" facts ("you will sleep 121 full days this year") |
-| **📉 Charts** | Large-format donut, bar and planned-vs-actual column charts + their auto data feeds |
-| **🔧 Settings** | Single source of truth: constants (24 h/day, 168 h/week, weeks/month, weeks/year), master category table, **5 custom category slots**, editable healthy Min/Max thresholds, productive-hours flags |
-| **📖 Guide** | In-sheet user manual |
+| **📊 Dashboard** | Executive overview only (no inputs): 🚦 Signals, 🎯 Goal Progress vs your targets, 📈 4-week logged-hours trend, 💡 Executive Insights, ⚖️ Life Balance table, donut + bar + planned-vs-actual charts |
+| **🌟 Ideal Week** | Conversational design of your 168 hours ("I sleep for around `8` hours per night…") across 17 life areas; every section shows weekly + monthly + annual estimates, % of week, and the cascading *"That leaves me with…"* |
+| **📆 Current Week** | Commit this week's plan (blank = ideal), watch Actual / Variance / Remaining / % of plan / progress bars fill in live from the Daily Tracker |
+| **📅 Daily Tracker** | The execution engine: date-stamped log (Date, Day, Category, Planned, Actual, Notes) with a live **Today panel** (daily total, remaining, productivity score) and a Last-7-Days scoreboard |
+| **🗓️ Monthly Review** | Auto-built from the log: monthly summary, weekly breakdown (W1–W5), category ranking, variance, monthly insights |
+| **🎯 Annual Review** | Annual plan vs actual YTD, on-pace %, annual days, life balance, Year-in-Review narrative |
+| **⚙️ Settings** | Lightweight config: Work Days, Sleep Goal, Weekly Productive Target, **Theme** (Teal / Navy / Forest — apply without rebuilding), constants, master category table + **5 custom category slots** |
+| **📖 Guide** | The operating manual, inside the sheet |
 
-### Default life areas
-Sleep · Work · Food · Household Chores · Childcare · Fitness · Entertainment ·
-Relationships · Learning · Personal Development · Spiritual · Travel · Admin
-(+ Free Time, computed) — plus **5 blank custom slots** that flow into every tracker
-and chart automatically the moment you name them.
-
----
-
-## 🧱 Architecture — *input once, calculate everywhere*
-
-```
-⚙️ Inputs ──► PLAN_* named ranges ──► 🔧 Settings master table
-                                        │  (CAT_NAMES / CAT_HOURS /
-                                        │   TOTAL_USED / FREE_TIME / PRODUCTIVE_H)
-              ┌─────────────┬───────────┼─────────────┬──────────────┐
-              ▼             ▼           ▼             ▼              ▼
-        📅 Daily      📈 Weekly    🗓️ Monthly    🎯 Annual      📊 Dashboard
-        (FILTER +     (XLOOKUP     (× WEEKS_    (× WEEKS_      + 📉 Charts
-         XLOOKUP)      vs Daily)    MONTH)       YEAR)          (auto feeds)
-```
-
-Design rules the build follows:
-
-- **Zero hardcoded values in formulas.** 24, 168, 4.35, 52.18 all live as named
-  constants on Settings (`HOURS_DAY`, `HOURS_WEEK`, `WEEKS_MONTH`, `WEEKS_YEAR`).
-- **Categories are data, not structure.** Trackers pull the category list via
-  `FILTER(CAT_NAMES, …)` and match hours via `XLOOKUP`, so adding a custom category
-  never breaks anything.
-- **Blue cell = editable. Everything else = formula.** Formula areas carry
-  warning-only protection so accidental edits prompt before overwriting.
-- **Validation everywhere.** Inputs accept only sane numbers (0–7 for days/week,
-  0–24 for daily logs); productive flags are checkboxes.
-- **Conditional formatting as an early-warning system:** Work > 60 h → red,
-  Sleep < 49 h → red, Fitness < 3 h → yellow, over-allocating past 168 h → red,
-  healthy free-time buffer → green, neglected categories (< 50 % of plan) → amber.
-
-### Balance Score (0–100)
-One glanceable number for how humane the week is. Checks: sleep within 49–63 h,
-work ≤ 55 h, fitness ≥ 3 h, relationships ≥ 3 h, learning + personal development ≥ 2 h,
-free time ≥ 5 h, and nothing over-allocated. **80+ = sustainable executive week.**
+### Life areas (17 defaults + custom)
+Sleep · Work · **Deep Work** · **Meetings** · Food · Household Chores · Childcare ·
+Fitness · Entertainment · Relationships · Learning · Personal Development · Spiritual ·
+Travel · Admin · **Business Development** · **Content Creation** (+ Free Time, computed,
+and 5 custom slots that propagate everywhere instantly).
 
 ---
 
-## 🔁 Everyday use
+## 🧱 Architecture
 
-- **Plan:** adjust blue cells on ⚙️ Inputs — dashboard, trackers and charts update live.
-- **Track:** type real hours into the blue grid on 📅 Daily Tracker.
-- **Review:** 📈 Weekly Tracker shows the plan-vs-reality gap; 🚦 Signals on the
-  Dashboard tell you what to fix first.
-- **New week:** select the blue grid on 📅 Daily Tracker and press Delete. Plans stay.
-- **Add a category:** type a name + hours in a blue row at the bottom of the
-  🔧 Settings master table. Done — it's everywhere.
-- **Factory reset:** ⚡ Executive OS → Build / Rebuild System (this resets inputs to
-  defaults, so note yours down first).
+**Input once → calculate everywhere.** 24 h/day and 168 h/week are the only axioms;
+everything else is derived through named ranges — no hardcoded values in formulas.
+
+```
+🌟 Ideal Week ──► PLAN_* ──► ⚙️ Settings master table (CAT_NAMES / CAT_HOURS / CAT_PROD)
+                                      │
+📆 Current Week (CW_EFF plan) ◄───────┤
+        ▲  actuals via SUMIFS         │
+📅 Daily Tracker log (LOG_DATE / LOG_CAT / LOG_ACT / LOG_PROD)
+        │
+        └──► 🗓️ Monthly Review · 🎯 Annual Review · 📊 Dashboard · charts
+```
+
+### Modular Apps Script codebase (`apps-script/`)
+`00_Config` · `01_Theme` · `02_Utilities` · `03_FormatValidate` · `04_ContextDash` ·
+`05_Builder` · `06_Settings` · `07_IdealWeek` · `08_CurrentWeek` · `09_Daily` ·
+`10_Monthly` · `11_Annual` · `12_Dashboard` · `13_Charts` · `14_Reports` · `15_Guide`
+
+Each module is independent; `tools/build_gs_bundle.py` concatenates them into the
+pasteable **`dist/AscensionOS.gs`**. Apps Script is used **only to build** — after the
+build the workbook runs on native formulas (SUMIFS, FILTER, XLOOKUP, INDEX/MATCH,
+SPARKLINE, named ranges).
+
+### Guardrails
+- **Blue cell = editable; everything else is a formula** (with warning-only protection).
+- Data validation everywhere (dates, 0–24 h logs, category dropdowns, checkboxes).
+- Conditional formatting: day > 24 h red / > 18 h amber, sleep below goal red, work
+  above target orange, fitness below goal yellow, over-allocation red, healthy
+  balance green, category over/under plan flags.
+- **Balance Score (0–100):** sleep at goal, total work (work + deep work + meetings)
+  ≤ 55 h, fitness ≥ 3 h, relationships ≥ 3 h, learning + PD ≥ 2 h, free time ≥ 5 h,
+  nothing over-allocated. 80+ = sustainable executive week.
+- ⚡ menu utilities: Apply Theme, Clear This Week's Plan, Clear Daily Log.
 
 ---
 
 ## 📁 Repo layout
 
 ```
-apps-script/
-  Code.gs           ← the entire builder (paste this into Extensions → Apps Script)
+apps-script/          ← 16 modular .gs source files (v2.0)
+dist/AscensionOS.gs   ← single-file bundle: paste THIS into Apps Script
+tools/
+  build_gs_bundle.py  ← regenerates dist/AscensionOS.gs from the modules
+  build_xlsx.py       ← builds the v1 no-code xlsx
+168-Hour-Executive-OS.xlsx  ← v1 no-code quick start (Drive upload)
 docs/
-  DEPLOYMENT.md     ← full deployment & integration guide (auth flow, clasp CLI,
-                      template distribution, troubleshooting)
-README.md           ← you are here
+  DEPLOYMENT.md       ← illustrated install & distribution guide
+  images/             ← step-by-step install illustrations
 ```
-
-Deploying for the first time? Follow **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** —
-it covers the exact click path, the Google authorization screens, CLI deployment
-with `clasp`, how to distribute the finished sheet as a template, and fixes for
-every common hiccup.

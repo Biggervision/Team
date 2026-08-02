@@ -8,9 +8,9 @@ install to CLI-based deployment and distributing it as a commercial template.
 
 ## 1. What you are deploying
 
-One file — [`apps-script/Code.gs`](../apps-script/Code.gs) — a **builder script**.
+One file — [`dist/AscensionOS.gs`](../dist/AscensionOS.gs) — a **builder script**.
 It runs *inside* your Google Sheet (Google Apps Script) and generates the entire
-system: 9 tabs, all formulas, named ranges, data validation, conditional
+system: 8 tabs (each with its own contextual executive dashboard), all formulas, named ranges, data validation, conditional
 formatting and charts.
 
 Key facts:
@@ -33,14 +33,14 @@ Key facts:
 ### Step 1 — Open the target spreadsheet and click Extensions → Apps Script
 Use your existing sheet or a fresh one at [sheets.new](https://sheets.new).
 Existing tabs (e.g. your old Ascension OS tabs) are **not modified** — the builder
-only creates/replaces its own 9 tabs.
+only creates/replaces its own 8 tabs.
 
 ![Step 1 — Extensions menu → Apps Script](images/step1-extensions-menu.png)
 
 ### Step 2 — Paste the builder into the script editor
-1. In the editor you'll see a file `Code.gs` containing `function myFunction() {…}`.
+1. In the editor you'll see a file `AscensionOS.gs` containing `function myFunction() {…}`.
 2. Select all of it (`Ctrl/Cmd + A`) and delete it.
-3. Paste the **entire contents** of [`apps-script/Code.gs`](../apps-script/Code.gs)
+3. Paste the **entire contents** of [`dist/AscensionOS.gs`](../dist/AscensionOS.gs)
    (open the file on GitHub → **Raw** → `Ctrl/Cmd+A`, `Ctrl/Cmd+C`).
 4. Press **Save** (💾 icon or `Ctrl/Cmd + S`).
 
@@ -48,12 +48,12 @@ only creates/replaces its own 9 tabs.
 
 ### Step 3 — Reload the spreadsheet
 Go back to the spreadsheet browser tab and **reload the page** (F5 / ⌘R).
-Within ~5 seconds a new menu appears in the menu bar: **⚡ Executive OS**.
+Within ~5 seconds a new menu appears in the menu bar: **⚡ Ascension OS**.
 
-![Step 3 — reload, the ⚡ Executive OS menu appears](images/step3-reload-menu.png)
+![Step 3 — reload, the ⚡ Ascension OS menu appears](images/step3-reload-menu.png)
 
 ### Step 4 — Run the build
-Click **⚡ Executive OS → Build / Rebuild System**.
+Click **⚡ Ascension OS → Build / Rebuild System**.
 
 ![Step 4 — Build / Rebuild System](images/step4-build.png)
 
@@ -65,13 +65,13 @@ Click **⚡ Executive OS → Build / Rebuild System**.
    in your own account, touching only this sheet.
 4. Click **Allow**.
 5. If the build was interrupted by the auth flow, click
-   **⚡ Executive OS → Build / Rebuild System** once more.
+   **⚡ Ascension OS → Build / Rebuild System** once more.
 
 ![Step 5 — the three authorization screens](images/step5-authorize.png)
 
 ### Step 6 — Done
 The build takes ~30–60 seconds and drops you on **📊 Dashboard** with a toast
-saying the OS is ready. Start planning on **⚙️ Inputs** — only edit blue cells.
+saying the OS is ready. Start designing on **🌟 Ideal Week** — only edit blue cells.
 
 ![Step 6 — the finished dashboard](images/step6-result.png)
 
@@ -113,7 +113,7 @@ clasp create --type sheets --title "168-Hour Executive OS" --rootDir .
 clasp push -f
 ```
 
-Then open the sheet, reload, and run **⚡ Executive OS → Build / Rebuild System**
+Then open the sheet, reload, and run **⚡ Ascension OS → Build / Rebuild System**
 (or run `buildExecutiveOS` from the editor). The build step itself always happens
 in Google's environment — `clasp` just delivers the code.
 
@@ -145,12 +145,12 @@ copy link; every copy is self-contained.
 
 ## 6. Updating to a newer version of the builder
 
-1. Pull the latest `apps-script/Code.gs` from this repo.
+1. Pull the latest `dist/AscensionOS.gs` from this repo.
 2. Extensions → Apps Script → select all → paste new version → Save.
 3. **⚠️ Note your current Inputs values first** — rebuilding resets the OS tabs
    to factory defaults (it's a rebuild, not a migration).
-4. ⚡ Executive OS → Build / Rebuild System.
-5. Re-enter your values on ⚙️ Inputs and 🔧 Settings custom rows.
+4. ⚡ Ascension OS → Build / Rebuild System.
+5. Re-enter your values on 🌟 Ideal Week and ⚙️ Settings custom rows.
 
 ---
 
@@ -185,9 +185,9 @@ copy link; every copy is self-contained.
 
 ```
 Extensions → Apps Script
-  → paste apps-script/Code.gs → Save
+  → paste dist/AscensionOS.gs → Save
 Reload spreadsheet
-  → ⚡ Executive OS → Build / Rebuild System
+  → ⚡ Ascension OS → Build / Rebuild System
   → Continue → choose account → Advanced → Allow
 Wait ~30–60 s → Dashboard appears
   → go to ⚙️ Inputs → edit blue cells only
