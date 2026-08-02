@@ -25,31 +25,39 @@ Key facts:
 
 ---
 
-## 2. Standard deployment (recommended, ≈2 minutes)
+## 2. Standard deployment (recommended, ≈2 minutes) — illustrated
 
-### Step 1 — Open the target spreadsheet
+> The images below are illustrations of the exact screens you'll see, with the
+> click targets circled in red.
+
+### Step 1 — Open the target spreadsheet and click Extensions → Apps Script
 Use your existing sheet or a fresh one at [sheets.new](https://sheets.new).
 Existing tabs (e.g. your old Ascension OS tabs) are **not modified** — the builder
 only creates/replaces its own 9 tabs.
 
-### Step 2 — Open the Apps Script editor
-In the spreadsheet menu: **Extensions → Apps Script**.
-A new browser tab opens with the script editor bound to this spreadsheet.
+![Step 1 — Extensions menu → Apps Script](images/step1-extensions-menu.png)
 
-### Step 3 — Paste the builder
+### Step 2 — Paste the builder into the script editor
 1. In the editor you'll see a file `Code.gs` containing `function myFunction() {…}`.
-2. Select all of it and delete it.
-3. Paste the **entire contents** of [`apps-script/Code.gs`](../apps-script/Code.gs).
+2. Select all of it (`Ctrl/Cmd + A`) and delete it.
+3. Paste the **entire contents** of [`apps-script/Code.gs`](../apps-script/Code.gs)
+   (open the file on GitHub → **Raw** → `Ctrl/Cmd+A`, `Ctrl/Cmd+C`).
 4. Press **Save** (💾 icon or `Ctrl/Cmd + S`).
 
-### Step 4 — Reload the spreadsheet
-Go back to the spreadsheet browser tab and **reload the page**.
+![Step 2 — delete placeholder, paste Code.gs, save](images/step2-paste-code.png)
+
+### Step 3 — Reload the spreadsheet
+Go back to the spreadsheet browser tab and **reload the page** (F5 / ⌘R).
 Within ~5 seconds a new menu appears in the menu bar: **⚡ Executive OS**.
 
-### Step 5 — Build
+![Step 3 — reload, the ⚡ Executive OS menu appears](images/step3-reload-menu.png)
+
+### Step 4 — Run the build
 Click **⚡ Executive OS → Build / Rebuild System**.
 
-**First run only — authorization:**
+![Step 4 — Build / Rebuild System](images/step4-build.png)
+
+### Step 5 — Authorize (first run only)
 1. Google shows *"Authorization required"* → click **Continue / OK**.
 2. Pick your Google account.
 3. If you see *"Google hasn't verified this app"* (normal for personal scripts):
@@ -59,9 +67,13 @@ Click **⚡ Executive OS → Build / Rebuild System**.
 5. If the build was interrupted by the auth flow, click
    **⚡ Executive OS → Build / Rebuild System** once more.
 
+![Step 5 — the three authorization screens](images/step5-authorize.png)
+
 ### Step 6 — Done
 The build takes ~30–60 seconds and drops you on **📊 Dashboard** with a toast
 saying the OS is ready. Start planning on **⚙️ Inputs** — only edit blue cells.
+
+![Step 6 — the finished dashboard](images/step6-result.png)
 
 ---
 

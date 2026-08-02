@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="960" height="600" fill="#F1F5F9"/>
+  <circle cx="48" cy="48" r="22" fill="#DC2626"/>
+  <text x="48" y="56" font-size="22" font-weight="bold" fill="#fff" text-anchor="middle">2</text>
+  <text x="84" y="42" font-size="20" font-weight="bold" fill="#0F172A">Paste the builder into the script editor</text>
+  <text x="84" y="64" font-size="15" fill="#475569">Delete the placeholder code, paste the whole  apps-script/Code.gs  file, press Save</text>
+
+  <!-- editor window -->
+  <rect x="30" y="90" width="900" height="480" rx="12" fill="#fff" stroke="#CBD5E1"/>
+  <circle cx="58" cy="114" r="6" fill="#F87171"/><circle cx="78" cy="114" r="6" fill="#FBBF24"/><circle cx="98" cy="114" r="6" fill="#34D399"/>
+  <text x="120" y="119" font-size="13" fill="#334155">Apps Script — Untitled project</text>
+
+  <!-- toolbar -->
+  <rect x="30" y="132" width="900" height="40" fill="#F8FAFC"/>
+  <line x1="30" y1="172" x2="930" y2="172" stroke="#E2E8F0"/>
+  <text x="200" y="157" font-size="13" fill="#64748B">↺   ↻</text>
+  <rect x="252" y="138" width="76" height="28" rx="6" fill="#E8F0FE"/>
+  <text x="266" y="157" font-size="13" font-weight="bold" fill="#1A73E8">💾 Save</text>
+  <text x="344" y="157" font-size="13" fill="#64748B">▷ Run    ⏱ Debug</text>
+  <circle cx="290" cy="152" r="24" fill="none" stroke="#DC2626" stroke-width="3"/>
+
+  <!-- sidebar -->
+  <rect x="30" y="172" width="180" height="398" fill="#FBFCFE"/>
+  <line x1="210" y1="172" x2="210" y2="570" stroke="#E2E8F0"/>
+  <text x="48" y="200" font-size="12" font-weight="bold" fill="#64748B">FILES</text>
+  <rect x="38" y="212" width="164" height="28" rx="6" fill="#E8F0FE"/>
+  <text x="52" y="231" font-size="13" font-weight="bold" fill="#1A73E8">Code.gs</text>
+
+  <!-- code pane -->
+  <text x="228" y="204" font-size="12" fill="#94A3B8" xml:space="preserve">1</text>
+  <text x="252" y="204" font-size="12" fill="#94A3B8" text-decoration="line-through" xml:space="preserve">function myFunction() {   ← delete this placeholder first</text>
+  <g font-family="Consolas, Menlo, monospace" font-size="12">
+    <text x="228" y="240" fill="#94A3B8">1</text><text x="252" y="240" fill="#6A9955">/** 168-HOUR EXECUTIVE TIME OPERATING SYSTEM — one-click builder */</text>
+    <text x="228" y="262" fill="#94A3B8">2</text><text x="252" y="262" fill="#0000FF">const</text><text x="290" y="262" fill="#111827"> UI = { navy: '#0F172A', accent: '#4F46E5', … };</text>
+    <text x="228" y="284" fill="#94A3B8">3</text><text x="252" y="284" fill="#0000FF">const</text><text x="290" y="284" fill="#111827"> CATEGORIES = [ Sleep, Work, Food, Chores, … ];</text>
+    <text x="228" y="306" fill="#94A3B8">4</text><text x="252" y="306" fill="#0000FF">function</text><text x="312" y="306" fill="#795E26"> onOpen</text><text x="358" y="306" fill="#111827">() { … adds the ⚡ menu … }</text>
+    <text x="228" y="328" fill="#94A3B8">5</text><text x="252" y="328" fill="#0000FF">function</text><text x="312" y="328" fill="#795E26"> buildExecutiveOS</text><text x="428" y="328" fill="#111827">() { … builds all 9 tabs … }</text>
+    <text x="228" y="350" fill="#94A3B8">6</text><text x="252" y="350" fill="#64748B">… (the rest of the ~900-line file) …</text>
+  </g>
+
+  <!-- callouts -->
+  <rect x="240" y="400" width="660" height="140" rx="10" fill="#FFF7ED" stroke="#FDBA74"/>
+  <text x="262" y="430" font-size="14" fill="#9A3412"><tspan font-weight="bold">①  Select all</tspan>  (Ctrl/Cmd + A) and delete the placeholder  function myFunction() {}</text>
+  <text x="262" y="460" font-size="14" fill="#9A3412"><tspan font-weight="bold">②  Paste</tspan>  the FULL contents of  apps-script/Code.gs  from this repo</text>
+  <text x="262" y="490" font-size="14" fill="#9A3412"><tspan font-weight="bold">③  Save</tspan>  — the 💾 button circled above (or Ctrl/Cmd + S)</text>
+  <text x="262" y="520" font-size="13" fill="#C2410C" font-style="italic">Tip: open the raw file on GitHub and Ctrl/Cmd+A → Ctrl/Cmd+C to copy everything in one go.</text>
+</svg>

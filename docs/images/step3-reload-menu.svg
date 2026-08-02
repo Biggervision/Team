@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="960" height="420" fill="#F1F5F9"/>
+  <circle cx="48" cy="48" r="22" fill="#DC2626"/>
+  <text x="48" y="56" font-size="22" font-weight="bold" fill="#fff" text-anchor="middle">3</text>
+  <text x="84" y="42" font-size="20" font-weight="bold" fill="#0F172A">Reload the spreadsheet tab</text>
+  <text x="84" y="64" font-size="15" fill="#475569">Go back to the sheet, press F5 / ⌘R.  A new  ⚡ Executive OS  menu appears within ~5 seconds.</text>
+
+  <rect x="30" y="90" width="900" height="290" rx="12" fill="#fff" stroke="#CBD5E1"/>
+  <circle cx="58" cy="114" r="6" fill="#F87171"/><circle cx="78" cy="114" r="6" fill="#FBBF24"/><circle cx="98" cy="114" r="6" fill="#34D399"/>
+  <rect x="120" y="102" width="420" height="24" rx="12" fill="#F1F5F9"/>
+  <text x="134" y="118" font-size="12" fill="#64748B">docs.google.com/spreadsheets/…</text>
+  <text x="560" y="120" font-size="16" fill="#1A73E8">⟳</text>
+  <circle cx="565" cy="114" r="14" fill="none" stroke="#DC2626" stroke-width="2.5"/>
+  <text x="590" y="119" font-size="12" fill="#DC2626" font-weight="bold">reload!</text>
+
+  <rect x="52" y="146" width="30" height="30" rx="6" fill="#188038"/>
+  <rect x="59" y="153" width="16" height="16" rx="2" fill="#fff"/>
+  <line x1="59" y1="161" x2="75" y2="161" stroke="#188038" stroke-width="2"/>
+  <line x1="67" y1="153" x2="67" y2="169" stroke="#188038" stroke-width="2"/>
+  <text x="94" y="166" font-size="17" fill="#0F172A">Ascension OS Weekly Tracker</text>
+
+  <!-- menu bar with new item -->
+  <text x="96" y="205" font-size="14" fill="#334155">File</text>
+  <text x="140" y="205" font-size="14" fill="#334155">Edit</text>
+  <text x="185" y="205" font-size="14" fill="#334155">View</text>
+  <text x="236" y="205" font-size="14" fill="#334155">Insert</text>
+  <text x="292" y="205" font-size="14" fill="#334155">Format</text>
+  <text x="356" y="205" font-size="14" fill="#334155">Data</text>
+  <text x="404" y="205" font-size="14" fill="#334155">Tools</text>
+  <text x="452" y="205" font-size="14" fill="#334155">Extensions</text>
+  <text x="534" y="205" font-size="14" fill="#334155">Help</text>
+  <rect x="576" y="186" width="140" height="28" rx="14" fill="#EEF2FF" stroke="#4F46E5"/>
+  <text x="590" y="205" font-size="14" font-weight="bold" fill="#4F46E5">⚡ Executive OS</text>
+
+  <ellipse cx="646" cy="200" rx="86" ry="24" fill="none" stroke="#DC2626" stroke-width="3"/>
+  <path d="M 700 300 L 660 228" stroke="#DC2626" stroke-width="3" fill="none" marker-end="url(#arr3)"/>
+  <defs><marker id="arr3" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#DC2626"/></marker></defs>
+  <rect x="620" y="300" width="250" height="52" rx="8" fill="#0F172A"/>
+  <text x="745" y="322" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">The new menu appears here</text>
+  <text x="745" y="341" font-size="12" fill="#CBD5E1" text-anchor="middle">missing? wait 10 s or reload again</text>
+</svg>

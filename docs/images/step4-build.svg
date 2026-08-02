@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="960" height="420" fill="#F1F5F9"/>
+  <circle cx="48" cy="48" r="22" fill="#DC2626"/>
+  <text x="48" y="56" font-size="22" font-weight="bold" fill="#fff" text-anchor="middle">4</text>
+  <text x="84" y="42" font-size="20" font-weight="bold" fill="#0F172A">Run the build</text>
+  <text x="84" y="64" font-size="15" fill="#475569">⚡ Executive OS  →  Build / Rebuild System.   Takes ~30–60 seconds.</text>
+
+  <rect x="30" y="90" width="900" height="290" rx="12" fill="#fff" stroke="#CBD5E1"/>
+  <text x="96" y="140" font-size="14" fill="#334155">File</text>
+  <text x="140" y="140" font-size="14" fill="#334155">Edit</text>
+  <text x="185" y="140" font-size="14" fill="#334155">View</text>
+  <text x="236" y="140" font-size="14" fill="#334155">Insert</text>
+  <text x="292" y="140" font-size="14" fill="#334155">Format</text>
+  <text x="356" y="140" font-size="14" fill="#334155">Data</text>
+  <text x="404" y="140" font-size="14" fill="#334155">Tools</text>
+  <text x="452" y="140" font-size="14" fill="#334155">Extensions</text>
+  <text x="534" y="140" font-size="14" fill="#334155">Help</text>
+  <rect x="576" y="121" width="140" height="28" rx="14" fill="#EEF2FF" stroke="#4F46E5"/>
+  <text x="590" y="140" font-size="14" font-weight="bold" fill="#4F46E5">⚡ Executive OS</text>
+
+  <!-- dropdown -->
+  <rect x="576" y="154" width="260" height="52" rx="8" fill="#fff" stroke="#CBD5E1"/>
+  <rect x="580" y="162" width="252" height="36" rx="6" fill="#E8F0FE"/>
+  <text x="596" y="185" font-size="14" font-weight="bold" fill="#1A73E8">Build / Rebuild System</text>
+  <ellipse cx="706" cy="180" rx="128" ry="24" fill="none" stroke="#DC2626" stroke-width="3"/>
+
+  <!-- progress toast -->
+  <rect x="330" y="270" width="380" height="60" rx="10" fill="#0F172A"/>
+  <text x="520" y="296" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">⏳ Building your Executive OS…</text>
+  <text x="520" y="316" font-size="12" fill="#CBD5E1" text-anchor="middle">9 tabs · formulas · charts · ~30–60 s — don't close the tab</text>
+</svg>

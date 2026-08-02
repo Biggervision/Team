@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="960" height="560" fill="#F1F5F9"/>
+  <!-- step badge -->
+  <circle cx="48" cy="48" r="22" fill="#DC2626"/>
+  <text x="48" y="56" font-size="22" font-weight="bold" fill="#fff" text-anchor="middle">1</text>
+  <text x="84" y="42" font-size="20" font-weight="bold" fill="#0F172A">Open your Google Sheet</text>
+  <text x="84" y="64" font-size="15" fill="#475569">Click the  Extensions  menu, then  Apps Script</text>
+
+  <!-- browser window -->
+  <rect x="30" y="90" width="900" height="440" rx="12" fill="#fff" stroke="#CBD5E1"/>
+  <circle cx="58" cy="114" r="6" fill="#F87171"/><circle cx="78" cy="114" r="6" fill="#FBBF24"/><circle cx="98" cy="114" r="6" fill="#34D399"/>
+  <rect x="120" y="102" width="520" height="24" rx="12" fill="#F1F5F9"/>
+  <text x="134" y="118" font-size="12" fill="#64748B">docs.google.com/spreadsheets/d/1Qqj0B21HB2ksWDyqNOPW…</text>
+
+  <!-- sheets header -->
+  <rect x="52" y="146" width="30" height="30" rx="6" fill="#188038"/>
+  <rect x="59" y="153" width="16" height="16" rx="2" fill="#fff"/>
+  <line x1="59" y1="161" x2="75" y2="161" stroke="#188038" stroke-width="2"/>
+  <line x1="67" y1="153" x2="67" y2="169" stroke="#188038" stroke-width="2"/>
+  <text x="94" y="166" font-size="17" fill="#0F172A">Ascension OS Weekly Tracker</text>
+
+  <!-- menu bar -->
+  <text x="96" y="200" font-size="14" fill="#334155">File</text>
+  <text x="140" y="200" font-size="14" fill="#334155">Edit</text>
+  <text x="185" y="200" font-size="14" fill="#334155">View</text>
+  <text x="236" y="200" font-size="14" fill="#334155">Insert</text>
+  <text x="292" y="200" font-size="14" fill="#334155">Format</text>
+  <text x="356" y="200" font-size="14" fill="#334155">Data</text>
+  <text x="404" y="200" font-size="14" fill="#334155">Tools</text>
+  <rect x="450" y="182" width="94" height="26" rx="13" fill="#E8F0FE"/>
+  <text x="462" y="200" font-size="14" font-weight="bold" fill="#1A73E8">Extensions</text>
+  <text x="558" y="200" font-size="14" fill="#334155">Help</text>
+
+  <!-- dropdown -->
+  <rect x="450" y="214" width="300" height="150" rx="8" fill="#fff" stroke="#CBD5E1"/>
+  <rect x="450" y="214" width="300" height="150" rx="8" fill="none" stroke="#94A3B8" stroke-opacity="0.25"/>
+  <text x="470" y="244" font-size="14" fill="#334155">🧩  Add-ons</text>
+  <text x="726" y="244" font-size="12" fill="#94A3B8">▸</text>
+  <text x="470" y="278" font-size="14" fill="#334155">◉  Macros</text>
+  <text x="726" y="278" font-size="12" fill="#94A3B8">▸</text>
+  <rect x="454" y="292" width="292" height="32" rx="6" fill="#E8F0FE"/>
+  <text x="470" y="313" font-size="14" font-weight="bold" fill="#1A73E8">⟨⟩  Apps Script</text>
+  <text x="470" y="348" font-size="14" fill="#334155">▦  AppSheet</text>
+  <text x="726" y="348" font-size="12" fill="#94A3B8">▸</text>
+
+  <!-- click callout -->
+  <ellipse cx="600" cy="308" rx="160" ry="26" fill="none" stroke="#DC2626" stroke-width="3"/>
+  <path d="M 790 400 L 700 322" stroke="#DC2626" stroke-width="3" fill="none" marker-end="url(#arr)"/>
+  <defs><marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#DC2626"/></marker></defs>
+  <rect x="740" y="400" width="170" height="56" rx="8" fill="#0F172A"/>
+  <text x="825" y="424" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">Click here</text>
+  <text x="825" y="444" font-size="12" fill="#CBD5E1" text-anchor="middle">opens the script editor</text>
+</svg>

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="620" viewBox="0 0 960 620" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="960" height="620" fill="#F1F5F9"/>
+  <circle cx="48" cy="48" r="22" fill="#16A34A"/>
+  <text x="48" y="56" font-size="22" font-weight="bold" fill="#fff" text-anchor="middle">✓</text>
+  <text x="84" y="42" font-size="20" font-weight="bold" fill="#0F172A">Done — this is what you'll see</text>
+  <text x="84" y="64" font-size="15" fill="#475569">You land on 📊 Dashboard. Go to ⚙️ Inputs and edit the blue cells — everything updates live.</text>
+
+  <rect x="30" y="90" width="900" height="500" rx="12" fill="#fff" stroke="#CBD5E1"/>
+  <text x="56" y="132" font-size="20" font-weight="bold" fill="#0F172A">168-HOUR EXECUTIVE OS</text>
+  <text x="56" y="152" font-size="11" fill="#64748B" font-style="italic">Week 31 · Sunday, 2 August 2026 · Every week resets to 168 hours. This is how you are spending yours.</text>
+
+  <!-- KPI cards -->
+  <g font-size="9">
+    <rect x="56" y="170" width="130" height="72" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <text x="121" y="188" fill="#94A3B8" font-weight="bold" text-anchor="middle">HOURS USED</text>
+    <text x="121" y="218" font-size="22" font-weight="bold" fill="#0F172A" text-anchor="middle">163.8</text>
+    <text x="121" y="234" fill="#94A3B8" text-anchor="middle">of 168 allocated</text>
+
+    <rect x="196" y="170" width="130" height="72" rx="8" fill="#0F172A"/>
+    <text x="261" y="188" fill="#A5B4FC" font-weight="bold" text-anchor="middle">HOURS FREE</text>
+    <text x="261" y="218" font-size="22" font-weight="bold" fill="#fff" text-anchor="middle">4.2</text>
+    <text x="261" y="234" fill="#C7D2FE" text-anchor="middle">unallocated buffer</text>
+
+    <rect x="336" y="170" width="130" height="72" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <text x="401" y="188" fill="#94A3B8" font-weight="bold" text-anchor="middle">UTILIZATION</text>
+    <text x="401" y="218" font-size="22" font-weight="bold" fill="#0F172A" text-anchor="middle">97.5%</text>
+    <text x="401" y="234" fill="#94A3B8" text-anchor="middle">of your week</text>
+
+    <rect x="476" y="170" width="130" height="72" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <text x="541" y="188" fill="#94A3B8" font-weight="bold" text-anchor="middle">BALANCE SCORE</text>
+    <text x="541" y="218" font-size="22" font-weight="bold" fill="#16A34A" text-anchor="middle">86</text>
+    <text x="541" y="234" fill="#94A3B8" text-anchor="middle">out of 100</text>
+
+    <rect x="616" y="170" width="130" height="72" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <text x="681" y="188" fill="#94A3B8" font-weight="bold" text-anchor="middle">PRODUCTIVE</text>
+    <text x="681" y="218" font-size="22" font-weight="bold" fill="#0F172A" text-anchor="middle">54.7</text>
+    <text x="681" y="234" fill="#94A3B8" text-anchor="middle">productive h / week</text>
+
+    <rect x="756" y="170" width="130" height="72" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <text x="821" y="188" fill="#94A3B8" font-weight="bold" text-anchor="middle">SLEEP</text>
+    <text x="821" y="218" font-size="22" font-weight="bold" fill="#0F172A" text-anchor="middle">56.0</text>
+    <text x="821" y="234" fill="#94A3B8" text-anchor="middle">sleep h / week</text>
+  </g>
+
+  <!-- signals -->
+  <rect x="56" y="262" width="400" height="24" rx="4" fill="#0F172A"/>
+  <text x="70" y="279" font-size="11" font-weight="bold" fill="#fff">🚦  SIGNALS</text>
+  <text x="60" y="308" font-size="11" fill="#334155">🟢  Work load is sustainable.</text>
+  <text x="60" y="328" font-size="11" fill="#334155">🟢  Sleep is on target.</text>
+  <text x="60" y="348" font-size="11" fill="#334155">🟡  Under 5 h of true free time — build in slack.</text>
+  <text x="60" y="368" font-size="11" fill="#334155">🟢  Fitness habit is funded.</text>
+
+  <!-- donut -->
+  <g transform="translate(590,340)">
+    <circle r="62" fill="none" stroke="#E2E8F0" stroke-width="26"/>
+    <circle r="62" fill="none" stroke="#6366F1" stroke-width="26" stroke-dasharray="130 260" transform="rotate(-90)"/>
+    <circle r="62" fill="none" stroke="#0EA5E9" stroke-width="26" stroke-dasharray="101 289" stroke-dashoffset="-130" transform="rotate(-90)"/>
+    <circle r="62" fill="none" stroke="#F59E0B" stroke-width="26" stroke-dasharray="62 328" stroke-dashoffset="-231" transform="rotate(-90)"/>
+    <circle r="62" fill="none" stroke="#10B981" stroke-width="26" stroke-dasharray="55 335" stroke-dashoffset="-293" transform="rotate(-90)"/>
+    <text y="-4" font-size="13" font-weight="bold" fill="#0F172A" text-anchor="middle">168 h</text>
+    <text y="14" font-size="9" fill="#94A3B8" text-anchor="middle">per week</text>
+  </g>
+  <g font-size="10" fill="#475569">
+    <rect x="700" y="292" width="9" height="9" fill="#6366F1"/><text x="716" y="301">Sleep · 56.0</text>
+    <rect x="700" y="312" width="9" height="9" fill="#0EA5E9"/><text x="716" y="321">Work · 43.3</text>
+    <rect x="700" y="332" width="9" height="9" fill="#F59E0B"/><text x="716" y="341">Childcare · 16.0</text>
+    <rect x="700" y="352" width="9" height="9" fill="#10B981"/><text x="716" y="361">Entertainment · 10.0</text>
+    <rect x="700" y="372" width="9" height="9" fill="#E2E8F0"/><text x="716" y="381">9 more areas…</text>
+  </g>
+
+  <!-- bar chart mini -->
+  <g font-size="10" fill="#475569">
+    <text x="60" y="410">Sleep</text><rect x="130" y="401" width="290" height="10" fill="#4F46E5"/>
+    <text x="60" y="430">Work</text><rect x="130" y="421" width="225" height="10" fill="#4F46E5"/>
+    <text x="60" y="450">Childcare</text><rect x="130" y="441" width="83" height="10" fill="#4F46E5"/>
+    <text x="60" y="470">Entertainment</text><rect x="130" y="461" width="52" height="10" fill="#4F46E5"/>
+    <text x="60" y="490">Relationships</text><rect x="130" y="481" width="39" height="10" fill="#4F46E5"/>
+  </g>
+
+  <!-- tab strip -->
+  <line x1="30" y1="540" x2="930" y2="540" stroke="#E2E8F0"/>
+  <g font-size="10.5">
+    <rect x="46" y="550" width="98" height="26" rx="5" fill="#0F172A"/>
+    <text x="95" y="567" fill="#fff" text-anchor="middle" font-weight="bold">📊 Dashboard</text>
+    <text x="200" y="567" fill="#475569" text-anchor="middle">⚙️ Inputs</text>
+    <text x="292" y="567" fill="#475569" text-anchor="middle">📅 Daily Tracker</text>
+    <text x="398" y="567" fill="#475569" text-anchor="middle">📈 Weekly Tracker</text>
+    <text x="510" y="567" fill="#475569" text-anchor="middle">🗓️ Monthly Tracker</text>
+    <text x="622" y="567" fill="#475569" text-anchor="middle">🎯 Annual Tracker</text>
+    <text x="712" y="567" fill="#475569" text-anchor="middle">📉 Charts</text>
+    <text x="790" y="567" fill="#475569" text-anchor="middle">🔧 Settings</text>
+    <text x="862" y="567" fill="#475569" text-anchor="middle">📖 Guide</text>
+  </g>
+
+  <!-- toast -->
+  <rect x="330" y="592" width="330" height="22" rx="6" fill="#0F172A" opacity="0.92"/>
+  <text x="495" y="607" font-size="11" fill="#fff" text-anchor="middle">⚡ Build complete — your Executive OS is ready.</text>
+</svg>
