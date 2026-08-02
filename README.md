@@ -23,10 +23,19 @@ Full illustrated walkthrough (with screenshots of every step, the authorization
 screens, `clasp` CLI deployment and troubleshooting):
 **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)**.
 
-> **No-code quick start (v1.x):** [`168-Hour-Executive-OS.xlsx`](168-Hour-Executive-OS.xlsx)
-> can be uploaded straight to Google Drive and opened as a Google Sheet — the previous
-> generation of the system, no script needed. The v2.0 experience below requires the
-> Apps Script build.
+### ⚡ No-code path (recommended): upload the ready-made file
+
+**[`Ascension-OS-v2.xlsx`](Ascension-OS-v2.xlsx)** is the complete v2.0 system as a
+file — 1,400+ formulas, verified error-free:
+
+1. [drive.google.com](https://drive.google.com) → **New → File upload** → pick the file.
+2. Double-click it → opens in Google Sheets → **File → Save as Google Sheets**. Done.
+
+Everything below is already inside (KPI strip on every sheet, all 8 tabs, charts,
+warnings, category dropdowns). Only two v2 features need the Apps Script build
+instead: switchable themes and the ⚡ menu utilities.
+(Built by `tools/build_xlsx_v2.py`; the v1 file `168-Hour-Executive-OS.xlsx`
+remains for reference.)
 
 ---
 
