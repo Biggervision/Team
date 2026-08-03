@@ -6,6 +6,12 @@ set -euo pipefail
 # Cloud sessions are ephemeral, so re-run this in a fresh environment
 # (or add it to the environment's setup script).
 
+# Already installed? Skip (keeps SessionStart hook fast on warm containers).
+if [ -x "${HOME}/.claude/skills/seo/bin/claude-seo" ]; then
+    echo "Claude SEO already installed, skipping."
+    exit 0
+fi
+
 TMP_DIR=$(mktemp -d)
 trap 'rm -rf -- "${TMP_DIR}"' EXIT
 
