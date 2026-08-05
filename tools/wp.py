@@ -2,12 +2,16 @@
 """Evergreen OC — WordPress REST client.
 
 A dependency-free command line client for making updates to the Evergreen OC
-WordPress site (https://evergreenoc.com) through the WordPress REST API.
+WordPress site through the WordPress REST API.
+
+Defaults to the **staging** site, https://staging2.evergreenoc.com. Production
+(https://evergreenoc.com) is only targeted when WP_SITE says so explicitly, and
+the client prints a warning when it does.
 
 Credentials are never stored in this repo. They are read from the environment,
 or from an untracked `.env.wordpress` file at the repo root:
 
-    WP_SITE=https://evergreenoc.com
+    WP_SITE=https://staging2.evergreenoc.com
     WP_USER=your-wordpress-username
     WP_APP_PASSWORD=xxxx xxxx xxxx xxxx xxxx xxxx
 
@@ -27,10 +31,10 @@ Usage examples:
     python3 tools/wp.py upload ./promo.jpg --title "Spring promo"
     python3 tools/wp.py raw GET /wp/v2/settings
 
-The site sits behind SiteGround bot protection, which serves a captcha
-interstitial instead of the API response when the calling IP has been rate
-limited. Every request here sends a browser User-Agent and retries with backoff
-when it is challenged, which clears the transient case.
+Both sites sit behind SiteGround bot protection, which serves a captcha
+interstitial instead of the API response when the calling IP is rate limited.
+The challenge is bursty rather than a sustained block, so a prompt retry clears
+it; every request here sends a browser User-Agent and retries automatically.
 """
 
 from __future__ import annotations
@@ -49,7 +53,11 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 ENV_FILE = REPO_ROOT / ".env.wordpress"
 
-DEFAULT_SITE = "https://evergreenoc.com"
+STAGING_SITE = "https://staging2.evergreenoc.com"
+PRODUCTION_SITE = "https://evergreenoc.com"
+
+# Work happens on staging unless WP_SITE explicitly says otherwise.
+DEFAULT_SITE = STAGING_SITE
 
 # SiteGround's sg-security plugin challenges requests with no/!browser UA.
 USER_AGENT = (
@@ -60,9 +68,10 @@ USER_AGENT = (
 TIMEOUT = 60
 
 # SiteGround rate limits per IP and answers challenged requests with a captcha
-# interstitial. It is transient, so retry with backoff before giving up.
-CAPTCHA_RETRIES = 5
-CAPTCHA_BACKOFF = [2, 4, 8, 16, 30]
+# interstitial. Measured on staging it hits ~50% of requests in a burst but
+# clears on the very next attempt, so retry fast first and only then back off.
+CAPTCHA_RETRIES = 8
+CAPTCHA_BACKOFF = [0.5, 1, 2, 4, 8, 15, 30]
 
 
 class WPError(RuntimeError):
@@ -93,9 +102,25 @@ def load_env_file(path: Path = ENV_FILE) -> None:
         os.environ.setdefault(key, value)
 
 
+_warned_production = False
+
+
+def warn_if_production(site: str) -> None:
+    """Say so, once, when a command is pointed at the live site."""
+    global _warned_production
+    if not _warned_production and site.rstrip("/") == PRODUCTION_SITE:
+        _warned_production = True
+        print(
+            "WARNING: targeting PRODUCTION (evergreenoc.com), not staging. "
+            "Changes here are live to customers.",
+            file=sys.stderr,
+        )
+
+
 def credentials() -> tuple[str, str, str]:
     load_env_file()
     site = (os.environ.get("WP_SITE") or DEFAULT_SITE).rstrip("/")
+    warn_if_production(site)
     user = os.environ.get("WP_USER", "")
     # Application passwords are displayed in space-separated groups of four.
     password = (os.environ.get("WP_APP_PASSWORD") or "").replace(" ", "")
@@ -260,7 +285,8 @@ def read_content(args) -> str | None:
 def cmd_whoami(args) -> int:
     site, user, _ = credentials()
     me, _ = request("GET", "/wp/v2/users/me", params={"context": "edit"})
-    print(f"Site        : {site}")
+    env = "STAGING" if site == STAGING_SITE else ("PRODUCTION" if site == PRODUCTION_SITE else "custom")
+    print(f"Site        : {site}  [{env}]")
     print(f"Connected as: {me.get('name')} (username: {me.get('slug')}, id: {me.get('id')})")
     print(f"Email       : {me.get('email', 'n/a')}")
     print(f"Roles       : {', '.join(me.get('roles', [])) or 'n/a'}")
