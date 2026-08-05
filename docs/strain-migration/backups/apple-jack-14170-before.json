@@ -1,0 +1,315 @@
+{
+ "id": 14170,
+ "date": "2026-07-29T04:41:26",
+ "date_gmt": "2026-07-29T04:41:26",
+ "guid": {
+  "rendered": "https://staging2.evergreenoc.com/strain/apple-jack/",
+  "raw": "https://staging2.evergreenoc.com/strain/apple-jack/"
+ },
+ "modified": "2026-07-29T07:09:36",
+ "modified_gmt": "2026-07-29T07:09:36",
+ "password": "",
+ "slug": "apple-jack",
+ "status": "publish",
+ "type": "strain",
+ "link": "https://staging2.evergreenoc.com/strain/apple-jack/",
+ "title": {
+  "raw": "Apple Jack",
+  "rendered": "Apple Jack"
+ },
+ "content": {
+  "raw": "",
+  "rendered": "",
+  "protected": false,
+  "block_version": 0
+ },
+ "featured_media": 13957,
+ "template": "",
+ "meta": {
+  "_seopress_titles_title": "Apple Jack Strain | Santa Ana Delivery & Pickup | Evergreen",
+  "_seopress_titles_desc": "Apple Jack is a balanced hybrid of Jack Herer × White Widow with 18-21% THC and a crisp apple, sweet-earth flavor. Order for same-day delivery or pickup in Santa Ana.",
+  "_seopress_robots_index": "",
+  "_seopress_robots_follow": "",
+  "_seopress_robots_imageindex": "",
+  "_seopress_robots_snippet": "",
+  "_seopress_robots_primary_cat": "",
+  "_seopress_robots_breadcrumbs": "",
+  "_seopress_robots_freeze_modified_date": "",
+  "_seopress_robots_custom_modified_date": "",
+  "_seopress_robots_canonical": "",
+  "_seopress_social_fb_title": "",
+  "_seopress_social_fb_desc": "",
+  "_seopress_social_fb_img": "",
+  "_seopress_social_fb_img_attachment_id": 0,
+  "_seopress_social_fb_img_width": 0,
+  "_seopress_social_fb_img_height": 0,
+  "_seopress_social_twitter_title": "",
+  "_seopress_social_twitter_desc": "",
+  "_seopress_social_twitter_img": "",
+  "_seopress_social_twitter_img_attachment_id": 0,
+  "_seopress_social_twitter_img_width": 0,
+  "_seopress_social_twitter_img_height": 0,
+  "_seopress_redirections_value": "",
+  "_seopress_redirections_enabled": "",
+  "_seopress_redirections_enabled_regex": "",
+  "_seopress_redirections_logged_status": "",
+  "_seopress_redirections_param": "",
+  "_seopress_redirections_type": 0,
+  "_seopress_analysis_target_kw": "",
+  "_monsterinsights_skip_tracking": false,
+  "strain_type": "Hybrid",
+  "hero_title": "Apple Jack Strain.",
+  "buy_kick": "Flower · Balanced Hybrid",
+  "hero_lede": "Apple Jack strain blends a clear-headed, creative mental lift with just enough body relaxation to keep you grounded. Crisp apple sweetness up front, sweet earth underneath, and a finish that stays functional instead of putting you on the couch.",
+  "thc": "18–21%",
+  "cbd": "&lt;1%",
+  "lineage": "Jack Herer × White Widow",
+  "timing": "Daytime friendly",
+  "price": "$35",
+  "price_note": "/ eighth · TODO(Pro): confirm live price",
+  "otd_note": "Out-the-door · tax included",
+  "buy_buttons": {
+   "item-0": {
+    "style": "solid",
+    "label": "Order for delivery",
+    "url": "https://weedmaps.com/dispensaries/evergreen-santa-ana"
+   },
+   "item-1": {
+    "style": "ghost",
+    "label": "Reserve for pickup",
+    "url": "https://weedmaps.com/dispensaries/evergreen-santa-ana"
+   }
+  },
+  "trust_items": {
+   "item-0": {
+    "icon": "fas fa-shield-alt",
+    "text": "Lab-tested"
+   },
+   "item-1": {
+    "icon": "fas fa-bolt",
+    "text": "Same-day delivery"
+   },
+   "item-2": {
+    "icon": "fas fa-circle",
+    "text": "Open 6AM–10PM"
+   }
+  },
+  "about_headline": "What is Apple Jack?",
+  "about_html": "<p><strong>Apple Jack is a balanced hybrid</strong> bred by crossing two legends: Jack Herer and White Widow. The Jack Herer side brings the energizing mental clarity it's famous for, while White Widow rounds it out with a soothing, grounded body feel. The result is a strain that works in both directions at once, lifted and focused up top, relaxed but functional underneath.</p>\n<p>First popularized in Amsterdam in the early 2000s, Apple Jack nearly disappeared when its mother plant began to fade, and only survived because breeders preserved the genetics. That heritage is part of why it holds a loyal following today: sweet, fruit-forward smoke, well-rounded effects, and a profile that suits almost any time of day before the late evening.</p>\n",
+  "glance": {
+   "item-0": {
+    "label": "Type",
+    "value": "Balanced hybrid, daytime-leaning"
+   },
+   "item-1": {
+    "label": "Genetics",
+    "value": "Jack Herer × White Widow"
+   },
+   "item-2": {
+    "label": "THC",
+    "value": "18–21%"
+   },
+   "item-3": {
+    "label": "CBD",
+    "value": "Less than 1%"
+   },
+   "item-4": {
+    "label": "Dominant terpenes",
+    "value": "Myrcene · Pinene · Caryophyllene"
+   },
+   "item-5": {
+    "label": "Flavor",
+    "value": "Crisp apple, sweet earth, subtle skunky spice"
+   }
+  },
+  "effects_headline": "Clear head,<br>calm body.",
+  "effects_html": "<p><strong>Apple Jack effects lean daytime.</strong> The session typically opens with a bright mental lift, the Jack Herer signature, that most people describe as happy, sociable, and creative. As the cerebral buzz settles in, a light physical relaxation spreads through the body, easing tension without locking you to the couch.</p>\n<p>That balance is the whole appeal. Apple Jack keeps you productive and present, which makes it a favorite for creative work, conversation, and active afternoons that roll into a mellow early evening. Potency sits in the 18–21% range, approachable for most experienced consumers; if you're newer to cannabis, start low and go slow. Effects vary person to person and batch to batch, so treat the type as a guide, not a guarantee.</p>\n",
+  "pills": {
+   "item-0": {
+    "label": "Uplifted"
+   },
+   "item-1": {
+    "label": "Focused"
+   },
+   "item-2": {
+    "label": "Creative"
+   },
+   "item-3": {
+    "label": "Sociable"
+   },
+   "item-4": {
+    "label": "Relaxed body"
+   },
+   "item-5": {
+    "label": "Daytime friendly"
+   }
+  },
+  "flavor_headline": "Bite into it.",
+  "flavor_html": "<p><strong>Apple Jack tastes like its name.</strong> The first inhale is crisp, fruity sweetness, close to biting into a tart green apple. As the flavor develops, earthy and herbal undertones ground the sweetness, and the exhale finishes slightly skunky and peppery, adding depth to an otherwise bright profile. Crack a jar and the nose follows the same arc: strong, skunky fruit up front, spiced earth and pepper underneath. Three terpenes drive it.</p>\n",
+  "terps": {
+   "item-0": {
+    "name": "Myrcene",
+    "type": "Dominant · earthy, herbal",
+    "text": "The workhorse terpene in Apple Jack. Myrcene supplies the earthy, herbal base notes and is associated with the calm, settled body feel that follows the initial mental lift."
+   },
+   "item-1": {
+    "name": "Pinene",
+    "type": "Secondary · fresh pine",
+    "text": "Pinene cuts through the sweetness with a refreshing, pine-like sharpness. It brightens the aroma and complements the strain's alert, clear-headed character."
+   },
+   "item-2": {
+    "name": "Caryophyllene",
+    "type": "Accent · spicy, peppery",
+    "text": "Caryophyllene delivers the spicy, peppery notes on the finish, the signature that keeps Apple Jack's fruit-forward flavor from reading one-dimensional."
+   }
+  },
+  "cultivation_headline": "",
+  "cultivation_html": "",
+  "grow_specs": [],
+  "use_headline": "",
+  "use_html": "",
+  "use_methods": [],
+  "jar_headline": "What to look for<br>in the jar.",
+  "jar_html": "<p><strong>Apple Jack buds are dense, medium-sized, and resin-rich,</strong> chunky and well-rounded in the classic hybrid structure. The dominant bright green is threaded with fiery orange pistils, and under cooler late-flowering conditions some batches show subtle purple hues along the edges. A thick coat of milky trichomes gives the flower a frosty, sugar-dusted finish and a sticky feel — the visual cues connoisseurs read as potency and careful curing.</p>\n",
+  "spec": {
+   "item-0": {
+    "label": "Bud structure",
+    "value": "Dense, chunky, well-rounded hybrid form"
+   },
+   "item-1": {
+    "label": "Color",
+    "value": "Bright green, fiery orange pistils, occasional purple edges"
+   },
+   "item-2": {
+    "label": "Trichomes",
+    "value": "Heavy, milky-white, frosty finish"
+   },
+   "item-3": {
+    "label": "Feel",
+    "value": "Sticky, resinous, firm and satisfying to break"
+   }
+  },
+  "steps_headline": "Three steps to<br>your door.",
+  "steps_items": {
+   "item-0": {
+    "title": "Check the live menu",
+    "text": "Apple Jack rotates through the flower shelf. Check the live Weedmaps menu for today's stock, or browse every strain we carry to plan a backup."
+   },
+   "item-1": {
+    "title": "Order delivery or pickup",
+    "text": "Same-day delivery across Santa Ana and Orange County, or reserve for pickup at 1320 E Edinger Ave. Every price is out-the-door."
+   },
+   "item-2": {
+    "title": "Show your ID",
+    "text": "Have a valid government photo ID showing 21+. The driver verifies at your door; for pickup, we check at the counter. That's it."
+   }
+  },
+  "related_headline": "If you like Apple Jack…",
+  "faq_headline": "Apple Jack, answered.",
+  "faqs": {
+   "item-0": {
+    "question": "Is Apple Jack a sativa or an indica?",
+    "answer": "Apple Jack is a balanced hybrid bred from Jack Herer and White Widow. It leans daytime-friendly, pairing a clear-headed mental lift with a relaxed body feel that stays functional rather than sedating."
+   },
+   "item-1": {
+    "question": "How strong is Apple Jack?",
+    "answer": "Apple Jack typically tests between 18% and 21% THC with minimal CBD. That is a moderate-to-high potency range approachable for most experienced consumers; newer consumers should start low and go slow."
+   },
+   "item-2": {
+    "question": "What does Apple Jack taste and smell like?",
+    "answer": "Expect crisp, fruity sweetness reminiscent of tart green apple up front, grounded by sweet earth and herbal undertones, with a subtly skunky, peppery finish. The aroma follows the flavor: a strong fruit-forward nose over spiced earth."
+   },
+   "item-3": {
+    "question": "What is Apple Jack good for?",
+    "answer": "Most people reach for Apple Jack for daytime and early-evening sessions where they want an uplifted, focused, creative headspace with gentle body relaxation. Effects vary by person and batch, so treat strain type as a guide rather than a guarantee."
+   },
+   "item-4": {
+    "question": "What strains is Apple Jack similar to?",
+    "answer": "Fans of Apple Jack tend to also enjoy Jack Herer for a brighter, more cerebral lift, Blue Dream for a fruitier balanced high, and Gelatti for a creamy, focused daytime buzz. All rotate through the Evergreen menu."
+   },
+   "item-5": {
+    "question": "Can I get Apple Jack delivered in Santa Ana?",
+    "answer": "Yes. When Apple Jack is in stock, order it on Weedmaps for same-day delivery across Santa Ana and much of Orange County, or reserve it for pickup at 1320 E Edinger Ave. All pricing is out-the-door with tax included."
+   }
+  },
+  "cta_kick": "Open until 10PM · Delivering now",
+  "cta_headline": "Try Apple Jack<br>today.",
+  "cta_buttons": {
+   "item-0": {
+    "style": "solid",
+    "label": "Order on Weedmaps",
+    "url": "https://weedmaps.com/dispensaries/evergreen-santa-ana"
+   },
+   "item-1": {
+    "style": "ghost",
+    "label": "Browse all strains",
+    "url": "/strain/"
+   }
+  },
+  "cta_license": "⬡ Licensed CA Dispensary · 1320 E Edinger Ave · Santa Ana, CA 92705 · 21+"
+ },
+ "permalink_template": "https://staging2.evergreenoc.com/strain/%pagename%/",
+ "generated_slug": "apple-jack",
+ "class_list": [
+  "post-14170",
+  "strain",
+  "type-strain",
+  "status-publish",
+  "has-post-thumbnail",
+  "hentry"
+ ],
+ "_links": {
+  "self": [
+   {
+    "href": "https://staging2.evergreenoc.com/wp-json/wp/v2/strain/14170",
+    "targetHints": {
+     "allow": [
+      "GET",
+      "POST",
+      "PUT",
+      "PATCH",
+      "DELETE"
+     ]
+    }
+   }
+  ],
+  "collection": [
+   {
+    "href": "https://staging2.evergreenoc.com/wp-json/wp/v2/strain"
+   }
+  ],
+  "about": [
+   {
+    "href": "https://staging2.evergreenoc.com/wp-json/wp/v2/types/strain"
+   }
+  ],
+  "wp:featuredmedia": [
+   {
+    "embeddable": true,
+    "href": "https://staging2.evergreenoc.com/wp-json/wp/v2/media/13957"
+   }
+  ],
+  "wp:attachment": [
+   {
+    "href": "https://staging2.evergreenoc.com/wp-json/wp/v2/media?parent=14170"
+   }
+  ],
+  "wp:action-publish": [
+   {
+    "href": "https://staging2.evergreenoc.com/wp-json/wp/v2/strain/14170"
+   }
+  ],
+  "wp:action-unfiltered-html": [
+   {
+    "href": "https://staging2.evergreenoc.com/wp-json/wp/v2/strain/14170"
+   }
+  ],
+  "curies": [
+   {
+    "name": "wp",
+    "href": "https://api.w.org/{rel}",
+    "templated": true
+   }
+  ]
+ }
+}

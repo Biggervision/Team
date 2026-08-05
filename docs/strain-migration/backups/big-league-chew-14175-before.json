@@ -1,0 +1,206 @@
+{
+ "id": 14175,
+ "date": "2026-07-29T04:41:27",
+ "date_gmt": "2026-07-29T04:41:27",
+ "guid": {
+  "rendered": "https://staging2.evergreenoc.com/?post_type=strain&p=14175",
+  "raw": "https://staging2.evergreenoc.com/?post_type=strain&p=14175"
+ },
+ "modified": "2026-07-29T04:41:27",
+ "modified_gmt": "2026-07-29T04:41:27",
+ "password": "",
+ "slug": "big-league-chew",
+ "status": "draft",
+ "type": "strain",
+ "link": "https://staging2.evergreenoc.com/?post_type=strain&p=14175",
+ "title": {
+  "raw": "Big League Chew",
+  "rendered": "Big League Chew"
+ },
+ "content": {
+  "raw": "",
+  "rendered": "",
+  "protected": false,
+  "block_version": 0
+ },
+ "featured_media": 0,
+ "template": "",
+ "meta": {
+  "_seopress_titles_title": "",
+  "_seopress_titles_desc": "",
+  "_seopress_robots_index": "",
+  "_seopress_robots_follow": "",
+  "_seopress_robots_imageindex": "",
+  "_seopress_robots_snippet": "",
+  "_seopress_robots_primary_cat": "",
+  "_seopress_robots_breadcrumbs": "",
+  "_seopress_robots_freeze_modified_date": "",
+  "_seopress_robots_custom_modified_date": "",
+  "_seopress_robots_canonical": "",
+  "_seopress_social_fb_title": "",
+  "_seopress_social_fb_desc": "",
+  "_seopress_social_fb_img": "",
+  "_seopress_social_fb_img_attachment_id": 0,
+  "_seopress_social_fb_img_width": 0,
+  "_seopress_social_fb_img_height": 0,
+  "_seopress_social_twitter_title": "",
+  "_seopress_social_twitter_desc": "",
+  "_seopress_social_twitter_img": "",
+  "_seopress_social_twitter_img_attachment_id": 0,
+  "_seopress_social_twitter_img_width": 0,
+  "_seopress_social_twitter_img_height": 0,
+  "_seopress_redirections_value": "",
+  "_seopress_redirections_enabled": "",
+  "_seopress_redirections_enabled_regex": "",
+  "_seopress_redirections_logged_status": "",
+  "_seopress_redirections_param": "",
+  "_seopress_redirections_type": 0,
+  "_seopress_analysis_target_kw": "",
+  "_monsterinsights_skip_tracking": false,
+  "strain_type": "Hybrid",
+  "hero_title": "Big League Chew Strain.",
+  "buy_kick": "Flower · Balanced Hybrid",
+  "hero_lede": "",
+  "thc": "",
+  "cbd": "",
+  "lineage": "",
+  "timing": "",
+  "price": "",
+  "price_note": "/ eighth · TODO(Pro): confirm live price",
+  "otd_note": "Out-the-door · tax included",
+  "buy_buttons": [
+   {
+    "style": "solid",
+    "label": "Order for delivery",
+    "url": "https://weedmaps.com/dispensaries/evergreen-santa-ana"
+   },
+   {
+    "style": "ghost",
+    "label": "Reserve for pickup",
+    "url": "https://weedmaps.com/dispensaries/evergreen-santa-ana"
+   }
+  ],
+  "trust_items": [
+   {
+    "icon": "fas fa-shield-alt",
+    "text": "Lab-tested"
+   },
+   {
+    "icon": "fas fa-bolt",
+    "text": "Same-day delivery"
+   },
+   {
+    "icon": "fas fa-circle",
+    "text": "Open 6AM–10PM"
+   }
+  ],
+  "about_headline": "",
+  "about_html": "",
+  "glance": [],
+  "effects_headline": "",
+  "effects_html": "",
+  "pills": [],
+  "flavor_headline": "",
+  "flavor_html": "",
+  "terps": [],
+  "cultivation_headline": "",
+  "cultivation_html": "",
+  "grow_specs": [],
+  "use_headline": "",
+  "use_html": "",
+  "use_methods": [],
+  "jar_headline": "",
+  "jar_html": "",
+  "spec": [],
+  "steps_headline": "Three steps to<br>your door.",
+  "steps_items": [
+   {
+    "title": "Check the live menu",
+    "text": "Apple Jack rotates through the flower shelf. Check the live Weedmaps menu for today's stock, or browse every strain we carry to plan a backup."
+   },
+   {
+    "title": "Order delivery or pickup",
+    "text": "Same-day delivery across Santa Ana and Orange County, or reserve for pickup at 1320 E Edinger Ave. Every price is out-the-door."
+   },
+   {
+    "title": "Show your ID",
+    "text": "Have a valid government photo ID showing 21+. The driver verifies at your door; for pickup, we check at the counter. That's it."
+   }
+  ],
+  "related_headline": "If you like Big League Chew…",
+  "faq_headline": "Big League Chew, answered.",
+  "faqs": [],
+  "cta_kick": "Open until 10PM · Delivering now",
+  "cta_headline": "Try Big League Chew<br>today.",
+  "cta_buttons": [
+   {
+    "style": "solid",
+    "label": "Order on Weedmaps",
+    "url": "https://weedmaps.com/dispensaries/evergreen-santa-ana"
+   },
+   {
+    "style": "ghost",
+    "label": "Browse all strains",
+    "url": "/strain/"
+   }
+  ],
+  "cta_license": "⬡ Licensed CA Dispensary · 1320 E Edinger Ave · Santa Ana, CA 92705 · 21+"
+ },
+ "permalink_template": "https://staging2.evergreenoc.com/strain/%pagename%/",
+ "generated_slug": "big-league-chew",
+ "class_list": [
+  "post-14175",
+  "strain",
+  "type-strain",
+  "status-draft",
+  "hentry"
+ ],
+ "_links": {
+  "self": [
+   {
+    "href": "https://staging2.evergreenoc.com/wp-json/wp/v2/strain/14175",
+    "targetHints": {
+     "allow": [
+      "GET",
+      "POST",
+      "PUT",
+      "PATCH",
+      "DELETE"
+     ]
+    }
+   }
+  ],
+  "collection": [
+   {
+    "href": "https://staging2.evergreenoc.com/wp-json/wp/v2/strain"
+   }
+  ],
+  "about": [
+   {
+    "href": "https://staging2.evergreenoc.com/wp-json/wp/v2/types/strain"
+   }
+  ],
+  "wp:attachment": [
+   {
+    "href": "https://staging2.evergreenoc.com/wp-json/wp/v2/media?parent=14175"
+   }
+  ],
+  "wp:action-publish": [
+   {
+    "href": "https://staging2.evergreenoc.com/wp-json/wp/v2/strain/14175"
+   }
+  ],
+  "wp:action-unfiltered-html": [
+   {
+    "href": "https://staging2.evergreenoc.com/wp-json/wp/v2/strain/14175"
+   }
+  ],
+  "curies": [
+   {
+    "name": "wp",
+    "href": "https://api.w.org/{rel}",
+    "templated": true
+   }
+  ]
+ }
+}
