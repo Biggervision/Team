@@ -42,25 +42,28 @@ def rep(items: list[dict]) -> dict:
     return {f"item-{i}": v for i, v in enumerate(items)}
 
 
-def flatten(markup: str) -> str:
-    """Reduce section HTML to the only tags the strain template styles.
+def normalize_headings(markup: str) -> str:
+    """Keep in-content subheadings at the correct level for this template.
 
-    The Elementor template gives `p` and `strong` explicit per-section colors
-    but never styles `h3`, `ul` or `li`. Those fall back to fixed greys — a
-    dark grey that disappears against the dark sections, and a light grey that
-    disappears against the cream ones. The published Apple Jack page renders
-    correctly precisely because it only ever uses `p` and `strong`.
+    The strain template already emits the page's only `h1` (the hero title) and
+    an `h2` for each section headline. Anything inside a section's rich text
+    sits a level below that, so subheadings are pinned to `h3` and nested ones
+    to `h4`. That keeps a single-h1 outline instead of competing with the
+    template's own headings.
 
-    So subheadings become bold paragraphs and list items become paragraphs.
-    Wording is untouched; only the wrapper tags change, which keeps the copy
-    and its keywords intact while inheriting each section's own text colour.
+    Colour for these — and for list copy — comes from the "Prose headings +
+    lists (strain sections)" Elementor code snippet, which extends
+    `.eg-prose-cream` / `.eg-prose-dark`. Those classes originally styled only
+    `p` and `strong`, which is why headings and lists first rendered as
+    unreadable greys.
     """
-    out = markup
-    out = re.sub(r'(?is)<h[1-6][^>]*>\s*(.*?)\s*</h[1-6]>', r'<p><strong>\1</strong></p>', out)
-    out = re.sub(r'(?is)</?[uo]l[^>]*>', '', out)
-    out = re.sub(r'(?is)<li[^>]*>\s*(.*?)\s*</li>', r'<p>\1</p>', out)
-    out = re.sub(r'\n{3,}', '\n\n', out)
-    return out.strip()
+    def demote(m):
+        level = int(m.group(1)[1])
+        new = "h3" if level <= 3 else "h4"
+        return "<%s>%s</%s>" % (new, m.group(2).strip(), new)
+
+    out = re.sub(r'(?is)<(h[1-6])[^>]*>(.*?)</\1>', demote, markup)
+    return re.sub(r'\n{3,}', '\n\n', out).strip()
 
 
 # ---------------------------------------------------------------------------
@@ -380,9 +383,9 @@ def build() -> dict:
     for block in (BUY_HERO, ABOUT, EFFECTS, FLAVOR, CULTIVATION,
                   HOW_TO_USE, JAR, STEPS, RELATED, FAQ, CTA, SEO):
         meta.update(block)
-    # every rich-text section goes out in template-safe markup
+    # pin in-content subheadings below the template's own h1/h2
     for key in [k for k in meta if k.endswith("_html")]:
-        meta[key] = flatten(meta[key])
+        meta[key] = normalize_headings(meta[key])
     return meta
 
 
