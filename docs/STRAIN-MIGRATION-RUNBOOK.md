@@ -1,0 +1,230 @@
+# Strain migration runbook
+
+How to move a live strain page from `evergreenoc.com` into the new JetEngine
+strain template on `staging2.evergreenoc.com` without losing keywords.
+
+Written from the Alien OG migration (strain `14169`). 95 strains remain.
+
+---
+
+## Part 0 — One-time setup (already done, do not repeat)
+
+Three things were changed once and apply to every strain from here on. They are
+recorded so nobody redoes or accidentally reverts them.
+
+| What | Where | Why |
+|---|---|---|
+| `show_in_rest: true` on all strain fields | Strain post type, id `2` | Fields were invisible to the REST API — `meta` came back `null` and `POST /wp/v2/strain` rejected a meta payload. Nothing could be written programmatically until this was set. |
+| Cultivation + How to Use sections added | Strain post type, id `2` | The template had no home for two live sections, the larger being 678 words of grow-side keywords. Tabs sit after Flavor so field order follows the live page. |
+| "Prose headings + lists (strain sections)" | Elementor snippet `14574` | `.eg-prose-cream` / `.eg-prose-dark` styled only `p` and `strong`, so `h3`, `ul` and `li` fell through to defaults that vanish against one background or the other. |
+
+Scripts: `tools/strain_cpt_enable_rest.py`, and the snippet body is in the
+commit history. Pre-change backups are in `docs/strain-migration/`.
+
+**JetEngine gotcha:** `show_in_rest` is not in JetEngine's field schema and does
+not appear in the UI, but JetEngine honours the key when present. It was tested
+on one field before rolling out to all 40. If a *new* field is ever added to the
+strain post type, it will not be REST-writable until this key is set on it.
+
+---
+
+## Part 1 — Per-strain process
+
+### 1. Fetch the live page
+
+Production sits behind SiteGround bot protection that answers roughly half of
+burst requests with a captcha (HTTP 202) instead of HTML. It clears on retry, so
+loop rather than failing:
+
+```bash
+UA='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36'
+for i in $(seq 1 15); do
+  curl -s -m 30 -A "$UA" -L "https://evergreenoc.com/strain/<slug>/" -o /tmp/<slug>.html
+  [ "$(stat -c%s /tmp/<slug>.html)" -gt 50000 ] && break
+  sleep 1
+done
+```
+
+A short page (a few hundred bytes) means the captcha, not a missing page.
+`tools/wp.py` already handles this automatically for API calls.
+
+### 2. Find the staging post
+
+```bash
+python3 tools/wp.py raw GET "/wp/v2/strain?search=<name>&status=any&_fields=id,slug,status"
+```
+
+96 strains exist in the CPT; most are drafts. Match on slug, not title.
+
+### 3. Back up before touching anything
+
+```bash
+python3 tools/wp.py get strain <id> > docs/strain-migration/<slug>-<id>-before.json
+```
+
+### 4. Extract and map the copy
+
+Pull headings, paragraphs and list items in document order, then map live
+sections to fields:
+
+| Live section | Fields |
+|---|---|
+| What Is *X*? | `about_headline`, `about_html` |
+| Strain Composition Breakdown | `about_html` (continues), `glance` repeater |
+| Effects and Benefits | `effects_headline`, `effects_html`, `pills` |
+| Flavor and Aroma | `flavor_headline`, `flavor_html`, `terps` |
+| Cultivation Tips | `cultivation_headline`, `cultivation_html`, `grow_specs` |
+| How to Use | `use_headline`, `use_html`, `use_methods` |
+| Physical Appearance | `jar_headline`, `jar_html`, `spec` |
+| FAQs | `faq_headline`, `faqs` |
+| Why Choose Us | CTA fields |
+
+Hero facts (`thc`, `cbd`, `lineage`, `strain_type`, `timing`) come from the live
+Key Features block. `strain_type` only accepts `Sativa`, `Indica` or `Hybrid`.
+
+### 5. Apply the content rules
+
+These are the rules that took several passes to get right on Alien OG. Follow
+them and the page renders correctly first time.
+
+**Strip every outbound link.** Alien OG had 27 — 13 to Weedmaps including the
+primary ordering buttons, the rest to Leafly, AllBud, CannaConnection, Hytiva,
+Project CBD, Cali Connection, Yelp and Wikipedia. Unwrap the anchor, keep the
+sentence: the link text is usually mid-sentence and carries keywords. Ordering
+CTAs point at `/shop/`, secondary CTAs at `/strain-hub/`.
+
+**Headings are `h3`.** The template emits the page's only `h1` (hero) and an
+`h2` per section headline, so in-content subheadings sit one level below.
+`normalize_headings()` in `tools/strain_alien_og.py` enforces this — never emit
+`h1` or `h2` from a field.
+
+**Repeaters are keyed objects,** not arrays: `{"item-0": {...}, "item-1": {...}}`.
+Use the `rep()` helper.
+
+**Check for placeholder copy from the reference build.** The Alien OG draft still
+carried Apple Jack text in `steps_items` telling visitors to check the Weedmaps
+menu. Grep every field for the wrong strain name before writing.
+
+**Carry the production SEO title over.** Drafts default to `<Name> - Evergreen`,
+which is weaker than the title production actually ranks under. Set
+`_seopress_titles_title` and `_seopress_titles_desc`.
+
+### 6. Write
+
+Copy `tools/strain_alien_og.py`, swap `POST_ID` and the content blocks, then:
+
+```bash
+python3 tools/strain_<slug>.py --dry-run   # field list + sizes
+python3 tools/strain_<slug>.py
+```
+
+If the write fails on rate limiting, retry — the challenge is served at the edge
+and never reaches WordPress, so no partial write can have occurred:
+
+```bash
+for a in 1 2 3 4; do
+  python3 tools/strain_<slug>.py 2>&1 | tail -2 | grep -q "wrote" && break
+  sleep 20
+done
+```
+
+### 7. Verify before previewing
+
+```python
+import sys, re, json
+sys.path.insert(0, 'tools'); import wp
+m = wp.request("GET", "/wp/v2/strain/<id>?context=edit")[0]["meta"]
+blob = json.dumps(m)
+
+ext = [u for u in set(re.findall(r'https?://[^\s"\'<>\\]+', blob))
+       if 'evergreenoc.com' not in u]
+print("external links:", ext or "none")
+
+lv = set()
+for v in m.values():
+    if isinstance(v, str): lv |= set(re.findall(r'<(h[1-6])', v))
+print("heading levels:", sorted(lv), "-- expect ['h3'] only")
+
+jet = {k: v for k, v in m.items() if not k.startswith('_')}
+print("populated:", sum(1 for v in jet.values() if v not in ('', [], {}, None)), "/", len(jet))
+```
+
+Pass criteria: **no external links**, **`h3` only**, **39+/40 fields populated**.
+
+### 8. Preview
+
+```
+https://staging2.evergreenoc.com/?post_type=strain&p=<id>&preview=true
+```
+
+Requires a logged-in wp-admin session. Check both background treatments —
+sections alternate cream and dark, and colour bugs only ever showed on one.
+
+### 9. Publish
+
+Only after review, and only once `price` is filled in. Leave as draft otherwise.
+
+---
+
+## Part 2 — Open items
+
+**Cultivation and How to Use do not render.** The fields hold the data — 678
+words of cultivation copy on Alien OG — but the Elementor single template has no
+widgets bound to them, and adding fields to a post type does not create widgets.
+Until two sections are added to the template, that copy is stored and invisible.
+
+The template is most likely **"Strain Final"** (`12173`); older
+`Evergreen Strains` (`10636`) and `Evergreen Strains 2` (`10664`) also exist, so
+confirm which has the active display condition before editing. This is a
+`_elementor_data` edit against a layout shared by all 96 strains — back it up
+first.
+
+**Pricing.** `price` is empty and `price_note` still reads "confirm live price"
+on Alien OG. Needs a real number per strain, or the field removing from the
+template.
+
+---
+
+## Part 3 — Reference
+
+### Field schema
+
+40 fields across 11 tabs. `_html` fields are WYSIWYG; the rest are text unless
+noted.
+
+```
+Buy Hero          strain_type(select) hero_title buy_kick hero_lede thc cbd
+                  lineage timing price price_note otd_note
+                  buy_buttons[style,label,url]  trust_items[icon,text]
+About             about_headline about_html  glance[label,value]
+Effects           effects_headline effects_html  pills[label]
+Flavor            flavor_headline flavor_html  terps[name,type,text]
+Cultivation       cultivation_headline cultivation_html  grow_specs[label,value]
+How to Use        use_headline use_html  use_methods[label,text]
+In the Jar        jar_headline jar_html  spec[label,value]
+Order Steps       steps_headline  steps_items[title,text]
+Related           related_headline
+FAQ               faq_headline  faqs[question,answer]
+CTA               cta_kick cta_headline  cta_buttons[style,label,url]  cta_license
+```
+
+### Prose colour palette
+
+Set by the WPCode global stylesheet plus snippet `14574`:
+
+| | Cream sections | Dark sections |
+|---|---|---|
+| `p`, `li` | `#4A5A4E` | `#D9D4C4` |
+| `strong`, `h2`–`h4` | `#0E2A1E` | `#F3EFE2` |
+| bullet dash | `#1f8a5f` | `#8fd36b` |
+
+The template decides which class a section gets, so content must never hardcode
+a colour — it would be wrong on one of the two backgrounds.
+
+### Rollback
+
+| To undo | How |
+|---|---|
+| One strain's content | Restore from `docs/strain-migration/<slug>-<id>-before.json` |
+| Heading/list CSS | Delete Elementor snippet `14574` |
+| Post type schema | Restore `docs/strain-migration/strain-cpt-before-rest-migration.json` via `POST /jet-engine/v2/edit-post-type/2` |
