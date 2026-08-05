@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -39,6 +40,27 @@ STRAIN_HUB_URL = "https://staging2.evergreenoc.com/strain-hub/"
 def rep(items: list[dict]) -> dict:
     """JetEngine stores repeaters as {"item-0": {...}, "item-1": {...}}."""
     return {f"item-{i}": v for i, v in enumerate(items)}
+
+
+def flatten(markup: str) -> str:
+    """Reduce section HTML to the only tags the strain template styles.
+
+    The Elementor template gives `p` and `strong` explicit per-section colors
+    but never styles `h3`, `ul` or `li`. Those fall back to fixed greys — a
+    dark grey that disappears against the dark sections, and a light grey that
+    disappears against the cream ones. The published Apple Jack page renders
+    correctly precisely because it only ever uses `p` and `strong`.
+
+    So subheadings become bold paragraphs and list items become paragraphs.
+    Wording is untouched; only the wrapper tags change, which keeps the copy
+    and its keywords intact while inheriting each section's own text colour.
+    """
+    out = markup
+    out = re.sub(r'(?is)<h[1-6][^>]*>\s*(.*?)\s*</h[1-6]>', r'<p><strong>\1</strong></p>', out)
+    out = re.sub(r'(?is)</?[uo]l[^>]*>', '', out)
+    out = re.sub(r'(?is)<li[^>]*>\s*(.*?)\s*</li>', r'<p>\1</p>', out)
+    out = re.sub(r'\n{3,}', '\n\n', out)
+    return out.strip()
 
 
 # ---------------------------------------------------------------------------
@@ -358,6 +380,9 @@ def build() -> dict:
     for block in (BUY_HERO, ABOUT, EFFECTS, FLAVOR, CULTIVATION,
                   HOW_TO_USE, JAR, STEPS, RELATED, FAQ, CTA, SEO):
         meta.update(block)
+    # every rich-text section goes out in template-safe markup
+    for key in [k for k in meta if k.endswith("_html")]:
+        meta[key] = flatten(meta[key])
     return meta
 
 
