@@ -166,22 +166,41 @@ Only after review, and only once `price` is filled in. Leave as draft otherwise.
 
 ---
 
-## Part 2 — Open items
+## Part 2 — What's still outstanding
 
-**Cultivation and How to Use do not render.** The fields hold the data — 678
-words of cultivation copy on Alien OG — but the Elementor single template has no
-widgets bound to them, and adding fields to a post type does not create widgets.
-Until two sections are added to the template, that copy is stored and invisible.
+### 1. Two sections are written but invisible
 
-The template is most likely **"Strain Final"** (`12173`); older
-`Evergreen Strains` (`10636`) and `Evergreen Strains 2` (`10664`) also exist, so
-confirm which has the active display condition before editing. This is a
-`_elementor_data` edit against a layout shared by all 96 strains — back it up
-first.
+A strain page has two parts: the **form** someone fills in (the tabs in
+wp-admin) and the **design template** that decides what shows up on the page.
 
-**Pricing.** `price` is empty and `price_note` still reads "confirm live price"
-on Alien OG. Needs a real number per strain, or the field removing from the
-template.
+Two new boxes were added to the form — Cultivation and How to Use — and filled
+with the copy from the live site. That copy is saved and safe. But nothing told
+the design template those boxes exist, so the words sit in the database and
+visitors never see them. Like typing two extra pages into a document where the
+printer is still set to print pages 1–9.
+
+**To fix it:** open the strain template in Elementor and add two sections that
+pull from those boxes. That's design work — the writing is already done.
+
+**Be careful:** all 96 strain pages share this one template. Fix it once and
+every strain gets the new sections. Break it once and every strain breaks. Back
+it up before editing.
+
+**Which template:** most likely "Strain Final" (`12173`). Two older ones exist —
+`Evergreen Strains` (`10636`) and `Evergreen Strains 2` (`10664`) — so check
+which one is actually switched on before touching anything.
+
+**Why it matters now:** every strain migrated before this is fixed will have the
+same hidden cultivation copy. Nothing is lost, it just won't be visible until
+the template catches up. Worth sorting before doing the remaining 95.
+
+### 2. Price is blank
+
+There is a price field on the page and it is empty, because nobody has said what
+a strain costs. The note beside it still reads "confirm live price."
+
+**To fix it:** supply a price per strain, or drop the price field from the
+template if pricing lives somewhere else.
 
 ---
 
