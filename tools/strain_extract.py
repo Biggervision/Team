@@ -62,6 +62,13 @@ GROW_LABELS = ["Difficulty", "Climate", "Plant Structure", "Flowering Time",
                "Trichome Coverage", "Temperature Control", "Humidity Management",
                "Nutrient Balance", "Pest Control", "Indoor Setup", "Outdoor Setup"]
 
+# Sites the copy sends readers to. Unwrapping the anchor leaves the referral
+# sentence behind ("refer to Weedmaps' guide to terpenes"), which still points
+# customers at a directory, so the sentence goes too. Cali Connection is
+# deliberately absent — it is the breeder, cited as lineage fact, not a referral.
+REFERRAL_BRANDS = ("Weedmaps", "Leafly", "AllBud", "Hytiva", "CannaConnection",
+                   "Project CBD", "Yelp", "Wikipedia", "Herbies", "Seedsman")
+
 TERPENE_NAMES = ["Myrcene", "Limonene", "Caryophyllene", "Pinene", "Linalool",
                  "Terpinolene", "Humulene", "Ocimene", "Bisabolol", "Valencene"]
 
@@ -89,6 +96,14 @@ def to_h3(markup: str) -> str:
     return re.sub(r"(?is)<(h[1-6])[^>]*>(.*?)</\1>", demote, markup)
 
 
+def strip_referrals(inner: str) -> str:
+    """Drop sentences that exist only to send the reader to another site."""
+    parts = re.split(r"(?<=[.!?])\s+", inner)
+    kept = [p for p in parts
+            if not any(b.lower() in text_of(p).lower() for b in REFERRAL_BRANDS)]
+    return " ".join(kept).strip()
+
+
 def clean_block(markup: str) -> str:
     """Reduce a section to clean paragraphs, lists and h3s."""
     out = strip_links(markup)
@@ -105,6 +120,7 @@ def clean_block(markup: str) -> str:
         inner = re.sub(r"(?is)<(b|i)>", lambda m: "<strong>" if m.group(1) == "b" else "<em>", inner)
         inner = re.sub(r"(?is)</(b|i)>", lambda m: "</strong>" if m.group(1) == "b" else "</em>", inner)
         inner = re.sub(r"\s+", " ", inner)
+        inner = strip_referrals(inner)
         if len(text_of(inner)) < 2:
             continue
         kept.append((tag, inner))
@@ -275,6 +291,7 @@ def extract_faqs(markup: str) -> list[dict]:
                 if len(nxt) > 30:
                     answer = nxt
                     break
+            answer = strip_referrals(answer)
             if answer:
                 faqs.append({"question": block, "answer": answer})
                 i += 1
@@ -293,12 +310,17 @@ def extract_faqs(markup: str) -> list[dict]:
 def extract_terpenes(markup: str) -> list[dict]:
     plain = text_of(strip_links(markup))
     rows = []
+    others = "|".join(TERPENE_NAMES)
     for name in TERPENE_NAMES:
-        m = re.search(rf"\b{name}\s*[:–-]\s*(.{{20,400}}?)(?=(?:\b(?:{'|'.join(TERPENE_NAMES)})\s*[:–-])|$)",
-                      plain, re.I)
+        # the blurb may be introduced by a colon, by a parenthetical nickname
+        # ("Myrcene (The Relaxant) A dominant terpene ..."), or by nothing at all
+        m = re.search(
+            rf"\b{name}\b\s*(?:\([^)]{{0,48}}\))?\s*[:–—-]?\s*"
+            rf"(.{{20,400}}?)(?=(?:\b(?:{others})\b\s*(?:\([^)]{{0,48}}\))?\s*[:–—-]?)|$)",
+            plain, re.I)
         if m:
             body = re.sub(r"\s+", " ", m.group(1)).strip()
-            body = re.sub(r"\s*(Learn more|You can explore|Read more).*$", "", body, flags=re.I).strip()
+            body = strip_referrals(body).strip(" ()")
             if len(body) > 25:
                 rows.append({"name": name, "type": "", "text": body})
     return rows[:5]
@@ -312,6 +334,48 @@ def extract_terpenes(markup: str) -> list[dict]:
 def pct(value: str) -> str:
     m = re.search(r"(\d{1,2}(?:\.\d)?\s*[%–-]{0,3}\s*\d{0,2}(?:\.\d)?\s*%?)", value or "")
     return re.sub(r"\s+", "", m.group(1)).replace("-", "–") if m else (value or "").strip()
+
+
+def lineage_from_prose(markup: str) -> str:
+    """Recover genetics when the page never labels them.
+
+    Plenty of pages skip the Lineage row and just say it: "bred from Red Pop and
+    RS11", "a cross of Gelato x Runtz". Without this those strains lose their
+    parentage entirely, which is one of the few hard facts the page carries.
+    """
+    plain = text_of(strip_links(markup))
+    patterns = [
+        r"\b(?:bred|built|created|made)\s+(?:from|by crossing)\s+([A-Z][\w'’.-]*(?:\s+[A-Z0-9][\w'’.-]*){0,3}\s*(?:x|×|and)\s*[A-Z][\w'’.-]*(?:\s+[A-Z0-9][\w'’.-]*){0,3})",
+        r"\bcross(?:ing)?\s+(?:of|between)\s+([A-Z][\w'’.-]*(?:\s+[A-Z0-9][\w'’.-]*){0,3}\s*(?:x|×|and)\s*[A-Z][\w'’.-]*(?:\s+[A-Z0-9][\w'’.-]*){0,3})",
+        r"\b([A-Z][\w'’.-]*(?:\s+[A-Z0-9][\w'’.-]*){0,2}\s*(?:x|×)\s*[A-Z][\w'’.-]*(?:\s+[A-Z0-9][\w'’.-]*){0,2})\b",
+    ]
+    for pattern in patterns:
+        m = re.search(pattern, plain)
+        if m:
+            value = re.sub(r"\s+", " ", m.group(1)).strip(" .,")
+            value = re.sub(r"\s+and\s+", " × ", value)
+            value = re.sub(r"\s*x\s*", " × ", value, flags=re.I)
+            if 6 < len(value) < 70:
+                return value
+    return ""
+
+
+def db_safe(value):
+    """Encode astral-plane characters so the database can store them.
+
+    Staging's tables are 3-byte `utf8`, so any 4-byte character — the emoji the
+    live copy uses as flourishes — makes the meta write fail outright with
+    "Could not update the meta value ... in database". Encoding them as numeric
+    HTML entities keeps them ASCII on disk while still rendering as the original
+    character on the page, so nothing is lost from the source copy.
+    """
+    if isinstance(value, str):
+        return "".join(c if ord(c) <= 0xFFFF else f"&#x{ord(c):X};" for c in value)
+    if isinstance(value, dict):
+        return {k: db_safe(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [db_safe(v) for v in value]
+    return value
 
 
 def build_meta(name: str, page_html: str) -> tuple[dict, list[str]]:
@@ -330,6 +394,10 @@ def build_meta(name: str, page_html: str) -> tuple[dict, list[str]]:
     thc = next((r["value"] for r in glance if r["label"] == "THC Content"), "")
     cbd = next((r["value"] for r in glance if r["label"] == "CBD Content"), "")
     lineage = next((r["value"] for r in glance if r["label"] in ("Lineage", "Genetics")), "")
+    if not lineage:
+        lineage = lineage_from_prose(about_src)
+        if lineage:
+            warnings.append("lineage recovered from prose")
 
     body_text = text_of(page_html)
     if re.search(r"\b50/50 hybrid|balanced hybrid\b", body_text, re.I):
@@ -374,6 +442,20 @@ def build_meta(name: str, page_html: str) -> tuple[dict, list[str]]:
         "cultivation_html": clean_block(sections.get("cultivation", "")),
         "use_headline": "Ways to enjoy it.",
         "use_html": clean_block(sections.get("use", "")),
+        "use_methods": {
+            "item-0": {"label": "Flower",
+                       "text": "Smoking the flower gives the fastest onset and the fullest "
+                               "expression of the terpene profile."},
+            "item-1": {"label": "Vaporizer",
+                       "text": "Vaping at lower temperatures preserves the lighter terpenes, "
+                               "giving cleaner flavour with less harshness."},
+            "item-2": {"label": "Concentrates",
+                       "text": "Trichome-heavy flower makes a strong candidate for solventless "
+                               "extracts like rosin and bubble hash."},
+            "item-3": {"label": "Edibles",
+                       "text": "Edibles and concentrates produce longer-lasting effects — start "
+                               "low, as onset is slower and potency builds."},
+        },
         "steps_headline": "Three steps to<br>your door.",
         "steps_items": {
             "item-0": {"title": "Check the live menu",
@@ -439,7 +521,7 @@ def build_meta(name: str, page_html: str) -> tuple[dict, list[str]]:
     if not glance:
         warnings.append("no at-a-glance rows found")
 
-    return meta, warnings
+    return db_safe(meta), warnings
 
 
 def load_pages() -> dict:

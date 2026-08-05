@@ -1,13 +1,13 @@
 {
  "id": 14177,
- "date": "2026-07-29T04:41:27",
- "date_gmt": "2026-07-29T04:41:27",
+ "date": "2026-08-05T20:28:00",
+ "date_gmt": "2026-08-05T20:28:00",
  "guid": {
-  "rendered": "https://staging2.evergreenoc.com/?post_type=strain&p=14177",
-  "raw": "https://staging2.evergreenoc.com/?post_type=strain&p=14177"
+  "rendered": "https://staging2.evergreenoc.com/?post_type=strain&#038;p=14177",
+  "raw": "https://staging2.evergreenoc.com/?post_type=strain&#038;p=14177"
  },
- "modified": "2026-07-29T04:41:27",
- "modified_gmt": "2026-07-29T04:41:27",
+ "modified": "2026-08-05T20:28:00",
+ "modified_gmt": "2026-08-05T20:28:00",
  "password": "",
  "slug": "black-runtz",
  "status": "draft",
@@ -26,8 +26,8 @@
  "featured_media": 0,
  "template": "",
  "meta": {
-  "_seopress_titles_title": "",
-  "_seopress_titles_desc": "",
+  "_seopress_titles_title": "Black Runtz Strain: Indica Hybrid Effects, THC % & Local Delivery",
+  "_seopress_titles_desc": "Shop Black Runtz. A potent 29% THC Gelato x Zkittlez hybrid. Deep berry flavors & relaxing effects. Order local today.",
   "_seopress_robots_index": "",
   "_seopress_robots_follow": "",
   "_seopress_robots_imageindex": "",
@@ -57,93 +57,210 @@
   "_seopress_redirections_type": 0,
   "_seopress_analysis_target_kw": "",
   "_monsterinsights_skip_tracking": false,
-  "strain_type": "Hybrid",
-  "hero_title": "Black Runtz Strain.",
-  "buy_kick": "Flower · Balanced Hybrid",
-  "hero_lede": "",
-  "thc": "",
-  "cbd": "",
-  "lineage": "",
-  "timing": "",
+  "strain_type": "Indica",
+  "hero_title": "Black Runtz Strain",
+  "buy_kick": "Flower · Indica",
+  "hero_lede": "If the original Runtz was the undisputed hero of the cannabis world and the 2020 Strain of the Year , then Black Runtz is its mysterious, high-potency “dark twin.” This indica-dominant hybri",
+  "thc": "19%",
+  "cbd": "1%",
+  "lineage": "Born from Zkittlez and Gelato",
+  "timing": "Evening / nighttime",
   "price": "",
   "price_note": "/ eighth · TODO(Pro): confirm live price",
   "otd_note": "Out-the-door · tax included",
-  "buy_buttons": [
-   {
+  "buy_buttons": {
+   "item-0": {
     "style": "solid",
     "label": "Order for delivery",
-    "url": "https://weedmaps.com/dispensaries/evergreen-santa-ana"
+    "url": "https://staging2.evergreenoc.com/shop/"
    },
-   {
+   "item-1": {
     "style": "ghost",
     "label": "Reserve for pickup",
-    "url": "https://weedmaps.com/dispensaries/evergreen-santa-ana"
+    "url": "https://staging2.evergreenoc.com/shop/"
    }
-  ],
-  "trust_items": [
-   {
+  },
+  "trust_items": {
+   "item-0": {
     "icon": "fas fa-shield-alt",
     "text": "Lab-tested"
    },
-   {
+   "item-1": {
     "icon": "fas fa-bolt",
     "text": "Same-day delivery"
    },
-   {
+   "item-2": {
     "icon": "fas fa-circle",
-    "text": "Open 6AM–10PM"
+    "text": "Open 9AM–10PM"
    }
-  ],
-  "about_headline": "",
-  "about_html": "",
-  "glance": [],
-  "effects_headline": "",
-  "effects_html": "",
-  "pills": [],
-  "flavor_headline": "",
-  "flavor_html": "",
-  "terps": [],
-  "cultivation_headline": "",
-  "cultivation_html": "",
-  "grow_specs": [],
-  "use_headline": "",
-  "use_html": "",
-  "use_methods": [],
-  "jar_headline": "",
-  "jar_html": "",
-  "spec": [],
-  "steps_headline": "Three steps to<br>your door.",
-  "steps_items": [
-   {
-    "title": "Check the live menu",
-    "text": "Apple Jack rotates through the flower shelf. Check the live Weedmaps menu for today's stock, or browse every strain we carry to plan a backup."
+  },
+  "about_headline": "If the original Runtz was the undisputed hero of the cannabis world and the 2020 Strain of the Year , then Black Runtz is its mysterious, high-potency “dark twin.” This indica-dominant hybri",
+  "about_html": "<p>If the original Runtz was the undisputed hero of the cannabis world and the <strong>2020 Strain of the Year</strong>, then <strong>Black Runtz</strong> is its mysterious, high-potency &#8220;dark twin.&#8221; This indica-dominant hybrid (55% indica / 45% sativa) takes everything enthusiasts love about the Runtz lineage—the candy-sweet profile and award-winning heritage—and dials up the intensity, visual depth, and physical relaxation.</p>\n<p>First popularized as a premium phenotype by <strong>Big Boss Farms</strong>, Black Runtz has quickly earned its reputation as one of the most visually stunning and potent varieties in the &#8220;dessert strain&#8221; category. Its signature deep-purple hues and thick coating of resin make it a favorite for connoisseurs and medical users seeking a heavy-hitting alternative to the classic.</p>\n<p>The high from Black Runtz is a masterclass in pacing. It begins with a euphoric cerebral lift that clears away mental clutter, followed by a &#8220;creeping&#8221; full-body calm that is perfect for unwinding. Whether you are looking for a social spark or a way to shut off the noise after a stressful week, Black Runtz delivers a sophisticated experience that lives up to its elite name.</p>\n<p><strong>Why Is Black Runtz a Popular Choice?</strong></p>\n<p>Black Runtz has achieved cult-like status for its combination of elite genetics, rare flavor notes, and reliable potency:</p>\n<ul>\n<li><strong>Exceptional Potency:</strong> With THC levels often reaching <strong>29%</strong>, Black Runtz is an ideal choice for seasoned users or medical patients who require significant relief from chronic symptoms.</li>\n<li><strong>Unique Terpene Profile:</strong> Unlike the tropical notes of the original, Black Runtz offers a complex palette of rose, sage, and creamy berries. This rich concentration of secondary terpenes provides a unique therapeutic experience.</li>\n<li><strong>Balanced &#8220;Creeping&#8221; Effects:</strong> It strikes a rare balance—starting with an uplifting, talkative energy before descending into a deeply soothing physical sedation.</li>\n<li><strong>Medical Versatility:</strong> It is a go-to for those managing <strong>chronic pain, stress, or insomnia,</strong> providing physical relief without immediate mental &#8220;fog.&#8221;</li>\n<li><strong>Elite Lineage:</strong> Born from <strong>Zkittlez</strong> and <strong>Gelato</strong>, Black Runtz shares a family tree with some of the most respected West Coast staples like Gelonade and White Runtz.</li>\n</ul>\n<p><strong>Key Features of Black Runtz</strong></p>\n<ul>\n<li><strong>THC Content:</strong> 19% – 29%</li>\n<li><strong>Lineage:</strong> Zkittlez x Gelato</li>\n<li><strong>Flavor &amp; Aroma:</strong> Creamy citrus, sweet berry, rose, and earthy spice</li>\n<li><strong>Effects:</strong> Euphoric, talkative, deeply relaxing, &#8220;creeper&#8221; high</li>\n<li><strong>Best For:</strong> Managing chronic pain, anxiety, insomnia, and appetite loss</li>\n</ul>\n<p><strong>Explore Similar Strains</strong></p>\n<p>If you enjoy the deep berry flavors and heavy-hitting relaxation of Black Runtz, explore these other top-tier hybrids from our collection:</p>\n<ul>\n<li><strong>White Runtz</strong> – For those who prefer a more tropical, creamy flavor profile with similar potency.</li>\n<li><strong>Purple Punch</strong> – A dessert-forward strain perfect for heavy evening sedation and sweet grape notes.</li>\n<li><strong>Biscotti</strong> – A high-THC indica hybrid that offers a cookies-and-gas flavor with a heavy body buzz.</li>\n<li><strong>Zkittlez</strong> – Return to the roots with this award-winning parent strain for a more functional, fruit-forward high.</li>\n<li><strong>Permanent Marker</strong> – A modern heavy-hitter for those who love the complex, pungent aromas of premium phenotypes.</li>\n</ul>\n<h3>2. Black Runtz Strain Composition Breakdown</h3>\n<p>Black Runtz stands out not just for its potency, but for its complex concentration of <strong>therapeutic terpenes</strong> and cannabinoids. These elements work together to create a deeply immersive and long-lasting experience through a phenomenon known as the <strong>entourage effect</strong>—where the various compounds of the cannabis plant interact synergistically to enhance the overall therapeutic impact.</p>\n<p><strong>CBD Content: &lt;1%</strong> With negligible CBD levels, Black Runtz is not a non-intoxicating wellness strain. It is specifically bred to deliver a powerful, THC-driven experience focused on mood elevation and physical sedation.</p>\n<p><strong>CBG Content: Trace Amounts</strong> The presence of trace amounts of cannabigerol (CBG) helps regulate mood and offers subtle anti-inflammatory benefits, supporting the strain's overall therapeutic profile.</p>\n<p><strong>CBN Content: Trace</strong> Cannabinol (CBN) appears in minimal levels; however, as Black Runtz buds age, CBN levels may increase, subtly enhancing the strain’s natural sedative properties for better sleep support.</p>\n<p><strong>Myrcene (The Relaxant)</strong> Found in mangoes and hops, myrcene provides the earthy, herbal base of this strain. It is known for its sedative qualities and its ability to enhance the permeability of the blood-brain barrier, allowing THC to take effect more efficiently. This contributes significantly to the \"couch-lock\" sensation later in the session.</p>\n<p><strong>Caryophyllene (The Soother)</strong> This peppery, spicy terpene is unique because it also acts as a cannabinoid by binding directly to CB2 receptors. This makes Black Runtz particularly effective for managing physical inflammation and chronic pain, grounding the euphoric high with tangible physical relief.</p>\n<p>Because it contains high levels of limonene alongside the heavier myrcene, the high doesn't hit like a \"sledgehammer\" immediately. Instead, the limonene provides a functional, euphoric spark first. As the myrcene and caryophyllene begin to interact with your system, the physical relaxation \"creeps\" in, eventually taking center stage. This synergy makes Black Runtz a sophisticated option for deep relaxation that evolves over time.</p>\n<h3>3. Effects and Benefits</h3>",
+  "glance": {
+   "item-0": {
+    "label": "CBD Content",
+    "value": "<1%"
    },
-   {
+   "item-1": {
+    "label": "Effects",
+    "value": "It strikes a rare balance—starting with an uplifting, talkat"
+   },
+   "item-2": {
+    "label": "Lineage",
+    "value": "Born from Zkittlez and Gelato"
+   },
+   "item-3": {
+    "label": "THC Content",
+    "value": "19% – 29%"
+   },
+   "item-4": {
+    "label": "Flavor & Aroma",
+    "value": "Creamy citrus, sweet berry, rose, and earthy spice"
+   },
+   "item-5": {
+    "label": "Best For",
+    "value": "Managing chronic pain, anxiety, insomnia, and appetite loss Explore Similar Strains If you enjoy the deep berry flavors "
+   }
+  },
+  "effects_headline": "What Black Runtz actually feels like.",
+  "effects_html": "<p>Black Runtz is celebrated for delivering a sophisticated, multi-layered experience that balances cerebral stimulation with profound physical sedation. Unlike some heavy-hitting indica hybrids that cause immediate &#8220;couch-lock,&#8221; <strong>Black Runtz</strong> is famous for its <strong>&#8220;creeping&#8221; timeline</strong>.</p>\n<p>The journey typically begins with a sudden wave of euphoria and mental clarity, often making users feel more talkative, social, and creatively inspired. As the high matures, this mental energy gently descends into the body, evolving into a weighted-blanket sensation that promotes deep relaxation. At higher doses, many users report feeling a unique sense of arousal and physical tingle, making it a popular choice for intimate evenings or mindful meditation.</p>\n<p><strong>Mental and Physical Relief</strong></p>\n<p>The synergistic blend of high THC and specific terpenes like limonene and myrcene makes Black Runtz a versatile tool for both mental and physical wellness. By targeting the <strong>body’s endocannabinoid system</strong>, this strain helps regulate mood and physical discomfort, offering a comprehensive sense of ease.</p>\n<p>On the mental health side, the limonene content acts as a &#8220;pressure valve&#8221; for the mind, helping to clear away the &#8220;mental noise&#8221; associated with a long day. Physically, the strain’s indica dominance excels at soothing muscle tension and providing a grounded, calm sensation that doesn&#8217;t immediately lead to mental fog.</p>\n<p><strong>Common Medical Use Cases</strong></p>\n<p>Because of its potency and balanced profile, medical marijuana patients frequently turn to Black Runtz to manage a variety of symptoms:</p>\n<ul>\n<li><strong>Anxiety and Chronic Stress:</strong> The initial euphoric lift helps stabilize mood and provides a temporary reprieve from racing thoughts.</li>\n<li><strong>Chronic Pain and Arthritis:</strong> The combination of THC and the terpene caryophyllene provides powerful anti-inflammatory benefits, making it an excellent choice for those dealing with joint pain or migraines.</li>\n<li><strong>Insomnia and Sleep Disorders:</strong> While the high starts out energetic, the late-stage sedation makes Black Runtz an effective &#8220;nightcap&#8221; strain for those who struggle to stay asleep.</li>\n<li><strong>Chronic Fatigue:</strong> In smaller doses, the uplifting sativa-like start can provide a much-needed boost for those dealing with lethargy.</li>\n</ul>\n<p><strong>Side Effects and Usage Tips</strong></p>\n<p>Due to its high <strong>THC</strong> ceiling (up to 29%), Black Runtz can be intense for those with low tolerance. Common side effects include dry mouth and dry eyes, which are easily managed with hydration. In some cases, the &#8220;creeping&#8221; nature of the high can catch users off guard; it is best to &#8220;low and slow&#8221; to avoid potential dizziness or mild paranoia.</p>\n<h3>4. Black Runtz Flavor and Aroma</h3>",
+  "pills": {
+   "item-0": {
+    "label": "Talkat"
+   }
+  },
+  "flavor_headline": "How Black Runtz tastes and smells.",
+  "flavor_html": "<p>Black Runtz offers a bold, multi-dimensional sensory experience that sets it apart from other members of the Runtz family. From the moment you crack open a jar to the lingering aftertaste of the last exhale, Black Runtz provides a sophisticated balance of sugary sweetness and sophisticated herbal &#8220;funk.&#8221;</p>\n<p><strong>Flavor Profile: Creamy Citrus &amp; Sugary Berries</strong></p>\n<p>On the inhale, Black Runtz hits the palate with an immediate burst of <strong>creamy citrus candy</strong> and <strong>sugary berries</strong>. This initial sweetness is a direct inheritance from its <strong>Zkittlez</strong> parentage, but it’s rounded out by a smooth, velvety texture that feels almost like a fruit-flavored dessert.</p>\n<p>As the smoke or vapor settles, you’ll notice a complex shift. The sugary start transitions into a touch of <strong>fresh earth and exotic spice</strong> on the exhale. This grounding finish prevents the sweetness from becoming overwhelming, making it a favorite for connoisseurs who appreciate a layered &#8220;<strong>dessert-plus-gas</strong>&#8221; profile.</p>\n<p><strong>Aroma Profile: Flowery Roses and Skunky Herbs</strong></p>\n<p>The aromatic intensity of Black Runtz is one of its most recognizable traits. The bouquet is dominated by:</p>\n<ul>\n<li><strong>Flowery Rose:</strong> A rare, delicate floral note that is often missing from more aggressive OG strains.</li>\n<li><strong>Fresh Herbs &amp; Sage:</strong> A savory, herbal backbone that provides a clean, crisp scent.</li>\n<li><strong>Skunky-Sweet Undertone:</strong> A classic &#8220;dank&#8221; aroma that signals the strain&#8217;s high potency and rich resin content.</li>\n</ul>\n<p>The combination of these scents creates a &#8220;berrylicious&#8221; funk that can quickly fill a room, making it a strain that demands attention.</p>\n<p><strong>Comparison: Black Runtz vs. Original Runtz</strong></p>\n<p>While they share the same legendary DNA, Black Runtz is widely considered the &#8220;deeper&#8221; and &#8220;darker&#8221; version of the 2020 winner.</p>\n<ul>\n<li><strong>Original Runtz</strong> is often noted for its bright, tropical, and &#8220;Rainbow Candy&#8221; profile.</li>\n<li><strong>Black Runtz</strong> leans into the &#8220;forest fruit&#8221; category—think blackberries, dark cherries, and plums mixed with a spicy, peppery kick.</li>\n</ul>\n<p>This difference is largely due to the specific <strong>phenotype </strong>selection by <strong>Big Boss Farms</strong>, which prioritized the heavier, more pungent terpenes over the light, fruity ones. If you love the candy-forward nature of Runtz but want something with more &#8220;bass&#8221; and a richer, earthier finish, Black Runtz is the clear winner.</p>\n<h3>5. Cultivation Tips for Black Runtz</h3>",
+  "terps": [],
+  "cultivation_headline": "Growing Black Runtz.",
+  "cultivation_html": "<p>Cultivating Black Runtz is a rewarding experience for those seeking a high-THC, terpene-rich hybrid with elite visual appeal. While not overly difficult, Black Runtz is best suited for growers with some prior experience due to its sensitivity to nutrient fluctuations and its specific environmental needs during the flowering stage. Originally a standout selection by <strong>Big Boss Farms</strong>, this strain is now a top choice for both indoor enthusiasts and outdoor sun-growers.</p>\n<p><strong>Climate:</strong> Warm and Mediterranean This strain thrives in a stable, warm environment. For indoor cultivation, maintain temperatures between 20–26°C (68–79°F). To bring out those signature \"Black\" purple hues, some growers successfully drop nighttime temperatures by about 10 degrees during the final two weeks of flowering to maximize visual bag appeal.</p>\n<p><strong>Plant Structure:</strong> Medium Height &amp; Dense Black Runtz grows with a sturdy, bushy frame. Its indica-dominance means it won't stretch as aggressively as a pure sativa, but its dense foliage requires regular pruning and selective defoliation to ensure light reaches the lower bud sites and to improve airflow throughout the canopy.</p>\n<p><strong>Indoor Yield:</strong> Approximately 500g/m² With optimized lighting (LED or HPS) and proper CO2 levels, Black Runtz is a generous producer for a boutique \"dessert\" strain. Using training techniques like ScrOG can further boost these results.</p>\n<p><strong>Outdoor Yield:</strong> Harvest by mid-October When grown outdoors in full sun, Black Runtz can become quite a large producer, yielding up to 650g/plant. Outdoor growers should ensure a warm climate and plan for a mid-October harvest window.</p>\n<p><strong>Indoor Setup:</strong> Humidity Management During the vegetative stage, 50–60% humidity is ideal, but you must drop levels to 40–50% during late flowering. The density of Black Runtz buds makes them susceptible to moisture trap, so oscillating fans and a high-quality dehumidifier are non-negotiable for indoor success.</p>\n<p><strong>Outdoor Setup:</strong> Sunny and sheltered Outdoor growers should choose a location with full sun exposure and minimal risk of rain during the mid-October harvest window. Proper spacing between plants is crucial to ensure adequate airflow around the dense, purple-hued flowers.</p>\n<p><strong>Growing Medium:</strong> Soil vs. Hydroponics Growing in organic soil will enhance the complex \"Rose and Sage\" terpene profile and natural sweetness, while hydroponic setups can push the THC levels toward that 29% ceiling and significantly speed up the overall growth cycle.</p>\n<p><strong>Coloration:</strong> Dark olive green with deep purple undertones Living up to its \"Black\" moniker, the buds display a striking palette of dark olive and mint greens, heavily accented by deep purple and near-black hues. These colors are contrasted by thin, fiery orange pistils that wind through the dark foliage.</p>\n<p><strong>Trichome Coverage:</strong> Frosty and purple-tinted A shimmering \"blanket\" of chunky, vibrantly purple-tinted white crystal trichomes coats every crevice of the flower. This heavy resin production not only signals the high 19%–29% THC potency but also gives the buds a sticky, \"dark-diamond\" sparkle that is highly sought after for extraction.</p>\n<p><strong>Humidity Management:</strong> Keep RH below 50% during bloom Black Runtz’s dense, resin-heavy buds are highly susceptible to moisture trap. Maintain relative humidity (RH) below 50% during the late flowering stage and utilize high-powered oscillating fans to ensure constant airflow, preventing mold or \"bud rot\" from within the colas.</p>\n<p><strong>Nutrient Balance:</strong> Avoid nitrogen-heavy late feeds While Black Runtz is a hungry strain, avoid excessive nitrogen during the mid-to-late flowering phase to prevent leafy growth and harsh flavors. Focus on phosphorus-rich nutrients to support bud density and maximize the \"creamy berry\" terpene profile.</p>\n<p><strong>Pest Control:</strong> Monitor for mites and aphids Regularly inspect the underside of the broad indica leaves for common pests like spider mites. Use organic solutions such as neem oil during the vegetative stage, but rely on beneficial insects like ladybugs during flowering to protect the delicate, rose-scented trichomes from contamination.</p>\n<h3>6. How to Use Black Runtz</h3>",
+  "grow_specs": {
+   "item-0": {
+    "label": "Climate",
+    "value": "Warm and Mediterranean"
+   },
+   "item-1": {
+    "label": "Plant Structure",
+    "value": "Medium Height & Dense"
+   },
+   "item-2": {
+    "label": "Indoor Yield",
+    "value": "Approximately 500g/m²"
+   },
+   "item-3": {
+    "label": "Outdoor Yield",
+    "value": "Harvest by mid-October"
+   },
+   "item-4": {
+    "label": "Indoor Setup",
+    "value": "Humidity Management"
+   },
+   "item-5": {
+    "label": "Outdoor Setup",
+    "value": "Sunny and sheltered"
+   },
+   "item-6": {
+    "label": "Growing Medium",
+    "value": "Soil vs. Hydroponics"
+   },
+   "item-7": {
+    "label": "Coloration",
+    "value": "Dark olive green with deep purple undertones"
+   }
+  },
+  "use_headline": "Ways to enjoy it.",
+  "use_html": "<p>How you choose to use Black Runtz significantly impacts which part of its &#8220;berrylicious&#8221; profile takes center stage.</p>\n<h4>7. Physical Appearance of Black Runtz</h4>",
+  "use_methods": {
+   "item-0": {
+    "label": "Flower",
+    "text": "Smoking the flower gives the fastest onset and the fullest expression of the terpene profile."
+   },
+   "item-1": {
+    "label": "Vaporizer",
+    "text": "Vaping at lower temperatures preserves the lighter terpenes, giving cleaner flavour with less harshness."
+   },
+   "item-2": {
+    "label": "Concentrates",
+    "text": "Trichome-heavy flower makes a strong candidate for solventless extracts like rosin and bubble hash."
+   },
+   "item-3": {
+    "label": "Edibles",
+    "text": "Edibles and concentrates produce longer-lasting effects — start low, as onset is slower and potency builds."
+   }
+  },
+  "jar_headline": "What to look for in the jar.",
+  "jar_html": "<p>Black Runtz is visually striking and instantly recognizable for its dense, oversized bud structure, often described as spade-shaped with a heavy, resinous texture. These tightly formed nugs are heavily blanketed in a &#8220;frosty&#8221; layer of <strong>trichomes</strong>—the crystal-like glands responsible for producing the strain’s high THC levels and complex &#8220;berrylicious&#8221; terpene profile. This exceptional trichome density not only indicates its 19%–29% potency but also makes Black Runtz a top-tier choice for solventless concentrate extraction.</p>\n<p><strong>Distinctive Coloration and &#8220;Bag Appeal&#8221;</strong></p>\n<p>The coloration of Black Runtz is what truly sets it apart from its parent strains. While most hybrids lean toward a standard forest green, this phenotype displays a dark, moody palette that lives up to its name:</p>\n<ul>\n<li><strong>Deep Hues:</strong> The buds feature dark olive green leaves heavily accented by deep purple and near-black undertones.</li>\n<li><strong>Fiery Accents:</strong> Winding through the dark foliage are thick, vibrant orange pistils (hairs) that provide a sharp visual contrast.</li>\n<li><strong>The &#8220;Purple&#8221; Frost:</strong> Under magnification, you’ll notice that the trichomes themselves often carry a vibrant purple tint, creating a shimmering, dark-diamond effect that is highly sought after by connoisseurs.</li>\n</ul>\n<p><strong>Indicators of Quality</strong></p>\n<p>From a cultivator’s perspective, these visual cues—such as the trichome transition from milky to amber and the deepening of the purple hues—are critical indicators of harvest readiness. As the plant reaches peak maturity near the end of its 8–9 week flowering cycle, the resin coating becomes so thick it can feel sticky or resinous to the touch.</p>\n<p>Whether you are a casual user or a seasoned grower, the appearance of Black Runtz sets clear expectations for what’s inside: <strong>extreme potency, sophisticated flavor, and elite extract value.</strong></p>\n<p>If you are a fan of visually stunning, &#8220;purple&#8221; genetics, you might also enjoy exploring the frosty aesthetics of <strong>Granddaddy Purp</strong> or the resin-heavy <strong>White Runtz</strong> for a different take on elite bag appeal.</p>\n<h4>8. Frequently Asked Questions</h4>",
+  "spec": {
+   "item-0": {
+    "label": "Plant Structure",
+    "value": "Medium Height & Dense"
+   },
+   "item-1": {
+    "label": "Coloration",
+    "value": "Dark olive green with deep purple undertones"
+   },
+   "item-2": {
+    "label": "Trichome Coverage",
+    "value": "Frosty and purple-tinted"
+   }
+  },
+  "steps_headline": "Three steps to<br>your door.",
+  "steps_items": {
+   "item-0": {
+    "title": "Check the live menu",
+    "text": "Black Runtz rotates through the flower shelf. Check our live menu for today's stock, or browse every strain we carry to plan a backup."
+   },
+   "item-1": {
     "title": "Order delivery or pickup",
     "text": "Same-day delivery across Santa Ana and Orange County, or reserve for pickup at 1320 E Edinger Ave. Every price is out-the-door."
    },
-   {
+   "item-2": {
     "title": "Show your ID",
     "text": "Have a valid government photo ID showing 21+. The driver verifies at your door; for pickup, we check at the counter. That's it."
    }
-  ],
+  },
   "related_headline": "If you like Black Runtz…",
   "faq_headline": "Black Runtz, answered.",
-  "faqs": [],
+  "faqs": {
+   "item-0": {
+    "question": "Is Black Runtz an indica or sativa?",
+    "answer": "Black Runtz is an indica-dominant hybrid , typically consisting of 55% indica and 45% sativa genetics. This balanced ratio is why users experience an initial “sativa-like” euphoric spark before descending into a deep, “indica-style” physical relaxation."
+   },
+   "item-1": {
+    "question": "How strong is Black Runtz?",
+    "answer": "Black Runtz is a high-potency strain with THC levels consistently ranging between 19% and 29% . Because of this high ceiling, it is best suited for experienced consumers or medical patients with a higher tolerance."
+   },
+   "item-2": {
+    "question": "What is the difference between Black Runtz and White Runtz?",
+    "answer": "While both are phenotypes of the same Zkittlez x Gelato cross, they offer different sensory experiences: Black Runtz: Features a “darker” profile of sour berries, rose, and sage with deep purple/black aesthetics. White Runtz : Known for a creamy, tropical candy flavor and a coating of white, snow-like trichomes that give it a lighter appearance."
+   },
+   "item-3": {
+    "question": "Does Black Runtz help with sleep?",
+    "answer": "Yes. Due to its high concentration of the terpene myrcene and its potent THC levels, Black Runtz is highly effective for managing insomnia and sleep disorders . Its late-stage “couch-lock” effect helps users fall asleep and stay asleep throughout the night."
+   },
+   "item-4": {
+    "question": "What are the top reported effects?",
+    "answer": "The most common effects reported by the cannabis community include feeling aroused, relaxed, euphoric, and talkative . It is often described as a “creeper” high that evolves significantly over a 2-hour window."
+   },
+   "item-5": {
+    "question": "Is Black Runtz good for beginners?",
+    "answer": "Due to its 29% THC potential, beginners should approach Black Runtz with extreme caution . We recommend starting with a single inhalation and waiting 30–45 minutes to see how the “creep” affects you before consuming more."
+   }
+  },
   "cta_kick": "Open until 10PM · Delivering now",
   "cta_headline": "Try Black Runtz<br>today.",
-  "cta_buttons": [
-   {
+  "cta_buttons": {
+   "item-0": {
     "style": "solid",
-    "label": "Order on Weedmaps",
-    "url": "https://weedmaps.com/dispensaries/evergreen-santa-ana"
+    "label": "Order for delivery",
+    "url": "https://staging2.evergreenoc.com/shop/"
    },
-   {
+   "item-1": {
     "style": "ghost",
     "label": "Browse all strains",
-    "url": "/strain/"
+    "url": "https://staging2.evergreenoc.com/strain-hub/"
    }
-  ],
+  },
   "cta_license": "⬡ Licensed CA Dispensary · 1320 E Edinger Ave · Santa Ana, CA 92705 · 21+"
  },
  "permalink_template": "https://staging2.evergreenoc.com/strain/%pagename%/",
