@@ -1,0 +1,668 @@
+{
+  "success": true,
+  "data": {
+    "general_settings": {
+      "name": "Strains",
+      "slug": "strain",
+      "id": "2",
+      "show_edit_link": false,
+      "hide_field_names": false,
+      "delete_metadata": false,
+      "custom_storage": false
+    },
+    "labels": {
+      "singular_name": "Strain"
+    },
+    "advanced_settings": {
+      "public": true,
+      "publicly_queryable": true,
+      "show_ui": true,
+      "show_in_menu": true,
+      "show_in_nav_menus": true,
+      "show_in_rest": true,
+      "query_var": true,
+      "rewrite": true,
+      "map_meta_cap": false,
+      "has_archive": false,
+      "hierarchical": false,
+      "exclude_from_search": false,
+      "with_front": false,
+      "show_edit_link": false,
+      "custom_storage": false,
+      "hide_field_names": false,
+      "delete_metadata": false,
+      "rewrite_slug": "strain",
+      "capability_type": "post",
+      "menu_position": -1,
+      "menu_icon": "dashicons-palmtree",
+      "supports": [
+        "title",
+        "editor",
+        "thumbnail"
+      ],
+      "admin_columns": [],
+      "admin_filters": []
+    },
+    "meta_fields": [
+      {
+        "title": "Buy Hero",
+        "name": "tab_buy_hero",
+        "type": "text",
+        "object_type": "tab",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Strain Type",
+        "name": "strain_type",
+        "type": "select",
+        "object_type": "field",
+        "width": "100%",
+        "options": [
+          {
+            "key": "Sativa",
+            "value": "Sativa"
+          },
+          {
+            "key": "Indica",
+            "value": "Indica"
+          },
+          {
+            "key": "Hybrid",
+            "value": "Hybrid"
+          }
+        ],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Hero Title (H1)",
+        "name": "hero_title",
+        "type": "text",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual",
+        "description": "Big headline. Default: Name Strain."
+      },
+      {
+        "title": "Buy Kick (eyebrow)",
+        "name": "buy_kick",
+        "type": "text",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Hero Lede",
+        "name": "hero_lede",
+        "type": "textarea",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "THC %",
+        "name": "thc",
+        "type": "text",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "CBD %",
+        "name": "cbd",
+        "type": "text",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Lineage",
+        "name": "lineage",
+        "type": "text",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Timing Chip",
+        "name": "timing",
+        "type": "text",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Price",
+        "name": "price",
+        "type": "text",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Price Note",
+        "name": "price_note",
+        "type": "text",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Out-the-door Note",
+        "name": "otd_note",
+        "type": "text",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Buy Buttons",
+        "name": "buy_buttons",
+        "type": "repeater",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [
+          {
+            "title": "Style (solid/ghost/gold)",
+            "name": "style",
+            "type": "text",
+            "options_source": "manual"
+          },
+          {
+            "title": "Label",
+            "name": "label",
+            "type": "text",
+            "options_source": "manual"
+          },
+          {
+            "title": "URL",
+            "name": "url",
+            "type": "text",
+            "options_source": "manual"
+          }
+        ],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Trust Row",
+        "name": "trust_items",
+        "type": "repeater",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [
+          {
+            "title": "Icon (fa class)",
+            "name": "icon",
+            "type": "text",
+            "options_source": "manual"
+          },
+          {
+            "title": "Text",
+            "name": "text",
+            "type": "text",
+            "options_source": "manual"
+          }
+        ],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "About Section",
+        "name": "tab_about",
+        "type": "text",
+        "object_type": "tab",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "About Headline",
+        "name": "about_headline",
+        "type": "textarea",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "About Content",
+        "name": "about_html",
+        "type": "wysiwyg",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "At a Glance",
+        "name": "glance",
+        "type": "repeater",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [
+          {
+            "title": "Label",
+            "name": "label",
+            "type": "text",
+            "options_source": "manual"
+          },
+          {
+            "title": "Value",
+            "name": "value",
+            "type": "text",
+            "options_source": "manual"
+          }
+        ],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Effects Section",
+        "name": "tab_effects",
+        "type": "text",
+        "object_type": "tab",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Effects Headline",
+        "name": "effects_headline",
+        "type": "textarea",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Effects Content",
+        "name": "effects_html",
+        "type": "wysiwyg",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Effect Pills",
+        "name": "pills",
+        "type": "repeater",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [
+          {
+            "title": "Label",
+            "name": "label",
+            "type": "text",
+            "options_source": "manual"
+          }
+        ],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Flavor Section",
+        "name": "tab_flavor",
+        "type": "text",
+        "object_type": "tab",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Flavor Headline",
+        "name": "flavor_headline",
+        "type": "textarea",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Flavor Content",
+        "name": "flavor_html",
+        "type": "wysiwyg",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Terpenes",
+        "name": "terps",
+        "type": "repeater",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [
+          {
+            "title": "Name",
+            "name": "name",
+            "type": "text",
+            "options_source": "manual"
+          },
+          {
+            "title": "Type",
+            "name": "type",
+            "type": "text",
+            "options_source": "manual"
+          },
+          {
+            "title": "Text",
+            "name": "text",
+            "type": "textarea",
+            "options_source": "manual"
+          }
+        ],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "In the Jar Section",
+        "name": "tab_jar",
+        "type": "text",
+        "object_type": "tab",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Jar Headline",
+        "name": "jar_headline",
+        "type": "textarea",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Jar Content",
+        "name": "jar_html",
+        "type": "wysiwyg",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Jar Specs",
+        "name": "spec",
+        "type": "repeater",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [
+          {
+            "title": "Label",
+            "name": "label",
+            "type": "text",
+            "options_source": "manual"
+          },
+          {
+            "title": "Value",
+            "name": "value",
+            "type": "text",
+            "options_source": "manual"
+          }
+        ],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Order Steps Section",
+        "name": "tab_steps",
+        "type": "text",
+        "object_type": "tab",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Steps Headline",
+        "name": "steps_headline",
+        "type": "textarea",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Steps",
+        "name": "steps_items",
+        "type": "repeater",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [
+          {
+            "title": "Title",
+            "name": "title",
+            "type": "text",
+            "options_source": "manual"
+          },
+          {
+            "title": "Text",
+            "name": "text",
+            "type": "textarea",
+            "options_source": "manual"
+          }
+        ],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Related Section",
+        "name": "tab_related",
+        "type": "text",
+        "object_type": "tab",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "Related Headline",
+        "name": "related_headline",
+        "type": "text",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "FAQ Section",
+        "name": "tab_faq",
+        "type": "text",
+        "object_type": "tab",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "FAQ Headline",
+        "name": "faq_headline",
+        "type": "text",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "FAQs",
+        "name": "faqs",
+        "type": "repeater",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [
+          {
+            "title": "Question",
+            "name": "question",
+            "type": "text",
+            "options_source": "manual"
+          },
+          {
+            "title": "Answer",
+            "name": "answer",
+            "type": "textarea",
+            "options_source": "manual"
+          }
+        ],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "CTA Section",
+        "name": "tab_cta",
+        "type": "text",
+        "object_type": "tab",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "CTA Kick",
+        "name": "cta_kick",
+        "type": "text",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "CTA Headline",
+        "name": "cta_headline",
+        "type": "textarea",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "CTA Buttons",
+        "name": "cta_buttons",
+        "type": "repeater",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [
+          {
+            "title": "Style (solid/ghost/gold)",
+            "name": "style",
+            "type": "text",
+            "options_source": "manual"
+          },
+          {
+            "title": "Label",
+            "name": "label",
+            "type": "text",
+            "options_source": "manual"
+          },
+          {
+            "title": "URL",
+            "name": "url",
+            "type": "text",
+            "options_source": "manual"
+          }
+        ],
+        "isNested": false,
+        "options_source": "manual"
+      },
+      {
+        "title": "CTA License Line",
+        "name": "cta_license",
+        "type": "text",
+        "object_type": "field",
+        "width": "100%",
+        "options": [],
+        "repeater-fields": [],
+        "isNested": false,
+        "options_source": "manual"
+      }
+    ],
+    "admin_columns": [],
+    "admin_filters": []
+  },
+  "table_notice": false
+}
