@@ -32,8 +32,32 @@ Staging additionally runs **Crocoblock**: `jet-engine/v1`, `jet-engine/v2`,
 production does not have. Expect staging pages to differ structurally from
 production, and check which builder owns a page before editing it.
 
-Known staging pages: `front-page` (13588), `deals` (14537), `strain-hub`
-(14284), `shop` (14112), `dispensary-near-fountain-valley` (14043).
+Known staging pages: `front-page` (13588 — titled "Font Page", the live front
+page), `deals` (14537), `strain-hub` (14284), `shop` (14112),
+`dispensary-near-fountain-valley` (14043). Note there is also an unused page
+titled "Home" at `10048` — that is *not* the front page on staging.
+
+### Content inventory (staging)
+
+| | |
+|---|---|
+| Pages | 189 |
+| Posts | 33 |
+| Media | 828 |
+
+Custom post types beyond the WordPress defaults — pass these as the `type`
+argument to `list` / `get` / `update`:
+
+| Type | REST base | What it holds |
+|---|---|---|
+| `deal` | `deal` | Deals / specials |
+| `strain` | `strain` | Cannabis strains (also mirrored as pages under `/strain/…`) |
+| `areas-we-serve` | `areas-we-serve` | Local service-area landing pages |
+| `elementor_library` | `elementor_library` | Saved Elementor templates |
+| `elementor_snippet` | `elementor_snippet` | Custom code snippets |
+| `jet-engine` | `jet-engine` | JetEngine listing items/components |
+| `elementskit_template` | `elementskit-template` | ElementsKit templates |
+| `rometheme_template` | `rometheme_template` | Rometheme templates |
 
 ## How the connection works
 
