@@ -1,0 +1,9 @@
+# WordPress credentials — never commit these
+.env.wordpress
+.env
+*.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
