@@ -168,39 +168,64 @@ Only after review, and only once `price` is filled in. Leave as draft otherwise.
 
 ## Part 2 — What's still outstanding
 
-### 1. Two sections are written but invisible
-
-A strain page has two parts: the **form** someone fills in (the tabs in
-wp-admin) and the **design template** that decides what shows up on the page.
-
-Two new boxes were added to the form — Cultivation and How to Use — and filled
-with the copy from the live site. That copy is saved and safe. But nothing told
-the design template those boxes exist, so the words sit in the database and
-visitors never see them. Like typing two extra pages into a document where the
-printer is still set to print pages 1–9.
-
-**To fix it:** open the strain template in Elementor and add two sections that
-pull from those boxes. That's design work — the writing is already done.
-
-**Be careful:** all 96 strain pages share this one template. Fix it once and
-every strain gets the new sections. Break it once and every strain breaks. Back
-it up before editing.
-
-**Which template:** most likely "Strain Final" (`12173`). Two older ones exist —
-`Evergreen Strains` (`10636`) and `Evergreen Strains 2` (`10664`) — so check
-which one is actually switched on before touching anything.
-
-**Why it matters now:** every strain migrated before this is fixed will have the
-same hidden cultivation copy. Nothing is lost, it just won't be visible until
-the template catches up. Worth sorting before doing the remaining 95.
-
-### 2. Price is blank
+### Price is blank
 
 There is a price field on the page and it is empty, because nobody has said what
 a strain costs. The note beside it still reads "confirm live price."
 
-**To fix it:** supply a price per strain, or drop the price field from the
-template if pricing lives somewhere else.
+Being handled later, once all 96 strains are loaded.
+
+---
+
+## Part 2b — The template (done)
+
+The Cultivation and How to Use sections now exist on the page. Recorded here so
+the next person knows how it was built and what to watch for.
+
+**The template is `14266`** — not any of the three templates with "Strain" in
+the name. Those are unused leftovers. The live one is titled "Elementor Single
+Post #14266" and is the only one whose display condition is
+`include/singular/strain`. Confirm from a rendered page (`elementor-page-<id>`
+in the body class) rather than from template titles.
+
+**Sections were cloned, not authored.** Cultivation is a copy of Appearance
+(dark) and How to Use a copy of The Strain (cream), each rebound to the new
+fields. Cloning inherits every typography and spacing setting, so the new
+sections match the rest of the page automatically. Both new repeaters hold
+label/value data, so they reuse `.eg-spec` (dark) and `.eg-glance` (cream).
+
+They sit after Flavor, which keeps page order matching field-tab order and
+preserves the existing cream/dark alternation. Numbered eyebrows were
+resequenced to 01–09.
+
+**Empty sections hide themselves.** A strain with no Cultivation copy would
+otherwise render an empty labelled band — the field widgets drop out on their
+own but the container and eyebrow do not. Both containers carry
+`eg-optional-sect`, and the prose snippet hides any such section containing no
+JetEngine output:
+
+```css
+.eg-optional-sect:not(:has(.jet-listing)){display:none!important}
+```
+
+So un-migrated strains look exactly as they did before, and a section appears
+the moment that strain gets copy. No cleanup pass needed later.
+
+### Cache: the step that looks like a failed save
+
+After writing `_elementor_data`, the front end kept serving the old layout —
+including on pages never fetched before, so it was not page caching. Purging
+SiteGround alone does nothing here. Elementor caches the rendered document
+separately and must be cleared first:
+
+```bash
+DELETE /elementor/v1/cache          # Elementor — this is the one that matters
+PUT    /siteground-optimizer/v1/purge-cache   # then SiteGround
+```
+
+`purge-cache` is **PUT**, not POST; POST returns a confusing 404. If a template
+edit appears not to have saved, re-read `_elementor_data` over REST before
+assuming the write failed — it is almost always the cache.
 
 ---
 
@@ -247,3 +272,4 @@ a colour — it would be wrong on one of the two backgrounds.
 | One strain's content | Restore from `docs/strain-migration/<slug>-<id>-before.json` |
 | Heading/list CSS | Delete Elementor snippet `14574` |
 | Post type schema | Restore `docs/strain-migration/strain-cpt-before-rest-migration.json` via `POST /jet-engine/v2/edit-post-type/2` |
+| Template sections | Restore `docs/strain-migration/template-14266-before-new-sections.json` into `_elementor_data` on `14266`, then clear the Elementor cache |
