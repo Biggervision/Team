@@ -1,0 +1,411 @@
+---
+name: cold-email-campaign-deploy
+description: "Deploy cold email campaigns to Email Bison or Instantly. Generates campaign brief, runs pre-launch checklist (8 safety gates), creates campaign via API in PAUSED state, attaches senders, configures settings. Use when deploying a campaign, launching a campaign, creating a campaign in Email Bison or Instantly, generating a campaign brief, or when someone says 'deploy campaign', 'launch campaign', 'create campaign in Email Bison', 'create campaign in Instantly', 'campaign brief'. This is Step 4 of the 4-skill chain: strategy -> copywriting -> ab-testing -> campaign-deploy."
+---
+
+# Cold Email Campaign Deploy
+
+Deploy a fully prepared campaign to Email Bison or Instantly. This skill compiles all upstream artifacts into a campaign brief, runs safety checks, and creates the campaign via API in PAUSED state.
+
+**Skill chain:** `cold-email-strategy` -> `cold-email-copywriting` -> `cold-email-ab-testing` -> `cold-email-campaign-deploy` (you are here)
+
+---
+
+## Pre-Flight: Load Workspace
+
+Check for upstream artifacts in `scripts/campaigns/{campaign-name}/`:
+
+| File | Source Skill | Required? |
+|------|-------------|-----------|
+| `strategy.md` | cold-email-strategy | Recommended (provides ICP, offer, messaging) |
+| `copy/sequence.md` | cold-email-copywriting | **Required** (the emails to deploy) |
+| `ab-testing/variants.md` | cold-email-ab-testing | **Required** (A/B variants with verification gate) |
+| `ab-testing/ab-schema.json` | cold-email-ab-testing | Recommended (structured variant data for API) |
+| `.metadata.json` | All skills | Recommended (phase tracking) |
+
+**If copy or variants are missing:** Ask the user to run the upstream skills first, or provide the email copy and variants directly.
+
+**If strategy is missing:** Proceed with deployment, but note that the campaign brief will have incomplete strategy sections.
+
+### Lead Readiness
+
+Leads are managed separately — this skill deploys the campaign structure, not the lead list. Before activating the campaign:
+
+- Verify lead list with `email-verification` skill (bounce target < 3%)
+- Upload leads via `lead-tracking-db` skill or sequencer dashboard
+- Minimum 500-1000 leads for statistical significance on A/B tests
+- Filter out competitors, existing clients, and spam traps
+- Consider starting with a small cohort (100-200) for the first test send
+
+Also confirm with user:
+- Which sequencer? (Email Bison or Instantly)
+- Sender email IDs or tags to attach
+- Campaign name (for the sequencer)
+
+---
+
+## Campaign Brief Generation
+
+Compile all workspace artifacts into `scripts/campaigns/{campaign-name}/deployment/campaign-brief.md` using the template in `references/campaign-brief-template.md`.
+
+The brief is the source of truth for this campaign. It captures every decision so you can audit, reproduce, or hand off the campaign. Include:
+
+1. **Discovery summary** (from strategy.md)
+2. **ICP summary** (from strategy.md)
+3. **Offer positioning** (from strategy.md)
+4. **Messaging strategy** (from strategy.md)
+5. **Sequence architecture** (from copy/sequence.md)
+6. **All email copy with variants and spintax** (from ab-testing/variants.md)
+7. **Deployment details** (sequencer, senders, settings, campaign ID)
+
+---
+
+## Pre-Launch Checklist (9 Mandatory Gates)
+
+**Every gate must pass before creating the campaign.** If any gate fails, stop and resolve before proceeding.
+
+| # | Gate | Check | Why |
+|---|------|-------|-----|
+| 0 | **Copy read-through (human + lint)** | Run the dash lint (`node .claude/skills/cold-email-copywriting/scripts/lint-copy.mjs <sequence file>`) and confirm it exits 0. Then read each subject line + first line as the prospect: would you open it, or does it smell like a cold email? Confirm the CTA asks for a simple "yes" (gives the fix, not "let me share what we do") and no email body is one solid block of text | Never blindly ship AI-generated copy. Em dashes (the top AI tell) slip past visual scans, so the lint is mandatory. If the copy telegraphs cold outreach or reads as a research flex, it won't get opened and nothing downstream matters. See `cold-email-copywriting/references/open-rate-playbook.md` |
+| 1 | **Email verification** | Lead list verified, bounce target < 3% | Bounces destroy domain reputation faster than anything else |
+| 2 | **Warmup score** | All sender accounts >= 95 warmup score | Sending cold on low-warmup accounts triggers spam detection |
+| 3 | **DNS authentication** | SPF, DKIM, and DMARC configured on all sender domains | Missing auth = emails go to spam |
+| 4 | **Tracking disabled** | Open tracking OFF, link tracking OFF | Tracking injects HTML that ESPs detect as automated marketing |
+| 5 | **Plain text mode** | Plain text enabled (no HTML formatting) | HTML signals promotional/marketing content |
+| 6 | **Spintax applied** | All emails have spintax on greetings, transitions, CTAs, sign-offs | ESPs detect identical templates across sends |
+| 6.5 | **Spintax format match** | All spintax matches target sequencer format | Mismatched format renders as literal text — Email Bison: `{a\|b}`, Instantly: `{{RANDOM \| a \| b}}` |
+| 7 | **A/B verification gate** | E1 >= 3 variants, E2-E4 >= 2 variants each, total >= 9 steps | Single-variant positions waste sending volume on untested copy |
+| 8 | **Sender signatures** | 100% of attached senders have non-empty `email_signature` (auto-check below) | Signature token in emails needs a stored value to render |
+
+**Gate 0 is a human read-through** — do it yourself first (as the prospect), then flag anything that reads like a cold email to the user before proceeding. **Ask the user to confirm gates 1-3** (these require checking external systems). Gates 4-8 can be verified from the workspace artifacts and API configuration.
+
+### Gate 8 auto-verification (Email Bison) — run BEFORE activation
+
+This gate is mandatory and must be programmatically verified. Self-attestation alone has shipped campaigns with 0% signature coverage in the past (LGJ `lgj-bootstrap-t1-t4-pilot-1`, 2026-05-13: 0/264 senders had signatures despite the gate being marked "passed").
+
+```bash
+# Replace 669 with the actual campaign ID and use the correct workspace key.
+# This pages through every sender attached to the campaign and counts how
+# many have a non-empty email_signature.
+python3 <<'PY'
+import json, urllib.request, os
+KEY = os.environ['EMAIL_BISON_API_KEY']  # use _LGJ_ or _CONSULTI_ variant per workspace
+BASE = "https://send.leadgenjay.com/api"
+CID = 669  # <-- campaign ID
+
+def fetch(page):
+    req = urllib.request.Request(f"{BASE}/campaigns/{CID}/sender-emails?page={page}&per_page=100",
+        headers={"Authorization": f"Bearer {KEY}"})
+    return json.loads(urllib.request.urlopen(req).read())
+
+p1 = fetch(1)
+senders = list(p1['data'])
+for p in range(2, p1['meta']['last_page']+1):
+    senders.extend(fetch(p)['data'])
+
+without_sig = [s for s in senders if not (s.get('email_signature') or '').strip()]
+print(f"Campaign {CID}: {len(senders)} attached, {len(senders)-len(without_sig)} WITH signature, {len(without_sig)} WITHOUT")
+if without_sig:
+    from collections import Counter
+    print("BLOCKED — missing signatures by display name:",
+          dict(Counter((s.get('name') or '').strip() for s in without_sig)))
+    raise SystemExit(1)
+print("PASS — all attached senders have signatures.")
+PY
+```
+
+**Fail behavior:** Script exits 1. Do NOT activate the campaign. Either (a) `PATCH /sender-emails/signatures/bulk` for the missing IDs, or (b) detach/delete the un-signatured senders, then re-run Gate 8. Only proceed when the script prints `PASS`.
+
+---
+
+## API Deployment
+
+Read `references/api-deployment.md` for the full API payloads, field mappings, and gotchas.
+
+### Email Bison Deployment
+
+**Base URL:** `https://send.leadgenjay.com/api`
+
+1. **Create campaign** (POST /campaigns)
+   ```bash
+   curl -s -X POST "https://send.leadgenjay.com/api/campaigns" \
+     -H 'Authorization: Bearer {EMAIL_BISON_API_KEY}' \
+     -H "Content-Type: application/json" \
+     -d '{"name": "{campaign_name}", "type": "email"}'
+   ```
+
+2. **Create sequence steps with A/B variants** (POST /campaigns/v1.1/{id}/sequence-steps)
+   - **Variant linking REQUIRES BOTH** `variant: true` (boolean) AND `variant_from_step: N` (1-based positional index of parent in same payload). Omitting `variant: true` causes Bison to silently strip the linkage — `variant_from_step` will be null in the response.
+   - Use `variant_from_step_id` (database ID) ONLY when adding variants to already-saved steps in a separate later call. Cannot mix in same step row with `variant_from_step`.
+   - **NEVER mix these up** (creates orphaned steps with no parent linkage)
+   - **Order field is auto-renumbered.** When `variant: true` is set, Bison renumbers parent `order` to sequential 1-N (parents become 1,2,3,4 instead of sent 1,4,6,8). Variant orders preserved. Send unique orders 1-N anyway; don't be alarmed by "duplicate" order numbers in the response — variant grouping is via `variant_from_step_id`, not order.
+   - **The deprecated PUT bulk-update (`PUT /campaigns/sequence-steps/{sequence_id}`) does NOT persist variant linkage.** If linkage is wrong after create, DELETE the campaign and re-POST. Do not try to fix variants via the bulk update.
+
+3. **Attach sender emails** (POST /campaigns/{id}/attach-sender-emails)
+
+4. **Configure settings** (PATCH /campaigns/{id}/update)
+   - `open_tracking: false`
+   - `plain_text: true`
+   - `reputation_building: true`
+   - `max_emails_per_day`: number of senders × per-mailbox daily_limit (typical pilot: senders × 20; ramp to ×30 after 7 days clean)
+   - `can_unsubscribe: false`
+   - `sequence_prioritization: "followups"` (default — `"top"` returns 422 invalid; do NOT send `"top"`)
+   - `link_tracking` accepts the value but may return null; rely on copy not having links rather than this flag
+
+5. **Bump per-mailbox daily limit** (PATCH /sender-emails/daily-limits/bulk) — default per-mailbox limit is 10 which throttles below the campaign-level cap. For a pilot ramp, send `{sender_email_ids: [...], daily_limit: 20}` then increase after 7 days of clean reply/bounce metrics.
+
+5. **Set sender signatures** (if multiple personas)
+   ```bash
+   curl -s -X PATCH "https://send.leadgenjay.com/api/sender-emails/signatures/bulk" \
+     -H 'Authorization: Bearer {EMAIL_BISON_API_KEY}' \
+     -H "Content-Type: application/json" \
+     -d '{"sender_email_ids": [...], "email_signature": "<html>"}'
+   ```
+
+6. **Bulk-load leads** (two-phase: create → attach). For campaigns with custom variables (e.g. `{personalization}`), follow this pattern exactly:
+
+   **Phase 0: Pre-create every custom variable used in the payload.** Workspace-scoped, one-time. Bulk-create returns 422 if any variable is missing.
+   ```bash
+   for VAR in personalization company_domain industry city state country linkedin_url; do
+     curl -s -X POST "https://send.leadgenjay.com/api/custom-variables" \
+       -H "Authorization: Bearer {EMAIL_BISON_API_KEY}" \
+       -H "Content-Type: application/json" \
+       -d "{\"name\":\"$VAR\"}"
+   done
+   ```
+
+   **Phase A: Bulk-create leads (500 max per request).** Note the field names — `title` not `job_title`, `company` not `company_name`.
+   ```bash
+   curl -s --max-time 180 -X POST "https://send.leadgenjay.com/api/leads/multiple" \
+     -H "Authorization: Bearer {EMAIL_BISON_API_KEY}" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "leads": [
+         {
+           "first_name": "Aaron",
+           "last_name": "Smith",
+           "email": "aaron@example.com",
+           "title": "Founder",
+           "company": "Example Co",
+           "custom_variables": [
+             {"name": "personalization", "value": "Saw the seed round news, congrats."},
+             {"name": "company_domain", "value": "example.com"}
+           ]
+         }
+       ]
+     }'
+   # Returns .data[].id for each created lead — collect into a list
+   ```
+
+   **Phase B: Attach the new lead IDs to the campaign (chunks of 1000).**
+   ```bash
+   curl -s --max-time 120 -X POST "https://send.leadgenjay.com/api/campaigns/{id}/leads/attach-leads" \
+     -H "Authorization: Bearer {EMAIL_BISON_API_KEY}" \
+     -H "Content-Type: application/json" \
+     -d '{"lead_ids": [101, 102, 103, ...]}'
+   ```
+
+### Bison bulk-load gotchas (hard-won)
+
+- **Custom variables MUST exist in the workspace BEFORE `/leads/multiple`** or the entire batch fails with `422 "You do not have a custom variable named X"`. Pre-create every name in Phase 0 above.
+- **Batch size hard cap: 500 leads per `/leads/multiple` request.** Larger payloads silently truncate or 500.
+- **Bison silently filters personal-domain emails** (`@gmail.com`, `@yahoo.com`, `@hotmail.com`, etc.) — expect ~10-15% of input to be dropped. Don't treat the delta as a script bug. Confirm by counting `.data[].id` returned vs sent.
+- **`/campaigns/{id}.total_leads` stays 0 until ALL Phase-B chunks complete.** Don't sanity-check campaign count mid-load and panic.
+- **`/campaigns/{id}/sender-emails` ignores `?per_page=N`** — always returns 15/page. Use `meta.total` for the true sender count.
+- **Timeouts under contention.** When other processes hammer the same DB/API, Bison response times spike past 60s. Use `curl --max-time 180` + 2-3 attempt retries with sleep backoff. The first version of `bison-load.sh` died mid-batch 6 when a parallel LGJ qualify ran; the retry-aware loader recovered cleanly.
+- **`PATCH /campaigns/{id}/archive`** is the dedicated archive endpoint. `PATCH /campaigns/{id}/update {status: "archived"}` is silently no-op.
+- **Reference impl:** `scripts/campaigns/consulti-beta-launch/bison-load.sh` + `bison-load-resume.sh` (the resume script has the canonical retry logic).
+
+### Instantly Deployment
+
+**Base URL:** `https://api.instantly.ai/api/v2`
+
+> **HTML Rule:** Use `<p>` tags only. `<br>` tags strip ALL text from Instantly emails.
+
+1. **Create campaign with full payload** (POST /campaigns)
+   - Full sequence structure embedded in creation (steps + variants in one call)
+   - `campaign_schedule` with `schedules` array is REQUIRED (omitting returns 400)
+   - Variants nested inside each step's `variants` array
+   - Empty subject `""` for threaded follow-ups
+   - Campaign created as status 0 (draft)
+
+2. **Configure settings** (PATCH /campaigns/{id})
+   - `open_tracking: false`
+   - `link_tracking: false`
+   - `text_only: true`
+
+3. **Add leads** (POST /leads) — one lead per call with `campaign_id`
+   - Verify lead upload capacity before bulk adds (workspace has a cap)
+   - For large lists, use Instantly dashboard CSV import instead of API
+
+4. **Sender accounts** — managed at workspace level, not per-campaign
+   - No "attach sender" API endpoint — accounts configured in Instantly UI
+   - Most campaigns inherit accounts via `email_tag_list` (tag UUIDs)
+   - Ensure warmup enabled and score >= 95 before activating campaign
+
+### Critical API Rules
+
+- **NEVER auto-activate the campaign.** Always create in PAUSED/DRAFT state.
+- **Confirm sender attachment** before reporting success.
+- **Validate step/variant count** matches what was planned in ab-schema.json.
+
+### Post-Generation Validation (run before reporting success)
+
+After constructing the API payload but BEFORE making the call, verify:
+
+1. **Instantly HTML check:** Scan every `body` field in the payload for `<br>` tags. If found, replace with `</p><p>` or remove entirely. This is the #1 cause of blank emails — `<br>` tags strip ALL text in Instantly. This applies to signature lines too (use `</p><p>` between name and title, not `<br>`).
+
+2. **Spintax completeness check:** Every email body MUST have spintax on ALL of these:
+   - Greeting: `{Hi|Hey|Hello}` (Email Bison) or `{{RANDOM | Hi | Hey | Hello}}` (Instantly)
+   - At least one transition or qualifier phrase
+   - CTA phrasing (at least 2 options)
+   - Sign-off: `{Best|Cheers}` (Email Bison) or `{{RANDOM | Best | Cheers}}` (Instantly)
+   If any email is missing spintax on greetings or sign-offs, add it before deploying.
+
+3. **Order uniqueness check (Email Bison):** Send unique `order` values 1-N in the payload. Bison may auto-renumber parent orders to sequential 1-N when `variant: true` is set on variant rows — that's the API's behavior, not a bug; functional grouping uses `variant_from_step_id`, not order.
+
+4. **Variant flag check (Email Bison):** For every variant row in the payload, BOTH `variant: true` AND `variant_from_step: N` (positional 1-based index of parent in same array) must be set. Missing the boolean causes silent linkage failure.
+
+---
+
+## Error Recovery & Troubleshooting
+
+API deployments can fail at any step. Since campaigns are created in PAUSED state, recovery is straightforward — nothing has been sent to prospects yet.
+
+### Common API Errors
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| `400 Bad Request` | Malformed payload, missing required field, duplicate order values | Check order uniqueness, validate spintax syntax, verify all required fields present |
+| `401 Unauthorized` | Invalid or expired API key | Verify `EMAIL_BISON_API_KEY` or `INSTANTLY_API_KEY` in `.env`. Email Bison keys contain pipe chars — use single quotes in shell. |
+| `409 Conflict` | Duplicate campaign name | Append date or short ID to campaign name |
+| `422 Unprocessable` | Step validation failed (wrong variant parent ref, order conflict) | Check `variant_from_step` (positional) vs `variant_from_step_id` (database ID) — mixing these up creates orphans |
+| `500 Server Error` | Sequencer API down | Retry up to 3 times with backoff (1s, 2s, 4s). If persistent, deploy later. |
+
+### Partial Deployment Recovery
+
+Deployment has multiple API calls. If one fails mid-sequence:
+
+1. **Campaign created, steps failed:** Campaign exists but is empty. POST the sequence steps again — no need to delete the campaign.
+
+2. **Steps created, sender attach failed:** Log the campaign ID and step IDs to `deployment-log.md`. Retry sender attachment separately, or attach via sequencer UI.
+
+3. **Steps partially created (e.g., E1-E2 succeeded, E3 failed):** Delete all created steps (`DELETE /campaigns/{id}/sequence-steps/{step_id}`), fix the issue, and POST the entire sequence again. Partial sequences are worse than restarting — variant grouping depends on the full payload.
+
+4. **Everything created, settings update failed:** Campaign is functional. Settings can be updated via API retry or directly in the sequencer UI.
+
+### Rollback
+
+Since campaigns deploy in PAUSED/draft state, rollback is simple:
+- **Delete and recreate:** `DELETE /campaigns/{id}` returns 200 and removes the campaign and all its sequence steps in one call. No emails have been sent.
+- **Don't delete steps one-by-one to "fix" them.** The variant linking depends on positional indices — editing individual steps breaks the A/B structure. Recreate the full sequence instead.
+- **Don't try to repair variant linkage via the deprecated PUT `/campaigns/sequence-steps/{sequence_id}`.** That endpoint accepts the payload but does NOT persist `variant_from_step_id` even when sent correctly. If linkage is wrong, DELETE the campaign and re-POST clean.
+- **Daily-limit changes are workspace-global.** `PATCH /sender-emails/daily-limits/bulk` updates limits for all listed senders across every campaign they're attached to. To revert a pilot ramp, re-PATCH with the previous limit (default 10).
+
+---
+
+## Post-Deployment Report
+
+After successful deployment, report:
+
+```
+Campaign Deployed (PAUSED)
+==========================
+Campaign ID:    {id}
+Campaign URL:   {sequencer dashboard link}
+Sequencer:      {Email Bison / Instantly}
+Steps created:  {N} (E1: {n} variants, E2: {n}, E3: {n}, E4: {n})
+Total variants: {N}
+Senders:        {N} accounts attached
+Max daily:      {N} emails/day ({senders} x 30)
+
+NEXT STEPS (post-deployment, pre-activation):
+1. Review the campaign in the sequencer dashboard
+2. Verify step count and variant grouping matches the brief
+3. Send a test email to yourself
+4. Verify spintax renders correctly (no literal {a|b|c} in output)
+5. Re-run Gate 8 auto-verification (see above) — confirm 100% of attached senders have signatures and that the `{SENDER_EMAIL_SIGNATURE}` token renders in the test email
+6. Upload verified lead list (if not already attached)
+7. Activate when ready
+```
+
+Write deployment details to `scripts/campaigns/{campaign-name}/deployment/deployment-log.md`.
+
+---
+
+## Worked Example: Consulti AI (Email Bison)
+
+This shows the full deployment flow from a real campaign.
+
+**Setup:** Consulti AI cold email campaign targeting B2B SaaS founders. 3 sender personas (Jay, Madison, Bob) with 30 mailboxes each = 90 senders.
+
+**Pre-Flight:** Loaded `strategy.md` (ICP: 3-75 employees, US, 3 industry segments), `copy/sequence.md` (4-email sequence), `ab-testing/variants.md` (3/2/2/2 structure = 9 total steps). User confirmed: Email Bison, 90 sender IDs (22317-22406).
+
+**Pre-Launch Gates:** All 9 passed:
+1. Leads verified (bounce < 3%)
+2. Warmup >= 95 on all 90 accounts (4+ weeks)
+3. SPF/DKIM/DMARC configured on all 30 domains
+4. Open tracking OFF, link tracking N/A
+5. Plain text confirmed
+6. Spintax format verified (Email Bison: `{a|b|c}`)
+6.5. Spintax format matches Email Bison conventions
+7. A/B gate passed (3+2+2+2 = 9 >= 9 minimum)
+8. Signatures set per persona
+
+**API Calls:**
+1. `POST /campaigns` → Campaign ID 366
+2. `POST /campaigns/v1.1/366/sequence-steps` → 9 steps with unique order values (1-9), variants linked via `variant_from_step`
+3. `POST /campaigns/366/attach-sender-emails` → IDs 22317-22406
+4. `PATCH /campaigns/366/update` → `open_tracking: false`, `max_emails_per_day: 2700` (90 x 30)
+5. `PATCH /sender-emails/signatures/bulk` → Per-persona signatures for Jay/Madison/Bob
+
+**Result:** Campaign 366 deployed PAUSED. Step IDs logged: E1-A: 2166, E1-B: 2167, E1-C: 2168, E2-A: 2169, E2-B: 2173, E3-A: 2170, E3-B: 2171, E4-A: 2172, E4-B: 2174.
+
+---
+
+## Safety Rules
+
+These protect domain reputation, the single most valuable (and fragile) asset in cold email:
+
+1. **4+ weeks warmup before sending** -- new domains have no reputation
+2. **Verify all emails first** (bounce target < 3%) -- bounces destroy reputation fastest
+3. **Open/link tracking OFF** -- tracking injects detectable HTML
+4. **Max 30 emails/day per mailbox** -- volume-based spam detection threshold
+5. **Plain text only** -- HTML signals promotional content
+6. **Never use primary domain** -- if a cold email domain burns, business email stays safe
+7. **Never auto-activate** -- always review in sequencer first
+8. **Spintax on everything** -- ESPs detect identical templates
+9. **Pause if bounce rate > 5%** -- something is wrong with the list
+10. **Re-verify lead lists older than 30 days** -- email addresses go stale
+
+---
+
+## Output & Handoff
+
+### Workspace output
+
+Write to `scripts/campaigns/{campaign-name}/deployment/`:
+- `campaign-brief.md` -- Complete campaign record
+- `deployment-log.md` -- API call results, campaign ID, settings applied
+
+### Metadata update
+
+Update `scripts/campaigns/{campaign-name}/.metadata.json`:
+```json
+{
+  "phases": {
+    "deployment": {
+      "status": "complete",
+      "completed_at": "{ISO}",
+      "output": "deployment/campaign-brief.md",
+      "campaign_id": "{id}",
+      "sequencer": "{email_bison|instantly}",
+      "state": "paused"
+    }
+  }
+}
+```
+
+### Campaign complete
+
+Tell the user: "Campaign deployed in PAUSED state. Review in the sequencer dashboard, send a test email to yourself, then activate when ready. Full brief saved to `deployment/campaign-brief.md`."

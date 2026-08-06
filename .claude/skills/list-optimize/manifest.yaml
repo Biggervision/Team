@@ -1,0 +1,50 @@
+id: list-optimize
+type: skill
+name: "List Optimize"
+description: "Qualify, normalize, research, and personalize a scraped lead list before campaign launch. Bundles 9 shell scripts (qualify.sh, normalize-company.sh, research.sh, personalize.sh, run-pipeline.sh, validate-campaign-vars.sh, migrate-schema.sh + db-query.sh helper). Interactive phase picker. Validates target Instantly/Email Bison campaign template carries the personalization variable + fallback before any DB writes. Updates Turso leads table with qualification + normalization + personalization fields. Requires the lead-tracking-db skill (provides db-setup.sh + V1 schema)."
+categories:
+  - lgj-exclusive
+  - automation
+  - productivity
+tags:
+  - cold-email
+  - lead-qualification
+  - lead-research
+  - personalization
+  - perplexity
+  - turso
+  - data-cleaning
+  - icp
+  - phase-picker
+  - campaign-validation
+icon: ListChecks
+path: skills/list-optimize
+files:
+  - SKILL.md
+  - manifest.yaml
+  - references/qualification-prompt.md
+  - references/company-normalization-rules.md
+  - references/personalization-prompt.md
+  - evals/evals.json
+  - scripts/db-query.sh
+  - scripts/list-optimize/migrate-schema.sh
+  - scripts/list-optimize/migrate-schema.sql
+  - scripts/list-optimize/normalize-company.sh
+  - scripts/list-optimize/perplexity-research.sh
+  - scripts/list-optimize/personalize.sh
+  - scripts/list-optimize/qualify.sh
+  - scripts/list-optimize/research.sh
+  - scripts/list-optimize/run-pipeline.sh
+  - scripts/list-optimize/validate-campaign-vars.sh
+version: "2.0"
+branch: LGJ-exclusive
+composesWell:
+  - consulti-scrape
+  - lead-tracking-db
+  - email-verification
+  - cold-email-strategy
+  - cold-email-copywriting
+  - cold-email-quickstart
+  - cold-email-campaign-deploy
+  - instantly
+  - email-bison

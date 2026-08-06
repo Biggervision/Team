@@ -1,0 +1,36 @@
+id: cold-email-quickstart
+type: skill
+name: "Cold Email Quickstart"
+description: "Thin orchestrator — first-run wizard chaining 8 specialist skills (sequencer signup → inbox-insiders → cold-email-strategy → lead-tracking-db → consulti-scrape → email-verification → list-optimize → cold-email-copywriting → cold-email-ab-testing → cold-email-campaign-deploy) with confirmation gates and resumable state via .metadata.json. This skill ships ONLY the walkthrough doc + phase-prompts; you must install the composed skills first (one curl command in Step 0 of SKILL.md). Strategy precedes scraping so its ICP feeds the scrape filters AND list-optimize qualification rules."
+categories:
+  - lgj-exclusive
+  - automation
+  - productivity
+  - onboarding
+tags:
+  - cold-email
+  - wizard
+  - orchestrator
+  - onboarding
+  - quickstart
+  - first-run
+  - resumable
+  - list-optimize-gate
+icon: Rocket
+path: skills/cold-email-quickstart
+files:
+  - SKILL.md
+  - manifest.yaml
+  - references/phase-prompts.md
+version: "2.0"
+branch: LGJ-exclusive
+composesWell:
+  - inbox-insiders
+  - cold-email-strategy
+  - lead-tracking-db
+  - consulti-scrape
+  - list-optimize
+  - email-verification
+  - cold-email-copywriting
+  - cold-email-ab-testing
+  - cold-email-campaign-deploy
