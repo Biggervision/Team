@@ -20,8 +20,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
-      "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
+UA = "EvergreenOC-ContentSync/1.0 (WordPress REST client; +https://evergreenoc.com)"
 
 MIN_BYTES = 50_000     # a real strain page; anything smaller is the captcha
 ATTEMPTS = 12

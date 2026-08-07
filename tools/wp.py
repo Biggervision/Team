@@ -59,11 +59,17 @@ PRODUCTION_SITE = "https://evergreenoc.com"
 # Work happens on staging unless WP_SITE explicitly says otherwise.
 DEFAULT_SITE = STAGING_SITE
 
-# SiteGround's sg-security plugin challenges requests with no/!browser UA.
-USER_AGENT = (
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
-    "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
-)
+# Identify the tool honestly. This started out as a spoofed Chrome string,
+# picked to get past what looked like a UA-based block, and that was the cause
+# of most of the trouble that followed: SiteGround's WAF carries rules against
+# outdated Chrome user agents, because that is what malicious traffic tends to
+# claim to be. Tripping those rules repeatedly greylisted the whole egress
+# range into the captcha service.
+#
+# A descriptive agent saying what the software is and where to complain about
+# it is both the honest answer and the one that stops the blocks. Never put a
+# browser string here.
+USER_AGENT = "EvergreenOC-ContentSync/1.0 (WordPress REST client; +https://evergreenoc.com)"
 
 TIMEOUT = 60
 

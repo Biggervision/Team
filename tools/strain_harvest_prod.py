@@ -22,8 +22,7 @@ import urllib.request
 from pathlib import Path
 
 SITE = "https://evergreenoc.com"
-UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
-      "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
+UA = "EvergreenOC-ContentSync/1.0 (WordPress REST client; +https://evergreenoc.com)"
 
 ATTEMPTS = 60
 BACKOFF = 20        # seconds between attempts; patience beats retries here

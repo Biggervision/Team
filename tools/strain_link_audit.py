@@ -41,8 +41,7 @@ SCRATCH = Path("/tmp/claude-0/-home-user-Team/f8696e23-6866-5a2c-b368-7481df712e
 PROSE = ("about_html", "effects_html", "flavor_html",
          "jar_html", "cultivation_html", "use_html")
 
-UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
-      "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
+UA = "EvergreenOC-ContentSync/1.0 (WordPress REST client; +https://evergreenoc.com)"
 
 
 def slug_of(path: str) -> str:
