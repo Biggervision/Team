@@ -1,0 +1,399 @@
+<title>WordPress Automation Playbook — Field Notes</title>
+<style>
+  :root {
+    --ground:  #F7F8FA;
+    --raised:  #FFFFFF;
+    --sunk:    #EEF1F4;
+    --ink:     #16202B;
+    --ink-mid: #46525F;
+    --ink-low: #7A8794;
+    --rule:    #E1E5EA;
+    --do:      #0F766E;
+    --do-bg:   #E6F4F1;
+    --warn:    #B45309;
+    --warn-bg: #FDF3E3;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground:  #12181F;
+      --raised:  #1A222B;
+      --sunk:    #0D1319;
+      --ink:     #E7ECF1;
+      --ink-mid: #AEBAC6;
+      --ink-low: #74828F;
+      --rule:    #232E39;
+      --do:      #2DD4BF;
+      --do-bg:   #10312E;
+      --warn:    #FBBF24;
+      --warn-bg: #2E2413;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:#12181F; --raised:#1A222B; --sunk:#0D1319; --ink:#E7ECF1;
+    --ink-mid:#AEBAC6; --ink-low:#74828F; --rule:#232E39;
+    --do:#2DD4BF; --do-bg:#10312E; --warn:#FBBF24; --warn-bg:#2E2413;
+  }
+  :root[data-theme="light"] {
+    --ground:#F7F8FA; --raised:#FFFFFF; --sunk:#EEF1F4; --ink:#16202B;
+    --ink-mid:#46525F; --ink-low:#7A8794; --rule:#E1E5EA;
+    --do:#0F766E; --do-bg:#E6F4F1; --warn:#B45309; --warn-bg:#FDF3E3;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink-mid);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 15.5px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 52rem; margin: 0 auto; padding: 3.5rem 1.5rem 6rem;
+    display: flex; flex-direction: column; gap: 3rem;
+  }
+  code, .mono {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  code {
+    font-size: 0.86em; background: var(--sunk); color: var(--ink);
+    padding: 0.12em 0.38em; border-radius: 3px;
+  }
+  pre {
+    background: var(--sunk); border: 1px solid var(--rule); border-radius: 4px;
+    padding: 0.9rem 1rem; overflow-x: auto; margin: 0;
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.8125rem; line-height: 1.6; color: var(--ink);
+  }
+  pre code { background: none; padding: 0; font-size: inherit; }
+
+  /* header */
+  header { display: flex; flex-direction: column; gap: 0.9rem; }
+  .kicker {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.6875rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-low);
+  }
+  h1 {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: clamp(1.6rem, 4.4vw, 2.25rem); font-weight: 700; line-height: 1.15;
+    letter-spacing: -0.02em; color: var(--ink); margin: 0; text-wrap: balance;
+  }
+  .sub { max-width: 40rem; margin: 0; }
+
+  /* the one rule */
+  .headline-rule {
+    background: var(--do-bg); border: 1px solid var(--do); border-radius: 4px;
+    padding: 1.4rem 1.5rem; display: flex; flex-direction: column; gap: 0.7rem;
+  }
+  .headline-rule .kicker { color: var(--do); }
+  .headline-rule p { margin: 0; color: var(--ink); }
+
+  h2 {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink); margin: 0 0 1.25rem;
+    padding-bottom: 0.6rem; border-bottom: 2px solid var(--ink);
+  }
+
+  /* gotchas */
+  .items { display: flex; flex-direction: column; gap: 1.5rem; }
+  .item {
+    background: var(--raised); border: 1px solid var(--rule); border-radius: 4px;
+    padding: 1.4rem 1.5rem; display: flex; flex-direction: column; gap: 0.85rem;
+  }
+  .item-head { display: flex; gap: 0.85rem; align-items: baseline; }
+  .item-num {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.8rem; font-weight: 700; color: var(--ink-low);
+    font-variant-numeric: tabular-nums;
+  }
+  h3 {
+    font-size: 1.05rem; font-weight: 650; letter-spacing: -0.01em;
+    color: var(--ink); margin: 0; text-wrap: balance;
+  }
+  .row { display: grid; grid-template-columns: 5.5rem 1fr; gap: 0.3rem 0.9rem; }
+  .row > dt {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.625rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-low); padding-top: 0.32em;
+  }
+  .row > dd { margin: 0; }
+  dt.fix { color: var(--do); }
+  dt.sym { color: var(--warn); }
+  dl { margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+
+  /* table */
+  .scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.875rem; }
+  th, td { text-align: left; padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--rule); }
+  th {
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.625rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-low); background: var(--sunk); white-space: nowrap;
+  }
+  tr:last-child td { border-bottom: 0; }
+  td:first-child { white-space: nowrap; color: var(--ink); font-weight: 600;
+    font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.8125rem; }
+
+  /* checklist */
+  ol.check { margin: 0; padding-left: 1.4rem; display: flex; flex-direction: column; gap: 0.6rem; }
+  ol.check li::marker { color: var(--do); font-weight: 700;
+    font-family: ui-monospace, monospace; font-size: 0.85em; }
+  ul.plain { margin: 0; padding: 0; list-style: none;
+    display: flex; flex-direction: column; gap: 0.5rem; }
+  ul.plain li { position: relative; padding-left: 1.15rem; }
+  ul.plain li::before { content: ""; position: absolute; left: 0; top: 0.7em;
+    width: 0.55rem; height: 1px; background: var(--do); }
+
+  strong { color: var(--ink); font-weight: 650; }
+  footer { border-top: 1px solid var(--rule); padding-top: 1.2rem; color: var(--ink-low); }
+  footer p { margin: 0; }
+</style>
+
+<div class="wrap">
+
+  <header>
+    <p class="kicker">Field notes &middot; Bigger Vision Agency</p>
+    <h1>Automating WordPress<br>without getting blocked</h1>
+    <p class="sub">Everything that cost us time on the Evergreen OC build, written down so the
+      next site doesn't repeat it. Applies to any tool hitting the WordPress REST API &mdash;
+      Claude Code, a script, a scraper.</p>
+  </header>
+
+  <section class="headline-rule">
+    <p class="kicker">The one rule</p>
+    <p><strong>Never send a browser User-Agent.</strong> Say what your software actually is.
+      Hosting firewalls block outdated browser strings on sight, because that is what malicious
+      traffic pretends to be. One wrong header cost us most of a working day and got an entire
+      IP range greylisted.</p>
+    <pre><code>✅  EvergreenOC-ContentSync/1.0 (WordPress REST client; +https://site.com)
+❌  Mozilla/5.0 (Macintosh...) Chrome/126.0.0.0 Safari/537.36</code></pre>
+  </section>
+
+  <section>
+    <h2>Before you start</h2>
+    <ol class="check">
+      <li>Create an <strong>Application Password</strong> (Users &rarr; Profile), not the login
+        password. Revocable in one click, and it can't be used to sign in.</li>
+      <li>Set a <strong>descriptive User-Agent</strong> with a contact URL. See the rule above.</li>
+      <li>Tell the host <em>before</em> you start a bulk job. A heads-up costs a support ticket;
+        being greylisted mid-run costs a day.</li>
+      <li>Check what the database charset is if content contains emoji. See #5.</li>
+      <li><strong>Back up every record before you write to it.</strong> One JSON file per post,
+        kept in the repo, makes any mistake a one-line revert.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>What will bite you</h2>
+    <div class="items">
+
+      <div class="item">
+        <div class="item-head"><span class="item-num">01</span><h3>The block is invisible in the host's logs</h3></div>
+        <dl>
+          <div class="row"><dt class="sym">Symptom</dt><dd>Requests return <code>HTTP 202</code>
+            with a tiny HTML body that meta-refreshes to a captcha URL. Support says
+            &ldquo;we see normal 200 OK responses, your IP isn't blocked.&rdquo;</dd></div>
+          <div class="row"><dt>Cause</dt><dd>The challenge is served by the edge firewall,
+            <em>in front of</em> PHP. WordPress never receives the request, so it never appears
+            in the site's access log.</dd></div>
+          <div class="row"><dt class="fix">Fix</dt><dd>Send support the response headers, not a
+            description. The giveaway header names the security layer directly:</dd></div>
+        </dl>
+        <pre><code>HTTP/2 202
+sg-captcha: challenge          ← this is the proof
+server: nginx</code></pre>
+      </div>
+
+      <div class="item">
+        <div class="item-head"><span class="item-num">02</span><h3>Your IP rotates, so one allowlist entry is useless</h3></div>
+        <dl>
+          <div class="row"><dt class="sym">Symptom</dt><dd>Host allowlists the IP you sent;
+            you're still blocked.</dd></div>
+          <div class="row"><dt>Cause</dt><dd>Cloud tooling egresses from a pool. We saw eight
+            different addresses in under a minute.</dd></div>
+          <div class="row"><dt class="fix">Fix</dt><dd>Sample it 20&ndash;30 times, then give
+            the host the whole range. <code>curl -s https://api.ipify.org</code> in a loop.
+            Better still, fix the User-Agent so no allowlist is needed at all.</dd></div>
+        </dl>
+      </div>
+
+      <div class="item">
+        <div class="item-head"><span class="item-num">03</span><h3>Retrying harder makes it permanent</h3></div>
+        <dl>
+          <div class="row"><dt class="sym">Symptom</dt><dd>A job that was half-working stops
+            working entirely, and stays broken for hours.</dd></div>
+          <div class="row"><dt>Cause</dt><dd>Aggressive retry loops are exactly the pattern a
+            firewall greylists. Running two jobs at once doubles it.</dd></div>
+          <div class="row"><dt class="fix">Fix</dt><dd>One job at a time. Back off in minutes,
+            not milliseconds. If success rate drops toward zero, <strong>stop</strong> &mdash;
+            continuing renews the timer rather than getting through.</dd></div>
+        </dl>
+      </div>
+
+      <div class="item">
+        <div class="item-head"><span class="item-num">04</span><h3>Elementor caches separately from the host</h3></div>
+        <dl>
+          <div class="row"><dt class="sym">Symptom</dt><dd>You edit a template, the change saves,
+            and the page still shows the old version &mdash; even on URLs never visited before.
+            Looks exactly like a failed save.</dd></div>
+          <div class="row"><dt>Cause</dt><dd>Elementor caches rendered output independently.
+            Purging the host cache does nothing for it.</dd></div>
+          <div class="row"><dt class="fix">Fix</dt><dd>Clear Elementor first, then the host.
+            Note the method &mdash; <code>POST</code> to that purge route returns a confusing 404.</dd></div>
+        </dl>
+        <pre><code>DELETE /wp-json/elementor/v1/cache            ← this one matters
+PUT    /wp-json/siteground-optimizer/v1/purge-cache   ← PUT, not POST</code></pre>
+        <p style="margin:0">Before assuming a write failed, read the value back over the API.
+          It is almost always cached, not broken.</p>
+      </div>
+
+      <div class="item">
+        <div class="item-head"><span class="item-num">05</span><h3>Emoji silently break database writes</h3></div>
+        <dl>
+          <div class="row"><dt class="sym">Symptom</dt><dd><code>HTTP 500 rest_meta_database_error</code>
+            &mdash; &ldquo;Could not update the meta value of X in database.&rdquo; Only some records fail.</dd></div>
+          <div class="row"><dt>Cause</dt><dd>The table is 3-byte <code>utf8</code>, which cannot
+            store 4-byte characters. Any emoji in the content kills the write.</dd></div>
+          <div class="row"><dt class="fix">Fix</dt><dd>Encode astral characters as HTML entities
+            before writing. They still render correctly, and store as plain ASCII.</dd></div>
+        </dl>
+        <pre><code>"".join(c if ord(c) &lt;= 0xFFFF else f"&amp;#x{ord(c):X};" for c in text)</code></pre>
+      </div>
+
+      <div class="item">
+        <div class="item-head"><span class="item-num">06</span><h3>Custom field plugins hide their data from the API</h3></div>
+        <dl>
+          <div class="row"><dt class="sym">Symptom</dt><dd><code>meta</code> comes back
+            <code>null</code>, and posting a meta payload is rejected outright.</dd></div>
+          <div class="row"><dt>Cause</dt><dd>Fields aren't registered for REST. With JetEngine,
+            the <code>show_in_rest</code> flag isn't in the field schema and isn't in the UI &mdash;
+            but the plugin honours it if you write it in anyway.</dd></div>
+          <div class="row"><dt class="fix">Fix</dt><dd>Set it on the post type definition, then
+            re-read one post to confirm before touching the rest. <strong>Any field added later
+            needs the same flag</strong> or it silently won't save.</dd></div>
+        </dl>
+      </div>
+
+      <div class="item">
+        <div class="item-head"><span class="item-num">07</span><h3>An open wp-admin tab will wipe your work</h3></div>
+        <dl>
+          <div class="row"><dt class="sym">Symptom</dt><dd>Content written via the API reverts to
+            its old state with no error anywhere.</dd></div>
+          <div class="row"><dt>Cause</dt><dd>An edit screen opened <em>before</em> the API write,
+            then saved, submits the stale form it loaded with &mdash; overwriting everything.</dd></div>
+          <div class="row"><dt class="fix">Fix</dt><dd>Close or reload wp-admin tabs before
+            running a job, and again before saving anything by hand afterwards. If content
+            reverts, check the <code>modified</code> timestamp &mdash; it names the culprit.</dd></div>
+        </dl>
+      </div>
+
+      <div class="item">
+        <div class="item-head"><span class="item-num">08</span><h3>Custom post types swallow a whole URL path</h3></div>
+        <dl>
+          <div class="row"><dt class="sym">Symptom</dt><dd>Existing pages under <code>/thing/</code>
+            start returning 404 the moment a custom post type is registered with that rewrite slug.</dd></div>
+          <div class="row"><dt>Cause</dt><dd>The post type claims the entire path. Old pages still
+            exist in wp-admin but have no working URL.</dd></div>
+          <div class="row"><dt class="fix">Fix</dt><dd>If old and new share a slug, the URL is
+            unchanged &mdash; <strong>publish, don't redirect</strong>. A 301 there would intercept
+            the URL before the new post could serve it and point it at itself. Only genuinely
+            orphaned URLs need redirects.</dd></div>
+        </dl>
+      </div>
+
+      <div class="item">
+        <div class="item-head"><span class="item-num">09</span><h3>Draft posts are 404s, and internal links to them are dead</h3></div>
+        <dl>
+          <div class="row"><dt class="sym">Symptom</dt><dd>A link audit passes &mdash; every link
+            present, correct, pointing somewhere real &mdash; yet the links don't work.</dd></div>
+          <div class="row"><dt>Cause</dt><dd>The targets are unpublished. The link is right; the
+            page isn't there yet.</dd></div>
+          <div class="row"><dt class="fix">Fix</dt><dd>Audit two things separately: <em>is the link
+            correct</em>, and <em>would it load for a visitor</em>. Publishing is the fix, not a
+            redirect.</dd></div>
+        </dl>
+      </div>
+
+      <div class="item">
+        <div class="item-head"><span class="item-num">10</span><h3>&ldquo;It's there&rdquo; is not &ldquo;you can see it&rdquo;</h3></div>
+        <dl>
+          <div class="row"><dt class="sym">Symptom</dt><dd>Links verified present and resolving,
+            but invisible on the page &mdash; the client finds them by browsing, not the audit.</dd></div>
+          <div class="row"><dt>Cause</dt><dd>The theme styled paragraphs and bold text but never
+            anchors, so links inherited body colour with no underline.</dd></div>
+          <div class="row"><dt class="fix">Fix</dt><dd>After any content job, <strong>look at the
+            rendered page</strong>. Automated checks confirm data, not design. Also check contrast
+            &mdash; a brand green that works on a dark band can be unreadable on a cream one.</dd></div>
+        </dl>
+      </div>
+
+      <div class="item">
+        <div class="item-head"><span class="item-num">11</span><h3>Grep the content for developer notes before publishing</h3></div>
+        <dl>
+          <div class="row"><dt class="sym">Symptom</dt><dd>A field reading
+            <code>TODO(Pro): confirm live price</code> rendered publicly on 89 pages the moment
+            they were published.</dd></div>
+          <div class="row"><dt>Cause</dt><dd>Placeholders left by whoever built the template. They
+            were harmless while everything was a draft.</dd></div>
+          <div class="row"><dt class="fix">Fix</dt><dd>Before publishing, scan every field for
+            <code>TODO FIXME XXX TBD PLACEHOLDER LOREM WIP</code>. Treat a TODO as a real task:
+            resolve it, or remove the note &mdash; don't leave it standing.</dd></div>
+        </dl>
+      </div>
+
+      <div class="item">
+        <div class="item-head"><span class="item-num">12</span><h3>Every host's firewall has different rules</h3></div>
+        <dl>
+          <div class="row"><dt class="sym">Symptom</dt><dd>The header that fixes one site breaks
+            another.</dd></div>
+          <div class="row"><dt>Cause</dt><dd>On this project SiteGround challenged browser
+            user-agents, while the Weedmaps storefront did the exact opposite &mdash; returning
+            <code>406</code> to browser strings and serving requests with <em>no</em> UA normally.</dd></div>
+          <div class="row"><dt class="fix">Fix</dt><dd>Test each host with a handful of requests
+            before assuming. Document what worked, per host, in the repo.</dd></div>
+        </dl>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>Reading the response</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Code</th><th>Usually means</th><th>Do this</th></tr></thead>
+        <tbody>
+          <tr><td>202</td><td>Firewall captcha challenge, not a real response</td><td>Fix the User-Agent; slow down</td></tr>
+          <tr><td>403</td><td>WAF rule, or an endpoint the host blocks (<code>/batch/v1</code> often is)</td><td>Fall back to individual requests</td></tr>
+          <tr><td>406</td><td>Some WAFs reject browser UAs specifically</td><td>Try with no User-Agent</td></tr>
+          <tr><td>401</td><td>Application Password wrong, or username is the email</td><td>Use the WP username, not the email</td></tr>
+          <tr><td>500</td><td><code>rest_meta_database_error</code> &mdash; charset, see #5</td><td>Encode 4-byte characters</td></tr>
+          <tr><td>200 + HTML</td><td>A challenge page wearing a success code</td><td>Check the body, not just the status</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Working with hosting support</h2>
+    <ul class="plain">
+      <li><strong>Lead with evidence.</strong> Response headers, exact status codes, timestamps and
+        the full IP range. &ldquo;It's blocked&rdquo; gets &ldquo;our logs look fine.&rdquo;</li>
+      <li><strong>Ask which layer.</strong> WordPress, <code>.htaccess</code>, or the edge firewall?
+        Different teams, different fixes.</li>
+      <li><strong>Don't ask them to switch off security rules.</strong> If support offers, decline.
+        On this project the rules were right and our header was wrong &mdash; the fix belonged on
+        our side.</li>
+      <li><strong>Ask for delisting, not just allowlisting.</strong> Existing greylist entries
+        persist after an allowlist is added, and will keep challenging you until they're cleared
+        or expire.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p class="mono">Bigger Vision Agency &middot; written from the Evergreen OC migration, Aug 2026</p>
+  </footer>
+
+</div>
