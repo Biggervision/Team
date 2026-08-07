@@ -1,18 +1,18 @@
 {
  "id": 14219,
- "date": "2026-08-06T03:29:13",
- "date_gmt": "2026-08-06T03:29:13",
+ "date": "2026-08-06T09:03:09",
+ "date_gmt": "2026-08-06T09:03:09",
  "guid": {
   "rendered": "https://staging2.evergreenoc.com/?post_type=strain&#038;p=14219",
   "raw": "https://staging2.evergreenoc.com/?post_type=strain&#038;p=14219"
  },
- "modified": "2026-08-06T03:29:13",
- "modified_gmt": "2026-08-06T03:29:13",
+ "modified": "2026-08-06T10:44:32",
+ "modified_gmt": "2026-08-06T10:44:32",
  "password": "",
  "slug": "mega-z",
- "status": "draft",
+ "status": "publish",
  "type": "strain",
- "link": "https://staging2.evergreenoc.com/?post_type=strain&p=14219",
+ "link": "https://staging2.evergreenoc.com/strain/mega-z/",
  "title": {
   "raw": "Mega Z",
   "rendered": "Mega Z"
@@ -28,7 +28,7 @@
  "meta": {
   "_seopress_titles_title": "Mega Z Strain Guide: Effects, Flavor, Benefits & More",
   "_seopress_titles_desc": "Explore Mega Z strain effects, flavor, benefits, and growing tips in this complete hybrid cannabis guide.",
-  "_seopress_robots_index": "",
+  "_seopress_robots_index": "yes",
   "_seopress_robots_follow": "",
   "_seopress_robots_imageindex": "",
   "_seopress_robots_snippet": "",
@@ -65,19 +65,19 @@
   "cbd": "1%",
   "lineage": "Zkittlez × Sativa Hybrid",
   "timing": "Any time of day",
-  "price": "",
-  "price_note": "/ eighth · TODO(Pro): confirm live price",
+  "price": "$68",
+  "price_note": "per eighth · live menu price",
   "otd_note": "Out-the-door · tax included",
   "buy_buttons": {
    "item-0": {
     "style": "solid",
-    "label": "Order for delivery",
+    "label": "Order Now",
     "url": "https://staging2.evergreenoc.com/shop/"
    },
    "item-1": {
     "style": "ghost",
-    "label": "Reserve for pickup",
-    "url": "https://staging2.evergreenoc.com/shop/"
+    "label": "Shop Weedmaps",
+    "url": "https://weedmaps.com/dispensaries/evergreen-santa-ana"
    }
   },
   "trust_items": {
@@ -294,7 +294,7 @@
   "post-14219",
   "strain",
   "type-strain",
-  "status-draft",
+  "status-publish",
   "hentry"
  ],
  "_links": {

@@ -1,18 +1,18 @@
 {
  "id": 14253,
- "date": "2026-08-06T03:29:52",
- "date_gmt": "2026-08-06T03:29:52",
+ "date": "2026-08-06T09:04:23",
+ "date_gmt": "2026-08-06T09:04:23",
  "guid": {
   "rendered": "https://staging2.evergreenoc.com/?post_type=strain&#038;p=14253",
   "raw": "https://staging2.evergreenoc.com/?post_type=strain&#038;p=14253"
  },
- "modified": "2026-08-06T03:29:52",
- "modified_gmt": "2026-08-06T03:29:52",
+ "modified": "2026-08-07T00:22:06",
+ "modified_gmt": "2026-08-07T00:22:06",
  "password": "",
  "slug": "whoa-si-whoa",
- "status": "draft",
+ "status": "publish",
  "type": "strain",
- "link": "https://staging2.evergreenoc.com/?post_type=strain&p=14253",
+ "link": "https://staging2.evergreenoc.com/strain/whoa-si-whoa/",
  "title": {
   "raw": "Whoa Si Whoa",
   "rendered": "Whoa Si Whoa"
@@ -23,12 +23,12 @@
   "protected": false,
   "block_version": 0
  },
- "featured_media": 0,
+ "featured_media": 14585,
  "template": "",
  "meta": {
   "_seopress_titles_title": "Whoa Si Whoa Strain: 30% THC Indica | Effects & Delivery",
   "_seopress_titles_desc": "Experience the 30% THC Whoa Si Whoa strain. A potent Indica cross of The White x Do-Si-Dos for deep sleep and relaxation.",
-  "_seopress_robots_index": "",
+  "_seopress_robots_index": "yes",
   "_seopress_robots_follow": "",
   "_seopress_robots_imageindex": "",
   "_seopress_robots_snippet": "",
@@ -65,19 +65,19 @@
   "cbd": "1%",
   "lineage": "Combining the frosty bag appeal of The White with the legendary terpene profile of Do-Si-Dos",
   "timing": "Any time of day",
-  "price": "",
-  "price_note": "/ eighth · TODO(Pro): confirm live price",
+  "price": "$58",
+  "price_note": "per eighth · live menu price",
   "otd_note": "Out-the-door · tax included",
   "buy_buttons": {
    "item-0": {
     "style": "solid",
-    "label": "Order for delivery",
+    "label": "Order Now",
     "url": "https://staging2.evergreenoc.com/shop/"
    },
    "item-1": {
     "style": "ghost",
-    "label": "Reserve for pickup",
-    "url": "https://staging2.evergreenoc.com/shop/"
+    "label": "Shop Weedmaps",
+    "url": "https://weedmaps.com/dispensaries/evergreen-santa-ana"
    }
   },
   "trust_items": {
@@ -123,7 +123,7 @@
    }
   },
   "effects_headline": "What Whoa Si Whoa actually feels like.",
-  "effects_html": "<p>Whoa Si Whoa is celebrated for delivering a sophisticated, two-stage high that mirrors the best qualities of its parentage. It doesn&#8217;t just &#8220;hit&#8221;; it evolves, taking the user on a journey from elevated mental clarity to profound physical stillness. Because of its complex cannabinoid structure, many users find it provides a <strong>more comprehensive therapeutic experience</strong> than standard high-THC cultivars.</p>\n<p><strong>The &#8220;Giddy-to-Sedative&#8221; Transition</strong></p>\n<p>The experience typically begins with a rapid-onset cerebral rush. Within minutes of the first exhale, a wave of euphoria washes over the mind, often resulting in &#8220;the giggles&#8221; and a talkative, lighthearted mood. This initial phase is powered by the strain&#8217;s <strong>Limonene</strong> content, which helps strip away the mental clutter of a stressful day.</p>\n<p>However, as the high matures, the Indica dominance takes hold. That initial mental energy begins to &#8220;melt&#8221; downward into the limbs, replaced by a heavy, tingling sensation of relaxation. This &#8220;head-to-toe&#8221; sedation is what has earned Whoa Si Whoa its reputation as a premier nightcap strain, effectively transitioning from a social spark to a physical anchor.</p>\n<p><strong>The &#8220;Couch-Lock&#8221; Warning</strong></p>\n<p>With THC levels frequently peaking at <strong>30%</strong>, Whoa Si Whoa is not for the faint of heart. For many, the physical relaxation eventually settles into a deep, inescapable <strong>couch-lock</strong>. This makes it an ideal choice for managing <strong>chronic pain and muscle spasms,</strong> as the body feels virtually weightless.</p>\n<p>Experienced users appreciate this &#8220;heavy-lidded&#8221; potency, but those with a lower tolerance should proceed with caution. The sedation is often accompanied by a strong sense of &#8220;the munchies&#8221; before the final stage of the high leads directly into a restorative, uninterrupted sleep.</p>\n<p><strong>Social vs. Solo: Timing Your Session</strong></p>\n<p>Choosing when to enjoy Whoa Si Whoa is key to maximizing its benefits:</p>\n<ul>\n<li><strong>Social &amp; Entertainment:</strong> During the first hour, it is fantastic for a comedy movie night or sharing a laugh with close friends. The euphoric uplift keeps the vibe light and engaging.</li>\n<li><strong>The Nightcap:</strong> After the initial peak, the strain is best enjoyed solo or in a low-energy environment. Once the sedation kicks in, your only priority will likely be a comfortable blanket and a pillow.</li>\n</ul>\n<h3>4. Whoa Si Whoa Flavor and Aroma</h3>\n<p><a href=\"https://staging2.evergreenoc.com/strain/reading-rainbow/\">Reading Rainbow</a> sits in the same designer group if you are working your way through them.</p>",
+  "effects_html": "<p>Whoa Si Whoa is celebrated for delivering a sophisticated, two-stage high that mirrors the best qualities of its parentage. It doesn&#8217;t just &#8220;hit&#8221;; it evolves, taking the user on a journey from elevated mental clarity to profound physical stillness. Because of its complex cannabinoid structure, many users find it provides a <strong>more comprehensive therapeutic experience</strong> than standard high-THC cultivars.</p>\n<p><strong>The &#8220;Giddy-to-Sedative&#8221; Transition</strong></p>\n<p>The experience typically begins with a rapid-onset cerebral rush. Within minutes of the first exhale, a wave of euphoria washes over the mind, often resulting in &#8220;the giggles&#8221; and a talkative, lighthearted mood. This initial phase is powered by the strain&#8217;s <strong>Limonene</strong> content, which helps strip away the mental clutter of a stressful day.</p>\n<p>However, as the high matures, the Indica dominance takes hold. That initial mental energy begins to &#8220;melt&#8221; downward into the limbs, replaced by a heavy, tingling sensation of relaxation. This &#8220;head-to-toe&#8221; sedation is what has earned Whoa Si Whoa its reputation as a premier nightcap strain, effectively transitioning from a social spark to a physical anchor.</p>\n<p><strong>The &#8220;Couch-Lock&#8221; Warning</strong></p>\n<p>With THC levels frequently peaking at <strong>30%</strong>, Whoa Si Whoa is not for the faint of heart. For many, the physical relaxation eventually settles into a deep, inescapable <strong>couch-lock</strong>. This makes it an ideal choice for managing <strong><a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6222489/\" rel=\"nofollow noopener\" target=\"_blank\">chronic pain and muscle spasms</a>,</strong> as the body feels virtually weightless.</p>\n<p>Experienced users appreciate this &#8220;heavy-lidded&#8221; potency, but those with a lower tolerance should proceed with caution. The sedation is often accompanied by a strong sense of &#8220;the munchies&#8221; before the final stage of the high leads directly into a restorative, uninterrupted sleep.</p>\n<p><strong>Social vs. Solo: Timing Your Session</strong></p>\n<p>Choosing when to enjoy Whoa Si Whoa is key to maximizing its benefits:</p>\n<ul>\n<li><strong>Social &amp; Entertainment:</strong> During the first hour, it is fantastic for a comedy movie night or sharing a laugh with close friends. The euphoric uplift keeps the vibe light and engaging.</li>\n<li><strong>The Nightcap:</strong> After the initial peak, the strain is best enjoyed solo or in a low-energy environment. Once the sedation kicks in, your only priority will likely be a comfortable blanket and a pillow.</li>\n</ul>\n<h3>4. Whoa Si Whoa Flavor and Aroma</h3>\n<p><a href=\"https://staging2.evergreenoc.com/strain/reading-rainbow/\">Reading Rainbow</a> sits in the same designer group if you are working your way through them.</p>",
   "pills": {
    "item-0": {
     "label": "Relaxed"
@@ -139,7 +139,7 @@
    }
   },
   "flavor_headline": "How Whoa Si Whoa tastes and smells.",
-  "flavor_html": "<p>While the potency of Whoa Si Whoa is what makes it famous, its sensory profile is what makes it a favorite among &#8220;terpene hunters.&#8221; Thanks to its <strong>Do-Si-Dos</strong> heritage, this strain offers a masterclass in complexity—balancing the sugary sweetness of a bakery with the raw, pungent &#8220;gas&#8221; of a classic OG. This section explores the aromatic journey from the first crack of the jar to the final lingering taste on the palate.</p>\n<p><strong>The &#8220;Cookie&#8221; Heritage: Sweet and Nutty</strong></p>\n<p>The most immediate characteristic of Whoa Si Whoa is its unmistakable &#8220;dessert-forward&#8221; profile. Inherited directly from its <strong>GSC</strong> (Girl Scout Cookies) ancestry via Do-Si-Dos, the flavor begins with a heavy wave of <strong>sweet, nutty, and sugary cookie notes</strong>.</p>\n<p>On the inhale, users often describe a creamy mouthfeel that tastes like toasted nuts and brown sugar. This sweetness isn&#8217;t cloying; it is grounded by a rich, doughy foundation that makes the smoke feel thick and satisfying. For many, this &#8220;pastry-like&#8221; quality makes it the perfect post-dinner treat or a literal &#8220;nightcap&#8221; in flower form.</p>\n<p><strong>The Complex Exhale: Gas and Fruit</strong></p>\n<p>As the smoke or vapor settles, Whoa Si Whoa reveals its hidden layers. While the inhale is all about the &#8220;cookie&#8221; sweetness, the exhale is decidedly more &#8220;gassy.&#8221; This pungent, fuel-like finish is a hallmark of high-quality Indica hybrids and signals a high concentration of <strong>terpenes like Myrcene and Caryophyllene.</strong></p>\n<p>Interestingly, many seasoned palates also report subtle, bright undertones during the transition from sweet to skunky. These &#8220;top notes&#8221; include:</p>\n<ul>\n<li><strong>Apricot and Apple:</strong> Faint fruity hints that provide a crisp, refreshing contrast to the heavier earthy flavors.</li>\n<li><strong>Light Spices:</strong> A peppery, herbal finish that lingers on the tongue long after the session is over.</li>\n</ul>\n<p><strong>The Scent: A Pungent &#8220;Room-Filler&#8221;</strong></p>\n<p>Don&#8217;t expect discretion with Whoa Si Whoa. The aroma of this strain is <strong>earthy, pungent, and intensely spicy</strong>. Simply breaking apart a sticky nugget releases a rush of dank, herbal fragrance that can quickly fill an entire room.</p>\n<p>The scent profile is a tug-of-war between &#8220;sweet&#8221; and &#8220;skunky.&#8221; You’ll notice an initial hit of fresh pine and damp earth, followed closely by a sugary, floral perfume. This aromatic intensity is a direct indicator of its <strong>trichome density and cannabinoid maturity</strong>, making it as pleasing to the nose as it is to the body.</p>\n<h3>5. Cultivation Tips for Whoa Si Whoa</h3>",
+  "flavor_html": "<p>While the potency of Whoa Si Whoa is what makes it famous, its sensory profile is what makes it a favorite among &#8220;terpene hunters.&#8221; Thanks to its <strong>Do-Si-Dos</strong> heritage, this strain offers a masterclass in complexity—balancing the sugary sweetness of a bakery with the raw, pungent &#8220;gas&#8221; of a classic OG. This section explores the aromatic journey from the first crack of the jar to the final lingering taste on the palate.</p>\n<p><strong>The &#8220;Cookie&#8221; Heritage: Sweet and Nutty</strong></p>\n<p>The most immediate characteristic of Whoa Si Whoa is its unmistakable &#8220;dessert-forward&#8221; profile. Inherited directly from its <strong>GSC</strong> (Girl Scout Cookies) ancestry via Do-Si-Dos, the flavor begins with a heavy wave of <strong>sweet, nutty, and sugary cookie notes</strong>.</p>\n<p>On the inhale, users often describe a creamy mouthfeel that tastes like toasted nuts and brown sugar. This sweetness isn&#8217;t cloying; it is grounded by a rich, doughy foundation that makes the smoke feel thick and satisfying. For many, this &#8220;pastry-like&#8221; quality makes it the perfect post-dinner treat or a literal &#8220;nightcap&#8221; in flower form.</p>\n<p><strong>The Complex Exhale: Gas and Fruit</strong></p>\n<p>As the smoke or vapor settles, Whoa Si Whoa reveals its hidden layers. While the inhale is all about the &#8220;cookie&#8221; sweetness, the exhale is decidedly more &#8220;gassy.&#8221; This pungent, fuel-like finish is a hallmark of high-quality Indica hybrids and signals a high concentration of <strong><a href=\"https://www.leafly.com/news/cannabis-101/terpenes-the-flavors-of-cannabis-aromatherapy\" rel=\"nofollow noopener\" target=\"_blank\">terpenes like Myrcene and Caryophyllene</a>.</strong></p>\n<p>Interestingly, many seasoned palates also report subtle, bright undertones during the transition from sweet to skunky. These &#8220;top notes&#8221; include:</p>\n<ul>\n<li><strong>Apricot and Apple:</strong> Faint fruity hints that provide a crisp, refreshing contrast to the heavier earthy flavors.</li>\n<li><strong>Light Spices:</strong> A peppery, herbal finish that lingers on the tongue long after the session is over.</li>\n</ul>\n<p><strong>The Scent: A Pungent &#8220;Room-Filler&#8221;</strong></p>\n<p>Don&#8217;t expect discretion with Whoa Si Whoa. The aroma of this strain is <strong>earthy, pungent, and intensely spicy</strong>. Simply breaking apart a sticky nugget releases a rush of dank, herbal fragrance that can quickly fill an entire room.</p>\n<p>The scent profile is a tug-of-war between &#8220;sweet&#8221; and &#8220;skunky.&#8221; You’ll notice an initial hit of fresh pine and damp earth, followed closely by a sugary, floral perfume. This aromatic intensity is a direct indicator of its <strong><a href=\"https://www.sciencedirect.com/science/article/pii/S2772375522000764\" rel=\"nofollow noopener\" target=\"_blank\">trichome density and cannabinoid maturity</a></strong>, making it as pleasing to the nose as it is to the body.</p>\n<h3>5. Cultivation Tips for Whoa Si Whoa</h3>",
   "terps": {
    "item-0": {
     "name": "Limonene",
@@ -214,7 +214,7 @@
    }
   },
   "jar_headline": "What to look for in the jar.",
-  "jar_html": "<p>Whoa Si Whoa is a visually stunning cultivar that commands attention the moment it leaves the jar. It inherits the best aesthetic traits of its parentage: the &#8220;white-out&#8221; resin production of <strong>The White</strong> and the deep, royal hues of <strong>Do-Si-Dos</strong>. For collectors and connoisseurs who prioritize &#8220;bag appeal,&#8221; this strain is often considered a masterpiece of modern cannabis aesthetics.</p>\n<p><strong>The Anatomy of a &#8220;Whoa&#8221; Bud</strong></p>\n<p>The buds are typically medium-to-large and shaped like dense, elongated grapes. Unlike some sativa-leaning hybrids that can feel airy or &#8220;foxtailed,&#8221; Whoa Si Whoa produces tightly packed, rock-hard nuggets that feel substantial in the hand. This density is a direct result of its heavy Indica lean and expert breeding by Cannarado Genetics.</p>\n<p>The coloration is a sophisticated tapestry of <strong>dark olive and forest greens</strong>, but it is the secondary colors that truly shine. Depending on the <strong>phenotype</strong> and the environmental temperatures during the final weeks of flowering, Whoa Si Whoa expresses <strong>deep purple undertones</strong> and flashes of indigo. These cool tones are contrasted by vibrant, fiery orange pistils (hairs) that wind through the crevices of the flower.</p>\n<p><strong>The &#8220;Frost&#8221; Factor</strong></p>\n<p>The most defining characteristic of Whoa Si Whoa is its overwhelming layer of trichomes. The buds look as though they have been rolled in confectioner’s sugar or caught in a localized blizzard. These crystal-like resin glands are so thick that they often give the buds a &#8220;fuzzy&#8221; or silvery-white appearance, almost completely obscuring the green foliage beneath.</p>\n<p>Under a jeweler’s loupe, you can see that these trichomes are often purple-tinted, a signal of peak maturity and high <strong>cannabinoid</strong> concentration. This heavy resin coating is what makes Whoa Si Whoa so incredibly sticky—and so potent. When you break a nugget open, the internal &#8220;frost&#8221; is just as impressive as the exterior, releasing a rush of its signature sugary-gas aroma.</p>\n<h3>8. Frequently Asked Questions</h3>",
+  "jar_html": "<p>Whoa Si Whoa is a visually stunning cultivar that commands attention the moment it leaves the jar. It inherits the best aesthetic traits of its parentage: the &#8220;white-out&#8221; resin production of <strong>The White</strong> and the deep, royal hues of <strong>Do-Si-Dos</strong>. For collectors and connoisseurs who prioritize &#8220;bag appeal,&#8221; this strain is often considered a masterpiece of modern cannabis aesthetics.</p>\n<p><strong>The Anatomy of a &#8220;Whoa&#8221; Bud</strong></p>\n<p>The buds are typically medium-to-large and shaped like dense, elongated grapes. Unlike some sativa-leaning hybrids that can feel airy or &#8220;foxtailed,&#8221; Whoa Si Whoa produces tightly packed, rock-hard nuggets that feel substantial in the hand. This density is a direct result of its heavy Indica lean and expert breeding by Cannarado Genetics.</p>\n<p>The coloration is a sophisticated tapestry of <strong>dark olive and forest greens</strong>, but it is the secondary colors that truly shine. Depending on the <strong><a href=\"https://en.wikipedia.org/wiki/Phenotype\" rel=\"nofollow noopener\" target=\"_blank\">phenotype</a></strong> and the environmental temperatures during the final weeks of flowering, Whoa Si Whoa expresses <strong>deep purple undertones</strong> and flashes of indigo. These cool tones are contrasted by vibrant, fiery orange pistils (hairs) that wind through the crevices of the flower.</p>\n<p><strong>The &#8220;Frost&#8221; Factor</strong></p>\n<p>The most defining characteristic of Whoa Si Whoa is its overwhelming layer of trichomes. The buds look as though they have been rolled in confectioner’s sugar or caught in a localized blizzard. These crystal-like resin glands are so thick that they often give the buds a &#8220;fuzzy&#8221; or silvery-white appearance, almost completely obscuring the green foliage beneath.</p>\n<p>Under a jeweler’s loupe, you can see that these trichomes are often purple-tinted, a signal of peak maturity and high <strong>cannabinoid</strong> concentration. This heavy resin coating is what makes Whoa Si Whoa so incredibly sticky—and so potent. When you break a nugget open, the internal &#8220;frost&#8221; is just as impressive as the exterior, releasing a rush of its signature sugary-gas aroma.</p>\n<h3>8. Frequently Asked Questions</h3>",
   "spec": {
    "item-0": {
     "label": "Plant Structure",
@@ -298,7 +298,8 @@
   "post-14253",
   "strain",
   "type-strain",
-  "status-draft",
+  "status-publish",
+  "has-post-thumbnail",
   "hentry"
  ],
  "_links": {
@@ -324,6 +325,12 @@
   "about": [
    {
     "href": "https://staging2.evergreenoc.com/wp-json/wp/v2/types/strain"
+   }
+  ],
+  "wp:featuredmedia": [
+   {
+    "embeddable": true,
+    "href": "https://staging2.evergreenoc.com/wp-json/wp/v2/media/14585"
    }
   ],
   "wp:attachment": [

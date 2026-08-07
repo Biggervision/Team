@@ -6,8 +6,8 @@
   "rendered": "https://staging2.evergreenoc.com/?post_type=strain&#038;p=14211",
   "raw": "https://staging2.evergreenoc.com/?post_type=strain&#038;p=14211"
  },
- "modified": "2026-08-07T00:26:26",
- "modified_gmt": "2026-08-07T00:26:26",
+ "modified": "2026-08-07T01:38:54",
+ "modified_gmt": "2026-08-07T01:38:54",
  "password": "",
  "slug": "lemon-tree",
  "status": "publish",
@@ -23,7 +23,7 @@
   "protected": false,
   "block_version": 0
  },
- "featured_media": 0,
+ "featured_media": 14704,
  "template": "",
  "meta": {
   "_seopress_titles_title": "Lemon Tree Strain | Effects, Flavor & Delivery California",
@@ -301,6 +301,7 @@
   "strain",
   "type-strain",
   "status-publish",
+  "has-post-thumbnail",
   "hentry"
  ],
  "_links": {
@@ -326,6 +327,12 @@
   "about": [
    {
     "href": "https://staging2.evergreenoc.com/wp-json/wp/v2/types/strain"
+   }
+  ],
+  "wp:featuredmedia": [
+   {
+    "embeddable": true,
+    "href": "https://staging2.evergreenoc.com/wp-json/wp/v2/media/14704"
    }
   ],
   "wp:attachment": [
