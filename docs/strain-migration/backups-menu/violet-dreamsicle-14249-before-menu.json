@@ -1,18 +1,18 @@
 {
  "id": 14249,
- "date": "2026-08-06T03:29:48",
- "date_gmt": "2026-08-06T03:29:48",
+ "date": "2026-08-06T09:04:15",
+ "date_gmt": "2026-08-06T09:04:15",
  "guid": {
   "rendered": "https://staging2.evergreenoc.com/?post_type=strain&#038;p=14249",
   "raw": "https://staging2.evergreenoc.com/?post_type=strain&#038;p=14249"
  },
- "modified": "2026-08-06T03:29:48",
- "modified_gmt": "2026-08-06T03:29:48",
+ "modified": "2026-08-06T10:52:06",
+ "modified_gmt": "2026-08-06T10:52:06",
  "password": "",
  "slug": "violet-dreamsicle",
- "status": "draft",
+ "status": "publish",
  "type": "strain",
- "link": "https://staging2.evergreenoc.com/?post_type=strain&p=14249",
+ "link": "https://staging2.evergreenoc.com/strain/violet-dreamsicle/",
  "title": {
   "raw": "Violet Dreamsicle",
   "rendered": "Violet Dreamsicle"
@@ -28,7 +28,7 @@
  "meta": {
   "_seopress_titles_title": "Violet Dreamsicle Strain – Effects, Flavor, THC & Benefits",
   "_seopress_titles_desc": "Discover Violet Dreamsicle strain with creamy citrus flavor, balanced effects, and smooth relaxing high.",
-  "_seopress_robots_index": "",
+  "_seopress_robots_index": "yes",
   "_seopress_robots_follow": "",
   "_seopress_robots_imageindex": "",
   "_seopress_robots_snippet": "",
@@ -65,19 +65,19 @@
   "cbd": "1%",
   "lineage": "Modern hybrid genetics (varies by grower)",
   "timing": "Any time of day",
-  "price": "",
-  "price_note": "/ eighth · TODO(Pro): confirm live price",
+  "price": "$42",
+  "price_note": "per eighth · live menu price",
   "otd_note": "Out-the-door · tax included",
   "buy_buttons": {
    "item-0": {
     "style": "solid",
-    "label": "Order for delivery",
+    "label": "Order Now",
     "url": "https://staging2.evergreenoc.com/shop/"
    },
    "item-1": {
     "style": "ghost",
-    "label": "Reserve for pickup",
-    "url": "https://staging2.evergreenoc.com/shop/"
+    "label": "Shop Weedmaps",
+    "url": "https://weedmaps.com/dispensaries/evergreen-santa-ana"
    }
   },
   "trust_items": {
@@ -306,7 +306,7 @@
   "post-14249",
   "strain",
   "type-strain",
-  "status-draft",
+  "status-publish",
   "hentry"
  ],
  "_links": {

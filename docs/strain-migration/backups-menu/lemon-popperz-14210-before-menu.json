@@ -1,18 +1,18 @@
 {
  "id": 14210,
- "date": "2026-08-06T03:29:03",
- "date_gmt": "2026-08-06T03:29:03",
+ "date": "2026-08-06T09:02:53",
+ "date_gmt": "2026-08-06T09:02:53",
  "guid": {
   "rendered": "https://staging2.evergreenoc.com/?post_type=strain&#038;p=14210",
   "raw": "https://staging2.evergreenoc.com/?post_type=strain&#038;p=14210"
  },
- "modified": "2026-08-06T03:29:03",
- "modified_gmt": "2026-08-06T03:29:03",
+ "modified": "2026-08-07T00:26:33",
+ "modified_gmt": "2026-08-07T00:26:33",
  "password": "",
  "slug": "lemon-popperz",
- "status": "draft",
+ "status": "publish",
  "type": "strain",
- "link": "https://staging2.evergreenoc.com/?post_type=strain&p=14210",
+ "link": "https://staging2.evergreenoc.com/strain/lemon-popperz/",
  "title": {
   "raw": "Lemon Popperz",
   "rendered": "Lemon Popperz"
@@ -28,7 +28,7 @@
  "meta": {
   "_seopress_titles_title": "Lemon Popperz Strain – Flavorful Hybrid Cannabis",
   "_seopress_titles_desc": "Discover Lemon Popperz, a balanced hybrid with citrus flavor, euphoric cerebral lift, gentle body relaxation, and stress-relief benefits.",
-  "_seopress_robots_index": "",
+  "_seopress_robots_index": "yes",
   "_seopress_robots_follow": "",
   "_seopress_robots_imageindex": "",
   "_seopress_robots_snippet": "",
@@ -65,19 +65,19 @@
   "cbd": "0–1%",
   "lineage": "Gelato 41 x Lemon Tree (Gelonade phenotype)",
   "timing": "Any time of day",
-  "price": "",
-  "price_note": "/ eighth · TODO(Pro): confirm live price",
+  "price": "$68",
+  "price_note": "per eighth · live menu price",
   "otd_note": "Out-the-door · tax included",
   "buy_buttons": {
    "item-0": {
     "style": "solid",
-    "label": "Order for delivery",
+    "label": "Order Now",
     "url": "https://staging2.evergreenoc.com/shop/"
    },
    "item-1": {
     "style": "ghost",
-    "label": "Reserve for pickup",
-    "url": "https://staging2.evergreenoc.com/shop/"
+    "label": "Shop Weedmaps",
+    "url": "https://weedmaps.com/dispensaries/evergreen-santa-ana"
    }
   },
   "trust_items": {
@@ -123,7 +123,7 @@
    }
   },
   "effects_headline": "What Lemon Popperz actually feels like.",
-  "effects_html": "<p>Lemon Popperz is a balanced hybrid strain that delivers a well-rounded experience, combining both mental stimulation and gentle physical relaxation. Users typically notice an initial cerebral lift that promotes focus, creativity, and an uplifted mood, followed by a relaxing body sensation that calms tension without inducing heavy sedation. Because effects are moderate and manageable, Lemon Popperz is suitable for both daytime and weekend use, offering a clear-headed yet euphoric experience.</p>\n<p><strong>Recreational Effects</strong></p>\n<p>Many consumers enjoy Lemon Popperz for its versatile effects, which often include:</p>\n<ul>\n<li><strong>Euphoric mental uplift</strong> – A mood-enhancing cerebral buzz that helps reduce stress and negativity.</li>\n<li><strong>Creative stimulation</strong> – Mildly introspective or inspiring effects that encourage artistic or cognitive pursuits.</li>\n<li><strong>Gentle body relaxation</strong> – Tingling sensations that ease tension without full couch-lock.</li>\n<li><strong>Clear focus</strong> – Supports productivity while still allowing for a sense of calm.</li>\n</ul>\n<p><strong>Medical Benefits</strong></p>\n<p>Lemon Popperz also offers potential therapeutic benefits, making it appealing to medical cannabis patients. Common applications include:</p>\n<ul>\n<li><strong>Chronic stress and anxiety relief</strong> – Its balanced THC and terpene profile may help reduce mental tension and improve mood.</li>\n<li><strong>Fatigue and mild pain management</strong> – The body-relaxing effects support relief from minor aches or tiredness.</li>\n<li><strong>Focus and mental clarity support</strong> – Ideal for patients seeking symptom relief without heavy sedation.</li>\n</ul>\n<p><strong>Potential Side Effects</strong></p>\n<p>Although Lemon Popperz is generally well-tolerated, high-THC strains can cause mild side effects, including:</p>\n<ul>\n<li><strong>Dry mouth and dry eyes</strong> – Staying hydrated and using eye drops can alleviate discomfort.</li>\n<li><strong>Dizziness or lightheadedness</strong> – Particularly for new users or those with low THC tolerance.</li>\n<li><strong>Mild paranoia or nervousness</strong> – More likely if consumed in large amounts.</li>\n</ul>\n<p>Beginners should start with a small dose and gradually increase to gauge individual tolerance. For safe consumption tips, see <strong>Healthline’s cannabis dosage guide.</strong></p>\n<p><strong>Usage Recommendations</strong></p>\n<p>Lemon Popperz is ideal for creative or recreational use during the day or for unwinding on the weekend. Its balanced 50/50 hybrid effects provide both cerebral and body benefits, appealing to users seeking a moderate, enjoyable, and versatile high.</p>\n<h4>4. Lemon Popperz Flavor and Aroma</h4>",
+  "effects_html": "<p>Lemon Popperz is a balanced hybrid strain that delivers a well-rounded experience, combining both mental stimulation and gentle physical relaxation. Users typically notice an initial cerebral lift that promotes focus, creativity, and an uplifted mood, followed by a relaxing body sensation that calms tension without inducing heavy sedation. Because effects are moderate and manageable, Lemon Popperz is suitable for both daytime and weekend use, offering a clear-headed yet euphoric experience.</p>\n<p><strong>Recreational Effects</strong></p>\n<p>Many consumers enjoy Lemon Popperz for its versatile effects, which often include:</p>\n<ul>\n<li><strong>Euphoric mental uplift</strong> – A mood-enhancing cerebral buzz that helps reduce stress and negativity.</li>\n<li><strong>Creative stimulation</strong> – Mildly introspective or inspiring effects that encourage artistic or cognitive pursuits.</li>\n<li><strong>Gentle body relaxation</strong> – Tingling sensations that ease tension without full couch-lock.</li>\n<li><strong>Clear focus</strong> – Supports productivity while still allowing for a sense of calm.</li>\n</ul>\n<p><strong>Medical Benefits</strong></p>\n<p>Lemon Popperz also offers potential therapeutic benefits, making it appealing to medical cannabis patients. Common applications include:</p>\n<ul>\n<li><strong>Chronic stress and anxiety relief</strong> – Its balanced THC and terpene profile may help reduce mental tension and improve mood.</li>\n<li><strong>Fatigue and mild pain management</strong> – The body-relaxing effects support relief from minor aches or tiredness.</li>\n<li><strong>Focus and mental clarity support</strong> – Ideal for patients seeking symptom relief without heavy sedation.</li>\n</ul>\n<p><strong>Potential Side Effects</strong></p>\n<p>Although Lemon Popperz is generally well-tolerated, high-THC strains can cause mild side effects, including:</p>\n<ul>\n<li><strong>Dry mouth and dry eyes</strong> – Staying hydrated and using eye drops can alleviate discomfort.</li>\n<li><strong>Dizziness or lightheadedness</strong> – Particularly for new users or those with low THC tolerance.</li>\n<li><strong>Mild paranoia or nervousness</strong> – More likely if consumed in large amounts.</li>\n</ul>\n<p>Beginners should start with a small dose and gradually increase to gauge individual tolerance. For safe consumption tips, see <strong><a href=\"https://www.healthline.com/health/cbd-dosage\" rel=\"nofollow noopener\" target=\"_blank\">Healthline’s cannabis dosage guide.</a></strong></p>\n<p><strong>Usage Recommendations</strong></p>\n<p>Lemon Popperz is ideal for creative or recreational use during the day or for unwinding on the weekend. Its balanced 50/50 hybrid effects provide both cerebral and body benefits, appealing to users seeking a moderate, enjoyable, and versatile high.</p>\n<h4>4. Lemon Popperz Flavor and Aroma</h4>",
   "pills": {
    "item-0": {
     "label": "Euphoric cerebral lift"
@@ -307,7 +307,7 @@
   "post-14210",
   "strain",
   "type-strain",
-  "status-draft",
+  "status-publish",
   "hentry"
  ],
  "_links": {
