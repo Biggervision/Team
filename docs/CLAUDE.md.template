@@ -1,0 +1,84 @@
+# Project guidance
+
+<!--
+  Drop this file in the root of a client repo. Claude Code reads it at the start
+  of every session, so these rules apply without anyone remembering to say them.
+
+  Fill in the three bracketed values below, delete this comment, and it is done.
+-->
+
+**Client:** `[CLIENT NAME]`
+**Live site:** `[https://clientsite.com]`
+**Staging:** `[https://staging.clientsite.com]`
+
+Work on staging unless told otherwise. Say so explicitly before touching production.
+
+---
+
+## WordPress automation — read before touching a live site
+
+Getting any of these wrong costs hours, and none of them are obvious from the
+error message.
+
+**Never send a browser User-Agent.** Hosting firewalls block outdated browser
+strings on sight, because that is what malicious traffic pretends to be. Send a
+descriptive one naming the software and where to complain about it:
+
+```
+[AGENCY]-ContentSync/1.0 (WordPress REST client; +https://clientsite.com)
+```
+
+If being blocked ever tempts you to disguise the client better, that instinct
+is the bug. Identify it properly instead.
+
+**Stop when the success rate collapses.** Aggressive retries are what firewalls
+greylist. Run one job at a time, back off in minutes rather than milliseconds,
+and if requests start failing consistently, stop — continuing renews the block
+rather than getting through it.
+
+**Read the value back before believing a write failed.** Page builders cache
+rendered output independently of the host cache, so a saved change can look
+exactly like a failed save. Clear the builder cache first, then the host.
+
+**Back up every record before writing to it.** One JSON file per post, kept in
+the repo, turns any mistake into a one-line revert.
+
+**Look at the rendered page when the job is done.** Automated checks confirm
+data, not design. Content can be present, correct, resolving — and invisible to
+a reader.
+
+**Grep for `TODO FIXME XXX TBD PLACEHOLDER LOREM WIP` before publishing.**
+Placeholders that were harmless in drafts go public the moment you publish.
+
+**Close wp-admin tabs before running a job.** An edit screen opened before an
+API write, then saved, submits the stale form it loaded with and silently
+overwrites everything.
+
+Fuller detail, including host-specific behaviour and status codes:
+`docs/wordpress-automation-playbook.md`
+
+---
+
+## Credentials
+
+WordPress access uses an **Application Password**, never the account login
+password. Keep it in an untracked `.env.wordpress` at the repo root:
+
+```ini
+WP_SITE=https://staging.clientsite.com
+WP_USER=wordpress-username        # the username, not the email address
+WP_APP_PASSWORD=xxxx xxxx xxxx xxxx xxxx xxxx
+```
+
+Add `.env.wordpress` to `.gitignore` before the first commit. Application
+Passwords are revocable in one click from Users → Profile and cannot be used to
+sign in, which is why they are the right credential for this.
+
+---
+
+## House rules
+
+- Default to staging. Production changes need to be asked for.
+- Prefer `--dry-run` on anything that writes in bulk, and show the plan first.
+- Report what actually happened, including partial failures. A job that wrote
+  82 of 95 records wrote 82, not "done".
