@@ -22,7 +22,9 @@ import urllib.request
 from pathlib import Path
 
 SITE = "https://evergreenoc.com"
-UA = "EvergreenOC-ContentSync/1.0 (WordPress REST client; +https://evergreenoc.com)"
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+from wp import USER_AGENT as UA  # one definition, so it cannot drift
 
 ATTEMPTS = 60
 BACKOFF = 20        # seconds between attempts; patience beats retries here

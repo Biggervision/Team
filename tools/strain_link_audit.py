@@ -41,7 +41,9 @@ SCRATCH = Path("/tmp/claude-0/-home-user-Team/f8696e23-6866-5a2c-b368-7481df712e
 PROSE = ("about_html", "effects_html", "flavor_html",
          "jar_html", "cultivation_html", "use_html")
 
-UA = "EvergreenOC-ContentSync/1.0 (WordPress REST client; +https://evergreenoc.com)"
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+from wp import USER_AGENT as UA  # one definition, so it cannot drift
 
 
 def slug_of(path: str) -> str:

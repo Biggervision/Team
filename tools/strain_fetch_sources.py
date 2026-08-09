@@ -20,7 +20,9 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-UA = "EvergreenOC-ContentSync/1.0 (WordPress REST client; +https://evergreenoc.com)"
+import sys as _sys, pathlib as _pl
+_sys.path.insert(0, str(_pl.Path(__file__).resolve().parent))
+from wp import USER_AGENT as UA  # one definition, so it cannot drift
 
 MIN_BYTES = 50_000     # a real strain page; anything smaller is the captcha
 ATTEMPTS = 12

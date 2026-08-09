@@ -34,7 +34,8 @@ Usage examples:
 Both sites sit behind SiteGround bot protection, which serves a captcha
 interstitial instead of the API response when the calling IP is rate limited.
 The challenge is bursty rather than a sustained block, so a prompt retry clears
-it; every request here sends a browser User-Agent and retries automatically.
+it. Every request identifies this client by a unique, non-browser User-Agent so
+the host can recognise and allowlist it; see USER_AGENT below.
 """
 
 from __future__ import annotations
@@ -69,7 +70,7 @@ DEFAULT_SITE = STAGING_SITE
 # A descriptive agent saying what the software is and where to complain about
 # it is both the honest answer and the one that stops the blocks. Never put a
 # browser string here.
-USER_AGENT = "EvergreenOC-ContentSync/1.0 (WordPress REST client; +https://evergreenoc.com)"
+USER_AGENT = "BiggerVisionAgency-EvergreenOC-ContentSync/1.0 (WordPress REST client; +https://biggervisionagency.com/bot; ref=bv-eoc-sync)"
 
 # This file has twice reverted to an older commit that still carried the spoofed
 # string, and the first request afterwards re-earned a greylisting. Refusing to
