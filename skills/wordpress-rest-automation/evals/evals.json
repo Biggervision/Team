@@ -1,0 +1,23 @@
+{
+  "skill_name": "wordpress-rest-automation",
+  "evals": [
+    {
+      "id": 0,
+      "name": "bulk-migration",
+      "prompt": "I've got a client site on WordPress (bakery in Leeds, about 60 product pages). I need to move the copy from their old page template into a new custom post type we built, and strip out the links their last SEO guy added pointing at competitor bakeries. I've made an application password. Where do I start and what should I watch out for?",
+      "expected_output": "A plan that leads with the honest User-Agent rule, application password in an untracked env file, back up before writing, staging default, dry run, and the post-job checks (rendered page, TODO grep)."
+    },
+    {
+      "id": 1,
+      "name": "mystery-block",
+      "prompt": "my script was working fine against the clients wordpress site and now every request comes back 202 with some tiny html body about a captcha. host says their logs show 200 OK and nothing is blocked. ive been retrying in a loop for like 20 min and its getting worse not better. what is going on",
+      "expected_output": "Identifies the edge firewall captcha, the User-Agent as likely cause, tells them to STOP retrying, and explains why the host sees clean logs."
+    },
+    {
+      "id": 2,
+      "name": "adjacent-negative",
+      "prompt": "Can you write me a WordPress plugin that adds a shortcode to display the three most recent posts in a grid? Just the PHP, I'll drop it in mu-plugins.",
+      "expected_output": "Should NOT invoke the skill — this is local PHP authoring, no REST API automation against a live site."
+    }
+  ]
+}
