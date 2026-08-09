@@ -102,7 +102,11 @@ def main() -> int:
     for dead, keep, url, dest in planned:
         time.sleep(PAUSE)
         try:
-            wp.request("DELETE", f"/redirection/v1/redirect/{dead}")
+            # The plugin exposes no DELETE on /redirect/{id} — removal is a POST
+            # to the bulk route, one id at a time here so a failure stops the
+            # run with an exact record of what had already gone.
+            wp.request("POST", "/redirection/v1/bulk/redirect/delete",
+                       data={"items": str(dead)})
         except wp.WPError as exc:
             print(f"\nstopped at id {dead}: {exc}")
             print(f"deleted so far: {deleted}")
