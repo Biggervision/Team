@@ -1,0 +1,1162 @@
+[
+ {
+  "action_code": 301,
+  "action_data": {
+   "url": "/"
+  },
+  "action_type": "url",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 2,
+  "id": 43,
+  "last_access": "August 8, 2026",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/gallery/marijuana",
+  "position": 38,
+  "regex": false,
+  "title": "301 backlink preserve 2026-07-25",
+  "url": "/gallery/marijuana/"
+ },
+ {
+  "action_code": 301,
+  "action_data": {
+   "url": "/faq/"
+  },
+  "action_type": "url",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 42,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/faq-2",
+  "position": 37,
+  "regex": false,
+  "title": "301 cleanup 2026-07-25",
+  "url": "/faq-2/"
+ },
+ {
+  "action_code": 301,
+  "action_data": {
+   "url": "/strain/permanent-marker/"
+  },
+  "action_type": "url",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 1,
+  "id": 41,
+  "last_access": "July 26, 2026",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/permanent-marker-2",
+  "position": 36,
+  "regex": false,
+  "title": "301 cleanup 2026-07-25",
+  "url": "/permanent-marker-2/"
+ },
+ {
+  "action_code": 301,
+  "action_data": {
+   "url": "/strain/permanent-marker/"
+  },
+  "action_type": "url",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 1,
+  "id": 40,
+  "last_access": "July 26, 2026",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/strain/permanent-marker-2",
+  "position": 35,
+  "regex": false,
+  "title": "301 cleanup 2026-07-25",
+  "url": "/strain/permanent-marker-2/"
+ },
+ {
+  "action_code": 301,
+  "action_data": {
+   "url": "/can-i-smoke-in-my-parked-car-in-california/"
+  },
+  "action_type": "url",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 5,
+  "id": 39,
+  "last_access": "August 9, 2026",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/can-i-smoke-in-my-parked-car-in-california-2",
+  "position": 34,
+  "regex": false,
+  "title": "301 cleanup 2026-07-25",
+  "url": "/can-i-smoke-in-my-parked-car-in-california-2/"
+ },
+ {
+  "action_code": 301,
+  "action_data": {
+   "url": "/brands/big-petes-treats/"
+  },
+  "action_type": "url",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 38,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/big-petes-treats",
+  "position": 33,
+  "regex": false,
+  "title": "301 cleanup 2026-07-25",
+  "url": "/big-petes-treats/"
+ },
+ {
+  "action_code": 301,
+  "action_data": {
+   "url": "/brands/foreign-genetics/"
+  },
+  "action_type": "url",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 37,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/foreign-genetics-inc",
+  "position": 32,
+  "regex": false,
+  "title": "301 cleanup 2026-07-25",
+  "url": "/foreign-genetics-inc/"
+ },
+ {
+  "action_code": 301,
+  "action_data": {
+   "url": "/strain/gastro-pop/"
+  },
+  "action_type": "url",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 36,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/gastro-pop",
+  "position": 31,
+  "regex": false,
+  "title": "301 cleanup 2026-07-25",
+  "url": "/gastro-pop/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 31,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/the-popularity-of-craft-beer-rises-every-year-2",
+  "position": 30,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/the-popularity-of-craft-beer-rises-every-year-2/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 30,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/bob-marley",
+  "position": 29,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/bob-marley/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 29,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/david-lee-roth",
+  "position": 28,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/david-lee-roth/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 28,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/20-wonderful-marijuana-dispensary-number-16-is-absolutely-stunning",
+  "position": 27,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/20-wonderful-marijuana-dispensary-number-16-is-absolutely-stunning/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 27,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/7-things-you-need-to-know-about-marijuana-dispensary-today",
+  "position": 26,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/7-things-you-need-to-know-about-marijuana-dispensary-today/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 26,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/five-amazing-things-you-can-learn-from-studying-marijuana",
+  "position": 25,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/five-amazing-things-you-can-learn-from-studying-marijuana/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 25,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/5-common-myths-about-cannabis",
+  "position": 24,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/5-common-myths-about-cannabis/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 24,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/seven-facts-about-cannabis-that-will-make-you-think-twice",
+  "position": 23,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/seven-facts-about-cannabis-that-will-make-you-think-twice/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 23,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/10-common-misconceptions-about-cannabis",
+  "position": 22,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/10-common-misconceptions-about-cannabis/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 22,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/marijuana-an-incredibly-easy-method-that-works-for-all",
+  "position": 21,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/marijuana-an-incredibly-easy-method-that-works-for-all/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 21,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/you-must-experience-marijuana-at-least-once-in-your-life-and-thats-why",
+  "position": 20,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/you-must-experience-marijuana-at-least-once-in-your-life-and-thats-why/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 20,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/eliminate-your-fears-and-doubts-about-marijuana-dispensary",
+  "position": 19,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/eliminate-your-fears-and-doubts-about-marijuana-dispensary/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 19,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/eliminate-your-fears-and-doubts-about-cannabis",
+  "position": 18,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/eliminate-your-fears-and-doubts-about-cannabis/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 18,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/96-of-musicians-at-least-once-in-their-life-have-tried-marijuana",
+  "position": 17,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/96-of-musicians-at-least-once-in-their-life-have-tried-marijuana/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 17,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/how-legalization-will-spread-across-europe-in-the-future",
+  "position": 16,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/how-legalization-will-spread-across-europe-in-the-future/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 16,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/france-parliament-votes-in-favor-of-temporary-freeze-on-cannabis-production",
+  "position": 15,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/france-parliament-votes-in-favor-of-temporary-freeze-on-cannabis-production/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 15,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/police-found-an-illegal-marijuana-plantation-near-switzerland",
+  "position": 14,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/police-found-an-illegal-marijuana-plantation-near-switzerland/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 14,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/las-vegas-city-council-approves-marijuana-consumption-lounges",
+  "position": 13,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/las-vegas-city-council-approves-marijuana-consumption-lounges/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 13,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/last-year-28-coffee-shops-and-pharmacies-were-opened-in-amsterdam",
+  "position": 12,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/last-year-28-coffee-shops-and-pharmacies-were-opened-in-amsterdam/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 12,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/in-australia-breeders-have-developed-8-new-cannabis-varieties",
+  "position": 11,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/in-australia-breeders-have-developed-8-new-cannabis-varieties/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 11,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/nevada-man-arrested-after-inviting-policeman-to-smoke-marijuana",
+  "position": 10,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/nevada-man-arrested-after-inviting-policeman-to-smoke-marijuana/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 10,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/things-need-to-explore-at-the-dr-willella-howe-waffle-house-and-medical-museum-in-santa-ana-ca",
+  "position": 9,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/things-need-to-explore-at-the-dr-willella-howe-waffle-house-and-medical-museum-in-santa-ana-ca/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 9,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/all-the-things-to-do-at-the-kellogg-house-in-santa-ana-ca",
+  "position": 8,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/all-the-things-to-do-at-the-kellogg-house-in-santa-ana-ca/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 8,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/things-need-to-know-at-aquarium-of-the-pacific-in-santa-ana-ca",
+  "position": 7,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/things-need-to-know-at-aquarium-of-the-pacific-in-santa-ana-ca/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 7,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/what-to-do-at-universal-studios-hollywood-in-santa-ana-ca",
+  "position": 6,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/what-to-do-at-universal-studios-hollywood-in-santa-ana-ca/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 6,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/all-the-fun-things-to-do-at-santa-ana-zoo-in-santa-ana-ca",
+  "position": 5,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/all-the-fun-things-to-do-at-santa-ana-zoo-in-santa-ana-ca/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 5,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/all-the-things-needed-to-do-at-bowers-museum-in-santa-ana-ca",
+  "position": 4,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/all-the-things-needed-to-do-at-bowers-museum-in-santa-ana-ca/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 4,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/all-the-things-to-do-at-discovery-cube-in-santa-ana-ca",
+  "position": 3,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/all-the-things-to-do-at-discovery-cube-in-santa-ana-ca/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 3,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/things-to-do-at-lyon-air-museum-in-santa-ana-ca",
+  "position": 2,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/things-to-do-at-lyon-air-museum-in-santa-ana-ca/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 2,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/all-the-fun-things-to-do-at-old-orange-county-courthouse-in-santa-ana-ca",
+  "position": 1,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/all-the-fun-things-to-do-at-old-orange-county-courthouse-in-santa-ana-ca/"
+ },
+ {
+  "action_code": 410,
+  "action_data": null,
+  "action_type": "error",
+  "enabled": true,
+  "group_id": 1,
+  "hits": 0,
+  "id": 1,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "ignore",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/what-to-do-at-old-orange-county-courthouse-in-santa-ana-ca",
+  "position": 0,
+  "regex": false,
+  "title": "410 cleanup 2026-07-25",
+  "url": "/what-to-do-at-old-orange-county-courthouse-in-santa-ana-ca/"
+ },
+ {
+  "action_code": 301,
+  "action_data": {
+   "url": "/strains/"
+  },
+  "action_type": "url",
+  "enabled": true,
+  "group_id": 2,
+  "hits": 4,
+  "id": 47,
+  "last_access": "August 9, 2026",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "exact",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/strain-hub",
+  "position": 7,
+  "regex": false,
+  "title": "",
+  "url": "/strain-hub/"
+ },
+ {
+  "action_code": 301,
+  "action_data": {
+   "url": "/strain-hub/"
+  },
+  "action_type": "url",
+  "enabled": true,
+  "group_id": 2,
+  "hits": 11,
+  "id": 46,
+  "last_access": "August 9, 2026",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "exact",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/strain",
+  "position": 6,
+  "regex": false,
+  "title": "Retired strain hub -&gt; new strain hub",
+  "url": "/strain/"
+ },
+ {
+  "action_code": 301,
+  "action_data": {
+   "url": "/contact/"
+  },
+  "action_type": "url",
+  "enabled": true,
+  "group_id": 2,
+  "hits": 0,
+  "id": 45,
+  "last_access": "-",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "exact",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/contact-new",
+  "position": 5,
+  "regex": false,
+  "title": "",
+  "url": "/contact-new/"
+ },
+ {
+  "action_code": 301,
+  "action_data": {
+   "url": "/front-page/"
+  },
+  "action_type": "url",
+  "enabled": true,
+  "group_id": 2,
+  "hits": 4,
+  "id": 44,
+  "last_access": "August 9, 2026",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "exact",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/home-page-v2",
+  "position": 4,
+  "regex": false,
+  "title": "",
+  "url": "/home-page-v2/"
+ },
+ {
+  "action_code": 301,
+  "action_data": {
+   "url": "/faq/"
+  },
+  "action_type": "url",
+  "enabled": true,
+  "group_id": 2,
+  "hits": 7,
+  "id": 35,
+  "last_access": "August 9, 2026",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "exact",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/faq-2",
+  "position": 3,
+  "regex": false,
+  "title": "",
+  "url": "/faq-2/"
+ },
+ {
+  "action_code": 301,
+  "action_data": {
+   "url": "/brands/big-petes-treats/"
+  },
+  "action_type": "url",
+  "enabled": true,
+  "group_id": 2,
+  "hits": 8,
+  "id": 34,
+  "last_access": "August 9, 2026",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "exact",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/big-petes-treats",
+  "position": 2,
+  "regex": false,
+  "title": "",
+  "url": "/big-petes-treats/"
+ },
+ {
+  "action_code": 301,
+  "action_data": {
+   "url": "/brands/foreign-genetics/"
+  },
+  "action_type": "url",
+  "enabled": true,
+  "group_id": 2,
+  "hits": 5,
+  "id": 33,
+  "last_access": "August 9, 2026",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "exact",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/foreign-genetics-inc",
+  "position": 1,
+  "regex": false,
+  "title": "",
+  "url": "/foreign-genetics-inc/"
+ },
+ {
+  "action_code": 301,
+  "action_data": {
+   "url": "/strain/gastro-pop/"
+  },
+  "action_type": "url",
+  "enabled": true,
+  "group_id": 2,
+  "hits": 5,
+  "id": 32,
+  "last_access": "August 9, 2026",
+  "match_data": {
+   "source": {
+    "flag_case": true,
+    "flag_query": "exact",
+    "flag_regex": false,
+    "flag_trailing": true
+   }
+  },
+  "match_type": "url",
+  "match_url": "/gastro-pop",
+  "position": 0,
+  "regex": false,
+  "title": "",
+  "url": "/gastro-pop/"
+ }
+]
