@@ -71,6 +71,15 @@ DEFAULT_SITE = STAGING_SITE
 # browser string here.
 USER_AGENT = "EvergreenOC-ContentSync/1.0 (WordPress REST client; +https://evergreenoc.com)"
 
+# This file has twice reverted to an older commit that still carried the spoofed
+# string, and the first request afterwards re-earned a greylisting. Refusing to
+# start is cheaper than another block, so fail loudly rather than send it.
+if any(token in USER_AGENT for token in ("Mozilla", "Chrome", "Safari", "Gecko")):
+    raise SystemExit(
+        "refusing to run: USER_AGENT is a browser string. That is what greylists "
+        "the egress range. Check out the current tools/wp.py before retrying."
+    )
+
 TIMEOUT = 60
 
 # SiteGround rate limits per IP and answers challenged requests with a captcha
