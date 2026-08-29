@@ -143,12 +143,13 @@ h3{font-size:26px;line-height:1.2;letter-spacing:-.005em}
   letter-spacing:-.03em;margin:0}
 .blk .sub{font-size:20px;color:var(--dim);font-weight:300;line-height:1.5;margin-top:18px;max-width:40ch}
 
-.blk .plain{list-style:none;margin:0;padding:0}
-.blk .plain li{font-size:23px;padding:15px 0;border-bottom:1px solid var(--line);color:var(--text);font-weight:400}
-.blk .rules{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:13px}
-.blk .rules li{font-family:var(--m);font-size:16px;letter-spacing:.05em;color:var(--dim);
+.plain{list-style:none;margin:0;padding:0}
+.plain li{font-size:23px;padding:15px 0;border-bottom:1px solid var(--line);color:var(--text);font-weight:400}
+.paper .plain li{border-bottom-color:var(--paper-line)}
+.rules{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:13px}
+.rules li{font-family:var(--m);font-size:16px;letter-spacing:.05em;color:var(--dim);
   display:flex;align-items:center;gap:14px}
-.blk .rules li::before{content:"";width:10px;height:1px;background:var(--accent);flex:none}
+.rules li::before{content:"";width:10px;height:1px;background:var(--accent);flex:none}
 
 /* ---------- 24h rail ---------- */
 .rail{position:relative;margin-top:auto;padding-top:24px;flex:none}
@@ -243,62 +244,83 @@ h3{font-size:26px;line-height:1.2;letter-spacing:-.005em}
     width:1600px;height:900px;inset:auto}
   #hint,#ov,#bar{display:none!important}
 }
-</style>
 
+/* ---------- added for Foundation Edition v2.0 source ---------- */
+.cols5{grid-template-columns:repeat(5,1fr)}
+.cols3{grid-template-columns:repeat(3,1fr)}
+.tiles.cols5 .c{min-height:126px}
+.rulesgrid.dense div{min-height:76px;padding:14px 26px}
+.rulesgrid.dense .t{font-size:21px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0 76px;align-items:start}
+.score{width:100%;border-collapse:collapse;margin-top:6px}
+.score th{font-family:var(--m);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--faint);text-align:left;padding:0 0 14px;border-bottom:1px solid var(--line);font-weight:400}
+.score th.r,.score td.r{text-align:right}
+.score td{font-size:22px;padding:15px 0;border-bottom:1px solid var(--line)}
+.score td.r{font-family:var(--m);font-size:19px;color:var(--accent);
+  font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.stack{display:flex;flex-direction:column;gap:15px;margin-top:22px}
+.stack li{list-style:none;font-size:21px;color:var(--dim);display:flex;align-items:baseline;gap:16px}
+.stack li::before{content:"";width:11px;height:1px;background:var(--accent);flex:none;transform:translateY(-5px)}
+.blanks{list-style:none;margin:0;padding:0}
+.blanks li{display:flex;align-items:baseline;gap:20px;padding:19px 0;border-bottom:1px solid var(--line)}
+.blanks .k{font-family:var(--m);font-size:14px;color:var(--accent);letter-spacing:.16em}
+</style>
 <div id="viewport"><div id="stage"><div id="bar"></div></div></div>
 <div id="ov" role="dialog" aria-label="All slides"><h4>All slides — click to jump · press O or Esc to close</h4><div id="ovg"></div></div>
 <div id="hint">← → navigate · O overview</div>
 
 <script>
 /* ============================================================
-   ASCENSION OPERATING SYSTEM — Foundation Edition v2.0
-   Speaker-led deck. Slides are cues, not the manual.
+   ASCENSION OPERATING SYSTEM™ — Foundation Edition v2.0
+   Speaker-led deck. Every time and list below comes from the
+   source document; the slides carry cues, the speaker carries depth.
    ============================================================ */
 
-/* ---------- the 24-hour rail: 1:00 PM -> 5:00 AM operating day + 8h recovery ---------- */
-var DAY = 1440, OPEND = 960;                 /* minutes from 1:00 PM */
+/* ---------- the 24-hour rail: 1:00 PM wake -> 5:00 AM sleep -> 1:00 PM ---------- */
+var DAY = 1440;                              /* minutes from 1:00 PM */
 var pct = function(m){ return (m / DAY * 100); };
 
 var BLOCKS = [
- {n:'01', t:'Wake Up Consistently',                     time:'1:00 PM',          s:0,   e:0},
- {n:'02', t:'Win Your First Hour',                      time:'1:00 – 1:40 PM',   s:0,   e:40},
- {n:'03', t:'Refuel Your System',                       time:'1:40 – 2:00 PM',   s:40,  e:60},
- {n:'04', t:'Protect Your Peak Hours',                  time:'2:00 – 4:00 PM',   s:60,  e:180},
- {n:'05', t:'Reset Your Energy',                        time:'4:00 – 4:30 PM',   s:180, e:210},
- {n:'06', t:'Move Your Body',                           time:'4:30 – 6:45 PM',   s:210, e:345},
- {n:'07', t:'Make Time to Live',                        time:'6:45 – 7:00 PM',   s:345, e:360},
- {n:'08', t:'Communicate Without Constant Interruption',time:'7:00 – 8:00 PM',   s:360, e:420},
- {n:'09', t:'Evening Reset',                            time:'8:00 – 9:00 PM',   s:420, e:480},
- {n:'10', t:'Execute & Level Up',                       time:'9:00 – 11:00 PM',  s:480, e:600},
- {n:'11', t:'Protect Your Deep Work',                   time:'11:00 PM – 1:00 AM',s:600,e:720},
- {n:'12', t:'Read to Build Your Mind',                  time:'1:00 – 1:30 AM',   s:720, e:750},
- {n:'13', t:'Build Your Future Value',                  time:'1:30 – 2:15 AM',   s:750, e:795},
- {n:'14', t:'Finish & Close Your Workday',              time:'2:15 – 4:00 AM',   s:795, e:900},
- {n:'15', t:'Design Tomorrow',                          time:'4:00 – 4:15 AM',   s:900, e:915},
- {n:'16', t:'Enter Your Recovery Window',               time:'4:15 – 5:00 AM',   s:915, e:960}
+ {n:'01', t:'Wake Up Consistently',                      time:'1:00 PM',            s:0,   e:0},
+ {n:'02', t:'Win Your First Hour',                       time:'1:00 – 1:40 PM',     s:0,   e:40},
+ {n:'03', t:'Refuel Your System',                        time:'1:40 – 2:00 PM',     s:40,  e:60},
+ {n:'04', t:'Protect Your Peak Hours',                   time:'2:00 – 4:00 PM',     s:60,  e:180},
+ {n:'05', t:'Reset Your Energy',                         time:'4:00 – 4:30 PM',     s:180, e:210},
+ {n:'06', t:'Move Your Body',                            time:'4:30 – 6:30 PM',     s:210, e:330},
+ {n:'07', t:'Communicate Without Constant Interruption', time:'6:45 – 7:45 PM',     s:345, e:405},
+ {n:'08', t:'Make Time to Live',                         time:'7:45 – 10:30 PM',    s:405, e:570},
+ {n:'09', t:'Execute &amp; Level Up',                    time:'10:30 PM – 12:30 AM',s:570, e:690},
+ {n:'10', t:'Protect Your Deep Work',                    time:'12:30 – 2:30 AM',    s:690, e:810},
+ {n:'11', t:'Deep Work Break',                           time:'2:30 – 2:45 AM',     s:810, e:825},
+ {n:'12', t:'Read to Build Your Mind',                   time:'2:45 – 3:15 AM',     s:825, e:855},
+ {n:'13', t:'Build Your Future Value',                   time:'3:15 – 4:00 AM',     s:855, e:900},
+ {n:'14', t:'Close Your Workday',                        time:'4:00 – 4:15 AM',     s:900, e:915},
+ {n:'15', t:'Design Tomorrow',                           time:'4:15 – 4:30 AM',     s:915, e:930},
+ {n:'16', t:'Enter Your Recovery Window',                time:'4:30 – 5:00 AM',     s:930, e:960},
+ {n:'17', t:'Sleep Consistently',                        time:'5:00 AM – 1:00 PM',  s:960, e:1440, sleep:true}
 ];
 
-/* mini rail shown on every daily-block slide — the audience always knows where in the day we are */
 function rail(active){
   var segs = BLOCKS.map(function(b,i){
     var w = Math.max(pct(b.e - b.s), 0.45);
-    return '<span class="seg' + (i===active?' on':'') + '" style="left:'+pct(b.s).toFixed(3)+'%;width:'+w.toFixed(3)+'%"></span>';
+    var cls = 'seg' + (b.sleep?' sleep':'') + (i===active?' on':'');
+    return '<span class="'+cls+'" style="left:'+pct(b.s).toFixed(3)+'%;width:'+w.toFixed(3)+'%"></span>';
   }).join('');
-  segs += '<span class="seg sleep" style="left:'+pct(OPEND).toFixed(3)+'%;width:'+pct(DAY-OPEND).toFixed(3)+'%"></span>';
-  var cur = BLOCKS[active];
-  var curPos = pct(cur.s + (cur.e - cur.s)/2);
+  var cur = BLOCKS[active], curPos = pct(cur.s + (cur.e - cur.s)/2);
+  var shift = curPos > 82 ? '-100%' : (curPos < 6 ? '0' : '-50%');
   return '<div class="rail"><div class="track">'
-       + '<span class="cur" style="left:'+curPos.toFixed(2)+'%;transform:translateX(' + (curPos>80?'-100%':(curPos<8?'0':'-50%')) + ')">' + cur.n + '</span>'
+       + '<span class="cur" style="left:'+curPos.toFixed(2)+'%;transform:translateX('+shift+')">'+cur.n+'</span>'
        + segs + '</div><div class="marks">'
        + '<span style="left:0">1 PM</span>'
        + '<span style="left:33.33%">9 PM</span>'
        + '<span style="left:50%">1 AM</span>'
        + '<span style="left:66.67%">5 AM · WORK ENDS</span>'
-       + '<span class="end" style="left:100%">8 H RECOVERY</span>'
+       + '<span class="end" style="left:100%">8 H SLEEP</span>'
        + '</div></div>';
 }
 
-/* ---------- small builders ---------- */
+/* ---------- builders ---------- */
 function eyebrow(t,m){ return '<p class="eyebrow'+(m?' mute':'')+'">'+t+'</p>'; }
 function chain(items,size){
   return '<div class="flow '+(size||'')+'">' + items.map(function(x,i){
@@ -324,43 +346,47 @@ function ruleList(head, items){
 function bullets(items, cls){
   return '<ul class="bul '+(cls||'')+'">' + items.map(function(x){ return '<li>'+x+'</li>'; }).join('') + '</ul>';
 }
+function stack(items){
+  return '<ul class="stack">' + items.map(function(x){ return '<li>'+x+'</li>'; }).join('') + '</ul>';
+}
 function tiles(cols, items){
   return '<div class="tiles cols'+cols+'">' + items.map(function(x){
     return '<div class="c"><span class="k"></span><span class="v">'+x+'</span></div>';
   }).join('') + '</div>';
 }
-function block(i, leftHTML, rightHTML){
-  var b = BLOCKS[i];
-  return { part:'03 — Daily Operating System', cls:'', html:
-      '<div class="blk">'
-    +   '<div class="hd"><span class="idx">'+b.n+'</span><span class="time">'+b.time+'</span></div>'
-    +   '<h2>'+b.t+'</h2>'
-    +   '<div class="cols"><div class="left">'+leftHTML+'</div><div class="right">'+rightHTML+'</div></div>'
-    + '</div>' + rail(i), nav:b.n+' '+b.t };
-}
 function kick(t, sub, note){
   return '<p class="kicker">'+t+'</p>' + (sub? '<p class="sub">'+sub+'</p>':'')
        + (note? '<p class="note" style="margin-top:34px">'+note+'</p>':'');
 }
+function block(i, leftHTML, rightHTML, note){
+  var b = BLOCKS[i];
+  return { part:'03 — The Daily Operating System', nav:b.n+' '+b.t.replace(/&amp;/g,'&'), html:
+      '<div class="blk">'
+    +   '<div class="hd"><span class="idx">'+b.n+'</span><span class="time">'+b.time+'</span></div>'
+    +   '<h2>'+b.t+'</h2>'
+    +   '<div class="cols"><div class="left">'+leftHTML+'</div><div class="right">'+rightHTML+'</div></div>'
+    +   (note? '<p class="note" style="margin:0 0 4px">'+note+'</p>':'')
+    + '</div>' + rail(i) };
+}
 
-/* ---------- weekly example: derived hour-for-hour from the daily architecture ---------- */
+/* ---------- one example week, built from the Weekly Scorecard targets ---------- */
 var WEEK = [
   {nm:'Sleep',                     h:56, c:'#E5F1F2'},
-  {nm:'Work',                      h:47, c:'#04A2B8'},
-  {nm:'Health &amp; Training',     h:19, c:'#8FDCE6'},
-  {nm:'Learning',                  h:18, c:'#0E6E7E'},
-  {nm:'Family &amp; Personal Life',h:9,  c:'#B9E7ED'},
-  {nm:'Recovery',                  h:7,  c:'#136F80'},
-  {nm:'Growth &amp; Brand',        h:2,  c:'#5FCBDA'},
-  {nm:'Unaccounted',               h:10, c:'#5A686B', unal:true}
+  {nm:'Client Work',               h:27, c:'#04A2B8'},
+  {nm:'Recovery &amp; Reset',      h:19, c:'#8FDCE6'},
+  {nm:'Family &amp; Personal Life',h:16, c:'#0E6E7E'},
+  {nm:'Learning &amp; Reading',    h:15, c:'#B9E7ED'},
+  {nm:'Gym &amp; Health',          h:8,  c:'#136F80'},
+  {nm:'Personal Branding',         h:2,  c:'#5FCBDA'},
+  {nm:'Flexible / Unassigned',     h:25, c:'#5A686B', unal:true}
 ];
 function weekViz(){
   var cells = '', idx = 0;
   WEEK.forEach(function(c,ci){
     for(var k=0;k<c.h;k++){
       idx++;
-      cells += '<i data-c="'+ci+'" data-h="'+idx+'" class="'+(c.unal?'unal':'')+'"'
-            + ' style="background-color:'+c.c+'"></i>';
+      cells += '<i data-c="'+ci+'" data-h="'+idx+'" class="'+(c.unal?'unal':'')
+            + '" style="background-color:'+c.c+'"></i>';
     }
   });
   var legend = WEEK.map(function(c,ci){
@@ -370,43 +396,65 @@ function weekViz(){
          + '<span class="nm">'+c.nm+'</span><span class="hr">'+c.h+' h</span></li>';
   }).join('');
   return '<div class="week"><div><ul class="legend" id="lg">'+legend+'</ul>'
-       + '<p class="note" style="margin-top:34px">Example week, derived hour-for-hour<br>from the daily architecture. Yours will differ.</p></div>'
+       + '<p class="note" style="margin-top:30px">One example week, built from the Weekly<br>Scorecard targets. Yours will look different.</p></div>'
        + '<div class="gridwrap"><div class="cells" id="cells">'+cells+'</div>'
        + '<div class="gridkey"><span>One cell = one hour</span><span>168 hours · 7 days</span></div>'
        + '<div id="tip"></div></div></div>';
 }
 
-/* ---------- the deck ---------- */
+/* ============================================================
+   the deck
+   ============================================================ */
 var PARTS = ['Why','The Philosophy','The Daily Operating System','The Weekly Tracker',
              'Review &amp; Improvement','Implementation','Q &amp; A'];
+function part(num, title, question, i){
+  var ix = PARTS.map(function(t,k){
+    return '<li class="'+(k===i?'on':'')+'"><span class="k">0'+(k+1)+'</span><span>'+t+'</span></li>';
+  }).join('');
+  return { part:'Part '+num, cls:'paper nochrome', nav:'Part '+num+' — '+title.replace(/&amp;/g,'&'), html:
+      '<div class="part"><div><p class="num">'+num+'</p>'
+    + '<p class="t">'+title+'</p><p class="q">'+question+'</p></div>'
+    + '<ul class="pix">'+ix+'</ul></div>' };
+}
+
 var S = [];
 
 S.push({ part:'Foundation Edition v2.0', cls:'nochrome', nav:'Cover', html:
-  '<div class="cover">'
-+   '<div></div>'
-+   '<div><p class="tm">ASCENSION<br>OPERATING SYSTEM<span style="font-size:34px;vertical-align:super">&trade;</span></p>'
-+     '<p class="sub">Foundation Edition &nbsp;v2.0</p>'
-+     '<p class="desc">Personal Life, Business &amp; Performance Operating System</p></div>'
-+   '<div class="foot"><p class="motto">Operate with Intention.<br>Execute with Discipline.<br>Improve Every Day.</p>'
-+     '<p class="ver">Live Session<br>Speaker-Led Framework</p></div>'
-+ '</div>' });
+  '<div class="cover"><div></div>'
++ '<div><p class="tm">ASCENSION<br>OPERATING SYSTEM<span style="font-size:34px;vertical-align:super">&trade;</span></p>'
++   '<p class="sub">Foundation Edition &nbsp;v2.0</p>'
++   '<p class="desc">Personal Life, Business &amp; Performance Operating System</p></div>'
++ '<div class="foot"><p class="motto">Operate with Intention.<br>Execute with Discipline.<br>Improve Every Day.</p>'
++   '<p class="ver">Live Session<br>Speaker-Led Framework</p></div></div>' });
 
 /* ===== PART 01 — WHY ===== */
 S.push(part('01','Why','Why do we need an operating system?', 0));
+
 S.push({ part:'01 — Why', nav:'The Problem', html:
   eyebrow('The Problem')
 + '<h1>Most people don’t have<br>a time problem.<br><span class="accent">They have a system problem.</span></h1>' });
 
-S.push({ part:'01 — Why', nav:'What Is Ascension OS', html:
-  eyebrow('What Is It')
-+ '<h2 style="margin-bottom:36px">One system to intentionally operate<br>your life and business.</h2>'
-+ tiles(7, ['Health','Faith','Work','Learning','Family','Recovery','Growth']) });
+S.push({ part:'01 — Why', nav:'Purpose', html:
+  eyebrow('Purpose')
++ '<div class="two" style="align-items:center">'
++ '<div><div class="listhead">This is not</div>'
++   stack(['A routine','A planner','A productivity schedule']) + '</div>'
++ '<div><div class="listhead">This is</div>'
++   '<p class="kicker" style="font-size:46px;margin-top:26px">A personal life<br>&amp; business<br>operating system.</p></div>'
++ '</div>'
++ '<p class="note">The objective is not to manage time. It is to organise energy, attention, priorities, responsibilities and recovery.</p>' });
+
+S.push({ part:'01 — Why', nav:'What It Operates', html:
+  eyebrow('What the System Operates')
++ '<h2 style="margin-bottom:34px">Ten areas. One system.</h2>'
++ tiles(5,['Health','Faith &amp; Prayer','Learning','Client Delivery','Client Communication',
+           'Personal Branding','Family','Recovery','Decision Making','Personal Growth']) });
 
 S.push({ part:'01 — Why', nav:'The Mission', html:
   eyebrow('The Mission')
 + '<p class="hero">Build a disciplined life<br>through <span class="accent">systems</span>,<br>not motivation.</p>' });
 
-/* ===== PART 02 — PHILOSOPHY ===== */
+/* ===== PART 02 — THE PHILOSOPHY ===== */
 S.push(part('02','The Philosophy','How should we think about time, discipline, energy and priorities?', 1));
 
 S.push({ part:'02 — The Philosophy', nav:'Core Philosophy', html:
@@ -416,73 +464,152 @@ S.push({ part:'02 — The Philosophy', nav:'Core Philosophy', html:
 S.push({ part:'02 — The Philosophy', nav:'Core Principle', html:
   eyebrow('Core Principle')
 + '<p class="hero">Time blocks are <span class="accent">fixed</span>.<br>Priorities are <span class="accent">flexible</span>.</p>'
-+ '<p class="lede">The structure stays stable. The priority inside the block can change.</p>' });
++ '<p class="lede">The block stays fixed. The task can change — so you never rebuild the whole schedule when priorities move.</p>' });
 
-S.push({ part:'02 — The Philosophy', nav:'Start With Sleep', html:
-  eyebrow('Sleep &amp; Rhythm')
-+ '<h2>Sleep is the foundation of performance.</h2>'
+S.push({ part:'02 — The Philosophy', nav:'The Sleep Principle', html:
+  eyebrow('The Sleep Principle')
++ '<h2>Early sleep and early wake-up<br>is the preferred practice.</h2>'
 + '<div class="track2">'
 +   '<div class="tr pref"><p class="lbl">Preferred direction</p>'
-+     chain(['Early Sleep','Early Wake','Day Work','Night Recovery']) + '</div>'
-+   '<div class="tr real"><p class="lbl">Current reality for some professionals</p>'
++     chain(['Sleep Earlier','Wake Earlier','Work in the Day','Recover at Night']) + '</div>'
++   '<div class="tr real"><p class="lbl">Current reality for many online professionals</p>'
 +     chain(['Late Work','Structured Schedule','Protected Sleep','Gradual Shift'],'sm') + '</div>'
 + '</div>'
-+ '<p class="note">A practical adaptation for late-night professionals — not the destination.</p>' });
++ '<p class="note">There is no productivity advantage in staying awake late. This system does not glorify it.</p>' });
+
+S.push({ part:'02 — The Philosophy', nav:'The Late-Night Principle', html:
+  eyebrow('The Late-Night Professional Principle')
++ '<div class="two" style="align-items:center">'
++ '<h2 style="font-size:44px">We are not optimising<br>for staying awake late.<br>'
++   '<span class="accent">We are optimising for living<br>and working better inside<br>your current reality.</span></h2>'
++ '<div><div class="listhead">If you genuinely cannot change it yet</div>'
++   stack(['Build boundaries','Protect your sleep','Protect your health','Protect your relationships','Protect your focus']) + '</div>'
++ '</div>' });
 
 S.push({ part:'02 — The Philosophy', nav:'Consistency Over Extremes', html:
   eyebrow('Consistency Over Extremes')
-+ '<h1>You don’t need<br>a 5 AM wake-up.</h1>'
-+ bullets(['Consistent Wake Time','Enough Sleep','Stable Rhythm','Sustainable Schedule'])
-+ '<p class="note">Consistency &gt; Extreme Schedules</p>' });
++ '<h1 style="margin-bottom:40px">You don’t need<br>a 5 AM wake-up.</h1>'
++ '<div class="listhead" style="border:0;padding-bottom:18px">Long-term direction — move gradually, never overnight</div>'
++ chain(['5:00 AM','4:30 AM','4:00 AM','3:30 AM','Earlier'],'lg')
++ '<p class="note">Progress toward a healthier rhythm, not perfection in one day.</p>' });
 
-/* ===== PART 03 — DAILY OPERATING SYSTEM ===== */
+/* ===== PART 03 — THE DAILY OPERATING SYSTEM ===== */
 S.push(part('03','The Daily Operating System','How does the system work throughout the day?', 2));
 
-/* the architecture */
 (function(){
   var segs = BLOCKS.map(function(b){
-    return '<span class="seg" style="left:'+pct(b.s).toFixed(3)+'%;width:'+Math.max(pct(b.e-b.s),0.45).toFixed(3)+'%;background:var(--accent)"></span>';
-  }).join('')
-  + '<span class="seg sleep" style="left:'+pct(OPEND).toFixed(3)+'%;width:'+pct(DAY-OPEND).toFixed(3)+'%"></span>';
-  var nums = BLOCKS.filter(function(b){ return (b.e-b.s) >= 20; }).map(function(b){
+    return '<span class="seg'+(b.sleep?' sleep':'')+'" style="left:'+pct(b.s).toFixed(3)
+         + '%;width:'+Math.max(pct(b.e-b.s),0.45).toFixed(3)+'%'+(b.sleep?'':';background:var(--accent)')+'"></span>';
+  }).join('');
+  var nums = BLOCKS.filter(function(b){ return (b.e-b.s) >= 20 && !b.sleep; }).map(function(b){
     return '<span style="left:'+pct(b.s+(b.e-b.s)/2).toFixed(2)+'%">'+b.n+'</span>';
   }).join('');
   var ticks = [[0,'1 PM','s'],[240,'5 PM',''],[480,'9 PM',''],[720,'1 AM',''],[960,'5 AM',''],[1440,'1 PM','e']]
     .map(function(t){ return '<span class="'+t[2]+'" style="left:'+pct(t[0]).toFixed(2)+'%">'+t[1]+'</span>'; }).join('');
-  S.push({ part:'03 — Daily Operating System', nav:'The Daily Architecture', html:
+  S.push({ part:'03 — The Daily Operating System', nav:'The Daily Architecture', html:
       eyebrow('The Daily Architecture')
-    + '<h2 style="margin-bottom:14px">16 operating hours. 8 hours of recovery.</h2>'
-    + '<div class="rail tl" style="margin-top:44px;margin-bottom:52px"><div class="nums">'+nums+'</div>'
+    + '<h2 style="margin-bottom:10px">Seventeen blocks. Sixteen operating hours. Eight hours of sleep.</h2>'
+    + '<div class="rail tl" style="margin-top:42px;margin-bottom:48px"><div class="nums">'+nums+'</div>'
     + '<div class="track">'+segs+'</div><div class="ticks">'+ticks+'</div></div>'
-    + '<div style="display:flex;flex-direction:column;gap:14px;align-items:flex-start">'
-    +   chain(['Wake','Reset','Fuel','Focus','Recovery','Gym','Communication'],'sm')
-    +   chain(['Learning','Deep Work','Reading','Growth','Shutdown','Sleep'],'sm')
+    + '<div style="display:flex;flex-direction:column;gap:13px;align-items:flex-start">'
+    +   chain(['Wake','Reset','Fuel','Focus','Recover','Move','Communicate'],'sm')
+    +   chain(['Live','Reset','Learn','Execute','Pause','Read','Build'],'sm')
+    +   chain(['Close','Design','Recover','Sleep','Repeat'],'sm')
     + '</div>' });
 })();
 
-S.push(block(0,  kick('Same time.<br>Every day.'),                     plainList('Non-Negotiables',['Same Wake Time','Enough Sleep','Stable Rhythm'])));
-S.push(block(1,  kick('Start<br>intentionally.'),                      vchain('The Opening Sequence',['Water','Light','Movement','Prayer','Review'])));
-S.push(block(2,  kick('20 minutes.'),                                  plainList('Refuel',['Simple Meal','Hydration','Sustainable Nutrition'])));
-S.push(block(3,  kick('One block.<br>One priority.'),                  plainList('Possible Priorities',['Client Work','Client Communication','Google Ads','Analytics &amp; Tracking'])));
-S.push(block(4,  kick('30 minutes.','','Recover intentionally, not digitally.'), vchain('Reset Sequence',['Meal','Hydration','Gym Preparation','Recovery'])));
-S.push(block(5,  kick('2 hr 15 min.','','Move &#8594; Reset &#8594; Perform Better'),  vchain('Training Window',['Travel','Workout','Return'])));
-S.push(block(6,  kick('A good system<br>should make your life<br>worth repeating.'), plainList('Protected',['Family','Personal Life','Recovery','Transition'])));
-S.push(block(7,  kick('Respond intentionally.<br>Don’t react continuously.'), plainList('Channels',['Email','WhatsApp','Slack','Messenger','Follow-ups'])));
-S.push(block(8,  kick('60 minutes.'),                                  plainList('Evening Reset',['Dinner','Prayer','Family','Desk Setup','Mental Reset'])));
-S.push(block(9,  '<div class="listhead" style="margin-bottom:26px">The Learning Loop</div>'
-               + chain(['Watch','Note','Practice','Apply']),           plainList('Focus Areas',['Google Ads','Analytics','Conversion Tracking','Professional Skills'])));
-S.push(block(10, kick('90+ minutes of<br>uninterrupted focus.','','Focus is a business asset.'), ruleList('Rules',['Phone Silent','No Notifications','No Multitasking','Timer On'])));
-S.push(block(11, kick('30 minutes<br>a day.','','Read &#8594; Reflect &#8594; Apply'), plainList('Reading Areas',['Business','Psychology','Strategy','Personal Growth'])));
-S.push(block(12, kick('3 days<br>a week.'),                            plainList('Future Value',['Personal Branding','Networking','Content','Client Acquisition'])));
-S.push(block(13, '<div class="listhead" style="margin-bottom:26px">Close the Loop</div>'
-               + chain(['Finish','Schedule','Eliminate']),
-               '<div class="listhead">The Only Question</div><p class="kicker" style="font-size:38px;margin-top:24px">What did I actually complete today?</p>'));
-S.push(block(14, kick('Tomorrow’s top 3.','Wake up with a starting point.'),
-               '<div class="listhead">Written Before Sleep</div><ul class="plain">'
-               + '<li><span style="font-family:var(--m);color:var(--accent);font-size:15px;margin-right:18px">01</span>&nbsp;</li>'
-               + '<li><span style="font-family:var(--m);color:var(--accent);font-size:15px;margin-right:18px">02</span>&nbsp;</li>'
-               + '<li><span style="font-family:var(--m);color:var(--accent);font-size:15px;margin-right:18px">03</span>&nbsp;</li></ul>'));
-S.push(block(15, kick('Work ends.<br>Recovery begins.'),               vchain('Shutdown Sequence',['Close Laptop','Notifications Off','Prayer','Wind Down','Sleep'])));
+S.push(block(0, kick('Same time.<br>Every day.'),
+  plainList('The First Objective',['Consistent Wake Time','Enough Sleep','Stable Sleep-Wake Rhythm','A Predictable Starting Point']),
+  'Consistency &gt; extreme schedules.'));
+
+S.push(block(1, kick('Start intentionally.<br>Don’t start consuming.','40-minute morning reset.'),
+  vchain('Your Morning Reset',['Water','Freshen Up','Natural Light','Light Stretching','Dhuhr Prayer','Review Today’s Top 3']),
+  'No social media. Your Top 3 were already written last night.'));
+
+S.push(block(2, kick('20 minutes.'),
+  plainList('Fuel Window',['Simple, Nutritious Meal','Hydration','Cook At Least One Meal Yourself']),
+  'Your energy is an operating resource. Fuel the system before you run it.'));
+
+S.push(block(3, kick('One block.<br>One priority.'),
+  plainList('Choose One',['Client Work','Client Communication','Google Ads Learning','Analytics &amp; Conversion Tracking']),
+  'Not every hour has equal value. Protect your energy → attention → output.'));
+
+S.push(block(4, kick('30 minutes.','A 15–20 minute power nap counts if you genuinely need it.'),
+  vchain('Reset Sequence',['Meal','Hydration','Prepare for Gym','Step Away From the Screen']),
+  'Scrolling feels like recovery. Recover intentionally, not digitally.'));
+
+S.push(block(5, kick('2 hours.<br>Door to door.'),
+  vchain('Gym Block',['Travel to the Gym','Workout','Return Home']),
+  'The goal is not to destroy yourself. Move → Reset → Perform Better.'));
+
+S.push(block(6, kick('Respond intentionally.<br>Don’t react continuously.'),
+  plainList('Communication Channels',['Email','WhatsApp','Slack','Messenger','Client Follow-up &amp; Updates']),
+  'Don’t live inside your inbox. An urgent client issue can override the system.'));
+
+S.push(block(7,
+  plainList('7:45 – 10:00 PM · Life',['Family &amp; Your Son','Friends','Dinner','Prayer','Planned Social Media — 15–20 min max']),
+  plainList('10:00 – 10:30 PM · Reset',['Clear Workspace','Desk Setup','Water Ready','Review Priorities','Mental Reset']),
+  'Your entire life cannot become a productivity project. Live → Reset → Execute.'));
+
+S.push(block(8,
+  '<div class="listhead" style="margin-bottom:26px">Learning Format</div>' + chain(['Watch','Note','Practice','Apply']),
+  plainList('Primary Areas',['Google Ads','Web Analytics','Conversion Tracking','SEO']),
+  'Don’t spend the block consuming. Work pays today — learning compounds tomorrow.'));
+
+S.push(block(9, kick('Minimum 90 minutes<br>of uninterrupted focus.','Default priority: client work.'),
+  ruleList('Deep Work Rules',['Phone Silent','Clean Desk','Water Ready','Timer On','No Notifications','No Multitasking']),
+  'Focus is a business asset. Protect it.'));
+
+S.push(block(10, kick('15 minutes.<br>Completely offline.'),
+  plainList('Step Away From the Screen',['Walk','Stretch','Drink Water','Breathe','Rest Your Eyes']),
+  'Don’t turn a 15-minute break into a social media session. Pause → Reset → Continue.'));
+
+S.push(block(11, kick('30 minutes<br>a day.'),
+  plainList('Reading Areas',['Business','Psychology','Strategy','Communication','Personal Growth']),
+  'The goal is not to finish books. Read → Reflect → Apply.'));
+
+S.push(block(12,
+  plainList('3 Days a Week · Build',['LinkedIn','Facebook','Fiverr','Networking','Content &amp; Client Acquisition']),
+  plainList('Other Days · Deliver',['Pending Client Work','Learning Revision','Skill Practice']),
+  'Client work builds today’s business. Your brand and network build tomorrow’s.'));
+
+S.push(block(13,
+  '<div class="listhead" style="margin-bottom:26px">Professional Shutdown</div>' + chain(['Finish','Schedule','Eliminate']),
+  '<div class="listhead">Ask</div><p class="kicker" style="font-size:36px;margin-top:24px">What did I actually<br>complete today?</p>'
+  + '<p class="sub">Not: what did I intend to complete?</p>',
+  'Unfinished tasks create mental noise. Close the loops before you close the laptop.'));
+
+S.push(block(14, kick('Tomorrow’s Top 3.','Most important task first. Then review your calendar, commitments and pending priorities.'),
+  '<div class="listhead">Written Before Sleep</div><ul class="blanks">'
+  + '<li><span class="k">01</span></li><li><span class="k">02</span></li><li><span class="k">03</span></li></ul>',
+  'Don’t wake up searching for direction. Wake up with a starting point.'));
+
+S.push(block(15, kick('Work ends.<br>Recovery begins.'),
+  vchain('Shutdown Sequence',['Close Laptop','Work Notifications Off','Leave the Desk','Fajr Prayer','Prepare for Sleep']),
+  'Without a shutdown boundary, work follows you into bed.'));
+
+S.push(block(16, kick('8 hours.<br>Protected.'),
+  plainList('Sleep Rules',['Same Time Each Night','Sufficient Sleep','Protected Recovery','Gradual Shift Earlier']),
+  'The objective is not to glorify sleeping at 5 AM. It is to protect recovery while you shift.'));
+
+S.push({ part:'03 — The Daily Operating System', nav:'The Ascension Daily Loop', html:
+  eyebrow('The Ascension Daily Loop')
++ '<h2 style="margin-bottom:44px">Eighteen moves. Then repeat.</h2>'
++ '<div style="display:flex;flex-direction:column;gap:14px;align-items:flex-start">'
++   chain(['Wake','Reset','Fuel','Focus','Recover','Move'],'sm')
++   chain(['Communicate','Live','Reset','Learn','Execute','Pause'],'sm')
++   chain(['Read','Build','Close','Design','Recover','Sleep'],'sm')
++ '</div>'
++ '<p class="note">&#8635;&nbsp;&nbsp;Sleep feeds back into Wake. The loop is the system.</p>' });
+
+S.push({ part:'03 — The Daily Operating System', nav:'Operating Rules', html:
+  eyebrow('Operating Rules')
++ '<div class="two">'
++ '<div>' + plainList('Social Media',['Not in the first 40 minutes','Not during Priority Focus','Not during Deep Work','Planned only in the Life block','15–20 minutes maximum'])
++   '<p class="note" style="margin-top:26px">Use social media. Don’t let social media use you.</p></div>'
++ '<div>' + plainList('Client Communication',['Don’t reply all day long','Use dedicated communication blocks','Batch messages wherever possible','Urgent issues can override the system','Close loops before shutdown'])
++   '<p class="note" style="margin-top:26px">Endless scrolling is not recovery.</p></div>'
++ '</div>' });
 
 /* ===== PART 04 — THE WEEKLY TRACKER ===== */
 S.push(part('04','The Weekly Tracker','Why should we lock and track our weekly time?', 3));
@@ -493,27 +620,46 @@ S.push({ part:'04 — The Weekly Tracker', nav:'Daily to Weekly', html:
 
 S.push({ part:'04 — The Weekly Tracker', nav:'Why Lock Your Week', html:
   eyebrow('Why Lock Your Weekly Time')
-+ '<h1 style="font-size:64px">If you don’t allocate your time,<br>something else will.</h1>'
++ '<h1 style="font-size:62px">If you don’t allocate your time,<br>something else will.</h1>'
 + bullets(['Lock Important Time','Protect Priorities','Reduce Random Decisions','Create Accountability','Make Time Visible']) });
 
-S.push({ part:'04 — The Weekly Tracker', nav:'Why It Matters', html:
+S.push({ part:'04 — The Weekly Tracker', nav:'The Weekly Loop', html:
   eyebrow('The Weekly Loop')
 + '<h2 style="margin-bottom:46px">Why weekly time blocking matters.</h2>'
-+ '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0 80px;align-items:start">'
++ '<div class="two">'
 +   '<div>' + vchain('Design the week',['Lock Your Week','Create Structure','See Your Actual Time'],1) + '</div>'
 +   '<div>' + vchain('Read the week back',['Identify Imbalance','Make Better Decisions','Improve Next Week'],4) + '</div>'
 + '</div>'
 + '<p class="note">&#8635;&nbsp;&nbsp;06 feeds back into 01. The loop is the system.</p>' });
 
+S.push({ part:'04 — The Weekly Tracker', nav:'Weekly Scorecard', html:
+  eyebrow('Weekly Scorecard')
++ '<h2 style="margin-bottom:30px">Nine numbers. Every week.</h2>'
++ '<div class="two" style="gap:0 76px">'
++ '<table class="score"><tr><th>Category</th><th class="r">Target</th></tr>'
++   '<tr><td>Client Work</td><td class="r">25–30 hours</td></tr>'
++   '<tr><td>Learning</td><td class="r">10–12 hours</td></tr>'
++   '<tr><td>Reading</td><td class="r">3.5+ hours</td></tr>'
++   '<tr><td>Gym</td><td class="r">4 days</td></tr>'
++   '<tr><td>Personal Branding</td><td class="r">3 sessions</td></tr></table>'
++ '<table class="score"><tr><th>Category</th><th class="r">Target</th></tr>'
++   '<tr><td>Prayer</td><td class="r">5 daily</td></tr>'
++   '<tr><td>Family Time</td><td class="r">Daily</td></tr>'
++   '<tr><td>Planned Social Media</td><td class="r">&le; 45 minutes</td></tr>'
++   '<tr><td>Sleep</td><td class="r">Consistent</td></tr></table>'
++ '</div>' });
+
 S.push({ part:'04 — The Weekly Tracker', nav:'Where Your Week Goes', html:
   eyebrow('Track Time. See Reality.')
-+ '<h2 style="font-size:44px;margin-bottom:8px">What does your week really look like?</h2>'
++ '<h2 style="font-size:44px;margin-bottom:6px">What does your week really look like?</h2>'
 + weekViz() });
 
 S.push({ part:'04 — The Weekly Tracker', nav:'Your Weekly Time Picture', html:
-  '<div style="display:grid;grid-template-columns:.85fr 1.15fr;gap:0 80px;align-items:center">'
+  '<div class="two" style="grid-template-columns:.85fr 1.15fr;align-items:center">'
 + '<div>' + eyebrow('Your Weekly Time Picture') + '<h2>Ask the week<br>seven questions.</h2></div>'
-+ bullets(['How many hours did I work?','How many hours did I sleep?','How much time did I invest in growth?','Where is most of my time going?','What is taking too much time?','Where should I spend less?','Where should I invest more?'],'q')
++ bullets(['How many hours did I work?','How many hours did I sleep?','How much time did I invest in growth?',
+           'Where is most of my time going?','What is taking too much time?','Where should I spend less?',
+           'Where should I invest more?'],'q')
 + '</div>' });
 
 /* ===== PART 05 — REVIEW & IMPROVEMENT ===== */
@@ -521,24 +667,34 @@ S.push(part('05','Review &amp; Improvement','How do we use weekly data to improv
 
 S.push({ part:'05 — Review &amp; Improvement', nav:'You Can’t Optimize What You Can’t See', html:
   eyebrow('Review &amp; Improvement')
-+ '<h2 style="margin-bottom:52px">You can’t optimize<br>what you can’t see.</h2>'
++ '<h2 style="margin-bottom:50px">You can’t optimise<br>what you can’t see.</h2>'
 + chain(['Visibility','Awareness','Decision','Improvement'],'lg')
 + '<p class="lede">Data turns time into something you can manage.</p>' });
 
 S.push({ part:'05 — Review &amp; Improvement', nav:'Weekly Review', html:
-  eyebrow('Weekly Review')
-+ '<h2 style="margin-bottom:40px">Review the week. Improve the system.</h2>'
-+ tiles(4,['Work','Sleep','Learning','Health','Family','Personal Branding','Social Media','Recovery'])
-+ '<div style="margin-top:46px"><div class="listhead" style="border:0;padding-bottom:16px">'
-+ 'For every category, ask:</div>' + chain(['Continue','Reduce','Eliminate','Increase']) + '</div>' });
+  eyebrow('Weekly Review &nbsp;·&nbsp; Every Sunday &nbsp;·&nbsp; 30–45 Minutes')
++ '<h2 style="margin-bottom:34px">Review the week. Improve the system.</h2>'
++ tiles(4,['Client Projects','Client Work Hours','Learning Hours','Reading Hours','Gym Sessions','Prayer Consistency',
+           'Personal Branding','Family Time','Social Media Usage','Sleep Consistency','Energy &amp; Recovery','Next Week’s Top 3'])
++ '<p class="note">Don’t plan everything. Identify the three outcomes that matter most.</p>' });
 
-S.push({ part:'05 — Review &amp; Improvement', nav:'The Rules', html:
+S.push({ part:'05 — Review &amp; Improvement', nav:'Monthly Review', html:
+  eyebrow('Monthly Review &nbsp;·&nbsp; Last Sunday of the Month')
++ '<div class="two" style="align-items:center">'
++ '<div><h2 style="font-size:46px">The review doesn’t<br>judge you.</h2>'
++   '<p class="lede" style="font-size:21px">It identifies what the system needs to improve.</p></div>'
++ '<div>' + plainList('Nine Questions',['Biggest Achievement','Biggest Mistake','Skill Growth','Revenue Progress',
+    'Health Progress','Sleep Quality','Biggest Lesson','Biggest Bottleneck','Next Month’s Primary Focus']) + '</div>'
++ '</div>' });
+
+S.push({ part:'05 — Review &amp; Improvement', nav:'Operating Principles', html:
   eyebrow('Operating Principles')
-+ '<h2 style="margin-bottom:40px">The rules.</h2>'
-+ '<div class="rulesgrid">'
++ '<h2 style="margin-bottom:26px">The twelve rules.</h2>'
++ '<div class="rulesgrid dense">'
 + ['One Block. One Purpose.','Time Blocks Are Fixed. Priorities Are Flexible.','Protect Your Peak Hours.',
-   'Recovery Is Part of Performance.','Consistency Beats Intensity.','Systems Before Motivation.',
-   'Learn &#8594; Apply &#8594; Compound.','Execute First. Optimize Later.']
+   'Protect the Next Block.','Recovery Is Part of Performance.','Consistency Beats Intensity.',
+   'Systems Before Motivation.','Business Before Entertainment.','Learn → Apply → Compound.',
+   'Close the Loops.','Build Today. Benefit Tomorrow.','Execute First. Optimize Later.']
   .map(function(r){ return '<div><span class="k"></span><span class="t">'+r+'</span></div>'; }).join('')
 + '</div>' });
 
@@ -547,28 +703,25 @@ S.push(part('06','Implementation','How do we actually start?', 5));
 
 S.push({ part:'06 — Implementation', nav:'Build It Gradually', html:
   eyebrow('Don’t Change Everything at Once')
-+ '<h1 style="margin-bottom:52px">Build the system gradually.</h1>'
++ '<h1 style="margin-bottom:50px">Build the system gradually.</h1>'
 + chain(['Start','Stabilize','Track','Review','Improve'],'lg')
-+ '<p class="note">Consistency first. Optimization second.</p>' });
++ '<p class="note">Execute first. Optimize later. Consistency before redesign.</p>' });
 
-/* ===== PART 07 — Q&A ===== */
+S.push({ part:'06 — Implementation', nav:'Final Philosophy', html:
+  eyebrow('Final Philosophy')
++ '<div class="two" style="align-items:center">'
++ '<h2 style="font-size:52px">You don’t need<br>a perfect day.<br><span class="accent">You need a<br>repeatable system.</span></h2>'
++ '<div><div class="listhead">A system that lets you</div>'
++   stack(['Work better','Recover better','Learn better','Live better','Become better']) + '</div>'
++ '</div>' });
+
+/* ===== PART 07 — Q & A ===== */
 S.push({ part:'07 — Q &amp; A', cls:'paper', nav:'Questions', html:
   '<div style="display:flex;flex-direction:column;justify-content:center;height:100%">'
 + '<p class="mega" style="color:#070808">Questions?</p>'
 + '<p class="lede" style="font-size:26px;margin-top:34px">Let’s build a system that works in real life.</p>'
 + '<p class="note" style="margin-top:auto;padding-top:26px;color:rgba(7,8,8,.42)">ASCENSION OPERATING SYSTEM&trade; · Foundation Edition v2.0</p>'
 + '</div>' });
-
-/* part divider factory (declared as a hoisted function so it can be used above) */
-function part(num, title, question, i){
-  var ix = PARTS.map(function(t,k){
-    return '<li class="'+(k===i?'on':'')+'"><span class="k">0'+(k+1)+'</span><span>'+t+'</span></li>';
-  }).join('');
-  return { part:'Part '+num, cls:'paper nochrome', nav:'Part '+num+' — '+title.replace(/&amp;/g,'&'), html:
-      '<div class="part"><div><p class="num">'+num+'</p>'
-    + '<p class="t">'+title+'</p><p class="q">'+question+'</p></div>'
-    + '<ul class="pix">'+ix+'</ul></div>' };
-}
 
 /* ============================================================
    render + navigation
@@ -582,7 +735,7 @@ S.forEach(function(s,i){
   el.innerHTML =
       '<div class="chrome"><div><b>Ascension OS&trade;</b><span class="dot"></span>' + s.part + '</div>'
     + '<div class="chrome-r">' + String(i+1).padStart(2,'0') + ' / ' + String(N).padStart(2,'0') + '</div></div>'
-    + '<div class="body' + (s.top ? ' top' : '') + '">' + s.html + '</div>';
+    + '<div class="body">' + s.html + '</div>';
   stage.appendChild(el);
 });
 var slides = stage.querySelectorAll('.slide');
@@ -590,14 +743,13 @@ var slides = stage.querySelectorAll('.slide');
 function show(i){
   cur = Math.max(0, Math.min(N-1, i));
   for (var k=0;k<slides.length;k++) slides[k].classList.toggle('live', k===cur);
-  bar.style.width = ((cur)/(N-1)*100) + '%';
+  bar.style.width = (cur/(N-1)*100) + '%';
   try { localStorage.setItem('aos-slide', String(cur)); } catch(e){}
   var cards = document.querySelectorAll('.ovc');
   for (var j=0;j<cards.length;j++) cards[j].classList.toggle('here', j===cur);
 }
 function go(d){ show(cur + d); }
 
-/* overview */
 var ov = document.getElementById('ov'), ovg = document.getElementById('ovg');
 S.forEach(function(s,i){
   var c = document.createElement('button');
@@ -634,11 +786,7 @@ document.addEventListener('touchend', function(e){
   tx = null;
 }, {passive:true});
 
-/* scale the 1600x900 stage to whatever viewport we are given */
-function fit(){
-  var w = window.innerWidth, h = window.innerHeight;
-  stage.style.transform = 'scale(' + Math.min(w/1600, h/900) + ')';
-}
+function fit(){ stage.style.transform = 'scale(' + Math.min(window.innerWidth/1600, window.innerHeight/900) + ')'; }
 window.addEventListener('resize', fit);
 fit();
 
@@ -656,7 +804,8 @@ fit();
   cells.addEventListener('mouseover', function(e){
     var c = e.target.closest('i'); if (!c) return;
     focusCat(c.dataset.c);
-    var d = WEEK[+c.dataset.c], r = c.getBoundingClientRect(), g = cells.parentElement.getBoundingClientRect(), sc = Math.min(window.innerWidth/1600, window.innerHeight/900);
+    var d = WEEK[+c.dataset.c], r = c.getBoundingClientRect(), g = cells.parentElement.getBoundingClientRect();
+    var sc = Math.min(window.innerWidth/1600, window.innerHeight/900);
     tip.innerHTML = d.nm.replace(/&amp;/g,'&') + ' &middot; ' + d.h + ' h';
     tip.style.opacity = 1;
     var x = (r.left - g.left + r.width/2) / sc, half = tip.offsetWidth / 2 + 6;
@@ -666,7 +815,6 @@ fit();
   cells.addEventListener('mouseleave', function(){ focusCat(null); tip.style.opacity = 0; });
 })();
 
-/* resume where the speaker left off */
 var start = 0;
 try { var v = localStorage.getItem('aos-slide'); if (v !== null && +v >= 0 && +v < N) start = +v; } catch(e){}
 show(start);
