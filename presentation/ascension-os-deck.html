@@ -1,0 +1,674 @@
+<title>Ascension Operating System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&family=Hanken+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ink:#070808; --surface:#0B0F10; --panel:#10171A; --panel-2:#141D20;
+  --line:#1D282B; --line-soft:rgba(229,241,242,.10);
+  --text:#F1F1F1; --dim:#93A3A6; --faint:#5D6A6D;
+  --accent:#04A2B8; --accent-hi:#3FC9DC; --ice:#E5F1F2;
+  --paper:#E5F1F2; --paper-2:#F1F1F1; --paper-line:rgba(7,8,8,.14);
+  --unal:#5A686B;
+  --d:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --b:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
+  --m:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--ink);color:var(--text);font-family:var(--b);overflow:hidden;-webkit-font-smoothing:antialiased}
+
+/* ---------- stage ---------- */
+#viewport{position:fixed;inset:0;display:grid;place-items:center;background:var(--ink)}
+#stage{width:1600px;height:900px;position:relative;transform-origin:center center;flex:none}
+.slide{position:absolute;inset:0;background:var(--surface);color:var(--text);
+  padding:44px 96px 52px;display:none;flex-direction:column;overflow:hidden}
+.slide.live{display:flex}
+.slide.paper{background:var(--paper);color:var(--ink)}
+
+/* ---------- chrome ---------- */
+.chrome{display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--m);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--faint);padding-bottom:14px;border-bottom:1px solid var(--line);flex:none}
+.paper .chrome{color:rgba(7,8,8,.42);border-bottom-color:var(--paper-line)}
+.chrome b{font-weight:600;color:var(--dim)}
+.paper .chrome b{color:rgba(7,8,8,.62)}
+.chrome .dot{display:inline-block;width:4px;height:4px;background:var(--accent);margin:0 12px 2px;vertical-align:middle}
+.chrome-r{font-variant-numeric:tabular-nums}
+.slide.nochrome .chrome{visibility:hidden}
+#bar{position:absolute;left:0;bottom:0;height:2px;background:var(--accent);width:0;transition:width .3s cubic-bezier(.2,.7,.2,1);z-index:6}
+
+/* ---------- body scaffold ---------- */
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0;padding:34px 0 8px}
+.body.top{justify-content:flex-start}
+
+/* ---------- type ---------- */
+.eyebrow{font-family:var(--m);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin:0 0 26px}
+.paper .eyebrow{color:#036C7B}
+.eyebrow.mute{color:var(--faint)}
+h1,h2,h3{margin:0;font-family:var(--d);font-weight:700;font-stretch:112%;text-wrap:balance}
+h1{font-size:78px;line-height:1.0;letter-spacing:-.022em}
+h2{font-size:52px;line-height:1.06;letter-spacing:-.016em}
+h3{font-size:26px;line-height:1.2;letter-spacing:-.005em}
+.hero{font-size:96px;line-height:.98;letter-spacing:-.03em;font-weight:800}
+.mega{font-family:var(--d);font-weight:800;font-stretch:118%;font-size:132px;line-height:.9;letter-spacing:-.04em}
+.lede{font-size:23px;line-height:1.5;color:var(--dim);max-width:62ch;font-weight:300;margin:26px 0 0}
+.paper .lede{color:rgba(7,8,8,.6)}
+.note{font-family:var(--m);font-size:13.5px;letter-spacing:.06em;color:var(--faint);margin:52px 0 0}
+.accent{color:var(--accent)}
+.paper .accent{color:#036C7B}
+.rule{height:1px;background:var(--line);border:0;margin:0}
+.paper .rule{background:var(--paper-line)}
+
+/* ---------- cover ---------- */
+.cover{display:flex;flex-direction:column;justify-content:space-between;height:100%}
+.cover .tm{font-family:var(--d);font-weight:900;font-stretch:120%;font-size:104px;line-height:.92;letter-spacing:-.035em}
+.cover .sub{font-family:var(--m);font-size:15px;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);margin-top:30px}
+.cover .desc{font-size:22px;color:var(--dim);font-weight:300;margin-top:16px}
+.cover .foot{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;
+  border-top:1px solid var(--line);padding-top:22px}
+.cover .motto{font-family:var(--d);font-weight:600;font-size:21px;letter-spacing:.005em;line-height:1.45}
+.cover .motto span{color:var(--faint)}
+.cover .ver{font-family:var(--m);font-size:12px;letter-spacing:.2em;color:var(--faint);text-align:right;white-space:nowrap}
+
+/* ---------- part divider: the deck's own "you are here" ---------- */
+.part{display:grid;grid-template-columns:1.15fr .85fr;gap:0 84px;align-items:center;height:100%}
+.part .num{font-family:var(--d);font-weight:800;font-stretch:120%;font-size:118px;line-height:.82;
+  letter-spacing:-.045em;color:#036C7B;margin:0 0 30px}
+.part .t{font-family:var(--d);font-weight:800;font-stretch:112%;font-size:74px;line-height:1.0;
+  letter-spacing:-.028em;margin:0}
+.part .q{font-size:22px;color:rgba(7,8,8,.56);font-weight:300;margin:24px 0 0;max-width:40ch}
+.part .pix{list-style:none;margin:0;padding:4px 0 4px 60px;border-left:1px solid var(--paper-line)}
+.part .pix li{display:flex;gap:22px;align-items:baseline;padding:12px 0;font-size:20px;
+  color:rgba(7,8,8,.34);font-weight:400}
+.part .pix .k{font-family:var(--m);font-size:12px;letter-spacing:.18em;color:rgba(7,8,8,.28)}
+.part .pix li.on{color:#070808;font-weight:600}
+.part .pix li.on .k{color:#036C7B}
+
+/* ---------- bullets ---------- */
+.bul{list-style:none;padding:0;margin:34px 0 0;display:flex;flex-direction:column;gap:0}
+.bul li{font-size:27px;font-weight:400;padding:19px 0;border-bottom:1px solid var(--line);
+  display:flex;align-items:baseline;gap:20px}
+.bul li:first-child{border-top:1px solid var(--line)}
+.paper .bul li{border-color:var(--paper-line)}
+.bul li::before{content:"";width:7px;height:7px;background:var(--accent);flex:none;transform:translateY(-4px)}
+.bul.q li{font-size:25px;color:var(--dim);font-weight:300}
+.bul.q li::before{background:var(--faint)}
+
+/* ---------- flow chain ---------- */
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:0 4px;margin-top:6px}
+.flow .n{font-family:var(--d);font-weight:600;font-stretch:108%;font-size:27px;letter-spacing:-.004em;
+  padding:15px 22px;border:1px solid var(--line);background:var(--panel);white-space:nowrap}
+.paper .flow .n{border-color:var(--paper-line);background:rgba(255,255,255,.55)}
+.flow .a{color:var(--accent);font-size:20px;padding:0 10px;font-family:var(--m)}
+.flow.lg .n{font-size:32px;padding:20px 28px}
+.flow.sm .n{font-size:20px;padding:11px 16px}
+
+/* vertical flow */
+.vflow{display:flex;flex-direction:column;align-items:flex-start;gap:0;margin-top:8px}
+.vflow .step{display:flex;align-items:center;gap:22px}
+.vflow .k{font-family:var(--m);font-size:12px;letter-spacing:.2em;color:var(--faint);width:34px;flex:none;
+  font-variant-numeric:tabular-nums}
+.vflow .n{font-family:var(--d);font-weight:600;font-stretch:108%;font-size:31px;letter-spacing:-.008em}
+.vflow .bridge{width:34px;display:flex;justify-content:center}
+.vflow .bridge i{width:1px;height:22px;background:var(--accent);opacity:.5;display:block}
+
+/* ---------- grids ---------- */
+.tiles{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:8px}
+.paper .tiles{background:var(--paper-line);border-color:var(--paper-line)}
+.tiles .c{background:var(--surface);padding:28px 26px;min-height:118px;display:flex;flex-direction:column;justify-content:space-between}
+.paper .tiles .c{background:var(--paper)}
+.tiles .c .k{width:8px;height:8px;background:var(--accent);display:block}
+.tiles .c .v{font-family:var(--d);font-weight:600;font-stretch:108%;font-size:27px;letter-spacing:-.008em;line-height:1.15}
+.cols7{grid-template-columns:repeat(7,1fr)}
+.tiles.cols7 .c{min-height:212px;padding:26px 22px}
+.cols4{grid-template-columns:repeat(4,1fr)}
+.cols2{grid-template-columns:repeat(2,1fr)}
+
+.listhead{font-family:var(--m);font-size:11px;letter-spacing:.2em;color:var(--faint);
+  text-transform:uppercase;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.paper .listhead{color:rgba(7,8,8,.45);border-bottom-color:var(--paper-line)}
+
+/* ---------- daily block slides ---------- */
+.blk{display:flex;flex-direction:column;flex:1;min-height:0}
+.blk .hd{display:flex;align-items:baseline;gap:22px;margin-bottom:6px}
+.blk .cols{flex:1;display:grid;grid-template-columns:1.15fr .85fr;gap:0 72px;align-items:center;min-height:0}
+.blk .idx{font-family:var(--m);font-weight:600;font-size:13px;letter-spacing:.24em;color:var(--accent);
+  border:1px solid var(--accent);padding:6px 10px 5px;line-height:1}
+.blk .time{font-family:var(--m);font-weight:500;font-size:15px;letter-spacing:.16em;color:var(--dim);
+  font-variant-numeric:tabular-nums;text-transform:uppercase}
+.blk h2{margin:14px 0 0;font-size:60px}
+.blk .left,.blk .right{padding-bottom:26px}
+.blk .kicker{font-family:var(--d);font-weight:800;font-stretch:116%;font-size:56px;line-height:1;
+  letter-spacing:-.03em;margin:0}
+.blk .sub{font-size:20px;color:var(--dim);font-weight:300;line-height:1.5;margin-top:18px;max-width:40ch}
+
+.blk .plain{list-style:none;margin:0;padding:0}
+.blk .plain li{font-size:23px;padding:15px 0;border-bottom:1px solid var(--line);color:var(--text);font-weight:400}
+.blk .rules{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:13px}
+.blk .rules li{font-family:var(--m);font-size:16px;letter-spacing:.05em;color:var(--dim);
+  display:flex;align-items:center;gap:14px}
+.blk .rules li::before{content:"";width:10px;height:1px;background:var(--accent);flex:none}
+
+/* ---------- 24h rail ---------- */
+.rail{position:relative;margin-top:auto;padding-top:24px;flex:none}
+.rail .track{position:relative;height:16px;width:100%}
+.rail .seg{position:absolute;top:0;height:16px;background:#18272B;border-right:1px solid var(--surface)}
+.rail .seg.on{background:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.rail .seg.sleep{background:repeating-linear-gradient(135deg,#131C1F 0 5px,#0E1517 5px 10px)}
+.rail .marks{position:relative;height:22px;margin-top:9px}
+.rail .marks span{position:absolute;top:0;font-family:var(--m);font-size:11px;letter-spacing:.14em;
+  color:var(--faint);transform:translateX(-50%);white-space:nowrap}
+.rail .marks span:first-child{transform:none}
+.rail .marks span.end{transform:translateX(-100%)}
+.rail .cur{position:absolute;top:-19px;font-family:var(--m);font-size:11px;letter-spacing:.16em;
+  color:var(--accent);white-space:nowrap}
+
+/* big timeline slide */
+.tl .track{height:30px}
+.tl .seg{height:30px}
+.tl .ticks{position:relative;height:20px;margin-top:10px}
+.tl .ticks span{position:absolute;font-family:var(--m);font-size:12px;letter-spacing:.16em;color:var(--dim);
+  transform:translateX(-50%);font-variant-numeric:tabular-nums;white-space:nowrap}
+.tl .ticks span.s{transform:none}
+.tl .ticks span.e{transform:translateX(-100%)}
+.tl .nums{position:relative;height:16px;margin-bottom:9px}
+.tl .nums span{position:absolute;font-family:var(--m);font-size:10.5px;color:var(--faint);transform:translateX(-50%)}
+
+/* ---------- week grid ---------- */
+.week{display:grid;grid-template-columns:360px 1fr;gap:56px;align-items:center;margin-top:20px}
+.legend{list-style:none;margin:0;padding:0}
+.legend li{display:grid;grid-template-columns:12px 1fr auto;align-items:center;gap:14px;
+  padding:12.5px 0;border-bottom:1px solid var(--line);cursor:default;transition:opacity .15s}
+.legend li:first-child{border-top:1px solid var(--line)}
+.legend .sw{width:12px;height:12px;background:var(--accent)}
+.legend .nm{font-size:19px;font-weight:400}
+.legend .hr{font-family:var(--m);font-size:16px;color:var(--dim);font-variant-numeric:tabular-nums}
+.legend li.dimmed{opacity:.32}
+.legend li.unal .nm{color:var(--dim)}
+.gridwrap{position:relative}
+.cells{display:grid;grid-template-columns:repeat(24,1fr);gap:3px}
+.cells i{display:block;aspect-ratio:1/1;transition:opacity .15s}
+.cells i.unal{
+  background-image:repeating-linear-gradient(135deg,rgba(229,241,242,.22) 0 2px,transparent 2px 4px)}
+.cells i.dimmed{opacity:.16}
+.gridkey{display:flex;justify-content:space-between;font-family:var(--m);font-size:11px;
+  letter-spacing:.18em;color:var(--faint);margin-top:16px;text-transform:uppercase}
+#tip{position:absolute;z-index:9;pointer-events:none;opacity:0;transition:opacity .12s;
+  background:var(--panel-2);border:1px solid var(--line);padding:8px 12px;
+  font-family:var(--m);font-size:12.5px;color:var(--text);white-space:nowrap;transform:translate(-50%,-140%)}
+
+/* ---------- rules grid ---------- */
+.rulesgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);margin-top:10px}
+.rulesgrid div{background:var(--surface);padding:26px 28px;display:flex;align-items:center;gap:20px;min-height:104px}
+.rulesgrid .k{width:18px;height:1px;background:var(--accent);flex:none;align-self:center}
+.rulesgrid .t{font-family:var(--d);font-weight:600;font-stretch:106%;font-size:25px;letter-spacing:-.006em;line-height:1.2}
+
+/* ---------- two-track (sleep) ---------- */
+.track2{display:flex;flex-direction:column;gap:34px;margin-top:10px}
+.tr .lbl{font-family:var(--m);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:16px}
+.tr.pref .lbl{color:var(--accent)}
+.tr.real .lbl{color:var(--faint)}
+.tr.real .flow .n{color:var(--dim);border-style:dashed}
+
+/* ---------- overview ---------- */
+#ov{position:fixed;inset:0;background:rgba(7,8,8,.97);z-index:20;display:none;
+  overflow-y:auto;padding:64px 56px}
+#ov.on{display:block}
+#ov h4{font-family:var(--m);font-size:12px;letter-spacing:.24em;color:var(--faint);
+  text-transform:uppercase;margin:0 0 28px}
+#ovg{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.ovc{border:1px solid var(--line);background:var(--surface);padding:16px;cursor:pointer;
+  min-height:108px;display:flex;flex-direction:column;gap:8px;text-align:left;color:inherit;font:inherit}
+.ovc:hover,.ovc:focus-visible{border-color:var(--accent);outline:none}
+.ovc .n{font-family:var(--m);font-size:10.5px;letter-spacing:.18em;color:var(--faint)}
+.ovc .t{font-family:var(--d);font-weight:600;font-size:15px;line-height:1.25;letter-spacing:-.004em}
+.ovc.here{border-color:var(--accent);background:var(--panel)}
+
+/* ---------- hint ---------- */
+#hint{position:fixed;right:18px;bottom:16px;z-index:12;font-family:var(--m);font-size:10.5px;
+  letter-spacing:.16em;color:var(--faint);text-transform:uppercase;transition:opacity .5s}
+#hint.gone{opacity:0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---------- print / PDF ---------- */
+@page{size:1600px 900px;margin:0}
+@media print{
+  body{overflow:visible;background:#fff}
+  #viewport{position:static;display:block}
+  #stage{transform:none!important;width:1600px;height:auto}
+  .slide{position:relative;display:flex!important;page-break-after:always;break-after:page;
+    width:1600px;height:900px;inset:auto}
+  #hint,#ov,#bar{display:none!important}
+}
+</style>
+
+<div id="viewport"><div id="stage"><div id="bar"></div></div></div>
+<div id="ov" role="dialog" aria-label="All slides"><h4>All slides — click to jump · press O or Esc to close</h4><div id="ovg"></div></div>
+<div id="hint">← → navigate · O overview</div>
+
+<script>
+/* ============================================================
+   ASCENSION OPERATING SYSTEM — Foundation Edition v2.0
+   Speaker-led deck. Slides are cues, not the manual.
+   ============================================================ */
+
+/* ---------- the 24-hour rail: 1:00 PM -> 5:00 AM operating day + 8h recovery ---------- */
+var DAY = 1440, OPEND = 960;                 /* minutes from 1:00 PM */
+var pct = function(m){ return (m / DAY * 100); };
+
+var BLOCKS = [
+ {n:'01', t:'Wake Up Consistently',                     time:'1:00 PM',          s:0,   e:0},
+ {n:'02', t:'Win Your First Hour',                      time:'1:00 – 1:40 PM',   s:0,   e:40},
+ {n:'03', t:'Refuel Your System',                       time:'1:40 – 2:00 PM',   s:40,  e:60},
+ {n:'04', t:'Protect Your Peak Hours',                  time:'2:00 – 4:00 PM',   s:60,  e:180},
+ {n:'05', t:'Reset Your Energy',                        time:'4:00 – 4:30 PM',   s:180, e:210},
+ {n:'06', t:'Move Your Body',                           time:'4:30 – 6:45 PM',   s:210, e:345},
+ {n:'07', t:'Make Time to Live',                        time:'6:45 – 7:00 PM',   s:345, e:360},
+ {n:'08', t:'Communicate Without Constant Interruption',time:'7:00 – 8:00 PM',   s:360, e:420},
+ {n:'09', t:'Evening Reset',                            time:'8:00 – 9:00 PM',   s:420, e:480},
+ {n:'10', t:'Execute & Level Up',                       time:'9:00 – 11:00 PM',  s:480, e:600},
+ {n:'11', t:'Protect Your Deep Work',                   time:'11:00 PM – 1:00 AM',s:600,e:720},
+ {n:'12', t:'Read to Build Your Mind',                  time:'1:00 – 1:30 AM',   s:720, e:750},
+ {n:'13', t:'Build Your Future Value',                  time:'1:30 – 2:15 AM',   s:750, e:795},
+ {n:'14', t:'Finish & Close Your Workday',              time:'2:15 – 4:00 AM',   s:795, e:900},
+ {n:'15', t:'Design Tomorrow',                          time:'4:00 – 4:15 AM',   s:900, e:915},
+ {n:'16', t:'Enter Your Recovery Window',               time:'4:15 – 5:00 AM',   s:915, e:960}
+];
+
+/* mini rail shown on every daily-block slide — the audience always knows where in the day we are */
+function rail(active){
+  var segs = BLOCKS.map(function(b,i){
+    var w = Math.max(pct(b.e - b.s), 0.45);
+    return '<span class="seg' + (i===active?' on':'') + '" style="left:'+pct(b.s).toFixed(3)+'%;width:'+w.toFixed(3)+'%"></span>';
+  }).join('');
+  segs += '<span class="seg sleep" style="left:'+pct(OPEND).toFixed(3)+'%;width:'+pct(DAY-OPEND).toFixed(3)+'%"></span>';
+  var cur = BLOCKS[active];
+  var curPos = pct(cur.s + (cur.e - cur.s)/2);
+  return '<div class="rail"><div class="track">'
+       + '<span class="cur" style="left:'+curPos.toFixed(2)+'%;transform:translateX(' + (curPos>80?'-100%':(curPos<8?'0':'-50%')) + ')">' + cur.n + '</span>'
+       + segs + '</div><div class="marks">'
+       + '<span style="left:0">1 PM</span>'
+       + '<span style="left:33.33%">9 PM</span>'
+       + '<span style="left:50%">1 AM</span>'
+       + '<span style="left:66.67%">5 AM · WORK ENDS</span>'
+       + '<span class="end" style="left:100%">8 H RECOVERY</span>'
+       + '</div></div>';
+}
+
+/* ---------- small builders ---------- */
+function eyebrow(t,m){ return '<p class="eyebrow'+(m?' mute':'')+'">'+t+'</p>'; }
+function chain(items,size){
+  return '<div class="flow '+(size||'')+'">' + items.map(function(x,i){
+    return (i? '<span class="a">&#8594;</span>':'') + '<span class="n">'+x+'</span>';
+  }).join('') + '</div>';
+}
+function vchain(head, items, from){
+  var out = '<div class="listhead">'+head+'</div><div class="vflow">';
+  items.forEach(function(x,i){
+    if(i) out += '<div class="bridge"><i></i></div>';
+    out += '<div class="step"><span class="k">'+String(i+(from||1)).padStart(2,'0')+'</span><span class="n">'+x+'</span></div>';
+  });
+  return out + '</div>';
+}
+function plainList(head, items){
+  return '<div class="listhead">'+head+'</div><ul class="plain">'
+       + items.map(function(x){ return '<li>'+x+'</li>'; }).join('') + '</ul>';
+}
+function ruleList(head, items){
+  return '<div class="listhead">'+head+'</div><ul class="rules" style="margin-top:22px">'
+       + items.map(function(x){ return '<li>'+x+'</li>'; }).join('') + '</ul>';
+}
+function bullets(items, cls){
+  return '<ul class="bul '+(cls||'')+'">' + items.map(function(x){ return '<li>'+x+'</li>'; }).join('') + '</ul>';
+}
+function tiles(cols, items){
+  return '<div class="tiles cols'+cols+'">' + items.map(function(x){
+    return '<div class="c"><span class="k"></span><span class="v">'+x+'</span></div>';
+  }).join('') + '</div>';
+}
+function block(i, leftHTML, rightHTML){
+  var b = BLOCKS[i];
+  return { part:'03 — Daily Operating System', cls:'', html:
+      '<div class="blk">'
+    +   '<div class="hd"><span class="idx">'+b.n+'</span><span class="time">'+b.time+'</span></div>'
+    +   '<h2>'+b.t+'</h2>'
+    +   '<div class="cols"><div class="left">'+leftHTML+'</div><div class="right">'+rightHTML+'</div></div>'
+    + '</div>' + rail(i), nav:b.n+' '+b.t };
+}
+function kick(t, sub, note){
+  return '<p class="kicker">'+t+'</p>' + (sub? '<p class="sub">'+sub+'</p>':'')
+       + (note? '<p class="note" style="margin-top:34px">'+note+'</p>':'');
+}
+
+/* ---------- weekly example: derived hour-for-hour from the daily architecture ---------- */
+var WEEK = [
+  {nm:'Sleep',                     h:56, c:'#E5F1F2'},
+  {nm:'Work',                      h:47, c:'#04A2B8'},
+  {nm:'Health &amp; Training',     h:19, c:'#8FDCE6'},
+  {nm:'Learning',                  h:18, c:'#0E6E7E'},
+  {nm:'Family &amp; Personal Life',h:9,  c:'#B9E7ED'},
+  {nm:'Recovery',                  h:7,  c:'#136F80'},
+  {nm:'Growth &amp; Brand',        h:2,  c:'#5FCBDA'},
+  {nm:'Unaccounted',               h:10, c:'#5A686B', unal:true}
+];
+function weekViz(){
+  var cells = '', idx = 0;
+  WEEK.forEach(function(c,ci){
+    for(var k=0;k<c.h;k++){
+      idx++;
+      cells += '<i data-c="'+ci+'" data-h="'+idx+'" class="'+(c.unal?'unal':'')+'"'
+            + ' style="background-color:'+c.c+'"></i>';
+    }
+  });
+  var legend = WEEK.map(function(c,ci){
+    return '<li data-c="'+ci+'"'+(c.unal?' class="unal"':'')+'>'
+         + '<span class="sw" style="background-color:'+c.c+(c.unal
+            ? ';background-image:repeating-linear-gradient(135deg,rgba(7,8,8,.45) 0 2px,transparent 2px 4px)':'')+'"></span>'
+         + '<span class="nm">'+c.nm+'</span><span class="hr">'+c.h+' h</span></li>';
+  }).join('');
+  return '<div class="week"><div><ul class="legend" id="lg">'+legend+'</ul>'
+       + '<p class="note" style="margin-top:34px">Example week, derived hour-for-hour<br>from the daily architecture. Yours will differ.</p></div>'
+       + '<div class="gridwrap"><div class="cells" id="cells">'+cells+'</div>'
+       + '<div class="gridkey"><span>One cell = one hour</span><span>168 hours · 7 days</span></div>'
+       + '<div id="tip"></div></div></div>';
+}
+
+/* ---------- the deck ---------- */
+var PARTS = ['Why','The Philosophy','The Daily Operating System','The Weekly Tracker',
+             'Review &amp; Improvement','Implementation','Q &amp; A'];
+var S = [];
+
+S.push({ part:'Foundation Edition v2.0', cls:'nochrome', nav:'Cover', html:
+  '<div class="cover">'
++   '<div></div>'
++   '<div><p class="tm">ASCENSION<br>OPERATING SYSTEM<span style="font-size:34px;vertical-align:super">&trade;</span></p>'
++     '<p class="sub">Foundation Edition &nbsp;v2.0</p>'
++     '<p class="desc">Personal Life, Business &amp; Performance Operating System</p></div>'
++   '<div class="foot"><p class="motto">Operate with Intention.<br>Execute with Discipline.<br>Improve Every Day.</p>'
++     '<p class="ver">Live Session<br>Speaker-Led Framework</p></div>'
++ '</div>' });
+
+/* ===== PART 01 — WHY ===== */
+S.push(part('01','Why','Why do we need an operating system?', 0));
+S.push({ part:'01 — Why', nav:'The Problem', html:
+  eyebrow('The Problem')
++ '<h1>Most people don’t have<br>a time problem.<br><span class="accent">They have a system problem.</span></h1>' });
+
+S.push({ part:'01 — Why', nav:'What Is Ascension OS', html:
+  eyebrow('What Is It')
++ '<h2 style="margin-bottom:36px">One system to intentionally operate<br>your life and business.</h2>'
++ tiles(7, ['Health','Faith','Work','Learning','Family','Recovery','Growth']) });
+
+S.push({ part:'01 — Why', nav:'The Mission', html:
+  eyebrow('The Mission')
++ '<p class="hero">Build a disciplined life<br>through <span class="accent">systems</span>,<br>not motivation.</p>' });
+
+/* ===== PART 02 — PHILOSOPHY ===== */
+S.push(part('02','The Philosophy','How should we think about time, discipline, energy and priorities?', 1));
+
+S.push({ part:'02 — The Philosophy', nav:'Core Philosophy', html:
+  eyebrow('Core Philosophy')
++ '<p class="mega">Operate with Intention.<br>Execute with Discipline.<br>Improve Every Day.</p>' });
+
+S.push({ part:'02 — The Philosophy', nav:'Core Principle', html:
+  eyebrow('Core Principle')
++ '<p class="hero">Time blocks are <span class="accent">fixed</span>.<br>Priorities are <span class="accent">flexible</span>.</p>'
++ '<p class="lede">The structure stays stable. The priority inside the block can change.</p>' });
+
+S.push({ part:'02 — The Philosophy', nav:'Start With Sleep', html:
+  eyebrow('Sleep &amp; Rhythm')
++ '<h2>Sleep is the foundation of performance.</h2>'
++ '<div class="track2">'
++   '<div class="tr pref"><p class="lbl">Preferred direction</p>'
++     chain(['Early Sleep','Early Wake','Day Work','Night Recovery']) + '</div>'
++   '<div class="tr real"><p class="lbl">Current reality for some professionals</p>'
++     chain(['Late Work','Structured Schedule','Protected Sleep','Gradual Shift'],'sm') + '</div>'
++ '</div>'
++ '<p class="note">A practical adaptation for late-night professionals — not the destination.</p>' });
+
+S.push({ part:'02 — The Philosophy', nav:'Consistency Over Extremes', html:
+  eyebrow('Consistency Over Extremes')
++ '<h1>You don’t need<br>a 5 AM wake-up.</h1>'
++ bullets(['Consistent Wake Time','Enough Sleep','Stable Rhythm','Sustainable Schedule'])
++ '<p class="note">Consistency &gt; Extreme Schedules</p>' });
+
+/* ===== PART 03 — DAILY OPERATING SYSTEM ===== */
+S.push(part('03','The Daily Operating System','How does the system work throughout the day?', 2));
+
+/* the architecture */
+(function(){
+  var segs = BLOCKS.map(function(b){
+    return '<span class="seg" style="left:'+pct(b.s).toFixed(3)+'%;width:'+Math.max(pct(b.e-b.s),0.45).toFixed(3)+'%;background:var(--accent)"></span>';
+  }).join('')
+  + '<span class="seg sleep" style="left:'+pct(OPEND).toFixed(3)+'%;width:'+pct(DAY-OPEND).toFixed(3)+'%"></span>';
+  var nums = BLOCKS.filter(function(b){ return (b.e-b.s) >= 20; }).map(function(b){
+    return '<span style="left:'+pct(b.s+(b.e-b.s)/2).toFixed(2)+'%">'+b.n+'</span>';
+  }).join('');
+  var ticks = [[0,'1 PM','s'],[240,'5 PM',''],[480,'9 PM',''],[720,'1 AM',''],[960,'5 AM',''],[1440,'1 PM','e']]
+    .map(function(t){ return '<span class="'+t[2]+'" style="left:'+pct(t[0]).toFixed(2)+'%">'+t[1]+'</span>'; }).join('');
+  S.push({ part:'03 — Daily Operating System', nav:'The Daily Architecture', html:
+      eyebrow('The Daily Architecture')
+    + '<h2 style="margin-bottom:14px">16 operating hours. 8 hours of recovery.</h2>'
+    + '<div class="rail tl" style="margin-top:44px;margin-bottom:52px"><div class="nums">'+nums+'</div>'
+    + '<div class="track">'+segs+'</div><div class="ticks">'+ticks+'</div></div>'
+    + '<div style="display:flex;flex-direction:column;gap:14px;align-items:flex-start">'
+    +   chain(['Wake','Reset','Fuel','Focus','Recovery','Gym','Communication'],'sm')
+    +   chain(['Learning','Deep Work','Reading','Growth','Shutdown','Sleep'],'sm')
+    + '</div>' });
+})();
+
+S.push(block(0,  kick('Same time.<br>Every day.'),                     plainList('Non-Negotiables',['Same Wake Time','Enough Sleep','Stable Rhythm'])));
+S.push(block(1,  kick('Start<br>intentionally.'),                      vchain('The Opening Sequence',['Water','Light','Movement','Prayer','Review'])));
+S.push(block(2,  kick('20 minutes.'),                                  plainList('Refuel',['Simple Meal','Hydration','Sustainable Nutrition'])));
+S.push(block(3,  kick('One block.<br>One priority.'),                  plainList('Possible Priorities',['Client Work','Client Communication','Google Ads','Analytics &amp; Tracking'])));
+S.push(block(4,  kick('30 minutes.','','Recover intentionally, not digitally.'), vchain('Reset Sequence',['Meal','Hydration','Gym Preparation','Recovery'])));
+S.push(block(5,  kick('2 hr 15 min.','','Move &#8594; Reset &#8594; Perform Better'),  vchain('Training Window',['Travel','Workout','Return'])));
+S.push(block(6,  kick('A good system<br>should make your life<br>worth repeating.'), plainList('Protected',['Family','Personal Life','Recovery','Transition'])));
+S.push(block(7,  kick('Respond intentionally.<br>Don’t react continuously.'), plainList('Channels',['Email','WhatsApp','Slack','Messenger','Follow-ups'])));
+S.push(block(8,  kick('60 minutes.'),                                  plainList('Evening Reset',['Dinner','Prayer','Family','Desk Setup','Mental Reset'])));
+S.push(block(9,  '<div class="listhead" style="margin-bottom:26px">The Learning Loop</div>'
+               + chain(['Watch','Note','Practice','Apply']),           plainList('Focus Areas',['Google Ads','Analytics','Conversion Tracking','Professional Skills'])));
+S.push(block(10, kick('90+ minutes of<br>uninterrupted focus.','','Focus is a business asset.'), ruleList('Rules',['Phone Silent','No Notifications','No Multitasking','Timer On'])));
+S.push(block(11, kick('30 minutes<br>a day.','','Read &#8594; Reflect &#8594; Apply'), plainList('Reading Areas',['Business','Psychology','Strategy','Personal Growth'])));
+S.push(block(12, kick('3 days<br>a week.'),                            plainList('Future Value',['Personal Branding','Networking','Content','Client Acquisition'])));
+S.push(block(13, '<div class="listhead" style="margin-bottom:26px">Close the Loop</div>'
+               + chain(['Finish','Schedule','Eliminate']),
+               '<div class="listhead">The Only Question</div><p class="kicker" style="font-size:38px;margin-top:24px">What did I actually complete today?</p>'));
+S.push(block(14, kick('Tomorrow’s top 3.','Wake up with a starting point.'),
+               '<div class="listhead">Written Before Sleep</div><ul class="plain">'
+               + '<li><span style="font-family:var(--m);color:var(--accent);font-size:15px;margin-right:18px">01</span>&nbsp;</li>'
+               + '<li><span style="font-family:var(--m);color:var(--accent);font-size:15px;margin-right:18px">02</span>&nbsp;</li>'
+               + '<li><span style="font-family:var(--m);color:var(--accent);font-size:15px;margin-right:18px">03</span>&nbsp;</li></ul>'));
+S.push(block(15, kick('Work ends.<br>Recovery begins.'),               vchain('Shutdown Sequence',['Close Laptop','Notifications Off','Prayer','Wind Down','Sleep'])));
+
+/* ===== PART 04 — THE WEEKLY TRACKER ===== */
+S.push(part('04','The Weekly Tracker','Why should we lock and track our weekly time?', 3));
+
+S.push({ part:'04 — The Weekly Tracker', nav:'Daily to Weekly', html:
+  eyebrow('From Structure to Visibility')
++ '<p class="hero">A daily system<br>gives you <span class="accent">structure</span>.<br>A weekly tracker<br>gives you <span class="accent">visibility</span>.</p>' });
+
+S.push({ part:'04 — The Weekly Tracker', nav:'Why Lock Your Week', html:
+  eyebrow('Why Lock Your Weekly Time')
++ '<h1 style="font-size:64px">If you don’t allocate your time,<br>something else will.</h1>'
++ bullets(['Lock Important Time','Protect Priorities','Reduce Random Decisions','Create Accountability','Make Time Visible']) });
+
+S.push({ part:'04 — The Weekly Tracker', nav:'Why It Matters', html:
+  eyebrow('The Weekly Loop')
++ '<h2 style="margin-bottom:46px">Why weekly time blocking matters.</h2>'
++ '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0 80px;align-items:start">'
++   '<div>' + vchain('Design the week',['Lock Your Week','Create Structure','See Your Actual Time'],1) + '</div>'
++   '<div>' + vchain('Read the week back',['Identify Imbalance','Make Better Decisions','Improve Next Week'],4) + '</div>'
++ '</div>'
++ '<p class="note">&#8635;&nbsp;&nbsp;06 feeds back into 01. The loop is the system.</p>' });
+
+S.push({ part:'04 — The Weekly Tracker', nav:'Where Your Week Goes', html:
+  eyebrow('Track Time. See Reality.')
++ '<h2 style="font-size:44px;margin-bottom:8px">What does your week really look like?</h2>'
++ weekViz() });
+
+S.push({ part:'04 — The Weekly Tracker', nav:'Your Weekly Time Picture', html:
+  '<div style="display:grid;grid-template-columns:.85fr 1.15fr;gap:0 80px;align-items:center">'
++ '<div>' + eyebrow('Your Weekly Time Picture') + '<h2>Ask the week<br>seven questions.</h2></div>'
++ bullets(['How many hours did I work?','How many hours did I sleep?','How much time did I invest in growth?','Where is most of my time going?','What is taking too much time?','Where should I spend less?','Where should I invest more?'],'q')
++ '</div>' });
+
+/* ===== PART 05 — REVIEW & IMPROVEMENT ===== */
+S.push(part('05','Review &amp; Improvement','How do we use weekly data to improve the system?', 4));
+
+S.push({ part:'05 — Review &amp; Improvement', nav:'You Can’t Optimize What You Can’t See', html:
+  eyebrow('Review &amp; Improvement')
++ '<h2 style="margin-bottom:52px">You can’t optimize<br>what you can’t see.</h2>'
++ chain(['Visibility','Awareness','Decision','Improvement'],'lg')
++ '<p class="lede">Data turns time into something you can manage.</p>' });
+
+S.push({ part:'05 — Review &amp; Improvement', nav:'Weekly Review', html:
+  eyebrow('Weekly Review')
++ '<h2 style="margin-bottom:40px">Review the week. Improve the system.</h2>'
++ tiles(4,['Work','Sleep','Learning','Health','Family','Personal Branding','Social Media','Recovery'])
++ '<div style="margin-top:46px"><div class="listhead" style="border:0;padding-bottom:16px">'
++ 'For every category, ask:</div>' + chain(['Continue','Reduce','Eliminate','Increase']) + '</div>' });
+
+S.push({ part:'05 — Review &amp; Improvement', nav:'The Rules', html:
+  eyebrow('Operating Principles')
++ '<h2 style="margin-bottom:40px">The rules.</h2>'
++ '<div class="rulesgrid">'
++ ['One Block. One Purpose.','Time Blocks Are Fixed. Priorities Are Flexible.','Protect Your Peak Hours.',
+   'Recovery Is Part of Performance.','Consistency Beats Intensity.','Systems Before Motivation.',
+   'Learn &#8594; Apply &#8594; Compound.','Execute First. Optimize Later.']
+  .map(function(r){ return '<div><span class="k"></span><span class="t">'+r+'</span></div>'; }).join('')
++ '</div>' });
+
+/* ===== PART 06 — IMPLEMENTATION ===== */
+S.push(part('06','Implementation','How do we actually start?', 5));
+
+S.push({ part:'06 — Implementation', nav:'Build It Gradually', html:
+  eyebrow('Don’t Change Everything at Once')
++ '<h1 style="margin-bottom:52px">Build the system gradually.</h1>'
++ chain(['Start','Stabilize','Track','Review','Improve'],'lg')
++ '<p class="note">Consistency first. Optimization second.</p>' });
+
+/* ===== PART 07 — Q&A ===== */
+S.push({ part:'07 — Q &amp; A', cls:'paper', nav:'Questions', html:
+  '<div style="display:flex;flex-direction:column;justify-content:center;height:100%">'
++ '<p class="mega" style="color:#070808">Questions?</p>'
++ '<p class="lede" style="font-size:26px;margin-top:34px">Let’s build a system that works in real life.</p>'
++ '<p class="note" style="margin-top:auto;padding-top:26px;color:rgba(7,8,8,.42)">ASCENSION OPERATING SYSTEM&trade; · Foundation Edition v2.0</p>'
++ '</div>' });
+
+/* part divider factory (declared as a hoisted function so it can be used above) */
+function part(num, title, question, i){
+  var ix = PARTS.map(function(t,k){
+    return '<li class="'+(k===i?'on':'')+'"><span class="k">0'+(k+1)+'</span><span>'+t+'</span></li>';
+  }).join('');
+  return { part:'Part '+num, cls:'paper nochrome', nav:'Part '+num+' — '+title.replace(/&amp;/g,'&'), html:
+      '<div class="part"><div><p class="num">'+num+'</p>'
+    + '<p class="t">'+title+'</p><p class="q">'+question+'</p></div>'
+    + '<ul class="pix">'+ix+'</ul></div>' };
+}
+
+/* ============================================================
+   render + navigation
+   ============================================================ */
+var stage = document.getElementById('stage'), bar = document.getElementById('bar');
+var N = S.length, cur = 0;
+
+S.forEach(function(s,i){
+  var el = document.createElement('section');
+  el.className = 'slide ' + (s.cls || '');
+  el.innerHTML =
+      '<div class="chrome"><div><b>Ascension OS&trade;</b><span class="dot"></span>' + s.part + '</div>'
+    + '<div class="chrome-r">' + String(i+1).padStart(2,'0') + ' / ' + String(N).padStart(2,'0') + '</div></div>'
+    + '<div class="body' + (s.top ? ' top' : '') + '">' + s.html + '</div>';
+  stage.appendChild(el);
+});
+var slides = stage.querySelectorAll('.slide');
+
+function show(i){
+  cur = Math.max(0, Math.min(N-1, i));
+  for (var k=0;k<slides.length;k++) slides[k].classList.toggle('live', k===cur);
+  bar.style.width = ((cur)/(N-1)*100) + '%';
+  try { localStorage.setItem('aos-slide', String(cur)); } catch(e){}
+  var cards = document.querySelectorAll('.ovc');
+  for (var j=0;j<cards.length;j++) cards[j].classList.toggle('here', j===cur);
+}
+function go(d){ show(cur + d); }
+
+/* overview */
+var ov = document.getElementById('ov'), ovg = document.getElementById('ovg');
+S.forEach(function(s,i){
+  var c = document.createElement('button');
+  c.className = 'ovc';
+  c.innerHTML = '<span class="n">' + String(i+1).padStart(2,'0') + '</span><span class="t">' + (s.nav || s.part) + '</span>';
+  c.addEventListener('click', function(){ show(i); ov.classList.remove('on'); });
+  ovg.appendChild(c);
+});
+function toggleOv(force){
+  var on = (force === undefined) ? !ov.classList.contains('on') : force;
+  ov.classList.toggle('on', on);
+  if (on) { var h = document.querySelector('.ovc.here'); if (h) h.scrollIntoView({block:'center'}); }
+}
+
+document.addEventListener('keydown', function(e){
+  if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { go(1); e.preventDefault(); }
+  else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { go(-1); e.preventDefault(); }
+  else if (e.key === 'Home') { show(0); }
+  else if (e.key === 'End') { show(N-1); }
+  else if (e.key === 'o' || e.key === 'O') { toggleOv(); }
+  else if (e.key === 'Escape') { toggleOv(false); }
+});
+document.getElementById('viewport').addEventListener('click', function(e){
+  if (ov.classList.contains('on')) return;
+  if (e.target.closest('.cells i') || e.target.closest('#lg li')) return;
+  go(e.clientX < window.innerWidth * 0.28 ? -1 : 1);
+});
+var tx = null;
+document.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; }, {passive:true});
+document.addEventListener('touchend', function(e){
+  if (tx === null) return;
+  var dx = e.changedTouches[0].clientX - tx;
+  if (Math.abs(dx) > 45) go(dx < 0 ? 1 : -1);
+  tx = null;
+}, {passive:true});
+
+/* scale the 1600x900 stage to whatever viewport we are given */
+function fit(){
+  var w = window.innerWidth, h = window.innerHeight;
+  stage.style.transform = 'scale(' + Math.min(w/1600, h/900) + ')';
+}
+window.addEventListener('resize', fit);
+fit();
+
+/* week grid: hovering a category lights its hours; hovering an hour names its category */
+(function(){
+  var cells = document.getElementById('cells'), lg = document.getElementById('lg'), tip = document.getElementById('tip');
+  if (!cells) return;
+  function focusCat(ci){
+    var all = cells.querySelectorAll('i'), rows = lg.querySelectorAll('li');
+    for (var i=0;i<all.length;i++) all[i].classList.toggle('dimmed', ci !== null && all[i].dataset.c !== String(ci));
+    for (var j=0;j<rows.length;j++) rows[j].classList.toggle('dimmed', ci !== null && rows[j].dataset.c !== String(ci));
+  }
+  lg.addEventListener('mouseover', function(e){ var li = e.target.closest('li'); if (li) focusCat(li.dataset.c); });
+  lg.addEventListener('mouseleave', function(){ focusCat(null); });
+  cells.addEventListener('mouseover', function(e){
+    var c = e.target.closest('i'); if (!c) return;
+    focusCat(c.dataset.c);
+    var d = WEEK[+c.dataset.c], r = c.getBoundingClientRect(), g = cells.parentElement.getBoundingClientRect(), sc = Math.min(window.innerWidth/1600, window.innerHeight/900);
+    tip.innerHTML = d.nm.replace(/&amp;/g,'&') + ' &middot; ' + d.h + ' h';
+    tip.style.opacity = 1;
+    var x = (r.left - g.left + r.width/2) / sc, half = tip.offsetWidth / 2 + 6;
+    tip.style.left = Math.min(Math.max(x, half), (g.width / sc) - half) + 'px';
+    tip.style.top  = ((r.top - g.top) / sc) + 'px';
+  });
+  cells.addEventListener('mouseleave', function(){ focusCat(null); tip.style.opacity = 0; });
+})();
+
+/* resume where the speaker left off */
+var start = 0;
+try { var v = localStorage.getItem('aos-slide'); if (v !== null && +v >= 0 && +v < N) start = +v; } catch(e){}
+show(start);
+setTimeout(function(){ document.getElementById('hint').classList.add('gone'); }, 4200);
+</script>
