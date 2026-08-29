@@ -22,10 +22,33 @@ interactive one, the PowerPoint the portable one.
 | `O` | Overview grid — click any slide to jump |
 | `Esc` | Close the overview |
 
-Clicking the right side of the stage advances, the left goes back, and swipe works
-on touch screens. The deck remembers your position in that browser, so reopening it
-mid-session picks up where you left off. Print (`Ctrl/Cmd-P`) with background
-graphics on and margins set to none to export one 16:9 page per slide.
+`F` toggles full screen. Two buttons sit in the bottom-right corner — all slides,
+and full screen — so the deck is fully operable with no keyboard.
+
+Tapping the right side of the stage advances, the left side goes back, and
+horizontal swipes work on touch screens; a vertical drag scrolls instead, so a long
+slide stays readable. The deck remembers your position in that browser, so reopening
+it mid-session picks up where you left off. Print (`Ctrl/Cmd-P`) with background
+graphics on and margins set to none to export one 16:9 page per slide — the PDF is
+always landscape regardless of the screen you print from.
+
+## On phones and tablets
+
+The deck has two design targets and picks one from the viewport's aspect ratio, then
+scales it to fill the screen edge to edge:
+
+| Viewport | Stage | Layout |
+|---|---|---|
+| Landscape (aspect ≥ 1.15) | 1600 wide, 900–1150 tall | The full two-column design. A 16:10 or 3:2 laptop fills completely; an ultra-wide screen gets side bars, like any 16:9 deck. |
+| Portrait or near-square | 680 wide, 920–1560 tall | Single column: paired columns stack, tile grids drop to two or three across, and the type is re-scaled for a narrow screen. |
+
+Small landscape screens (a phone held sideways) additionally get a `compact` tier
+that enlarges the small monospace labels, which would otherwise scale down to a few
+pixels. In portrait the 168-hour grid keeps all 24 columns, so one row is still one
+day, and tapping a cell names its category — the hover behaviour, on touch.
+
+Everything below was checked on every slide at 360×640, 390×844, 844×390, 820×1180,
+1180×820, 1440×900 and 1920×1080: no slide overflows its frame at any of them.
 
 ## Fonts
 
