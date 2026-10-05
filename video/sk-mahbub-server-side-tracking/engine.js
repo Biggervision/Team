@@ -8,11 +8,16 @@ const TL = window.TIMELINE;
 const SC = {}; TL.scenes.forEach(s => SC[s.id] = s);
 
 // ---------- brand tokens (sampled from website screenshot) ----------
-const BG = '#04090B';
-const teal = a => `rgba(25,195,177,${a})`;
-const tealB = a => `rgba(59,227,207,${a})`;
-const wht = a => `rgba(244,247,247,${a})`;
-const GREY = a => `rgba(150,166,168,${a})`;
+// Theme: dark (website) or light (see SK_Mahbub_Brand_Video_Style_Guide.md)
+const LIGHT = !!(window.TIMELINE && window.TIMELINE.light);
+const TH = (dark, light) => LIGHT ? light : dark;
+const BG = TH('#04090B', '#F4F9F8');
+const teal = a => TH(`rgba(25,195,177,${a})`, `rgba(13,150,137,${a})`);
+const tealB = a => TH(`rgba(59,227,207,${a})`, `rgba(25,195,177,${a})`);
+const wht = a => TH(`rgba(244,247,247,${a})`, `rgba(10,26,29,${a})`);   // primary text / ink
+const GREY = a => TH(`rgba(150,166,168,${a})`, `rgba(125,140,142,${a})`);
+const hl = a => TH(`rgba(255,255,255,${a})`, `rgba(10,26,29,${(a * 1.25).toFixed(3)})`); // hairlines / faint fills
+const bgA = a => TH(`rgba(4,9,11,${a})`, `rgba(244,249,248,${a})`);
 
 // ---------- math ----------
 const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
@@ -44,7 +49,7 @@ function text(s, x, y, o = {}) {
   X.textAlign = o.align || 'center'; X.textBaseline = o.base || 'alphabetic';
   X.globalAlpha *= (o.a ?? 1);
   X.fillStyle = o.color || wht(1);
-  if (o.glow) { X.shadowColor = o.glowColor || teal(.55); X.shadowBlur = o.glow; }
+  if (o.glow) { X.shadowColor = LIGHT ? teal(.28) : (o.glowColor || teal(.55)); X.shadowBlur = LIGHT ? o.glow * .45 : o.glow; }
   X.fillText(s, x, y);
   X.restore();
 }
@@ -92,16 +97,19 @@ function kline(str, x, y, o, t0, t) {
 function card(x, y, w, h, o = {}) {
   const r = o.r ?? 28;
   X.save(); X.globalAlpha *= (o.a ?? 1);
-  if (o.glow) { X.shadowColor = teal(.32 * o.glow); X.shadowBlur = 70 * o.glow; }
+  if (o.glow) { X.shadowColor = teal(TH(.32, .22) * o.glow); X.shadowBlur = 70 * o.glow; }
+  else if (LIGHT) { X.shadowColor = 'rgba(10,26,29,0.08)'; X.shadowBlur = 40; X.shadowOffsetY = 12; }
   const g = X.createLinearGradient(0, y, 0, y + h);
-  g.addColorStop(0, 'rgba(17,31,35,0.96)'); g.addColorStop(1, 'rgba(9,18,21,0.96)');
+  g.addColorStop(0, TH('rgba(17,31,35,0.96)', '#FFFFFF')); g.addColorStop(1, TH('rgba(9,18,21,0.96)', '#FBFDFD'));
   rr(x, y, w, h, r); X.fillStyle = g; X.fill();
-  X.shadowBlur = 0;
-  X.lineWidth = o.lw ?? 1.5; X.strokeStyle = o.stroke || 'rgba(255,255,255,0.075)'; X.stroke();
+  X.shadowBlur = 0; X.shadowOffsetY = 0;
+  X.lineWidth = o.lw ?? 1.5; X.strokeStyle = o.stroke || hl(0.075); X.stroke();
   // top inner highlight
+  if (!LIGHT) {
   const hg = X.createLinearGradient(x, 0, x + w, 0);
-  hg.addColorStop(0, 'rgba(255,255,255,0)'); hg.addColorStop(.5, 'rgba(255,255,255,0.10)'); hg.addColorStop(1, 'rgba(255,255,255,0)');
+  hg.addColorStop(0, 'rgba(255,255,255,0)'); hg.addColorStop(.5, hl(0.10)); hg.addColorStop(1, 'rgba(255,255,255,0)');
   X.beginPath(); X.moveTo(x + r, y + .75); X.lineTo(x + w - r, y + .75); X.strokeStyle = hg; X.lineWidth = 1.5; X.stroke();
+  }
   X.restore();
 }
 
@@ -229,14 +237,14 @@ const grid = document.createElement('canvas'); grid.width = W; grid.height = H +
 (() => {
   const g = grid.getContext('2d');
   for (let y = 0; y < grid.height; y += 60) for (let x = 30; x < W; x += 60) {
-    g.fillStyle = 'rgba(255,255,255,0.055)'; g.fillRect(x - 1, y - 1, 2, 2);
+    g.fillStyle = hl(0.055); g.fillRect(x - 1, y - 1, 2, 2);
   }
 })();
 function background(t) {
   X.fillStyle = BG; X.fillRect(0, 0, W, H);
   const gx = 230 + Math.sin(t * .13) * 140, gy = 220 + Math.cos(t * .1) * 90;
   let g = X.createRadialGradient(gx, gy, 0, gx, gy, 1150);
-  g.addColorStop(0, 'rgba(20,92,94,0.42)'); g.addColorStop(.45, 'rgba(10,44,48,0.20)'); g.addColorStop(1, 'rgba(4,9,11,0)');
+  g.addColorStop(0, TH('rgba(20,92,94,0.42)', 'rgba(25,195,177,0.17)')); g.addColorStop(.45, TH('rgba(10,44,48,0.20)', 'rgba(25,195,177,0.06)')); g.addColorStop(1, bgA(0));
   X.fillStyle = g; X.fillRect(0, 0, W, H);
   const hx = 900 + Math.sin(t * .09 + 2) * 80, hy = 1650;
   g = X.createRadialGradient(hx, hy, 0, hx, hy, 900);
@@ -251,7 +259,7 @@ function background(t) {
     X.fillStyle = teal(.06 + .14 * hash(i, 5)); X.fill();
   }
   g = X.createRadialGradient(W / 2, H * .45, H * .3, W / 2, H * .5, H * .78);
-  g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,0.55)');
+  g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, TH('rgba(0,0,0,0.55)', 'rgba(10,40,44,0.07)'));
   X.fillStyle = g; X.fillRect(0, 0, W, H);
 }
 
@@ -271,7 +279,7 @@ const LAYOUT = {
   '06': { eye: [540, 300, 520, 380, 1], head: [540, 430, 520, 540, 1.5], cards: [540, 995, 1370, 540, .93] },
   '07': { por: [540, 620, 540, 520, .95], name: [540, 1200, 1420, 420, 1], infra: [540, 1480, 1420, 740, 1] },
   '08': { eye: [540, 300, 520, 190, 1], big: [540, 800, 520, 560, .85], right: [540, 1310, 1400, 560, .95] },
-  '09': { head: [540, 815, 960, 540, 1], fin: [540, 850, 960, 540, 1.05], end: [540, 905, 960, 540, 1] },
+  '09': { head: [540, 815, 960, 540, 1], fin: [540, 850, 960, 540, 1.05], end: [540, 540, 960, 540, 1] },
 };
 function Bbase() { SBASE = X.getTransform(); }
 function Bset(name) {
@@ -310,13 +318,13 @@ S['01'] = (t, s, c) => {
   // source chips (conceptual, no platform UI)
   X.save(); X.translate(0, 0);
   const w1 = measure('Meta Ads', 19, 700, 'JBM', 1) + 44;
-  pill(140 + w1 / 2, cy0 + 122, 'Meta Ads', { size: 19, fill: 'rgba(255,255,255,0.04)', stroke: 'rgba(255,255,255,0.12)', color: wht(.8) });
+  pill(140 + w1 / 2, cy0 + 122, 'Meta Ads', { size: 19, fill: hl(0.04), stroke: hl(0.12), color: wht(.8) });
   const w2 = measure('Google Ads', 19, 700, 'JBM', 1) + 44;
-  pill(140 + w1 + 14 + w2 / 2, cy0 + 122, 'Google Ads', { size: 19, fill: 'rgba(255,255,255,0.04)', stroke: 'rgba(255,255,255,0.12)', color: wht(.8) });
+  pill(140 + w1 + 14 + w2 / 2, cy0 + 122, 'Google Ads', { size: 19, fill: hl(0.04), stroke: hl(0.12), color: wht(.8) });
   X.restore();
   // chart
   const chx = 140, chy = cy0 + 170, chw = 800, chh = 170;
-  for (let i = 0; i <= 3; i++) line(chx, chy + chh * i / 3, chx + chw, chy + chh * i / 3, { col: 'rgba(255,255,255,0.05)', lw: 1 });
+  for (let i = 0; i <= 3; i++) line(chx, chy + chh * i / 3, chx + chw, chy + chh * i / 3, { col: hl(0.05), lw: 1 });
   const n = 30, cp = E.io(P(t, .5, 2.4));
   const pts = [];
   for (let i = 0; i < n; i++) {
@@ -347,8 +355,8 @@ S['01'] = (t, s, c) => {
     let a = rp;
     if (t > tf && t < tf + .45) a *= hash(Math.floor(t * 30), i) > .45 ? 1 : .2;
     X.save(); X.globalAlpha *= a; X.translate((1 - rp) * 40, 0);
-    rr(130, y, 820, 74, 18); X.fillStyle = 'rgba(255,255,255,0.03)'; X.fill(); X.strokeStyle = 'rgba(255,255,255,0.06)'; X.lineWidth = 1.2; X.stroke();
-    iconBox(146, y + 11, 52, ic, { a: 1 - .6 * fp, col: fp > .5 ? GREY(1) : teal(1), fill: fp > .5 ? 'rgba(255,255,255,0.04)' : teal(.12), stroke: fp > .5 ? GREY(.3) : teal(.28) });
+    rr(130, y, 820, 74, 18); X.fillStyle = hl(0.03); X.fill(); X.strokeStyle = hl(0.06); X.lineWidth = 1.2; X.stroke();
+    iconBox(146, y + 11, 52, ic, { a: 1 - .6 * fp, col: fp > .5 ? GREY(1) : teal(1), fill: fp > .5 ? hl(0.04) : teal(.12), stroke: fp > .5 ? GREY(.3) : teal(.28) });
     text(lab, 220, y + 36, { size: 28, weight: 800, align: 'left', ls: 1.5, a: 1 - .55 * fp });
     text(fp > .5 ? `${src} · signal lost` : `${src} · received`, 220, y + 60, { size: 17, weight: 500, fam: 'JBM', align: 'left', color: fp > .5 ? GREY(.9) : wht(.45) });
     if (fp < 1) checkMark(905, y + 37, 20, P(t, ta + .1, .45), { a: 1 - fp });
@@ -367,7 +375,7 @@ S['01'] = (t, s, c) => {
     const sz = fit('ARE YOU SURE?', 900, 132, 960);
     X.save(); X.globalAlpha *= clamp(p * 1.4);
     const sc = 1.22 - .22 * p; X.translate(540, 1000); X.scale(sc, sc);
-    if (!LAND) { X.fillStyle = 'rgba(4,9,11,0.55)'; X.fillRect(-540, -150, 1080, 230); }
+    if (!LAND) { X.fillStyle = bgA(.7); X.fillRect(-540, -150, 1080, 230); }
     text('ARE YOU', 0, -40, { size: sz, weight: 900, ls: -1 });
     text('SURE?', 0, sz * .95 - 40, { size: sz, weight: 900, ls: -1, color: teal(1), glow: 40 });
     X.restore();
@@ -379,8 +387,35 @@ const S2 = { nodeY: [520, 880, 1240], pipeTop: 580, pipeBot: 1180, spawn: .17, t
 S['02'] = (t, s, c) => {
   const aout = c.ios - .6;
   Bset('often');
-  kline('Often,', 540, 860, { size: 140, weight: 900, out: aout, ls: -2 }, c.often - .08, t);
-  kline("they're [not.]", 540, 1010, { size: 140, weight: 900, out: aout, ls: -2 }, c.often + .3, t);
+  {
+    const oz = fit("THEY'RE NOT.", 900, 150, 900, 'Inter', -3);
+    const o2 = { size: oz, weight: 900, out: aout, ls: -3 };
+    kline('OFTEN,', 540, 860, o2, c.often - .08, t);
+    const y2 = 860 + oz * 1.08;
+    const sp = measure(' ', oz, 900, 'Inter', -3), w1 = measure("THEY'RE", oz, 900, 'Inter', -3), w2 = measure('NOT.', oz, 900, 'Inter', -3);
+    const gap = oz * .14, x0 = 540 - (w1 + sp + gap + w2) / 2, nx = x0 + w1 + sp + gap;
+    kline("THEY'RE", x0, y2, { ...o2, align: 'left' }, c.often + .3, t);
+    // marker sweep behind NOT. + pop
+    const tH = c.often + .78, sw = E.io(P(t, tH, .32)), q = E.io(P(t, aout, .4));
+    const pop = 1 + .09 * Math.sin(Math.PI * P(t, tH + .18, .32));
+    X.save(); X.globalAlpha *= 1 - q;
+    X.translate(nx + w2 / 2, y2 - oz * .35); X.scale(pop, pop); X.rotate(-.025 * sw); X.translate(-(nx + w2 / 2), -(y2 - oz * .35));
+    if (sw > 0) {
+      rr(nx - 16, y2 - oz * .86, (w2 + 32) * sw, oz * 1.06, 18);
+      X.fillStyle = TH('#19C3B1', '#19C3B1'); X.shadowColor = teal(.5); X.shadowBlur = TH(40, 20); X.fill(); X.shadowBlur = 0;
+    }
+    X.restore();
+    X.save(); X.globalAlpha *= 1 - q;
+    X.translate(nx + w2 / 2, y2 - oz * .35); X.scale(pop, pop); X.translate(-(nx + w2 / 2), -(y2 - oz * .35));
+    kline('NOT.', nx, y2, { ...o2, out: undefined, align: 'left', color: sw > .55 ? '#04090B' : teal(1) }, c.often + .37, t);
+    X.restore();
+    // small ripple on impact
+    const rp = P(t, tH + .25, .7);
+    if (rp > 0 && rp < 1 && q < 1) {
+      X.save(); X.globalAlpha *= (1 - rp) * .5 * (1 - q); rr(nx - 16 - rp * 40, y2 - oz * .86 - rp * 40, w2 + 32 + rp * 80, oz * 1.06 + rp * 80, 18 + rp * 30);
+      X.strokeStyle = tealB(.9); X.lineWidth = 2.5; X.stroke(); X.restore();
+    }
+  }
   if (t < aout + .05) return;
   eyebrow(t, aout + .1, 'WHERE CONVERSION DATA GETS LOST', 300);
   if (LAND) {
@@ -445,7 +480,7 @@ S['02'] = (t, s, c) => {
     line(540, o.y, edge, o.y, { col: wht(.35), lw: 2, dash: [4, 5] });
     X.beginPath(); X.moveTo(540 - 11, o.y - 11); X.lineTo(540 + 11, o.y + 11); X.moveTo(540 + 11, o.y - 11); X.lineTo(540 - 11, o.y + 11);
     X.strokeStyle = wht(.85); X.lineWidth = 3; X.lineCap = 'round'; X.stroke();
-    rr(x, o.y - h / 2, w, h, 14); X.fillStyle = 'rgba(16,24,27,0.95)'; X.fill(); X.strokeStyle = wht(.18); X.lineWidth = 1.5; X.stroke();
+    rr(x, o.y - h / 2, w, h, 14); X.fillStyle = TH('rgba(16,24,27,0.95)', '#FFFFFF'); X.fill(); X.strokeStyle = wht(.18); X.lineWidth = 1.5; X.stroke();
     // warning glyph
     const gx = x + 30, gy = o.y;
     X.beginPath(); X.moveTo(gx, gy - 11); X.lineTo(gx + 11, gy + 9); X.lineTo(gx - 11, gy + 9); X.closePath(); X.strokeStyle = wht(.75); X.lineWidth = 2; X.stroke();
@@ -465,8 +500,8 @@ S['02'] = (t, s, c) => {
       text(l, x, 1410, { size: 18, weight: 700, fam: 'JBM', ls: 2, color: wht(.45) });
       text(String(v), x, 1468, { size: 50, weight: 800, color: col, ls: -1, glow: i === 1 ? 18 : 0 });
     });
-    line(390, 1385, 390, 1475, { col: 'rgba(255,255,255,0.07)', lw: 1.5 });
-    line(690, 1385, 690, 1475, { col: 'rgba(255,255,255,0.07)', lw: 1.5 });
+    line(390, 1385, 390, 1475, { col: hl(0.07), lw: 1.5 });
+    line(690, 1385, 690, 1475, { col: hl(0.07), lw: 1.5 });
     X.restore();
   }
   X.restore();
@@ -476,8 +511,8 @@ S['02'] = (t, s, c) => {
     const p = E.ox(P(t, c.lost - .75, .5));
     const g = t - (c.lost - .75) < .16;
     X.save(); X.globalAlpha *= clamp(p * 1.5);
-    X.fillStyle = 'rgba(4,9,11,0.72)'; X.fillRect(0, H / 2 - 200, W, 300);
-    line(0, H / 2 - 200, W, H / 2 - 200, { col: 'rgba(255,255,255,0.08)', lw: 1.5 }); line(0, H / 2 + 100, W, H / 2 + 100, { col: 'rgba(255,255,255,0.08)', lw: 1.5 });
+    X.fillStyle = bgA(TH(.72, .88)); X.fillRect(0, H / 2 - 200, W, 300);
+    line(0, H / 2 - 200, W, H / 2 - 200, { col: hl(0.08), lw: 1.5 }); line(0, H / 2 + 100, W, H / 2 + 100, { col: hl(0.08), lw: 1.5 });
     const sc = 1.15 - .15 * p; X.translate(W / 2, H / 2); X.scale(sc, sc);
     const sz = fit('DATA LOSS', 900, 170, 940);
     if (g) {
@@ -506,13 +541,13 @@ S['03'] = (t, s, c) => {
   text(wv < .5 ? 'Campaign Optimization' : 'Budget vs. Signal', 140, y0 + 72, { size: 34, weight: 800, align: 'left', ls: -.5, a: wv < .5 ? 1 - wv * 2 : (wv - .5) * 2 });
   const bad = P(t, c.platforms + .4, .3);
   if (bad < 1) pill(860, y0 + 60, 'GOOD DATA', { size: 18, a: 1 - bad, dot: true });
-  if (bad > 0) pill(845, y0 + 60, 'SIGNAL LOSS', { size: 18, a: bad, dot: true, color: GREY(1), stroke: GREY(.4), fill: 'rgba(255,255,255,0.04)', dotColor: GREY(1) });
+  if (bad > 0) pill(845, y0 + 60, 'SIGNAL LOSS', { size: 18, a: bad, dot: true, color: GREY(1), stroke: GREY(.4), fill: hl(0.04), dotColor: GREY(1) });
   // signal quality
   const dq = E.io(P(t, c.platforms + .2, 2.2));
   const q = lerp(.94, .46, dq);
   text('SIGNAL QUALITY', 140, y0 + 140, { size: 18, weight: 700, fam: 'JBM', ls: 2, align: 'left', color: wht(.45) });
   text(Math.round(q * 100) + '%', 940, y0 + 140, { size: 22, weight: 700, fam: 'JBM', align: 'right', color: dq > .3 ? GREY(1) : teal(1) });
-  rr(140, y0 + 158, 800, 10, 5); X.fillStyle = 'rgba(255,255,255,0.06)'; X.fill();
+  rr(140, y0 + 158, 800, 10, 5); X.fillStyle = hl(0.06); X.fill();
   rr(140, y0 + 158, 800 * q, 10, 5); X.fillStyle = dq > .3 ? GREY(.8) : teal(1); X.fill();
   // chart area
   const ax = 140, ay = y0 + 210, aw = 800, ah = 370;
@@ -545,7 +580,7 @@ S['03'] = (t, s, c) => {
   // budget vs signal viz
   if (wv > 0) {
     X.save(); X.globalAlpha *= wv;
-    for (let i = 0; i <= 4; i++) line(ax, ay + ah * i / 4, ax + aw, ay + ah * i / 4, { col: 'rgba(255,255,255,0.05)', lw: 1 });
+    for (let i = 0; i <= 4; i++) line(ax, ay + ah * i / 4, ax + aw, ay + ah * i / 4, { col: hl(0.05), lw: 1 });
     const dp = E.io(P(t, c.wasted, 1.3));
     const N = 40, sp = [], cv2 = [];
     for (let i = 0; i < N; i++) {
@@ -557,7 +592,7 @@ S['03'] = (t, s, c) => {
     X.beginPath(); X.moveTo(sp[0][0], sp[0][1]);
     for (let i = 0; i < m; i++) X.lineTo(sp[i][0], sp[i][1]);
     for (let i = m - 1; i >= 0; i--) X.lineTo(cv2[i][0], cv2[i][1]);
-    X.closePath(); X.fillStyle = 'rgba(255,255,255,0.055)'; X.fill();
+    X.closePath(); X.fillStyle = hl(0.055); X.fill();
     const stroke = (arr, col, glow) => { X.beginPath(); for (let i = 0; i < m; i++) i ? X.lineTo(arr[i][0], arr[i][1]) : X.moveTo(arr[i][0], arr[i][1]); X.strokeStyle = col; X.lineWidth = 4; if (glow) { X.shadowColor = teal(.7); X.shadowBlur = 12; } X.stroke(); X.shadowBlur = 0; };
     stroke(sp, wht(.9)); stroke(cv2, tealB(1), true);
     if (dp > .6) {
@@ -703,7 +738,7 @@ S['05'] = (t, s, c) => {
     const y = lerp(yW + 10, yS - 60, E.sine(q));
     const a = clamp(q * 5) * (1 - P(q, .82, .18));
     const cx = lerp(880, 700, E.io(P(q, .62, .38)));
-    pill(cx, y, names[k % 4], { size: 19, a, fill: 'rgba(8,30,32,0.95)', stroke: teal(.7) });
+    pill(cx, y, names[k % 4], { size: 19, a, fill: TH('rgba(8,30,32,0.95)', 'rgba(255,255,255,0.97)'), stroke: teal(.7) });
   }
   // platforms
   const plats = [['Google', c.google], ['Meta', c.meta], ['TikTok', c.tiktok]];
@@ -751,7 +786,7 @@ S['06'] = (t, s, c) => {
     text(sub, 220, y + 116, { size: 20, weight: 500, fam: 'JBM', align: 'left', color: wht(.5) });
     checkMark(935, y + 68, 24, P(t, ti + .05, .5));
     const vx = 130, vy = y + 160, vw = 820, vh = 110;
-    rr(vx, vy, vw, vh, 18); X.fillStyle = 'rgba(255,255,255,0.025)'; X.fill(); X.strokeStyle = 'rgba(255,255,255,0.05)'; X.lineWidth = 1; X.stroke();
+    rr(vx, vy, vw, vh, 18); X.fillStyle = hl(0.025); X.fill(); X.strokeStyle = hl(0.05); X.lineWidth = 1; X.stroke();
     const lt = t - ti;
     if (i === 0) { // stable stream
       X.save(); X.beginPath(); X.rect(vx, vy, vw, vh); X.clip();
@@ -769,7 +804,7 @@ S['06'] = (t, s, c) => {
         const x = vx + 50 + k * (vw - 180) / (n - 1), yy = vy + vh / 2;
         const f = E.ob(P(lt, .1 + k * .07, .3));
         const reached = k !== 9;
-        X.beginPath(); X.arc(x, yy, 13, 0, 7); X.strokeStyle = 'rgba(255,255,255,0.12)'; X.lineWidth = 2; X.stroke();
+        X.beginPath(); X.arc(x, yy, 13, 0, 7); X.strokeStyle = hl(0.12); X.lineWidth = 2; X.stroke();
         if (reached && f > 0) { X.save(); X.beginPath(); X.arc(x, yy, 13 * f, 0, 7); X.fillStyle = tealB(1); X.shadowColor = teal(.8); X.shadowBlur = 14; X.fill(); X.restore(); }
       }
       icon('flow', vx + vw - 70, vy + vh / 2, 50, teal(1), 3);
@@ -792,7 +827,7 @@ function drawPortrait(x, y, w, h, z, reveal, t) {
   if (reveal <= 0) return;
   X.save();
   // glow + frame behind
-  X.save(); X.shadowColor = teal(.35); X.shadowBlur = 90; rr(x, y, w, h, 34); X.fillStyle = '#0a1518'; X.fill(); X.restore();
+  X.save(); X.shadowColor = teal(.35); X.shadowBlur = 90; rr(x, y, w, h, 34); X.fillStyle = TH('#0a1518', '#FFFFFF'); X.fill(); X.restore();
   X.beginPath(); X.roundRect(x, y + h * (1 - reveal), w, h * reveal, 34); X.clip();
   // source crop keeps aspect; image itself untouched (no face edits)
   const sw = 800 * (w / h), sh = 800;
@@ -805,10 +840,10 @@ function drawPortrait(x, y, w, h, z, reveal, t) {
   // blend portrait background into the dark brand world (edges only)
   X.beginPath(); X.roundRect(x, y, w, h, 34); X.clip();
   let g = X.createLinearGradient(0, y + h * .62, 0, y + h);
-  g.addColorStop(0, 'rgba(4,9,11,0)'); g.addColorStop(1, 'rgba(4,9,11,0.92)');
+  g.addColorStop(0, bgA(0)); g.addColorStop(1, bgA(TH(.92, .3)));
   X.fillStyle = g; X.fillRect(x, y, w, h);
   g = X.createLinearGradient(0, y, 0, y + h * .3);
-  g.addColorStop(0, 'rgba(4,20,24,0.35)'); g.addColorStop(1, 'rgba(4,20,24,0)');
+  g.addColorStop(0, TH('rgba(4,20,24,0.35)', 'rgba(244,249,248,0)')); g.addColorStop(1, 'rgba(4,20,24,0)');
   X.fillStyle = g; X.fillRect(x, y, w, h);
   X.restore();
   X.save(); X.globalAlpha *= reveal; rr(x, y, w, h, 34); X.strokeStyle = teal(.45); X.lineWidth = 2; X.stroke(); X.restore();
@@ -936,7 +971,7 @@ S['08'] = (t, s, c) => {
       const y = 1312 + i * 104;
       text(l, 140, y, { size: 19, weight: 700, fam: 'JBM', ls: 2, align: 'left', color: wht(.55) });
       text(ar, 940, y, { size: 24, weight: 700, fam: 'JBM', align: 'right', color: col });
-      rr(140, y + 22, 800, 18, 9); X.fillStyle = 'rgba(255,255,255,0.06)'; X.fill();
+      rr(140, y + 22, 800, 18, 9); X.fillStyle = hl(0.06); X.fill();
       rr(140, y + 22, 800 * v, 18, 9); X.fillStyle = col; if (i) { X.shadowColor = teal(.7); X.shadowBlur = 14; } X.fill(); X.shadowBlur = 0;
     });
     X.restore();
@@ -986,13 +1021,18 @@ S['09'] = (t, s, c) => {
     const p = E.oc(P(t, endT + .2, .8));
     X.save(); X.globalAlpha *= p;
     // circular portrait (unaltered image, circular crop)
-    const r = 135, cx = 540, cy = 690;
-    X.save(); X.shadowColor = teal(.45); X.shadowBlur = 70; X.beginPath(); X.arc(cx, cy, r + 6, 0, 7); X.fillStyle = '#0a1518'; X.fill(); X.restore();
+    const EC = LAND ? { r: 172, cy: 330 } : { r: 135, cy: 690 };
+    const r = EC.r, cx = 540, cy = EC.cy;
+    const ps = .86 + .14 * E.oc(P(t, endT + .2, .9));
+    X.translate(cx, cy); X.scale(ps, ps); X.translate(-cx, -cy);
+    X.save(); X.shadowColor = teal(.45); X.shadowBlur = 70; X.beginPath(); X.arc(cx, cy, r + 6, 0, 7); X.fillStyle = TH('#0a1518', '#FFFFFF'); X.fill(); X.restore();
     X.save(); X.beginPath(); X.arc(cx, cy, r, 0, 7); X.clip();
     const z = 1.04 + .03 * P(t, endT, 5);
     X.drawImage(IMG, 130, 40, 540, 540, cx - r * z, cy - r * z, 2 * r * z, 2 * r * z); X.restore();
     X.beginPath(); X.arc(cx, cy, r + 6, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * E.io(P(t, endT + .3, 1))); X.strokeStyle = teal(.9); X.lineWidth = 3; X.stroke();
     X.restore();
+    const ey = LAND ? -350 : 0;
+    X.save(); X.translate(0, ey);
     kline('SK MAHBUB', 540, 960, { size: 112, weight: 900, ls: 6, stagger: .08 }, endT + .35, t);
     const ul = E.io(P(t, endT + .7, .6));
     if (ul > 0) { rr(540 - 80 * ul, 994, 160 * ul, 5, 3); X.fillStyle = teal(1); X.shadowColor = teal(.8); X.shadowBlur = 16; X.fill(); X.shadowBlur = 0; }
@@ -1007,6 +1047,7 @@ S['09'] = (t, s, c) => {
     if (p3 > 0) text('Paid Ads, Web Analytics & Conversion Tracking Consultant', 540, 1120, { size: 25, weight: 500, color: wht(.55), a: p3 });
     const p4 = E.oc(P(t, endT + 1.5, .7));
     if (p4 > 0) pill(540, 1230, 'FIX YOUR TRACKING BEFORE IT COSTS YOU MORE', { size: 19, a: p4, dot: true, fam: 'Inter', weight: 700, ls: 2, h: 52 });
+    X.restore();
   }
 };
 
@@ -1031,7 +1072,7 @@ function renderFrame(t) {
   // global fade in/out
   const fi = 1 - E.oc(P(t, 0, .9)), fo = P(t, TL.total - .7, .7);
   const a = Math.max(fi, fo);
-  if (a > 0) { X.setTransform(1, 0, 0, 1, 0, 0); X.globalAlpha = 1; X.fillStyle = `rgba(0,0,0,${a})`; X.fillRect(0, 0, W, H); }
+  if (a > 0) { X.setTransform(1, 0, 0, 1, 0, 0); X.globalAlpha = 1; X.fillStyle = TH(`rgba(0,0,0,${a})`, bgA(a)); X.fillRect(0, 0, W, H); }
 }
 window.renderFrame = renderFrame;
 window.grab = (t, type = 'image/png', q) => { renderFrame(t); return cv.toDataURL(type, q).split(',')[1]; };

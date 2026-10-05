@@ -3,6 +3,7 @@ const { chromium } = require('/opt/node22/lib/node_modules/playwright');
 const fs = require('fs'), path = require('path'), { spawn } = require('child_process');
 const TL = JSON.parse(fs.readFileSync(path.join(__dirname, 'timeline.json'), 'utf8'));
 if (process.env.LAND) TL.land = true;
+if (process.env.LIGHT) TL.light = true;
 
 (async () => {
   const [mode, ...args] = process.argv.slice(2);
