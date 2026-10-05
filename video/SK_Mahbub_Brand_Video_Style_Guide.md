@@ -87,6 +87,7 @@ On light backgrounds use **Deep Teal `#0B7A70`** for text and thin lines. Keep `
 | Card shadow | `#0A1A1D` at 6–8%, blur 40px, y +12px | Soft lift (replaces dark-mode glow) |
 | **Accent: Brand Teal** | **`#19C3B1`** | Buttons, fills, icon backgrounds, charts, data packets |
 | **Accent: Deep Teal (text-safe)** | **`#0B7A70`** | Highlighted keywords, links, thin lines, checkmarks |
+| Accent: Headline Teal | `#0D9689` | Optional, for very large display words only (≥ 60px). 3.6 : 1, fine for large text. Used in the light video |
 | Teal tint fill | `#19C3B1` at 10–12% | Icon boxes, pills, chips |
 | Teal tint stroke | `#0B7A70` at 25–35% | Pill/icon borders, active card outline |
 | Text: primary | `#0A1A1D` | Headlines, labels |
