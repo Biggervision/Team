@@ -1,6 +1,8 @@
 # SK Mahbub — Server-Side Tracking (9:16 social video)
 
-**Final render:** `SK_Mahbub_Server_Side_Tracking_9x16.mp4` (1080×1920, 30 fps, H.264 + AAC, 90 s, −14 LUFS)
+**Final renders** (30 fps, H.264 + AAC, 90 s, −14 LUFS, same audio):
+- `SK_Mahbub_Server_Side_Tracking_9x16.mp4`: 1080×1920 (Reels / TikTok / Shorts)
+- `SK_Mahbub_Server_Side_Tracking_16x9.mp4`: 1920×1080 (YouTube / LinkedIn / web). A true landscape layout, not a letterbox: text on the left, visuals on the right. Built from the same scenes through the `LAYOUT` table in `engine.js`.
 
 ## Inputs
 - `voiceover/raw_01..09.wav`: SK Mahbub's original voice-over (SCENE_01–09). This is the source of truth for timing.
@@ -21,4 +23,6 @@ printf "file 'seg/s%d.mp4'\n" 0 1 2 3 > build/list.txt
 ffmpeg -f concat -safe 0 -i build/list.txt -c copy build/video_only.mp4
 ffmpeg -i build/video_only.mp4 -i build/final_mix.wav -map 0:v -map 1:a -c:v copy -af volume=1.3dB -c:a aac -b:a 256k -movflags +faststart -shortest out.mp4
 ```
+16:9 version: prefix the render commands with `LAND=1` (e.g. `LAND=1 node render.js video 0 675 seg.mp4`).
+
 Preview stills: `node render.js stills out_dir 5 20 33`

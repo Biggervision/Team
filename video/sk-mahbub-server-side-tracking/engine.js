@@ -1,6 +1,8 @@
 /* SK Mahbub — Server-Side Tracking video. Deterministic canvas renderer: renderFrame(t). */
-const W = 1080, H = 1920;
+const LAND = !!(window.TIMELINE && window.TIMELINE.land);
+const W = LAND ? 1920 : 1080, H = LAND ? 1080 : 1920;
 const cv = document.getElementById('c');
+cv.width = W; cv.height = H;
 const X = cv.getContext('2d');
 const TL = window.TIMELINE;
 const SC = {}; TL.scenes.forEach(s => SC[s.id] = s);
@@ -125,9 +127,11 @@ function eyebrow(t, t0, label, y = 300, out) {
   if (t < t0) return;
   let p = E.oc(P(t, t0, .6));
   if (out !== undefined) p *= 1 - E.io(P(t, out, .35));
+  Bset('eye');
   X.save(); X.globalAlpha *= p; X.translate(0, (1 - p) * 16);
   pill(540, y, label, { size: 22, weight: 700, fam: 'Inter', ls: 4, dot: true, h: 54 });
   X.restore();
+  Bset(null);
 }
 
 // ---------- icons (stroke, centered on cx,cy; s = box size) ----------
@@ -255,12 +259,34 @@ function background(t) {
 const IMG = new Image(); IMG.src = 'assets/portrait.jpg';
 window.assetsReady = Promise.all([document.fonts.ready, new Promise(r => { if (IMG.complete) r(); else IMG.onload = r; })]);
 
+// ---------- layout blocks: portrait coords -> landscape placement ----------
+// [srcX, srcY, dstX, dstY, scale]. Portrait mode = identity.
+let CUR = null, SBASE = null;
+const LAYOUT = {
+  '01': { eye: [540, 300, 520, 300, 1], text: [540, 520, 490, 520, .88], dash: [540, 1005, 1390, 540, 1], sure: [540, 1000, 520, 540, 1] },
+  '02': { often: [540, 935, 960, 560, 1], eye: [540, 300, 520, 330, 1], pipe: [540, 880, 1370, 560, .82], count: [540, 1430, 520, 730, .9] },
+  '03': { eye: [540, 300, 520, 300, 1], card: [540, 700, 1390, 540, 1], stm: [540, 1275, 520, 610, .9] },
+  '04': { calm: [540, 960, 960, 540, 1], txt: [540, 660, 560, 540, .9], arch: [540, 1230, 1400, 540, .95] },
+  '05': { eye: [540, 300, 520, 330, 1], dia: [540, 870, 1330, 545, .95], cap: [540, 1480, 520, 560, 1.15] },
+  '06': { eye: [540, 300, 520, 380, 1], head: [540, 430, 520, 540, 1.5], cards: [540, 995, 1370, 540, .93] },
+  '07': { por: [540, 620, 540, 520, .95], name: [540, 1200, 1420, 420, 1], infra: [540, 1480, 1420, 740, 1] },
+  '08': { eye: [540, 300, 520, 190, 1], big: [540, 800, 520, 560, .85], right: [540, 1310, 1400, 560, .95] },
+  '09': { head: [540, 815, 960, 540, 1], fin: [540, 850, 960, 540, 1.05], end: [540, 905, 960, 540, 1] },
+};
+function Bbase() { SBASE = X.getTransform(); }
+function Bset(name) {
+  X.setTransform(SBASE);
+  const m = LAND && name && LAYOUT[CUR] && LAYOUT[CUR][name];
+  if (m) { X.translate(m[2], m[3]); X.scale(m[4], m[4]); X.translate(-m[0], -m[1]); }
+}
+
 // =====================================================================
 const S = {};
 
 // ---------------- SCENE 01 — HOOK ----------------
 S['01'] = (t, s, c) => {
   eyebrow(t, .35, 'PAID ADS  ·  CONVERSION TRACKING', 300);
+  Bset('text');
   const outA = c.sure - .2;
   kline('Running [Facebook]', 540, 470, { size: 92, weight: 800, out: outA }, c.running, t);
   kline('or [Google Ads?]', 540, 578, { size: 92, weight: 800, out: outA }, c.google - .25, t);
@@ -268,6 +294,7 @@ S['01'] = (t, s, c) => {
   kline('Are you [missing data?]', 540, 530, { size: sB, weight: 800, out: c.actually - .15 }, c.sure + .05, t);
 
   // dashboard
+  Bset('dash');
   const dp = E.oc(P(t, .2, 1.3));
   const uns = P(t, c.lead - .1, .3);
   const jit = uns > 0 ? (hash(Math.floor(t * 20)) - .5) * 5 * uns * (hash(Math.floor(t * 7), 4) > .55 ? 1 : 0) : 0;
@@ -334,12 +361,13 @@ S['01'] = (t, s, c) => {
   X.restore();
 
   // ARE YOU SURE?
+  Bset('sure');
   if (t > c.actually - .05) {
     const p = E.ox(P(t, c.actually, .55));
     const sz = fit('ARE YOU SURE?', 900, 132, 960);
     X.save(); X.globalAlpha *= clamp(p * 1.4);
     const sc = 1.22 - .22 * p; X.translate(540, 1000); X.scale(sc, sc);
-    X.fillStyle = 'rgba(4,9,11,0.55)'; X.fillRect(-540, -150, 1080, 230);
+    if (!LAND) { X.fillStyle = 'rgba(4,9,11,0.55)'; X.fillRect(-540, -150, 1080, 230); }
     text('ARE YOU', 0, -40, { size: sz, weight: 900, ls: -1 });
     text('SURE?', 0, sz * .95 - 40, { size: sz, weight: 900, ls: -1, color: teal(1), glow: 40 });
     X.restore();
@@ -350,10 +378,15 @@ S['01'] = (t, s, c) => {
 const S2 = { nodeY: [520, 880, 1240], pipeTop: 580, pipeBot: 1180, spawn: .17, travel: 1.75 };
 S['02'] = (t, s, c) => {
   const aout = c.ios - .6;
+  Bset('often');
   kline('Often,', 540, 860, { size: 140, weight: 900, out: aout, ls: -2 }, c.often - .08, t);
   kline("they're [not.]", 540, 1010, { size: 140, weight: 900, out: aout, ls: -2 }, c.often + .3, t);
   if (t < aout + .05) return;
   eyebrow(t, aout + .1, 'WHERE CONVERSION DATA GETS LOST', 300);
+  if (LAND) {
+    kline('Signals get blocked', 520, 470, { size: 74, weight: 800, ls: -1.5 }, aout + .2, t);
+    kline('[before they arrive.]', 520, 560, { size: 74, weight: 800, ls: -1.5 }, aout + .35, t);
+  }
   const T0 = aout + .25;
   const L = S2.pipeBot - S2.pipeTop;
   const obs = [
@@ -364,6 +397,7 @@ S['02'] = (t, s, c) => {
   ];
   const lossFocus = P(t, c.lost - .75, .25);
   const pa = E.oc(P(t, aout + .15, .6)) * (1 - .6 * lossFocus);
+  Bset('pipe');
   X.save(); X.globalAlpha *= pa;
   // pipe
   line(540, S2.pipeTop, 540, S2.pipeBot, { col: teal(.22), lw: 3, p: E.io(P(t, aout + .2, .8)) });
@@ -422,6 +456,7 @@ S['02'] = (t, s, c) => {
   // counter
   const cpb = E.oc(P(t, c.ios - .1, .6));
   if (cpb > 0) {
+    Bset('count');
     X.save(); X.globalAlpha *= cpb; X.translate(0, (1 - cpb) * 30);
     card(90, 1360, 900, 140, { r: 24 });
     const cols = [['EVENTS SENT', sent, wht(1)], ['RECEIVED', recv, teal(1)], ['LOST', lost, GREY(1)]];
@@ -436,13 +471,14 @@ S['02'] = (t, s, c) => {
   }
   X.restore();
   // DATA LOSS
+  Bset(null);
   if (lossFocus > 0) {
     const p = E.ox(P(t, c.lost - .75, .5));
     const g = t - (c.lost - .75) < .16;
     X.save(); X.globalAlpha *= clamp(p * 1.5);
-    X.fillStyle = 'rgba(4,9,11,0.72)'; X.fillRect(0, 760, W, 300);
-    line(0, 760, W, 760, { col: 'rgba(255,255,255,0.08)', lw: 1.5 }); line(0, 1060, W, 1060, { col: 'rgba(255,255,255,0.08)', lw: 1.5 });
-    const sc = 1.15 - .15 * p; X.translate(540, 960); X.scale(sc, sc);
+    X.fillStyle = 'rgba(4,9,11,0.72)'; X.fillRect(0, H / 2 - 200, W, 300);
+    line(0, H / 2 - 200, W, H / 2 - 200, { col: 'rgba(255,255,255,0.08)', lw: 1.5 }); line(0, H / 2 + 100, W, H / 2 + 100, { col: 'rgba(255,255,255,0.08)', lw: 1.5 });
+    const sc = 1.15 - .15 * p; X.translate(W / 2, H / 2); X.scale(sc, sc);
     const sz = fit('DATA LOSS', 900, 170, 940);
     if (g) {
       for (let i = 0; i < 5; i++) {
@@ -457,8 +493,13 @@ S['02'] = (t, s, c) => {
 // ---------------- SCENE 03 — WHY IT MATTERS ----------------
 S['03'] = (t, s, c) => {
   eyebrow(t, s.vs + .2, 'WHY IT MATTERS', 300);
+  if (LAND) {
+    kline('No right data,', 520, 470, { size: 74, weight: 800, ls: -1.5, out: c.inaccurate - .45 }, s.vs + .3, t);
+    kline('[no real optimization.]', 520, 560, { size: 74, weight: 800, ls: -1.5, out: c.inaccurate - .45 }, c.campaign - .1, t);
+  }
   const cp = E.oc(P(t, s.vs + .1, .7));
   const x0 = 90, y0 = 380, w0 = 900, h0 = 640;
+  Bset('card');
   X.save(); X.globalAlpha *= cp; X.translate(0, (1 - cp) * 50);
   card(x0, y0, w0, h0);
   const wv = E.io(P(t, c.wasted - .1, .6));
@@ -529,6 +570,7 @@ S['03'] = (t, s, c) => {
   }
   X.restore();
   // statements
+  Bset('stm');
   const st = [['INACCURATE REPORTING', c.inaccurate, 'doc'], ['WEAKER OPTIMIZATION', c.weaker, 'trend'], ['WASTED AD SPEND', c.wasted, 'money']];
   st.forEach(([lab, ts, ic], i) => {
     const p = E.oq(P(t, ts - .05, .5)); if (p <= 0) return;
@@ -570,9 +612,12 @@ function serverNode(cx, cy, w, h, t, o = {}) {
 S['04'] = (t, s, c) => {
   const ts = c.server - .32;
   const lp = E.io(P(t, s.vs + .15, .7)) * (1 - E.io(P(t, ts, .3)));
+  Bset('calm');
   if (lp > 0) line(540 - 160 * lp, 960, 540 + 160 * lp, 960, { col: teal(.7 * lp), lw: 2 });
+  Bset(null);
   const push = 1 + .055 * E.sine(P(t, ts, 3.0));
-  X.save(); X.translate(540, 960); X.scale(push, push); X.translate(-540, -960);
+  X.save(); X.translate(W / 2, H / 2); X.scale(push, push); X.translate(-W / 2, -H / 2);
+  Bbase(); Bset('txt');
   const fl = P(t, c.server, 1.1);
   if (fl > 0 && fl < 1) {
     radialFlash(540, 660, 760, 1 - fl);
@@ -582,6 +627,7 @@ S['04'] = (t, s, c) => {
   kline('SERVER-SIDE', 540, 640, { size: sz, weight: 900, ls: -3, stagger: 0, dur: .6, wglow: 0 }, ts, t);
   kline('[TRACKING]', 540, 640 + sz * 1.02, { size: sz, weight: 900, ls: -3, dur: .6, glow: 40 }, ts + .12, t);
   // architecture
+  Bset('arch');
   const y1 = 1020, y2 = 1230, y3 = 1440;
   const a1 = E.oc(P(t, c.server + .2, .5)), a2 = E.oc(P(t, c.server + .4, .55)), a3 = E.oc(P(t, c.server + .6, .5));
   line(540, y1 + 55, 540, y2 - 80, { p: E.io(P(t, c.server + .4, .4)), col: teal(.4), lw: 3 });
@@ -601,6 +647,7 @@ S['04'] = (t, s, c) => {
 // ---------------- SCENE 05 — HOW IT WORKS ----------------
 S['05'] = (t, s, c) => {
   eyebrow(t, s.vs + .15, 'HOW IT WORKS', 300);
+  Bset('dia');
   const yW = 470, yB = 640, yS = 880, yP = 1240;
   const ap = i => E.oc(P(t, s.vs + .1 + i * .12, .5));
   // connectors
@@ -673,6 +720,7 @@ S['05'] = (t, s, c) => {
     X.restore();
   });
   // caption
+  Bset('cap');
   const capY = 1480;
   kline('Processed through [a server] first', 540, capY, { size: 44, weight: 800, out: c.sent - .2, ls: -.5 }, c.processed - .1, t);
   kline('then sent to [your ad platforms]', 540, capY, { size: 44, weight: 800, ls: -.5 }, c.sent + .1, t);
@@ -681,12 +729,14 @@ S['05'] = (t, s, c) => {
 // ---------------- SCENE 06 — BENEFITS ----------------
 S['06'] = (t, s, c) => {
   eyebrow(t, s.vs + .1, 'THE RESULT', 300);
+  Bset('head');
   kline('The [result]', 540, 430, { size: 82, weight: 900, ls: -2 }, c.result - .05, t);
   const items = [
     ['MORE RELIABLE TRACKING', 'Stable, consistent data stream', c.reliable, 'stream'],
     ['LESS DATA LOSS', 'More events reach their destination', c.less, 'shield'],
     ['BETTER SIGNALS', 'Stronger signals for your campaigns', c.better, 'signal'],
   ];
+  Bset('cards');
   items.forEach(([title, sub, ti, ic], i) => {
     const p = E.oq(P(t, ti - .08, .6)); if (p <= 0) return;
     const y = 510 + i * 335, h = 305;
@@ -765,6 +815,7 @@ function drawPortrait(x, y, w, h, z, reveal, t) {
 }
 S['07'] = (t, s, c) => {
   // subtle infrastructure behind portrait
+  Bset('por');
   const bgA = E.oc(P(t, s.vs + .2, 1.2)) * .5;
   X.save(); X.globalAlpha *= bgA;
   const side = [[110, 420, 'WEBSITE'], [110, 760, 'SERVER'], [970, 420, 'ANALYTICS'], [970, 760, 'ADS']];
@@ -782,6 +833,7 @@ S['07'] = (t, s, c) => {
   const z = 1.1 - .05 * rv - .035 * P(t, s.vs, 17);
   drawPortrait(240, 250, 600, 740, z, rv, t);
   // name
+  Bset('name');
   const nameSz = 118;
   kline('SK MAHBUB', 540, 1130, { size: nameSz, weight: 900, ls: 6, stagger: .09, wglow: 0 }, c.name - .12, t);
   const ul = E.io(P(t, c.name + .3, .7));
@@ -799,6 +851,7 @@ S['07'] = (t, s, c) => {
   });
   const cp = E.oc(P(t, c.consultant - .05, .6));
   if (cp > 0) text('Paid Ads, Web Analytics & Conversion Tracking Consultant', 540, 1286, { size: fit('Paid Ads, Web Analytics & Conversion Tracking Consultant', 500, 26, 900), weight: 500, color: wht(.6), a: cp });
+  Bset('infra');
   // infra strip: Website -> Server -> Analytics -> Ads
   const xs = [190, 423, 657, 890], lab = ['Website', 'Server', 'Analytics', 'Ads'], ics = ['globe', 'server', 'chart', 'ads'], yI = 1410;
   xs.forEach((x, i) => {
@@ -827,8 +880,10 @@ S['07'] = (t, s, c) => {
 S['08'] = (t, s, c) => {
   const shk = Math.exp(-Math.max(0, t - c.losing) * 7) * (t > c.losing ? 1 : 0);
   X.save(); X.translate((hash(Math.floor(t * 60)) - .5) * 14 * shk, (hash(Math.floor(t * 60), 2) - .5) * 14 * shk);
+  Bbase();
   const pd = P(t, c.pause + .05, .35) * (1 - P(t, c.losing - .04, .06));
   eyebrow(t, s.vs + .2, 'THE REAL COST', 300);
+  Bset('big');
   const big = 156;
   // phase 1: WRONG TRACKING
   const o1 = c.missing - .25;
@@ -866,6 +921,7 @@ S['08'] = (t, s, c) => {
     X.restore();
   }
   // phase 4: WASTING AD SPEND
+  Bset('right');
   const wsz = fit('WASTING AD SPEND', 900, 96, 960, 'Inter', -2);
   kline('[WASTING AD SPEND]', 540, 1150, { size: wsz, weight: 900, ls: -2, stagger: .08, glow: 34 }, c.wasting - .05, t);
   // budget panel
@@ -892,6 +948,7 @@ S['08'] = (t, s, c) => {
 S['09'] = (t, s, c) => {
   const audioEnd = s.start + s.dur;
   const endT = audioEnd + .25;
+  Bset('head');
   const o1 = c.fix - .35;
   const sz1 = fit('BEFORE YOU SCALE', 900, 100, 960, 'Inter', -2);
   kline('BEFORE YOU SCALE', 540, 600, { size: sz1, weight: 900, ls: -2, out: o1 }, c.before - .1, t);
@@ -910,6 +967,7 @@ S['09'] = (t, s, c) => {
     X.restore();
   });
   // final statement
+  Bset('fin');
   const qEnd = E.io(P(t, endT, .5));
   if (qEnd < 1) {
     X.save(); X.globalAlpha *= 1 - qEnd; X.translate(0, -qEnd * 40);
@@ -923,6 +981,7 @@ S['09'] = (t, s, c) => {
     X.restore();
   }
   // end card
+  Bset('end');
   if (t > endT + .2) {
     const p = E.oc(P(t, endT + .2, .8));
     X.save(); X.globalAlpha *= p;
@@ -965,6 +1024,7 @@ function renderFrame(t) {
     const sc = 1 + (1 - pin) * .03 - pout * .035;
     X.translate(W / 2, H / 2); X.scale(sc, sc); X.translate(-W / 2, -H / 2 + (1 - pin) * 26 - pout * 34);
     if (pout > .02) X.filter = `blur(${(pout * 12).toFixed(1)}px)`;
+    CUR = s.id; Bbase();
     S[s.id](t, s, s.cues);
     X.restore(); X.filter = 'none';
   }

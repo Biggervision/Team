@@ -2,11 +2,12 @@
 const { chromium } = require('/opt/node22/lib/node_modules/playwright');
 const fs = require('fs'), path = require('path'), { spawn } = require('child_process');
 const TL = JSON.parse(fs.readFileSync(path.join(__dirname, 'timeline.json'), 'utf8'));
+if (process.env.LAND) TL.land = true;
 
 (async () => {
   const [mode, ...args] = process.argv.slice(2);
   const browser = await chromium.launch({ args: ['--allow-file-access-from-files', '--disable-web-security', '--use-gl=swiftshader', '--enable-unsafe-swiftshader'] });
-  const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
+  const page = await browser.newPage({ viewport: TL.land ? { width: 1920, height: 1080 } : { width: 1080, height: 1920 } });
   page.on('console', m => console.log('[page]', m.text()));
   page.on('pageerror', e => { console.error('[pageerror]', e.message); process.exitCode = 1; });
   await page.addInitScript(`window.TIMELINE=${JSON.stringify(TL)};`);
