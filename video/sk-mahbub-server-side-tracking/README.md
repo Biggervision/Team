@@ -4,6 +4,7 @@
 - `SK_Mahbub_Server_Side_Tracking_9x16.mp4`: 1080×1920 (Reels / TikTok / Shorts)
 - `SK_Mahbub_Server_Side_Tracking_16x9.mp4`: 1920×1080 (YouTube / LinkedIn / web). A true landscape layout, not a letterbox: text on the left, visuals on the right. Built from the same scenes through the `LAYOUT` table in `engine.js`.
 - `SK_Mahbub_Server_Side_Tracking_16x9_Light.mp4`: 1920×1080 **light theme** (palette from `../SK_Mahbub_Brand_Video_Style_Guide.md`), with uppercase "OFTEN, THEY'RE NOT." + marker-highlight effect and a larger centered photo on the end card. Render with `LAND=1 LIGHT=1`.
+- `SK_Mahbub_Server_Side_Tracking_16x9_Light_60s.mp4`: 59.96 s cut of the light 16:9 version. The original voice stays at natural speed and pitch; the cuts are made at natural pauses (`timeline60.py`, run it instead of `timeline.py`).
 
 ## Inputs
 - `voiceover/raw_01..09.wav`: SK Mahbub's original voice-over (SCENE_01–09). This is the source of truth for timing.

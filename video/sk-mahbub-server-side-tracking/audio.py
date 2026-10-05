@@ -41,9 +41,18 @@ vo = np.zeros(N, np.float32)
 for s in tl["scenes"]:
     src = f"{RAW}/raw_{s['id']}.wav"
     tmp = f"{OUT}/vo_{s['id']}_a.wav"
-    dur = s["trim_out"] - s["trim_in"]
-    sh(f"ffmpeg -v error -y -ss {s['trim_in']} -t {dur} -i {src} -af "
-       f"\"{VOICE_CHAIN},afade=t=in:d=0.04,afade=t=out:st={dur-0.09:.3f}:d=0.09\" -ar {SR} -ac 1 {tmp}")
+    # clean the whole clip once, then keep only the chosen segments (natural speed & pitch)
+    full = f"{OUT}/vo_{s['id']}_full.wav"
+    sh(f"ffmpeg -v error -y -i {src} -af \"{VOICE_CHAIN}\" -ar {SR} -ac 1 -c:a pcm_f32le {full}")
+    xf = read(full)
+    segs = s.get("segs") or [(s["trim_in"], s["trim_out"])]
+    parts = []
+    for a, b in segs:
+        p = xf[int(a * SR):int(b * SR)].copy()
+        fi, fo = int(.015 * SR), int(.03 * SR)
+        p[:fi] *= np.linspace(0, 1, fi); p[-fo:] *= np.linspace(1, 0, fo)
+        parts.append(p)
+    wavfile.write(tmp, SR, np.concatenate(parts).astype(np.float32))
     m = json.loads(sh(f"ffmpeg -i {tmp} -af loudnorm=I=-16:TP=-2:LRA=9:print_format=json -f null - ")
                    .split("[Parsed_loudnorm")[-1].split("\n", 1)[1])
     fin = f"{OUT}/vo_{s['id']}.wav"

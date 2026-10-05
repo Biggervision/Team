@@ -387,7 +387,7 @@ const S2 = { nodeY: [520, 880, 1240], pipeTop: 580, pipeBot: 1180, spawn: .17, t
 S['02'] = (t, s, c) => {
   const aout = c.ios - .6;
   Bset('often');
-  {
+  if (c.often > 0) {
     const oz = fit("THEY'RE NOT.", 900, 150, 900, 'Inter', -3);
     const o2 = { size: oz, weight: 900, out: aout, ls: -3 };
     kline('OFTEN,', 540, 860, o2, c.often - .08, t);
@@ -528,7 +528,7 @@ S['02'] = (t, s, c) => {
 // ---------------- SCENE 03 — WHY IT MATTERS ----------------
 S['03'] = (t, s, c) => {
   eyebrow(t, s.vs + .2, 'WHY IT MATTERS', 300);
-  if (LAND) {
+  if (LAND && !TL.cut) {
     kline('No right data,', 520, 470, { size: 74, weight: 800, ls: -1.5, out: c.inaccurate - .45 }, s.vs + .3, t);
     kline('[no real optimization.]', 520, 560, { size: 74, weight: 800, ls: -1.5, out: c.inaccurate - .45 }, c.campaign - .1, t);
   }
@@ -982,7 +982,7 @@ S['08'] = (t, s, c) => {
 // ---------------- SCENE 09 — FINAL CTA ----------------
 S['09'] = (t, s, c) => {
   const audioEnd = s.start + s.dur;
-  const endT = audioEnd + .25;
+  const endT = audioEnd + (TL.cut ? .05 : .25);
   Bset('head');
   const o1 = c.fix - .35;
   const sz1 = fit('BEFORE YOU SCALE', 900, 100, 960, 'Inter', -2);
@@ -1070,7 +1070,7 @@ function renderFrame(t) {
     X.restore(); X.filter = 'none';
   }
   // global fade in/out
-  const fi = 1 - E.oc(P(t, 0, .9)), fo = P(t, TL.total - .7, .7);
+  const fi = 1 - E.oc(P(t, 0, .9)), fo = P(t, TL.total - (TL.cut ? .45 : .7), TL.cut ? .45 : .7);
   const a = Math.max(fi, fo);
   if (a > 0) { X.setTransform(1, 0, 0, 1, 0, 0); X.globalAlpha = 1; X.fillStyle = TH(`rgba(0,0,0,${a})`, bgA(a)); X.fillRect(0, 0, W, H); }
 }
