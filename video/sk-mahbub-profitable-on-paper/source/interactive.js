@@ -273,19 +273,18 @@ function photo(x, y, r, a = 1, ring = 3) {
   });
 }
 function brandGroup(x, y, r, a = 1) { // logo + photo, side by side, slightly overlapping; returns width
-  monogram(x + r, y, r, a);
-  photo(x + r * 3.25, y, r * 1.08, a, r * .1);
-  return r * 4.4;
+  photo(x + r * 1.15, y, r * 1.15, a, r * .1);
+  return r * 2.4;
 }
 function watermark(t) {
   const a = P(t, 0.3, .8) * (1 - P(t, t3(36.2), .6));
   if (a <= 0) return;
   if (!V) {
-    const gw = brandGroup(60, 76, 23, a);
+    const gw = brandGroup(60, 76, 26, a);
     T('SK Mahbub', 60 + gw + 14, 71, { size: 21, w: 750, c: C.ink, a });
     T(ROLE, 60 + gw + 14, 95, { size: 15, w: 500, c: C.mut, a });
   } else {
-    const r = 26, gw = r * 4.4;
+    const r = 30, gw = r * 2.4;
     const tw = Math.max(M('SK Mahbub', 27, 750), M(ROLE, 18, 500));
     const x0 = (W - (gw + 16 + tw)) / 2;
     brandGroup(x0, 118, r, a);
@@ -301,7 +300,7 @@ function ctaScene(t, lt) {
     line(W / 2 - 60, 505, W / 2 + 60, 505, { c: C.acc, lw: 3, p: sg2, a: sg2 });
     withA(clamp(sg), () => {
       ctx.save(); xform(W / 2, 620, lerp(.8, 1, clamp(sg)));
-      const r = 46, gw = r * 4.4; brandGroup(W / 2 - gw / 2, 620, r, 1); ctx.restore();
+      const r = 62, gw = r * 2.4; brandGroup(W / 2 - gw / 2, 620, r, 1); ctx.restore();
     });
     T('SK Mahbub', W / 2, 745 + (1 - sg2) * 16, { size: 54, w: 800, c: C.ink, al: 'center', ls: -1, a: sg2 });
     T(ROLE, W / 2, 795 + (1 - sg2) * 16, { size: 26, w: 600, c: C.deep, al: 'center', a: sg2 });
@@ -314,7 +313,7 @@ function ctaScene(t, lt) {
     line(W / 2 - 60, 860, W / 2 + 60, 860, { c: C.acc, lw: 3, p: sg2, a: sg2 });
     withA(clamp(sg), () => {
       ctx.save(); xform(W / 2, 1000, lerp(.8, 1, clamp(sg)));
-      const r = 62, gw = r * 4.4; brandGroup(W / 2 - gw / 2, 1000, r, 1); ctx.restore();
+      const r = 80, gw = r * 2.4; brandGroup(W / 2 - gw / 2, 1000, r, 1); ctx.restore();
     });
     T('SK Mahbub', W / 2, 1170 + (1 - sg2) * 16, { size: 68, w: 800, c: C.ink, al: 'center', ls: -1.5, a: sg2 });
     T('Paid Ads, Web Analytics &', W / 2, 1236 + (1 - sg2) * 16, { size: 36, w: 600, c: C.deep, al: 'center', a: sg2 });
