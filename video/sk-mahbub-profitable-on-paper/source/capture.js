@@ -8,7 +8,7 @@ const path = require('path');
   const browser = await chromium.launch({ args: ['--allow-file-access-from-files', '--disable-gpu-vsync'] });
   const page = await browser.newPage({ viewport: { width: W, height: H } });
   await page.goto('file://' + path.resolve(__dirname, 'index.html'));
-  await page.evaluate(async v => { await document.fonts.load('700 20px Inter'); await document.fonts.load('400 20px Inter'); init(v); }, vert);
+  await page.evaluate(async v => { await document.fonts.load('700 20px Inter'); await document.fonts.load('400 20px Inter'); await document.getElementById('me').decode(); init(v); }, vert);
   if (mode === 'stills') {
     for (const t of times) {
       const b64 = await page.evaluate(t => { renderFrame(+t); return document.getElementById('c').toDataURL('image/png').split(',')[1]; }, t);

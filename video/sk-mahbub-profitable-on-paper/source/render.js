@@ -271,7 +271,7 @@ function scene1(t, alpha) {
 
   // ---- dashboard (morphs into the "Google Ads" node) ----
   {
-    const zoom = 1 + .035 * P(t, 10.6, 3.6, E.io) * (1 - morph);
+    const zoom = 1;
     const R = {
       x: lerp(D.x, N[0].x, morph), y: lerp(D.y, N[0].y, morph),
       w: lerp(D.w, N[0].w, morph), h: lerp(D.h, N[0].h, morph)
@@ -305,7 +305,7 @@ function scene1(t, alpha) {
   const na = P(t, 20.4, .5);
   if (na > 0) {
     nodeLabel(N[0], 'SOURCE', 'Google Ads', '4,812 clicks', na);
-    const bA = P(t, 20.9, .6, E.out5);
+    const bA = P(t, 20.9, .6, E.spring);
     if (bA > 0) {
       withA(bA, () => {
         ctx.save(); xform(N[1].x + N[1].w / 2, N[1].y + N[1].h / 2, lerp(.94, 1, bA)); card(N[1].x, N[1].y, N[1].w, N[1].h); ctx.restore();
@@ -386,7 +386,7 @@ function dashContent(t, D) {
   const my0 = D.y + (V ? 120 : 112);
   S1.metrics.forEach(([k, v], i) => {
     const cx = D.x + pad + (i % cols) * (mw + gap), cy = my0 + Math.floor(i / cols) * (mh + gap);
-    const ap = P(t, .45 + i * .14, .6, E.out5);
+    const ap = P(t, .45 + i * .14, .7, E.spring);
     const hl = P(t, S1.hl[i] - .05, .35, E.out);
     const lift = hl * 6;
     withA(ap, () => {
@@ -442,7 +442,7 @@ const CB = { name: 'CAMPAIGN B', cpl: 120, spend: '$2,400', q: 6, cpq: 400 };
 
 function campState(t, isB) {
   const s = {};
-  s.a = P(t, t2(isB ? 1.0 : .55), .8, E.out5);
+  s.a = P(t, t2(isB ? 1.0 : .55), .9, E.spring);
   s.cpl = isB ? P(t, t2(9.7), 1.0) : P(t, t2(4.9), .9);
   const elevA = P(t, t2(12.7), .6) * (1 - P(t, t2(16.85), .5));
   const winB = P(t, t2(41.9), .6, E.out5);
@@ -548,8 +548,7 @@ function scene2(t, alpha) {
   const B = V ? { x: 60, y: 825, w: 960, h: 560 } : { x: 1030, y: 160, w: 740, h: 690 };
 
   // illustrative scenario tag
-  const tagA = P(t, t2(.8), .6) * (1 - P(t, t2(54.6), .5));
-  chip('ILLUSTRATIVE SCENARIO', W / 2, V ? 196 : 118, { size: V ? 15 : 13, al: 'center', fill: '#fff', stroke: C.line, c: C.mut, ls: 2, a: tagA, dot: true });
+
 
   const sa = campState(t, false), sb = campState(t, true);
   // draw the dominant one last
@@ -641,7 +640,7 @@ function scene3(t, alpha) {
   if (fa > 0) withA(fa, () => {
     const R = flowRects();
     R.forEach((r, i) => {
-      const ap = P(lt, FLOW[i][2], .6, E.out5);
+      const ap = P(lt, FLOW[i][2], .6, E.spring);
       if (ap <= 0) return;
       const biz = i >= 2;
       withA(ap, () => {
@@ -727,9 +726,9 @@ function statusChip(s, x, y, a, size) {
 }
 function crmScene(t, lt) {
   const G = V ? { x: 190, y: 250, w: 700, h: 140 } : { x: 80, y: 395, w: 320, h: 150 };
-  const CR = V ? { x: 60, y: 470, w: 960, h: 640 } : { x: 500, y: 190, w: 920, h: 620 };
-  const RV = V ? { x: 190, y: 1190, w: 700, h: 140 } : { x: 1520, y: 395, w: 320, h: 150 };
-  const ga = P(lt, 12.2, .6, E.out5), cra = P(lt, 13.6, .7, E.out5), rva = P(lt, 16.6, .6, E.out5);
+  const CR = V ? { x: 60, y: 450, w: 960, h: 700 } : { x: 500, y: 190, w: 920, h: 620 };
+  const RV = V ? { x: 190, y: 1225, w: 700, h: 140 } : { x: 1520, y: 395, w: 320, h: 150 };
+  const ga = P(lt, 12.2, .6, E.spring), cra = P(lt, 13.6, .8, E.spring), rva = P(lt, 16.6, .6, E.spring);
   const s = V ? 1.05 : 1;
   const node = (R, k, title, val, a, hl) => withA(a, () => {
     ctx.save(); xform(R.x + R.w / 2, R.y + R.h / 2, lerp(.94, 1, a));

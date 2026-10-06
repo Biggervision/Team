@@ -46,6 +46,13 @@ S3+=[(14.4,confirm(1046.5,.7)),(15.3,confirm(1174.7,.7)),(16.5,confirm(1318.5,.8
 S3+=[(24.9,swoosh(1,.8)),(26.05,impact(1.0)),(29.1,tick()),(30.7,tick()),(31.9,tick()),(32.9,pop(900,.7)),(34.4,swoosh(1,.7)),(34.85,pop(660,.6)),(36.7,confirm(784,.8)),(36.82,confirm(1174.7,.6))]
 for o,lst in ((0,S1),(O2,S2),(O3,S3)):
     for t,x in lst: at(o+t,x)
+
+def mclick(g=1):
+    n=int(.04*SR); x=bp(rng.standard_normal(n),1800,6000)*env(n,.0003,.004)*.5
+    k=int(.025*SR); y=np.zeros(n); y[k:]=bp(rng.standard_normal(n-k),1200,4000)*env(n-k,.0003,.004)*.3
+    return (x+y)*g
+CLK=[1.6,15.12,16.02,16.82,17.56,26.9]+[O2+x for x in (4.9,9.7,22.1,26.2,34.6,41.94)]+[O3+x for x in (5.3,6.5,7.7,8.55,10.8,14.4,15.3,16.5,30.7,31.9)]
+for c in CLK: at(c-.03,mclick(.9))
 # ---- music: minimal, 100 BPM ----
 bpm=100; beat=60/bpm; bar=4*beat
 mus=np.zeros(N); drums=np.zeros(N)
