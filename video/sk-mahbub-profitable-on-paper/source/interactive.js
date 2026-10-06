@@ -341,3 +341,6 @@ function renderFrame(t) {
   watermark(t);
   progress(t);
 }
+
+// no scene labels / progress bars on screen
+function progress() {}
