@@ -1,0 +1,79 @@
+1
+00:00:00,500 --> 00:00:04,900
+If you run a personal injury law firm,
+HVAC, roofing, or plumbing business,
+
+2
+00:00:05,700 --> 00:00:09,160
+your phone calls can be worth
+thousands of dollars.
+
+3
+00:00:09,360 --> 00:00:13,160
+But what if Google Ads
+isn't tracking all of them?
+
+4
+00:00:13,840 --> 00:00:18,760
+You might receive 30 serious calls,
+while Google only sees 10 conversions.
+
+5
+00:00:19,620 --> 00:00:22,380
+Now Google thinks your campaign
+is underperforming.
+
+6
+00:00:23,120 --> 00:00:26,000
+You cut the budget or pause the campaign,
+
+7
+00:00:26,000 --> 00:00:30,620
+when the campaign may actually be
+bringing your best customers.
+
+8
+00:00:31,360 --> 00:00:33,200
+The problem may not be your ads.
+
+9
+00:00:33,860 --> 00:00:36,640
+Your tracking may be hiding
+the real performance.
+
+10
+00:00:37,960 --> 00:00:38,780
+Here's the fix:
+
+11
+00:00:39,760 --> 00:00:41,300
+Track your calls properly.
+
+12
+00:00:41,500 --> 00:00:44,500
+Identify which calls become qualified leads.
+
+13
+00:00:44,780 --> 00:00:47,980
+Then send those conversion signals
+back to Google Ads.
+
+14
+00:00:48,560 --> 00:00:52,300
+When Google sees the leads
+that actually matter,
+
+15
+00:00:52,860 --> 00:00:58,440
+it can optimize toward more qualified
+customers and more revenue.
+
+16
+00:00:58,980 --> 00:01:02,900
+Otherwise, you may keep pausing
+campaigns that are working
+
+17
+00:01:02,900 --> 00:01:05,760
+while your competitors
+capture those customers.
