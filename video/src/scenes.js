@@ -7,66 +7,6 @@ const INDUSTRIES = [
   ['house', 'Roofing', 3.86],
   ['drop', 'Plumbing', 4.32],
 ];
-const CALLS = [
-  ['Injury case', 15000, '+'],
-  ['Roof replacement', 14800, ''],
-  ['AC install', 7200, ''],
-  ['Water heater', 1900, ''],
-  ['Car accident', 12000, '+'],
-  ['Furnace repair', 4600, ''],
-];
-
-// ---------------- Scene 1: the hook ----------------
-function s1(c, t) {
-  const ph = V ? { x: 540, y: 610, h: 500 } : { x: 660, y: 560, h: 600 };
-  c.save();
-  zoomAt(c, ph.x, ph.y, lerp(1.32, 1, pr(t, 0, 4.8)));
-  const ring = t < 6.0 ? 1 : clamp(1 - (t - 6.0) / 0.5);
-
-  const chipPos = V
-    ? [[300, 990], [780, 990], [300, 1100], [780, 1100]]
-    : [[1250, 330], [1500, 470], [1500, 650], [1250, 790]];
-  const cw = V ? 420 : 300, ch = V ? 88 : 84;
-  INDUSTRIES.forEach(([ic, label, at], i) => {
-    const k = pr(t, at - 0.1, 0.55, eo);
-    if (k <= 0) return;
-    const [x, y] = chipPos[i];
-    const ks = spring(pr(t, at - 0.1, 0.6, x => x));
-    connector(c, ph.x + (V ? 0 : 150), ph.y + (V ? 250 : 0), x - (V ? 0 : cw / 2), y - (V ? ch / 2 : 0), t, 'idle', k * 0.8, k);
-    c.save();
-    c.translate(x, y); c.scale(lerp(0.8, 1, ks), lerp(0.8, 1, ks)); c.translate(-x, -y);
-    glass(c, x - cw / 2, y - ch / 2, cw, ch, 20, k);
-    dotIcon(c, x - cw / 2 + 44, y, 26, P.tint, null, null, k);
-    icon(c, ic, x - cw / 2 + 44, y, 26, P.deep, 2, k);
-    txt(c, label, x - cw / 2 + 84, y, V ? 27 : 24, 600, P.ink, 'left', k);
-    c.restore();
-  });
-
-  phone(c, ph.x, ph.y, ph.h, t, ring);
-
-  const cardPos = V
-    ? [[205, 420], [875, 420], [205, 600], [875, 600], [205, 780], [875, 780]]
-    : [[300, 240], [255, 365], [300, 490], [255, 615], [300, 740], [255, 865]];
-  const s = V ? 0.86 : 1;
-  CALLS.forEach(([label, val, plus], i) => {
-    const k = pr(t, 5.9 + i * 0.09, 0.7, eo);
-    if (k <= 0) return;
-    const [tx, ty] = cardPos[i];
-    const x = lerp(ph.x, tx, k), y = lerp(ph.y, ty, k);
-    const v = Math.round(val * pr(t, 7.92 + i * 0.06, 0.9, eo) / 100) * 100;
-    let tone = 'brand', a = k;
-    if (i === 4 && t > 8.55) {
-      const f = t - 8.55;
-      tone = Math.cos(f * 22) > -0.2 || f > 0.5 ? 'warn' : 'brand';
-      a = k * lerp(1, 0.5, clamp(f / 0.6));
-    }
-    callCard(c, x, y, s * lerp(0.4, 1, k), label, v > 0 ? money(v) + plus : 'New lead', a, tone);
-  });
-
-  headline(c, 'Calls worth thousands', V ? 540 : 1375, V ? 285 : 930, V ? 46 : 42, t, 7.9, { color: P.deep });
-  c.restore();
-}
-
 // ---------------- Scene 2: the black hole ----------------
 function s2(c, t) {
   const vx = V ? 540 : 880, vy = V ? 760 : 640, R = V ? 330 : 360;
@@ -113,6 +53,24 @@ function s2(c, t) {
     }
   }
 
+  // the AC replacement lead from the opening — the one that gets lost
+  let hero = null;
+  const hp = (t - 10.2) / 2.8;
+  if (hp > 0 && hp < 1) {
+    const start = V ? [540, 380] : [-220, 560];
+    const rim = V ? [vx + R * 0.55, vy - R * 0.12] : [vx - R * 0.72, vy - R * 0.08];
+    if (hp < 0.55) {
+      const [x, y] = quad(start, V ? [vx + R * 0.7, vy - 260] : [vx - R * 1.2, vy - 120], rim, eio(hp / 0.55));
+      hero = { x, y, s: 1, a: clamp(hp * 8), tone: 'brand' };
+    } else {
+      const q = (hp - 0.55) / 0.45;
+      const ang = (V ? 0 : Math.PI) + q * 4.4;
+      const r = R * 0.72 * (1 - eo(q));
+      heat = Math.max(heat, Math.sin(q * Math.PI));
+      hero = { x: vx + r * Math.cos(ang), y: vy + r * Math.sin(ang) * 0.38 - (1 - q) * 30, s: 1 - q * 0.8, a: 1 - q * q, tone: 'warn' };
+    }
+  }
+
   vortex(c, vx, vy, R, t, open, heat * open);
 
   nodes.forEach(([x, y], j) => {
@@ -127,6 +85,7 @@ function s2(c, t) {
   });
 
   for (const cl of calls) miniCall(c, cl.x, cl.y, (V ? 1.3 : 1.25) * cl.s, cl.a, cl.tone);
+  if (hero) callCard(c, hero.x, hero.y, (V ? 1.15 : 1.1) * hero.s, 'AC replacement', '$8,500', hero.a, hero.tone);
   c.restore();
 
   headline(c, V ? 'Your best leads may be\ndisappearing.' : 'Your best leads may be disappearing.', V ? 540 : 960, V ? 270 : 135, V ? 50 : 54, t, 12.0);
@@ -652,7 +611,7 @@ function s10(c, t) {
 }
 
 // ---------------- Scene 11: final card ----------------
-const TITLE = 'Google Ads, Web Analytics, Paid Ads, Web Analytics and Conversion Tracking Consultant';
+const TITLE = 'Paid Ads, Web Analytics & Conversion Tracking Consultant';
 const STATEMENT = "If Google can't see your real leads, it can't optimize for them.";
 const CTA = 'Check your call tracking before you pause your campaign.';
 
@@ -662,7 +621,7 @@ function s11(c, t) {
   const k = pr(t, 65.7, 0.8, x => x), ks = spring(k), a = clamp(k * 2);
   const kt = pr(t, 66.3, 0.6, eo), kc = pr(t, 68.8, 0.7, eo);
   if (V) {
-    const cd = { x: 150, y: 270, w: 780, h: 640 };
+    const cd = { x: 150, y: 300, w: 780, h: 580 };
     c.save(); c.translate(0, (1 - ks) * 50);
     glass(c, cd.x, cd.y, cd.w, cd.h, 30, a);
     portrait(c, cd.x + 230, cd.y + 36, 320, 320, 26, a);
@@ -673,16 +632,17 @@ function s11(c, t) {
     const sl = wrap(c, STATEMENT, 900, 56, 700);
     sl.forEach((ln, i) => {
       const kk = pr(t, 66.9 + i * 0.25, 0.6, eo);
-      txt(c, ln, 540, 1010 + i * 68 + (1 - kk) * 16, 56, 700, P.ink, 'center', kk, -0.5);
+      txt(c, ln, 540, 980 + i * 68 + (1 - kk) * 16, 56, 700, P.ink, 'center', kk, -0.5);
     });
     const cl = wrap(c, CTA, 860, 32, 500);
-    cl.forEach((ln, i) => txt(c, ln, 540, 1010 + sl.length * 68 + 50 + i * 44 + (1 - kc) * 12, 32, 500, P.ink2, 'center', kc));
+    cl.forEach((ln, i) => txt(c, ln, 540, 980 + sl.length * 68 + 50 + i * 44 + (1 - kc) * 12, 32, 500, P.ink2, 'center', kc));
   } else {
-    const cd = { x: 170, y: 140, w: 620, h: 800 };
+    const lines = wrap(c, TITLE, 620 - 90, 27, 650);
+    const ch = 560 + lines.length * 37 + 70;
+    const cd = { x: 170, y: 540 - ch / 2, w: 620, h: ch };
     c.save(); c.translate(0, (1 - ks) * 50);
     glass(c, cd.x, cd.y, cd.w, cd.h, 30, a);
     portrait(c, cd.x + 40, cd.y + 40, cd.w - 80, 470, 24, a, 0.3);
-    const lines = wrap(c, TITLE, cd.w - 90, 27, 650);
     lines.forEach((ln, i) => txt(c, ln, cd.x + 45, cd.y + 560 + i * 37, 27, 650, P.ink, 'left', kt));
     c.save(); c.globalAlpha *= kt; rr(c, cd.x + 45, cd.y + 560 + lines.length * 37 + 4, 70, 5, 3); c.fillStyle = P.brand; c.fill(); c.restore();
     c.restore();

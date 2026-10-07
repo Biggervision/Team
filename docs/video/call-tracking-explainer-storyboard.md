@@ -1,7 +1,7 @@
 # The Phone Call Black Hole — Production Storyboard
 
 **Premium 3D explainer · Light version · 16:9 + 9:16**
-Client: Google Ads, Web Analytics, Paid Ads, Web Analytics and Conversion Tracking Consultant
+Client: Paid Ads, Web Analytics & Conversion Tracking Consultant
 Audience: Local service business owners who run Google Ads and live on inbound phone calls
 Single lesson: *"Your Google Ads may not be failing. Your conversion tracking may be hiding the leads that are actually working."*
 
@@ -144,34 +144,48 @@ Each scene: timing · VO · visual · 3D elements · camera · animation · on-s
 
 ---
 
-### Scene 1 — The Hook: Calls Worth Thousands
+### Scene 1 — The Hook: One HVAC Customer Journey
 **Master 00:00.00 – 00:09.30 (9.3 s)**
 
 **VO:** "If you run a personal injury law firm, HVAC, roofing, or plumbing business, your phone calls can be worth thousands of dollars."
 
-**Visual concept:** A premium 3D smartphone floats above the grid, screen glowing with an incoming call. Around it, four industry chips orbit into place in sync with the VO. Calls stream out of the phone, each tagged with value.
+**Visual concept:** A real customer story from one HVAC call. In 5–7 seconds the viewer should understand: *someone needs HVAC service → they search → they call the business → this is a valuable lead.*
 
-**3D elements:** Smartphone (satin white, tilted 12° toward camera) · 4 industry chips with simple line icons: scales (Law Firm), snowflake/flame (HVAC), roof outline (Roofing), pipe/droplet (Plumbing) · Call cards ("Incoming call · 2:41") · value tags (`$2,400`, `$8,500`, `$15,000+`, `$650`).
+**Beats (master time):**
+- **0.0–2.0 Problem at home.** A "Homeowner · Saturday, 2:14 PM" panel. A wall thermostat reads 84° and climbs to 89°, with a warm-orange arc and a blinking "❄ Off". The tag "AC not cooling" appears with "☀ Outside 104°F" under it.
+- **1.5–3.4 Search.** The homeowner's phone slides up (upright, no rotation). It shows a keyboard and a search bar, and "ac repair near me" is typed letter by letter.
+- **3.45–5.5 Local result.** A generic search results page with tabs (All / Maps / Images / News):
+  - At the top, a **Sponsored** result: "CoolAir HVAC: Same-Day AC Repair & Replacement, Open 24/7", rated 4.9 ★ (312), with **Call** and Website buttons.
+  - Under it, a map pack and two grey competitor listings.
+  - At 4.3 the ad card picks up a soft brand glow. A fingertip moves in and taps **Call** at 5.45, just before "phone calls".
+- **5.65–7.3 The call.** The screen switches to "Calling CoolAir HVAC… / Ringing…".
+  - A brand-color call signal arcs off the phone while the camera pans (right in 16:9, up in 9:16) to the **Your business · CoolAir HVAC** panel.
+  - The owner's phone shows *Incoming call · (602) 555-0148 · via Google Ads · AC repair*.
+- **7.45–9.2 The lead.** The owner answers. A lead card springs in: **New lead · AC replacement · Estimated job value $8,500**. The value counts up on "thousands of dollars".
+- **7.9–9.2 Signal path.** Along the bottom, **Search → Google Ad → Phone call → Business → Conversion tracking** lights up step by step. A dot travels the path and the last node pulses at 9.03.
+- **Industry context:** small chips at the top light up in time with the VO (Personal Injury Law, HVAC, Roofing, Plumbing). HVAC stays highlighted in brand color, then the chips fade at 5.5.
 
-**Camera:** Starts tight on the phone screen (pre-roll ring), slow pull-back and 8° orbit right to reveal the chips; ends on a medium-wide.
+**Camera:** Static, calm framing on the homeowner panel. One smooth 1.3 s pan from customer to business (6.0–7.3). No tilts, wobble, or phone rotations.
 
-**Animation:**
-- 0.00–0.50 Pre-roll: phone screen lights, single soft ring, gentle haptic vibration.
-- 1.88 Law Firm chip slides in on a soft spring; 3.12 HVAC; 3.86 Roofing; 4.32 Plumbing. Each chip emits one thin brand-color line back to the phone.
-- 5.90 "phone calls": 6–8 call cards pop off the screen and drift outward in a fan.
-- 7.92–9.16 "thousands of dollars": value tags tick up on each card (counter roll, 0.6 s).
-- 8.6 Tension seed: one call card at the edge flickers amber and dims slightly. Nothing else yet.
+**On-screen text:** "AC not cooling" · search query · ad copy · "New lead · AC replacement · $8,500" · path labels.
 
-**On-screen text:** Industry chip labels only, then "Calls worth thousands" (small, beside phone, at 7.9).
+**Transition:** The last path node, Conversion tracking, pulses, and the frame dissolves into the tracking system in Scene 2. The same $8,500 AC replacement call is the one that falls into the black hole.
 
-**Transition:** The fan of call cards begins flowing right (16:9) / down (9:16) — the camera follows the flow into Scene 2. Continuous move, no cut.
+**Sound:**
+- Soft thermostat beep
+- Light keyboard taps
+- Soft whoosh as results appear
+- Tap click on Call
+- Outgoing ringback, then the business phone's ring
+- Answer click
+- Light pop when the lead card lands
+- Value shimmer as the price counts up
+- Rising ticks along the signal path
 
-**Sound:** Soft modern phone ring (one cycle, filtered) at 0.0 · gentle notification ticks per chip (pitched up a step each) · light paper-like "pop" for each call card · faint coin-like shimmer on value tags (very subtle, not slot-machine).
+**Purpose:** An owner instantly sees their own customer and their own revenue in the story.
 
-**Purpose:** Instant self-identification ("that's my business") and establish that calls = money.
-
-**16:9:** Phone left-of-center third; chips arc on the right side in a loose semicircle; call cards fan toward the right edge, setting up left→right flow.
-**9:16:** Phone centered, upper-middle (y ≈ 38%). Chips stack in a 2×2 grid below the phone. Call cards fan downward. Value tags large (≥ 56 px).
+**16:9:** Thermostat left, phone right inside a wide homeowner panel. The business panel sits one screen to the right (owner phone left, lead card right). The signal path runs as a horizontal row of chips at the bottom.
+**9:16:** The thermostat starts big and centered, then shrinks to the top-left when the phone slides up at center-right. The business panel sits one screen below (owner phone left, lead card right). The signal path is a row of 5 icon nodes above the caption zone.
 
 ---
 
@@ -484,7 +498,7 @@ The Ads node is fine. The Tracking layer has broken, dashed connections — and 
 - 69.50 – 71.50 Hold. Everything still except a slow breath of the grid.
 
 **On-screen text:**
-- Title: Google Ads, Web Analytics, Paid Ads, Web Analytics and Conversion Tracking Consultant
+- Title: Paid Ads, Web Analytics & Conversion Tracking Consultant
 - Statement: **If Google can't see your real leads, it can't optimize for them.**
 - CTA: Check your call tracking before you pause your campaign.
 
@@ -530,7 +544,7 @@ Designed as a separate composition, not a crop.
 - **Colors:** apply brand tokens (Section 2) to data streams, tracked call cards, step badges, node glyphs, chart lines, buttons, title accents, the portrait card edge. Replace the provisional hex values with the brand reference once supplied; do not add any extra hues.
 - **Warning colors:** `warn` and `loss` only on untracked call rims, the "Underperforming" pill, "Campaign Paused," lost-revenue tiles. Never on the consultant card, the plan, or the success scene.
 - **Portrait:** three appearances only — Scene 7 (identity card), Scene 8 (small badge, top corner, until Step 3 completes), Scene 11 (hero card). Never altered, never stylized, color-matched to scene lighting.
-- **Title:** use exactly "Google Ads, Web Analytics, Paid Ads, Web Analytics and Conversion Tracking Consultant." Full title appears in Scene 11. In 9:16 it may wrap to three lines; do not shorten.
+- **Title:** use exactly "Paid Ads, Web Analytics & Conversion Tracking Consultant." Full title appears in Scene 11. In 9:16 it may wrap to three lines; do not shorten.
 - **Logo:** if a personal logo/wordmark exists, place it small on the final card (bottom of card), never as an animated sting.
 - **Typeface:** brand typeface if one exists; otherwise Inter/Manrope.
 - **Google references:** generic "Ads" glyph and layout only. No Google logo, Google colors, or exact interface reproduction.
@@ -653,15 +667,15 @@ Use this as the single master prompt for an AI video workflow. Generate each sce
 
 > **MASTER PROMPT — "The Phone Call Black Hole"**
 >
-> Create a premium, light-themed 3D motion-graphics explainer for a Google Ads, Web Analytics, Paid Ads, Web Analytics and Conversion Tracking Consultant. Audience: local service business owners (personal injury law firms, HVAC, roofing, plumbing) who rely on phone calls from Google Ads. Runtime 71.5 seconds, locked to the supplied voiceover placed at 0.5 s. Deliver two separately composed versions: 16:9 (1920×1080) and 9:16 (1080×1920) — the vertical version is re-composed, not cropped.
+> Create a premium, light-themed 3D motion-graphics explainer for a Paid Ads, Web Analytics & Conversion Tracking Consultant. Audience: local service business owners (personal injury law firms, HVAC, roofing, plumbing) who rely on phone calls from Google Ads. Runtime 71.5 seconds, locked to the supplied voiceover placed at 0.5 s. Deliver two separately composed versions: 16:9 (1920×1080) and 9:16 (1080×1920) — the vertical version is re-composed, not cropped.
 >
 > **Look:** bright near-white canvas (#F7F9FB) with a faint perspective grid floor; realistic-but-simplified 3D; frosted-glass UI panels with soft shadows, subtle reflections, clean edges and controlled depth; large soft key light from top-left. Palette restrained to brand colors (provisional: brand-primary #20B4CE, brand-deep #0B5F78, brand-tint #E3F6FA, ink #0E1A2B); amber #F08A24 and red #E5484D only on small elements for untracked calls, "Underperforming," "Campaign Paused," and lost revenue. Modern sans-serif type, 3–7 words per scene. Premium SaaS/editorial feel — not cartoon, not flat infographic, not whiteboard, not cyberpunk, not gaming, not dark cinematic.
 >
 > **Central metaphor:** phone calls are luminous call cards. Tracked calls flow into Ads, Analytics and CRM nodes. Untracked calls slip into a soft, elegant, pearl-grey vortex in the grid — "the phone call black hole" — a calm data visualization of missing conversion data, never scary or sci-fi.
 >
 > **Story (11 shots):**
-> 1. (0.0–9.3) Satin-white smartphone ringing on the grid; four industry chips (Law Firm, HVAC, Roofing, Plumbing) land in sync with the VO; call cards fan out with value tags. One card flickers amber.
-> 2. (9.3–13.6) Calls stream toward Ads/Analytics/CRM nodes; the grid bends into the soft vortex; some calls arrive with checks, others slip in. Text: "Your best leads may be disappearing."
+> 1. (0.0–9.3) HVAC customer journey: a thermostat climbs to 89° ("AC not cooling", 104°F outside); the homeowner's upright phone searches "ac repair near me"; a generic local results page shows a Sponsored "CoolAir HVAC" ad and the homeowner taps Call; the camera pans to the business owner's phone ringing "via Google Ads · AC repair"; a lead card shows AC replacement, $8,500; a signal lights Search → Google Ad → Phone call → Business → Conversion tracking.
+> 2. (9.3–13.6) Calls stream toward Ads/Analytics/CRM nodes; the grid bends into the soft vortex; some calls arrive with checks, others slip in — including the $8,500 AC replacement call from the opening. Text: "Your best leads may be disappearing."
 > 3. (13.6–19.4) Clean glass dashboard: Actual calls 30 vs Tracked conversions 10; a 30-slot bar where 20 slots drain to hollow. Text: "20 missing."
 > 4. (19.4–22.9) Generic ad-platform campaign card (no Google branding); cost per conversion rises; line flattens; amber pill flips to "Underperforming."
 > 5. (22.9–31.0) A hand drags the budget slider down and toggles "Campaign Paused"; behind the card, glowing high-value lead cards fade to grey one by one; tiles: Lost leads, Lost customers, Lost revenue.
@@ -670,7 +684,7 @@ Use this as the single master prompt for an AI video workflow. Generate each sce
 > 8. (39.6–48.3) Three steps, one continuous move: 1 Track calls (connectors snap solid, vortex closes), 2 Identify qualified leads (filter gate splits qualified vs not-a-fit), 3 Send signals to Google Ads (a bright stream flows back from CRM to the Ads node).
 > 9. (48.3–58.7) Campaign card returns crisp: tracked conversions climb 10 → 30 and match actual calls; performance curve lifts smoothly; Qualified leads, Customers, Revenue tiles stack upward. Text: "Better data. Better results."
 > 10. (58.7–65.8) Ghosted paused card; minimal light 3D map; calls curve away from "You" to a neutral "Competitor" pin.
-> 11. (65.8–71.5) Final card: portrait identity card with the full title "Google Ads, Web Analytics, Paid Ads, Web Analytics and Conversion Tracking Consultant"; headline "If Google can't see your real leads, it can't optimize for them."; CTA "Check your call tracking before you pause your campaign." Calm hold.
+> 11. (65.8–71.5) Final card: portrait identity card with the full title "Paid Ads, Web Analytics & Conversion Tracking Consultant"; headline "If Google can't see your real leads, it can't optimize for them."; CTA "Check your call tracking before you pause your campaign." Calm hold.
 >
 > **Camera:** slow push-ins, smooth dollies, gentle 10–15° orbits, parallax, controlled zoom. No fast spins, whip pans, extreme zooms, glitches, explosions or lens flares. Every transition is a continuous match-move: call cards → vortex → dashboard → campaign card → pipeline → plan → success → map → final card.
 >
@@ -685,7 +699,7 @@ Use this as the single master prompt for an AI video workflow. Generate each sce
 
 Append the master "Look" paragraph to each.
 
-1. *Premium white smartphone floating above a light grid floor, incoming call glowing on screen, four rounded glass chips with line icons (scales, snowflake, roof, pipe) orbiting into place, small glowing call cards fanning out with dollar value tags, soft studio light, slow pull-back with slight orbit.*
+1. *Bright, clean home-wall vignette: a modern round thermostat reading 89° with an orange arc and "AC not cooling" tag; an upright smartphone beside it typing "ac repair near me" into a generic search page, then a Sponsored HVAC result with a Call button being tapped; smooth pan to the business owner's phone receiving the call and a glass lead card "AC replacement · $8,500"; no logos, no phone rotation.*
 2. *Stream of small luminous call cards flowing across a light grid toward three rounded tiles (ad glyph, chart glyph, contact glyph); the grid floor gently bends into a soft pearl-grey spiral vortex; some cards arrive with a teal check, others curve elegantly into the vortex with a faint amber trail; calm lateral dolly.*
 3. *Frosted glass analytics panel on a light background, two large numbers "30" and "10" with labels "Actual calls" and "Tracked conversions," a bar of 30 small phone icons where 20 drain to hollow outlines, slow push-in.*
 4. *Generic glass advertising campaign card with a flat line chart and a status pill flipping to amber "Underperforming," gentle 10° orbit, no real brand logos.*

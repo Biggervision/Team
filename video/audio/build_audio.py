@@ -165,14 +165,24 @@ def put(x, at, gain=1.0, pan=0.0):
 SFX_GAIN = 0.16
 G = SFX_GAIN
 
-# Scene 1 — hook
-put(ring(), 0.0, G * 1.4)
-put(haptic(), 0.02, G)
-for at, f, pan in [(1.88, 1200, 0.2), (3.12, 1350, 0.35), (3.86, 1520, 0.35), (4.32, 1700, 0.2)]:
-    put(tick(f, 0.06), at, G * 0.9, pan)
-for i in range(6):
-    put(pop(), 5.9 + i * 0.09, G * 0.7, -0.3)
-put(shimmer(0.9, 2400, 4200, 8), 7.92, G * 0.5, -0.2)
+# Scene 1 — HVAC customer journey
+put(layer(sweep(1046, 1046, 0.12, 12), np.zeros(1)), 0.35, G * 0.6)          # thermostat beep
+put(sweep(880, 880, 0.12, 12), 0.55, G * 0.5)
+for at, f, pan in [(1.88, 1200, 0.0), (3.12, 1350, 0.0), (3.86, 1520, 0.0), (4.32, 1700, 0.0)]:
+    put(tick(f, 0.05), at, G * 0.45, pan)                                      # industry chips
+for i in range(len('ac repair near me')):
+    put(bp(noise(0.03), 1500, 6000) * np.exp(-120 * tl(0.03)), 2.1 + i * 1.2 / 17, G * 0.55, 0.3)  # keyboard
+put(whoosh(0.5, 800, 4000), 3.4, G * 0.5, 0.3)                                # results
+put(click(), 5.45, G * 0.9, 0.3)                                              # tap Call
+t_rb = tl(0.9)
+ringback = (np.sin(2 * np.pi * 440 * t_rb) + np.sin(2 * np.pi * 480 * t_rb)) * adsr(len(t_rb), 0.05, 0.1) * 0.25
+put(lp(ringback, 2500), 5.75, G * 0.8, 0.2)                                   # outgoing ringback
+put(ring(), 6.55, G * 1.1, 0.0)                                               # business phone rings
+put(click(), 7.45, G * 0.8)                                                   # answer
+put(pop(), 7.6, G * 0.8)                                                      # lead card
+put(shimmer(0.9, 2400, 4200, 8), 7.92, G * 0.45)                              # value counts up
+for i in range(5):
+    put(tick(1400 + i * 180, 0.05), 8.15 + i * 0.22, G * 0.5)                 # signal path
 
 # Scene 2 — black hole (mirrors the call spawner in scenes.js)
 for i in range(34):
@@ -186,6 +196,8 @@ for i in range(34):
         at = ts + 1.75
         if 9.3 < at < 13.6:
             put(tick(2000, 0.04), at, G * 0.35, 0.5)
+
+put(whoom_down(), 11.75, G * 0.8)  # the $8,500 call falls in
 
 # Scene 3 — 30 vs 10
 for i in range(14):
