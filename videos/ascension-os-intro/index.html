@@ -189,6 +189,13 @@
           <div data-hf-id="hf-bsp7" id="s3-tag">The Executive 168-Hour Operating System</div>
         </div>
       </div>
+      <audio id="vo-l1" src="assets/vo/l1.wav" data-start="0.25" data-duration="1.54" data-track-index="1" data-volume="1"></audio>
+      <audio id="vo-l2" src="assets/vo/l2.wav" data-start="1.9" data-duration="1.12" data-track-index="1" data-volume="1"></audio>
+      <audio id="vo-design" src="assets/vo/w-Design.wav" data-start="3.72" data-duration="0.55" data-track-index="1" data-volume="1"></audio>
+      <audio id="vo-commit" src="assets/vo/w-Commit.wav" data-start="4.3" data-duration="0.47" data-track-index="1" data-volume="1"></audio>
+      <audio id="vo-execute" src="assets/vo/w-Execute.wav" data-start="4.85" data-duration="0.68" data-track-index="1" data-volume="1"></audio>
+      <audio id="vo-review" src="assets/vo/w-Review.wav" data-start="5.58" data-duration="0.53" data-track-index="1" data-volume="1"></audio>
+      <audio id="vo-l3" src="assets/vo/l3.wav" data-start="6.85" data-duration="2.27" data-track-index="1" data-volume="1"></audio>
     </div>
     <script>
       // Build DOM deterministically before the timeline.
@@ -255,13 +262,14 @@
         3.3,
       );
       tl.fromTo("#s2-fill", { scaleX: 0 }, { scaleX: 1, duration: 2.2, ease: "none" }, 3.7);
+      const lightAt = [3.75, 4.32, 4.87, 5.6]; // synced to the spoken words
       for (let i = 0; i < 4; i++) {
-        const t = 3.75 + i * 0.55;
+        const t = lightAt[i];
         tl.to(`#st-${i}`, { color: C.ink, duration: 0.2, ease: "power2.out" }, t);
         tl.to(`#st-${i}`, { scale: 1.1, duration: 0.14, yoyo: true, repeat: 1, ease: "sine.inOut" }, t);
         if (i < 3) tl.to(`#ar-${i}`, { color: C.teal, duration: 0.2 }, t + 0.25);
       }
-      tl.to("#st-3", { color: C.teal, duration: 0.2 }, 5.6);
+      tl.to("#st-3", { color: C.teal, duration: 0.2 }, 5.8);
       tl.to("#s2", { autoAlpha: 0, y: -40, duration: 0.4, ease: "power2.in" }, 6.2);
 
       // ── Scene 3 (6.6 – 10s): ⚡ ASCENSION OS lockup, then hold ──
