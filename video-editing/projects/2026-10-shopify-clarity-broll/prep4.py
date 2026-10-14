@@ -18,16 +18,21 @@ def process(fr):
     cm = [cv2.resize(np.squeeze(m.numpy_view()).astype(np.float32), (288, 512)) for m in r.confidence_masks]
     person = smooth("p", 1 - cm[0]); skin = smooth("s", np.clip(cm[2] + cm[3], 0, 1))
     pm = cv2.ximgproc.guidedFilter(fr, cv2.resize(person, (W, H), interpolation=cv2.INTER_CUBIC), 8, 1e-3)
-    pm = np.clip((pm - 0.3) / 0.45, 0, 1)
+    pm = np.clip((pm - 0.2) / 0.45, 0, 1)   # keep fine beard/hair edges sharp
     sm = cv2.ximgproc.guidedFilter(fr, cv2.resize(skin, (W, H), interpolation=cv2.INTER_CUBIC), 10, 1e-3)
-    sm = np.clip((sm - 0.25) / 0.5, 0, 1)[..., None]
+    sm = np.clip((sm - 0.45) / 0.4, 0, 1)
+    sm = cv2.erode(sm, np.ones((7, 7), np.uint8))
+    Lr = cv2.cvtColor(fr, cv2.COLOR_BGR2LAB)[..., 0].astype(np.float32)
+    sm = cv2.GaussianBlur(sm * np.clip((Lr - 70) / 50, 0, 1), (0, 0), 2)[..., None]   # never touch dark beard/hair
     # background: light bokeh + darken (moody)
     hs = cv2.resize(fr, (W // 2, H // 2), interpolation=cv2.INTER_AREA).astype(np.float32)
     bm = cv2.resize(1 - pm, (W // 2, H // 2))
     bg = cv2.filter2D(hs * bm[..., None], -1, disc) / (cv2.filter2D(bm, -1, disc)[..., None] + 1e-4)
     bg = cv2.resize(bg, (W, H), interpolation=cv2.INTER_CUBIC) * BG_DARK
     a = pm[..., None]
-    out = fr.astype(np.float32) * a + bg * (1 - a)
+    core = cv2.GaussianBlur(cv2.erode(pm, np.ones((9, 9), np.uint8)), (0, 0), 3)[..., None]
+    frd = fr.astype(np.float32) * (BG_DARK + (1 - BG_DARK) * core)   # edge pixels get the same darkening as the background
+    out = fr.astype(np.float32)   # no background blur / darkening
     # skin
     o8 = np.clip(out, 0, 255).astype(np.uint8)
     smoothd = cv2.bilateralFilter(o8, 9, 40, 9)
