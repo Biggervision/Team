@@ -1,6 +1,6 @@
 import json, subprocess
 d = json.load(open("cut.json"))
-GRADE = "colortemperature=temperature=7600:mix=0.8,colorbalance=rs=-0.03:bs=0.04:rm=-0.04:gm=-0.01:bm=0.04:rh=-0.02:bh=0.02,eq=contrast=1.12:saturation=1.02:gamma=0.97,curves=all='0/0 0.12/0.07 0.5/0.5 0.9/0.86 1/0.94',vignette=PI/4.2"
+GRADE = "colortemperature=temperature=7200:mix=0.7,colorbalance=rs=-0.02:bs=0.03:rm=-0.03:bm=0.02,eq=contrast=1.10:saturation=1.15:gamma=1.0,curves=all='0/0 0.25/0.22 0.5/0.5 0.75/0.78 1/0.97',vignette=PI/4.5"  # natural vivid; skin brightened separately by skin.py
 VOICE = "highpass=f=80,equalizer=f=250:t=q:w=1:g=-2,equalizer=f=3500:t=q:w=1.2:g=2.5,acompressor=threshold=-20dB:ratio=3:attack=8:release=120:makeup=2"
 f = []
 for i, (src, s, e) in enumerate(d["src"]):
