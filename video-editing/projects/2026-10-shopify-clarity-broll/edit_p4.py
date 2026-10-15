@@ -145,6 +145,7 @@ BROLL = [
     dict(id="42133", s=wt(3) - 0.04, e=wt(5) - 0.02, src=1.0, cx=0.5),            # store gets traffic
     dict(id="42123", s=wt(15) - 0.04, e=wt(21) - 0.04, src=2.0, cx=0.62),         # between add to cart & checkout
     dict(id="46977", s=wt(26) - 0.04, e=wt(30) - 0.04, src=3.0, cx=0.6),          # investigate journey
+    dict(id="4939", s=wt(30) - 0.04, e=wt(33) - 0.1, src=1.0, cx=0.5, ui=True),  # "Use Microsoft Clarity"
     dict(id="8843", s=wt(50) - 0.04, e=wt(55) - 0.02, src=3.0, cx=0.5),           # struggling with variants
     dict(id="25897", s=wt(55) - 0.02, e=wt(57) - 0.02, src=2.0, cx=0.33),         # dropping
     dict(id="35902", s=wt(57) - 0.02, e=wt(65) - 0.04, src=3.0, cx=0.45),         # mobile checkout
@@ -171,6 +172,49 @@ def prep_broll():
         vf += ",hue=s=0,eq=contrast=1.15" if b.get("bw") else ",eq=contrast=1.06:saturation=1.08"
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", str(b["src"]), "-i", f"broll/{b['id']}.mp4", "-t", f"{dur:.2f}", "-vf", vf,
                         "-an", "-c:v", "libx264", "-crf", "14", "-preset", "fast", "-pix_fmt", "yuv420p", out], check=True)
+
+
+def clarity_ui(cv, t, b):
+    age = t - b["s"]
+    p = ease_out(age / 0.35)
+    W2, H2 = 860, 760; cx, cy = 540, 700 + (1 - p) * 90
+    x0, y0 = cx - W2 / 2, cy - H2 / 2
+    lay = Image.new("RGBA", cv.size, (0, 0, 0, 0)); d = ImageDraw.Draw(lay)
+    d.rounded_rectangle([x0 + 10, y0 + 24, x0 + W2 + 10, y0 + H2 + 24], 34, fill=(0, 0, 0, int(140 * p)))
+    lay = lay.filter(ImageFilter.GaussianBlur(24)); d = ImageDraw.Draw(lay)
+    d.rounded_rectangle([x0, y0, x0 + W2, y0 + H2], 30, fill=(250, 251, 252, int(255 * p)))
+    d.rounded_rectangle([x0, y0, x0 + W2, y0 + 70], 30, fill=(232, 236, 240, int(255 * p)))
+    d.rectangle([x0, y0 + 40, x0 + W2, y0 + 70], fill=(232, 236, 240, int(255 * p)))
+    for k, c in enumerate(((255, 95, 87), (254, 188, 46), (40, 200, 64))):
+        d.ellipse([x0 + 28 + k * 30, y0 + 26, x0 + 46 + k * 30, y0 + 44], fill=c + (int(255 * p),))
+    d.rounded_rectangle([x0 + 140, y0 + 18, x0 + W2 - 40, y0 + 54], 18, fill=(255, 255, 255, int(255 * p)))
+    url = "clarity.microsoft.com"; n = max(0, min(len(url), int((age - 0.15) / 0.03)))
+    u = text_img(url[:n], "med", 26, (60, 64, 70), 0, shadow=False); lay.alpha_composite(u, (int(x0 + 165 - 40), int(y0 + 36 - u.height / 2)))
+    # logo + title
+    lx, ly = x0 + 50, y0 + 110
+    for k, c in enumerate(((0, 120, 212), (80, 160, 230), (0, 90, 170))):
+        d.rounded_rectangle([lx + k * 22, ly + (2 - k) * 10, lx + k * 22 + 16, ly + 50], 4, fill=c + (int(255 * p),))
+    tt = text_img("Microsoft Clarity", "bold", 40, (20, 24, 28), 0, shadow=False); lay.alpha_composite(tt, (int(lx + 90 - 40), int(ly + 25 - tt.height / 2)))
+    # tabs
+    for k, lab in enumerate(("Dashboard", "Recordings", "Heatmaps")):
+        on = k == (1 if age < 1.0 else 2)
+        tl = text_img(lab, "semi", 26, (0, 103, 192) if on else (110, 116, 124), 0, shadow=False)
+        tx = x0 + 50 + k * 230; lay.alpha_composite(tl, (int(tx - 40), int(y0 + 200 - tl.height / 2)))
+        if on: d.rectangle([tx, y0 + 222, tx + tl.width - 80, y0 + 226], fill=(0, 103, 192, int(255 * p)))
+    # page thumbnail with heatmap
+    px0, py0, px1, py1 = x0 + 50, y0 + 260, x0 + W2 - 50, y0 + H2 - 50
+    d.rounded_rectangle([px0, py0, px1, py1], 18, fill=(238, 241, 245, int(255 * p)))
+    d.rounded_rectangle([px0 + 30, py0 + 30, px0 + 340, py0 + 260], 14, fill=(214, 224, 236, int(255 * p)))
+    for k in range(3): d.rounded_rectangle([px0 + 380, py0 + 40 + k * 50, px1 - 40, py0 + 66 + k * 50], 8, fill=(205, 212, 222, int(255 * p)))
+    d.rounded_rectangle([px0 + 380, py0 + 220, px0 + 640, py0 + 280], 14, fill=(30, 30, 34, int(255 * p)))
+    hp = ease_out((age - 0.8) / 0.6)
+    if hp > 0:
+        hm = Image.new("RGBA", cv.size, (0, 0, 0, 0)); hd = ImageDraw.Draw(hm)
+        for (hx, hy, r) in ((px0 + 510, py0 + 250, 110), (px0 + 185, py0 + 140, 80), (px0 + 520, py0 + 90, 60)):
+            for rr, col in ((r, (37, 99, 235, 90)), (r * 0.65, (250, 204, 21, 130)), (r * 0.35, (239, 68, 68, 190))):
+                hd.ellipse([hx - rr * hp, hy - rr * hp, hx + rr * hp, hy + rr * hp], fill=col[:3] + (int(col[3] * p),))
+        lay.alpha_composite(hm.filter(ImageFilter.GaussianBlur(22)))
+    cv.alpha_composite(lay)
 
 _cap = {}
 def broll_frame(b, t):
@@ -290,7 +334,7 @@ def group_chunks():
     ch, cur = [], []
     for w in words:
         i = w["i"]
-        if cur and (len(cur) >= 3 or wt(i) - we(cur[-1]) > 0.28 or words[cur[-1]]["t"].endswith((".", "?", ","))
+        if cur and not (cur[-1] == 31 and i == 32) and (len(cur) >= 3 or wt(i) - we(cur[-1]) > 0.28 or words[cur[-1]]["t"].endswith((".", "?", ","))
                     or (i in KEY and cur[-1] not in KEY) or (cur[-1] in KEY and i not in KEY)):
             ch.append(cur); cur = []
         cur.append(i)
@@ -337,8 +381,11 @@ def caption(cv, t):
         if b is not None:      # big single-word caption over B-roll (reference: STARBUCKS)
             cur = [i for i in c["ws"] if wt(i) <= t + 0.02]
             i = cur[-1] if cur else c["ws"][0]
-            im = text_img(words[i]["t"].upper().rstrip(",.?"), "anton", 132, WHITE, 0.01, maxw=980)
-            a2 = t - wt(i)
+            if i in (31, 32):                       # tool name stays one unit
+                im = text_img("MICROSOFT CLARITY", "anton", 132, WHITE, 0.01, maxw=980); a2 = t - wt(31)
+            else:
+                im = text_img(words[i]["t"].upper().rstrip(",.?"), "anton", 132, WHITE, 0.01, maxw=980)
+                a2 = t - wt(i)
             paste(cv, im, 540, 1420, 1.1 - 0.1 * ease_out(a2 / 0.12), min(1, a2 / 0.05 + 0.3))
             return
         keyed = [i for i in c["ws"] if i in KEY]
@@ -447,7 +494,9 @@ def render(fr, t):
         out = np.asarray(SCENE[c["kind"]](t, c).convert("RGB"))
     elif b:
         bf = broll_frame(b, t)
-        cv = Image.fromarray(bf).convert("RGBA"); caption(cv, t)
+        cv = Image.fromarray(bf).convert("RGBA")
+        if b.get("ui"): clarity_ui(cv, t, b)
+        caption(cv, t)
         out = np.asarray(cv.convert("RGB"))
         u = t - b["s"]
         if u < 0.12:     # punchy zoom-in entry
