@@ -35,3 +35,21 @@ High-pass 70 Hz, light FFT denoise (6 dB), loudness normalized to ~-16/-17 LUFS,
 - Instagram references are behind a login wall — not reviewed. Need the files.
 - Visual reference screenshot — not received; palette built from the written brief.
 - Testimonials — none received.
+
+---
+
+# v2 — Reel-style redesign (current)
+
+Reference: Instagram Reel `Dcs_d-LRaRK` (downloaded and studied frame by frame).
+Output: `SK_Mahbub_Fiverr_Intro_v2.mp4` — 1920×1080, 30 fps, H.264 + AAC, 55.0 s (52.1 s speech + 2.9 s name card), ~35 MB.
+
+Design system copied from the reference:
+- Full-frame footage (black bars removed), multi-cam style hard cuts between wide and medium framing at sentence starts.
+- Hero words: Montserrat Black, silver→sky→royal-blue painterly gradient, placed **behind** the speaker using an AI person matte (RobustVideoMatting).
+- Italic lead-ins: Playfair Display Italic, white.
+- Captions: Montserrat 800 (keywords) / 600 (other words), white with soft shadow, 1–2 words at a time, synced to word timestamps.
+- Faint glowing white line icons behind the speaker (data, funnel, chat).
+- Animated tool chips (frosted glass + gradient icon tile) that pop in when each tool is spoken: GA4 21.08, Meta Pixel 22.06, Conversion API 22.42, Google Ads 23.30, TikTok 25.24, Snapchat 25.70, X 26.30, LinkedIn 26.58, Microsoft Clarity 28.28, Google Tag Manager 30.30 + Server-side 31.22 (on "other essential tracking tools"), Google Ads 32.94, Meta Ads 34.10; plus tracking issues / conversion mismatches / duplicate events fixes at 14.48 / 15.62 / 17.32.
+- End card: name, title, "Let's talk".
+
+Pipeline: `tx.py` (word timestamps) → `matte.py` (person matte) → `render2.py` + `chips.py` (frames) → ffmpeg mux with cleaned audio.
